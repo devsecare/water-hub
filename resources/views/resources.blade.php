@@ -37,7 +37,7 @@
                 </li>
 
                 <li>
-                    <button onclick="toggleMenu('menu1')"
+                    <button
                         class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide='search' class='w-5 h-5'></i> Identifying
                             PPP opportunities</span>
@@ -52,7 +52,7 @@
                 </li>
 
                 <li>
-                    <button onclick="toggleMenu('menu2')"
+                    <button
                         class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide='briefcase' class='w-5 h-5'></i> Preparing
                             your project</span>
@@ -64,7 +64,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button onclick="toggleMenu('menu3')"
+                    <button 
                         class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide="layers" class="w-5 h-5"></i>
                             Implementation</span>
@@ -76,7 +76,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button onclick="toggleMenu('menu4')"
+                    <button 
                         class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide="settings" class="w-5 h-5"></i>
                             Management</span>
@@ -88,7 +88,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button onclick="toggleMenu('menu5')"
+                    <button 
                         class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide="book-open" class="w-5 h-5"></i>Case
                             studies</span>
