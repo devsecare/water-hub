@@ -1,0 +1,465 @@
+@extends('layouts.frontend')
+
+@section('title', 'About Water PPPs')
+
+@section('content')
+
+    <!-- hero section  -->
+    <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-12  sm:py-24 lg:py-28">
+            <p class="text-sm text-[#37C6F4] font-semibold mb-3">WHAT ARE WATER AND WASTEWATER PPPs</p>
+            <h1 class="text-4xl sm:text-5xl font-extrabold leading-none max-w-xl">
+                Understanding Water PPPs – The Facts
+            </h1>
+        </div>
+    </section>
+
+    <!-- about text  -->
+    <section class="w-full bg-white my-10 lg:my-20 flex items-center">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full">
+            <div class="max-w-[790px] text-left">
+                <!-- First Bold Paragraph -->
+                <p class="text-[#1E1D57] font-semibold text-sm sm:text-base md:text-[18px] md:leading-[1.35rem] mb-4">
+                    A Public-Private Partnership (PPP) in water and wastewater is a contractual agreement between a
+                    public authority and a private operator to deliver water services. The public authority remains the
+                    “master” – setting objectives, goals, and conditions – whilst the private operator becomes the
+                    “servant”, carrying out operations and transferring technology and expertise to improve services.
+
+                </p>
+
+                <!-- Second Regular Paragraph -->
+                <p class="text-[#1E1D57] text-sm sm:text-base lg:mt-8 md:text-[18px] md:leading-[1.35rem] ">
+                    Through these agreements, the skills and assets of both sectors combine to deliver essential
+                    services. Each party shares in the risks and rewards, working towards a common goal: reliable, safe
+                    water and sanitation for communities.
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- flex three section  -->
+    <div class="max-w-7xl px-6 lg:px-12 mx-auto ">
+        <!-- Main Heading -->
+        <h1 class="text-4xl font-bold text-blue-900 mb-8">
+            Why PPPs matter for water
+        </h1>
+
+        <!-- 3 Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <!-- Left Column -->
+            <div class="text-[17px] leading-relaxed space-y-3">
+                <p>
+                    Almost 1 billion people still use unsafe drinking water sources, whilst 2.5 billion lack proper
+                    sanitation
+                    facilities. The water sector globally is chronically underfunded and inefficient. Meeting
+                    <a href="#" class="text-blue-600 font-semibold hover:underline">Sustainable Development Goal 6</a>
+                    – universal access to safe water and sanitation by 2030 – requires massive investment that
+                    traditional funding
+                    alone cannot deliver.
+                </p>
+            </div>
+
+            <!-- Middle Column -->
+            <div class="text-[17px] leading-relaxed">
+                <p class="font-semibold mb-3">PPPs offer a mechanism to:</p>
+                <ul class="list-disc pl-6 space-y-1">
+                    <li>Fund critical infrastructure investment</li>
+                    <li>Introduce new technology and innovation (desalination, water reuse, smart systems)</li>
+                    <li>Improve operational efficiency and reduce water loss</li>
+                    <li>Transfer specialist expertise to utilities</li>
+                    <li>Achieve financial sustainability through better management</li>
+                </ul>
+            </div>
+
+            <!-- Right Column -->
+            <div class="text-[17px] leading-relaxed space-y-4">
+                <p>
+                    Private operators now include increasingly local and regional providers, bringing down costs through
+                    competition whilst understanding local contexts.
+                </p>
+                <div class="flex items-center space-x-3">
+                    <img src="images/clean-water.jpg" alt="SDG 6" class=" object-contain">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- type of ppps section  -->
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-20">
+        <!-- Main Heading -->
+        <h1 class="text-4xl font-bold text-blue-900 mb-6">
+            Types of PPPs
+        </h1>
+
+        <!-- Intro Paragraph -->
+
+
+        <!-- Two Column Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 text-[17px] leading-relaxed">
+
+            <!-- Left Column -->
+            <div class="space-y-5">
+                <p class="text-[17px] leading-relaxed ">
+                    Contracts vary significantly in scope and duration, typically ranging from 3 to 30+ years depending
+                    on complexity:
+                </p>
+                <p>
+                    <span class="font-semibold">Technical Assistance Contracts (3–5 years):</span>
+                    Providing specific expertise – reducing water loss, improving billing, implementing new technology.
+                </p>
+
+                <p>
+                    <span class="font-semibold">Management Contracts (3–5 years):</span>
+                    Private operator manages day-to-day operations whilst the public authority retains assets and
+                    investment responsibility.
+                </p>
+            </div>
+
+            <!-- Right Column -->
+            <div class="space-y-5">
+                <p>
+                    <span class="font-semibold">Lease/Affermage Contracts (8–15 years):</span>
+                    Operator leases the infrastructure, manages operations and maintenance, and collects revenue whilst
+                    the authority retains ownership.
+                </p>
+
+                <p>
+                    <span class="font-semibold">Design-Build-Operate Contracts (15–25 years):</span>
+                    Private partner designs, builds, and operates new facilities – common for wastewater treatment
+                    plants or desalination facilities.
+                </p>
+
+                <p>
+                    <span class="font-semibold">Concessions (20–30 years):</span>
+                    Comprehensive contracts where the operator takes on significant investment obligations whilst
+                    operating the service.
+                </p>
+            </div>
+
+        </div>
+    </div>
+    <!-- who controls who section  -->
+    <section class="bg-[#1E1D4E] text-white py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+
+            <!-- Heading -->
+            <h1 class="text-4xl font-bold mb-6">Who controls what?</h1>
+
+            <!-- Description -->
+            <p class="text-lg mb-12 max-w-2xl">
+                A critical fact often misunderstood: the public authority always controls the contract and pricing
+                policy. Water remains a public service under public control. The private operator works within the
+                framework set by the authority.</p>
+
+            <!-- Bottom two-column section -->
+            <div class="flex flex-col md:flex-row  lg:max-w-[70%] gap-10">
+
+                <!-- Left column -->
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-2xl font-semibold mb-4">The authority decides:</h2>
+                    <ul class="list-disc list-outside pl-6 space-y-2">
+                        <li>Service standards and quality requirements</li>
+                        <li>Tariff structures and pricing policies</li>
+                        <li>Investment priorities</li>
+                        <li>Contract performance metrics</li>
+                        <li>Social protection measures</li>
+                    </ul>
+                </div>
+
+                <!-- Right column -->
+                <div class="w-full lg:w-1/2">
+                    <h2 class="text-2xl font-semibold mb-4">The operator delivers:</h2>
+                    <ul class="list-disc list-outside pl-6 space-y-2">
+                        <li>Day-to-day management and operations</li>
+                        <li>Technical expertise and innovation</li>
+                        <li>Efficiency improvements</li>
+                        <li>Investment execution (depending on contract type)</li>
+                        <li>Performance reporting</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- the economi of water section  -->
+    <section>
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 lg:pt-12 pt-8">
+            <h1 class="text-lg sm:text-4xl sm:text-4xl font-extrabold text-blue-900 ">
+                The Economics of Water PPPs
+            </h1>
+        </div>
+        <div class="max-w-7xl px-6 lg:px-12 py-8 lg:py-12 mx-auto grid lg:grid-cols-2 gap-10 ">
+
+            <!-- bottom Section -->
+            <div>
+                <p class="text-gray-700 mb-4">
+                    Sustainable water services require cost recovery. Most costs – labour, energy, chemicals, financing
+                    for
+                    infrastructure – are external factors, not controlled by operators. When authorities engage private
+                    operators, they often make important economic decisions simultaneously:
+                </p>
+
+                <ul class="list-disc pl-6 space-y-2 text-gray-700 mb-6">
+                    <li>Moving from tax-funded services to direct user charges (making costs visible)</li>
+                    <li>Implementing needed investment programmes to restore or upgrade infrastructure</li>
+                    <li>Establishing tariff structures that ensure long-term sustainability</li>
+                </ul>
+
+                <p class="text-gray-700">
+                    This means PPPs sometimes “appear” more expensive, but they’re often simply reflecting decisions
+                    about
+                    investment and cost recovery that the authority has already made and would occur regardless of who
+                    operates the service.
+                </p>
+            </div>
+
+            <!-- Right Section (Suggested Graphic Placeholder) -->
+            <div class="bg-blue-50 rounded-2xl p-6 flex flex-col justify-center">
+                <h2 class="font-semibold text-gray-800 mb-2">SUGGESTED GRAPHIC:</h2>
+                <p class="text-gray-700">
+                    Simple breakdown showing what makes up the cost of water services – positioned here.
+                    Can this be done?
+                </p>
+            </div>
+        </div>
+    </section>
+    <!-- financial water infrastructure  -->
+
+    <section class="bg-[#f2f2f2]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+            <div class="flex flex-col lg:flex-row gap-6 md:gap-10">
+
+                <!-- Left Image -->
+                <div class="lg:w-1/2">
+                    <img src="images/financial-water-infrastructure.jpg" alt="Water Infrastructure"
+                        class="md:w-full md:h-full object-contain rounded-2xl">
+                </div>
+
+                <!-- Right Content -->
+                <div class="lg:w-1/2 flex flex-col justify-center">
+                    <h2 class="text-2xl md:text-3xl font-bold text-indigo-900 mb-4">
+                        Financing Water Infrastructure
+                    </h2>
+                    <p class="text-gray-700 mb-4">
+                        Private operators access various financing sources to fund needed investments:
+                    </p>
+
+                    <ul class="list-disc list-outside pl-4 text-gray-700 space-y-1 mb-4">
+                        <li>Bank loans or financial institution borrowing</li>
+                        <li>Capital investment from financial investors or the operator itself</li>
+                        <li>Repayable subsidies from government or revolving funds</li>
+                        <li>Blended finance combining multiple sources</li>
+                        <li>Non-repayable grants from donors (for specific social programmes)</li>
+                    </ul>
+
+                    <p class="text-gray-700">
+                        All financing mechanisms except grants require repayment over the contract term through the
+                        agreed revenue model.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- real world success  -->
+    <section class="relative overflow-hidden">
+        <!-- Wave Shape at Top -->
+        <div class="absolute top-0 left-0 w-full">
+            <svg viewBox="0 0 1440 320" class="w-full h-24 md:h-32" preserveAspectRatio="none">
+                <path fill="#ffffff"
+                    d="M0,64L60,80C120,96,240,128,360,154.7C480,181,600,203,720,197.3C840,192,960,160,1080,149.3C1200,139,1320,149,1380,154.7L1440,160L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
+                </path>
+            </svg>
+        </div>
+
+        <!-- Background Gradient -->
+        <div
+            class="bg-[linear-gradient(103deg,#37C6F4_0%,#5CD3CE_100%)] opacity-100 text-center py-20 px-6 md:px-16 text-white relative z-10">
+            <h2 class="text-4xl md:text-5xl font-bold text-[#1E1D57] mb-6">Real-World Success</h2>
+            <p class="text-[#1E1D57] max-w-5xl mx-auto leading-relaxed text-lg md:text-[22px]">
+                There’s evidence from around the world demonstrates PPPs’ impact.
+                In Manila, Philippines, access jumped from 26% to 99% since 1997,
+                with diarrhoea incidences falling 75%. Poor families who paid $3
+                per cubic metre for bottled water now pay 18 cents through subsidised tariffs.
+            </p>
+
+
+<div class="mt-6">
+    <a href="#"
+        class="group inline-flex items-center bg-[#1E1D57] text-[#37C6F4] 
+               text-sm md:text-base font-medium py-3 px-6 rounded-full 
+               shadow-md transition-all duration-300 hover:text-white">
+        
+        View more case studies
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+            width="24" height="24"
+            viewBox="0 0 24 24"
+            class="ml-2 transition-all duration-200 fill-[#37C6F4] group-hover:fill-white">
+            <rect width="24" height="24" fill="none"></rect>
+            <path d="M12.6,12,8,7.4,9.4,6l6,6-6,6L8,16.6,12.6,12Z"></path>
+        </svg>
+    </a>
+</div>
+
+
+        </div>
+    </section>
+<!-- PPPs and sustainability  -->
+    <section class="lg:py-12">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 lg:pt-12 pt-8">
+            <h1 class="text-lg sm:text-4xl sm:text-4xl font-extrabold text-[#1E1D57] ">
+                PPPs and sustainability
+            </h1>
+        </div>
+        <div class="max-w-7xl px-6 lg:px-12 py-8 mx-auto grid lg:grid-cols-2 gap-10 ">
+
+            <!-- bottom Section -->
+            <div>
+
+                <p class="text-gray-700 mb-4">
+                    Water operators link the natural and human water cycles – taking water from nature, treating it
+                    safely for use, collecting wastewater, treating it to remove pollution, and returning it to nature.
+                    This cycle must be sustainable.
+                </p>
+                <h1 class="text-[22px] mb-6 font-extrabold text-[#1E1D57]">
+                    Private operators support community sustainability by:
+                </h1>
+                <ul class="list-disc pl-4 space-y-2 text-gray-700 mb-6">
+                    <li>Protecting water resources through better management </li>
+                    <li>Reducing energy consumption and carbon footprint</li>
+                    <li>mplementing climate resilience measures </li>
+                    <li>Ensuring 24/7 service continuity </li>
+                    <li>Training local workforces </li>
+                    <li>Advancing towards universal access targets </li>
+                </ul>
+
+
+            </div>
+
+            <!-- Right Section (Suggested Graphic Placeholder) -->
+            <div class="bg-blue-50 rounded-2xl p-6 flex flex-col justify-center">
+                <h2 class="font-semibold text-gray-800 mb-2">SUGGESTED GRAPHIC:</h2>
+                <p class="text-gray-700">
+                    Simple breakdown showing what makes up the cost of water services – positioned here.
+                    Can this be done?
+                </p>
+            </div>
+        </div>
+    </section>
+ <!-- faq section  -->
+    <section class="bg-[#070648] text-white">
+        <section class="max-w-4xl mx-auto px-6 py-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Frequently asked questions</h2>
+
+            <div class="space-y-2">
+
+                <!-- FAQ Item -->
+                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
+                    onclick="toggleFAQ(this)">
+                    <h3 class="font-medium text-sm md:text-base">Don’t PPPs mean privatising water?</h3>
+                    <span class="text-xl">➤</span>
+                </div>
+
+                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
+                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
+                        Contracts ensure public ownership remains intact and the service continues to be publicly
+                        accountable.
+                    </div>
+                </div>
+
+                <!-- FAQ Item -->
+                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
+                    onclick="toggleFAQ(this)">
+                    <h3 class="font-medium text-sm md:text-base">Will water bills increase with a PPP?</h3>
+                    <span class="text-xl">➤</span>
+                </div>
+
+                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
+                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
+                        Tariffs are regulated to ensure affordability while improving service quality.
+                    </div>
+                </div>
+
+                <!-- FAQ Item (Active Example) -->
+                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer text-[#37C6F4] font-semibold transition-all duration-300"
+                    onclick="toggleFAQ(this)">
+                    <h3 class="text-sm md:text-base">What happens if the private company fails?</h3>
+                    <span class="text-xl rotate-90 transition-transform duration-300">➤</span>
+                </div>
+
+                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-[500px]">
+                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
+                        Contracts include detailed termination provisions. Assets remain public property.
+                        The authority can replace an underperforming operator or resume direct management.
+                        Well-designed contracts protect the public interest.
+                    </div>
+                </div>
+
+                <!-- More FAQs -->
+                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
+                    onclick="toggleFAQ(this)">
+                    <h3 class="font-medium text-sm md:text-base">Do PPPs mean job losses?</h3>
+                    <span class="text-xl">➤</span>
+                </div>
+                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
+                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
+                        PPPs often include provisions to protect workers and improve working conditions.
+                    </div>
+                </div>
+
+                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
+                    onclick="toggleFAQ(this)">
+                    <h3 class="font-medium text-sm md:text-base">Are PPPs suitable for poor communities?</h3>
+                    <span class="text-xl">➤</span>
+                </div>
+                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
+                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
+                        Well-structured PPPs can include subsidies to ensure access for low-income households.
+                    </div>
+                </div>
+
+                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
+                    onclick="toggleFAQ(this)">
+                    <h3 class="font-medium text-sm md:text-base">Who monitors PPP performance?</h3>
+                    <span class="text-xl">➤</span>
+                </div>
+                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
+                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
+                        Independent regulators and public agencies monitor and report PPP performance regularly.
+                    </div>
+                </div>
+
+                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
+                    onclick="toggleFAQ(this)">
+                    <h3 class="font-medium text-sm md:text-base">What about water as a human right?</h3>
+                    <span class="text-xl">➤</span>
+                </div>
+                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
+                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
+                        PPPs are designed to ensure everyone’s right to water, improving access and quality for all.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </section>
+
+    <!-- waves section  -->
+    <div class=" bottom-0 left-0 right-0">
+        <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
+            preserveAspectRatio="none">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+        58-18 88-18 58 18 88 18v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
+            </g>
+        </svg>
+    </div>
+
+@endsection
