@@ -7,6 +7,7 @@ use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -25,14 +26,45 @@ class CategoryResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function ($state, Set $set) {
+                        $set('slug', \Illuminate\Support\Str::slug($state));
+                    }),
                 Forms\Components\TextInput::make('slug')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('color')
+                    ->maxLength(255)
+                    ->unique(ignoreRecord: true)
+                    ->dehydrated()
+                    ->helperText('Auto-generated from name. You can edit it if needed.'),
+                Forms\Components\Select::make('parent_id')
+                    ->label('Parent Category')
+                    ->relationship('parent', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->helperText('Select a parent category to make this a sub-category. Leave empty for a top-level category.')
+                    ->options(function ($record) {
+                        // Only show top-level categories (no parent) as parent options
+                        // Exclude the current category to prevent self-reference
+                        $query = Category::where('is_active', true)
+                            ->whereNull('parent_id');
+
+                        if ($record) {
+                            $query->where('id', '!=', $record->id);
+                        }
+
+                        return $query->pluck('name', 'id');
+                    }),
+                Forms\Components\ColorPicker::make('color')
+                    ->label('Category Color')
                     ->required()
-                    ->maxLength(7)
-                    ->default('#3B82F6'),
+                    ->default('#3B82F6')
+                    ->helperText('This color will be used as the gradient background for category items on the resources page.'),
+                Forms\Components\TextInput::make('icon')
+                    ->label('Icon')
+                    ->maxLength(255)
+                    ->default('folder')
+                    ->helperText('Enter a Material Symbols icon name (e.g., view_agenda, folder, search). See Material Symbols guide for available icons.'),
                 Forms\Components\Textarea::make('description')
                     ->columnSpanFull(),
                 Forms\Components\Toggle::make('is_active')
@@ -46,9 +78,17 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('parent.name')
+                    ->label('Parent Category')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('color')
+                Tables\Columns\ColorColumn::make('color')
+                    ->label('Color'),
+                Tables\Columns\TextColumn::make('icon')
+                    ->label('Icon')
+                    ->badge()
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),

@@ -4,6 +4,22 @@
 
 @push('styles')
 <script src="https://unpkg.com/lucide@latest"></script>
+<style>
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .animate-fadeIn {
+        animation: fadeIn 0.3s ease-out;
+    }
+    .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    }
+</style>
 @endpush
 
 @section('content')
@@ -30,122 +46,211 @@
 <section class="bg-[#f2f2f2]">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen">
         <!-- Sidebar -->
-        <aside class="w-full md:w-64 lg:w-[20rem]  p-5">
-            <ul class="space-y-3 text-gray-700 font-medium">
-                <li class="flex items-center gap-3 cursor-pointer hover:text-blue-600">
-                    <i data-lucide="grid" class="w-5 h-5"></i> <span>All content</span>
-                </li>
+        <aside class="w-full md:w-64 lg:w-[20rem] p-5">
+            <form method="GET" action="{{ route('resources') }}" id="filterForm">
+                <ul class="space-y-3 text-gray-700 font-medium">
+                    <li>
+                        <a href="{{ route('resources') }}" class="flex items-center gap-3 hover:text-blue-600 {{ !request('category') && !request('type') ? 'text-blue-600' : '' }}">
+                            <span class="material-symbols-outlined text-lg">grid_view</span> <span>All content</span>
+                        </a>
+                    </li>
 
-                <li>
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
-                        <span class="flex items-center gap-3"><i data-lucide='search' class='w-5 h-5'></i> Identifying
-                            PPP opportunities</span>
-                        <i id="icon-menu1" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu1" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub category topic 1</li>
-                        <li>Sub category topic with a longer title 2</li>
-                        <li>Sub category topic 3</li>
-                        <li>Sub category topic 4</li>
-                    </ul>
-                </li>
+                    @foreach($categories as $category)
+                    <li>
+                        @if($category->children->count() > 0)
+                            <button type="button" 
+                                    class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3 category-toggle"
+                                    onclick="toggleCategory({{ $category->id }})">
+                                <span class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-lg">{{ $category->icon ?? 'folder' }}</span>
+                                    {{ $category->name }}
+                                </span>
+                                <i id="icon-category-{{ $category->id }}" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                            </button>
+                            <ul id="subcategory-{{ $category->id }}" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
+                                <li>
+                                    <a href="{{ route('resources', ['category' => $category->id]) }}" 
+                                       class="flex items-center gap-2 hover:text-blue-600 {{ request('category') == $category->id ? 'text-blue-600 font-semibold' : '' }}">
+                                        <span class="material-symbols-outlined text-sm">{{ $category->icon ?? 'circle' }}</span>
+                                        <span>All {{ $category->name }}</span>
+                                    </a>
+                                </li>
+                                @foreach($category->children as $subCategory)
+                                <li>
+                                    <a href="{{ route('resources', ['category' => $subCategory->id]) }}" 
+                                       class="flex items-center gap-2 hover:text-blue-600 {{ request('category') == $subCategory->id ? 'text-blue-600 font-semibold' : '' }}">
+                                        <span class="material-symbols-outlined text-sm">{{ $subCategory->icon ?? 'circle' }}</span>
+                                        <span>{{ $subCategory->name }}</span>
+                                    </a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        @else
+                            <a href="{{ route('resources', ['category' => $category->id]) }}" 
+                               class="flex items-center gap-3 hover:text-blue-600 {{ request('category') == $category->id ? 'text-blue-600 font-semibold' : '' }}">
+                                <span class="material-symbols-outlined text-lg">{{ $category->icon ?? 'folder' }}</span> 
+                                <span>{{ $category->name }}</span>
+                            </a>
+                        @endif
+                    </li>
+                    @endforeach
+                </ul>
 
-                <li>
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
-                        <span class="flex items-center gap-3"><i data-lucide='briefcase' class='w-5 h-5'></i> Preparing
-                            your project</span>
-                        <i id="icon-menu2" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu2" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub topic 1</li>
-                        <li>Sub topic 2</li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
-                        <span class="flex items-center gap-3"><i data-lucide="layers" class="w-5 h-5"></i>
-                            Implementation</span>
-                        <i id="icon-menu3" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu3" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub topic 1</li>
-                        <li>Sub topic 2</li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
-                        <span class="flex items-center gap-3"><i data-lucide="settings" class="w-5 h-5"></i>
-                            Management</span>
-                        <i id="icon-menu4" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu4" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub topic 1</li>
-                        <li>Sub topic 2</li>
-                    </ul>
-                </li>
-                <li>
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
-                        <span class="flex items-center gap-3"><i data-lucide="book-open" class="w-5 h-5"></i>Case
-                            studies</span>
-                        <i id="icon-menu5" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu5" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub topic 1</li>
-                        <li>Sub topic 2</li>
-                    </ul>
-                </li>
-            </ul>
+                <div class="w-full mt-6">
+                    <label class="block text-lg font-semibold text-[#000000] mb-3">Search</label>
+                    <div class="relative">
+                        <input type="text" 
+                               name="search" 
+                               value="{{ $search }}"
+                               placeholder="Search…" 
+                               class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700 
+                                      placeholder-gray-400 focus:ring-0 focus:outline-none"
+                               onkeypress="if(event.key === 'Enter') { event.preventDefault(); document.getElementById('filterForm').submit(); }">
+                        <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18.095 18.095">
+                                <path d="M16.681,18.1h0l-5.145-5.145a7.2,7.2,0,1,1,1.414-1.414L18.1,16.681l-1.413,1.413ZM7.2,2a5.2,5.2,0,1,0,5.2,5.2A5.206,5.206,0,0,0,7.2,2Z" fill="#1E1D57"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
 
-            <div class="w-full mt-6">
-          <label class="block text-lg font-semibold text-[#000000] mb-3">Search</label>
-          <div class="relative">
-            <input type="text" placeholder="Search…" class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700 
-                   placeholder-gray-400 focus:ring-0 focus:outline-none">
-
-            <!-- Search Icon -->
-            <span class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18.095 18.095">
-                <path d="M16.681,18.1h0l-5.145-5.145a7.2,7.2,0,1,1,1.414-1.414L18.1,16.681l-1.413,1.413ZM7.2,2a5.2,5.2,0,1,0,5.2,5.2A5.206,5.206,0,0,0,7.2,2Z" fill="#1E1D57"></path>
-              </svg>
-            </span>
-          </div>
-        </div>
+                @if(request('category') || request('search') || request('type'))
+                <div class="mt-4">
+                    <a href="{{ route('resources') }}" class="text-sm text-blue-600 hover:underline">Clear filters</a>
+                </div>
+                @endif
+            </form>
         </aside>
 
         <!-- ✅ MAIN CONTENT -->
         <main class="flex-1 p-6">
-            <!-- Cards -->
-            <div id="card-container" class="grid grid-cols-1 lg:w-[100%] sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-            <!-- Pagination -->
-            <div class="flex justify-center mt-6 space-x-2">
-                <button onclick="prevPage()"  class="text-[#ababab] hover:text-[#1E1D57] transition-colors duration-300 ">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
-                        fill="currentColor">
-                        <g transform="translate(-781 -2356)">
-                            <rect width="40" height="40" transform="translate(781 2356)" fill="none" />
-                            <path
-                                d="M17.617,18.763l5.159,5.159-2.345,2.4L12.894,18.78l7.537-7.537,2.345,2.4L17.617,18.8Zm1.139,16.749a16.21,16.21,0,0,0,6.532-1.323A16.731,16.731,0,0,0,34.2,25.279a16.21,16.21,0,0,0,1.323-6.532A16.21,16.21,0,0,0,34.2,12.214,16.731,16.731,0,0,0,25.289,3.3,16.21,16.21,0,0,0,18.756,1.98,16.21,16.21,0,0,0,12.224,3.3a16.731,16.731,0,0,0-8.911,8.911A16.21,16.21,0,0,0,1.99,18.746a16.21,16.21,0,0,0,1.323,6.532,16.731,16.731,0,0,0,8.911,8.911A16.21,16.21,0,0,0,18.756,35.512Zm0-3.35a12.968,12.968,0,0,1-9.514-3.9,12.941,12.941,0,0,1-3.9-9.514,12.941,12.941,0,0,1,3.9-9.514,12.941,12.941,0,0,1,9.514-3.9,12.941,12.941,0,0,1,9.514,3.9,12.941,12.941,0,0,1,3.9,9.514,12.941,12.941,0,0,1-3.9,9.514A12.941,12.941,0,0,1,18.756,32.163Z"
-                                transform="translate(781.744 2356.738)" />
-                        </g>
-                    </svg>
-                </button>
+            @if($items->count() > 0)
+                <!-- Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @foreach($items as $item)
+                        @php
+                            // Check if item is bookmarked
+                            $isBookmarked = in_array($item->id, $bookmarkedItemIds ?? []);
+                            
+                            // Get display category (parent if exists, otherwise the category itself)
+                            $displayCategory = $item->category->parent ?? $item->category;
+                            $categoryColor = $displayCategory->color ?? '#0E1C62';
+                            // Ensure color has # prefix
+                            if (!str_starts_with($categoryColor, '#')) {
+                                $categoryColor = '#' . $categoryColor;
+                            }
+                            // Create a complementary color for the gradient end
+                            // Convert hex to RGB, lighten it, then convert back
+                            $hex = ltrim($categoryColor, '#');
+                            // Handle 3-character hex codes
+                            if (strlen($hex) == 3) {
+                                $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
+                            }
+                            $r = hexdec(substr($hex, 0, 2));
+                            $g = hexdec(substr($hex, 2, 2));
+                            $b = hexdec(substr($hex, 4, 2));
+                            // Lighten the color by 30% for gradient end
+                            $r2 = min(255, $r + (255 - $r) * 0.3);
+                            $g2 = min(255, $g + (255 - $g) * 0.3);
+                            $b2 = min(255, $b + (255 - $b) * 0.3);
+                            $gradientEnd = sprintf('#%02x%02x%02x', $r2, $g2, $b2);
+                            $firstFileId = $item->files->first() ? $item->files->first()->id : null;
+                        @endphp
+                        <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
+                            <div class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]" 
+                                 style="background: linear-gradient(to bottom right, {{ $categoryColor }}, {{ $gradientEnd }});">
+                                <div>
+                                    <h3 class="font-semibold text-lg leading-snug">{{ $item->title }}</h3>
+                                    <p class="text-sm mt-2 opacity-90">{{ $item->publisher ?? 'No publisher' }}</p>
+                                </div>
+                                <div class="flex items-center space-x-2 mt-12">
+                                    <i data-lucide="{{ $item->type_icon }}" class="w-4 h-4"></i>
+                                    <span class="text-sm">{{ $item->type_label }}</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
+                                <i data-lucide="maximize-2" 
+                                   class="w-4 h-4 cursor-pointer" 
+                                   onclick="openModal({{ $firstFileId ?? 'null' }}, '{{ addslashes($item->title) }}', '{{ addslashes($item->publisher ?? 'No publisher') }}', '{{ $item->type_label }}', '{{ $item->type_icon }}', '{{ addslashes($item->short_description ?? $item->description ?? 'No description available.') }}', '{{ $categoryColor }}', '{{ $gradientEnd }}', {{ $item->files->count() }}, '{{ $item->slug }}', {{ $item->id }}, {{ $isBookmarked ? 'true' : 'false' }})"></i>
+                                @if($item->files->count() > 0)
+                                    <a href="{{ route('files.download', $item->files->first()->id) }}" 
+                                       class="cursor-pointer"
+                                       onclick="event.stopPropagation();">
+                                        <i data-lucide="download" class="w-4 h-4"></i>
+                                    </a>
+                                @else
+                                    <i data-lucide="download" class="w-4 h-4 opacity-50"></i>
+                                @endif
+                                <i data-lucide="bookmark" 
+                                   class="w-4 h-4 cursor-pointer {{ $isBookmarked ? 'fill-[#37C6F4] text-[#37C6F4]' : 'hover:text-[#37C6F4]' }}"
+                                   onclick="toggleBookmark({{ $item->id }}, this)"
+                                   data-item-id="{{ $item->id }}"></i>
+                                <i data-lucide="share-2" class="w-4 h-4 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
 
-                <button id="btn1" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4]   rounded" onclick="changePage(1)">1</button>
-                <button id="btn2" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded" onclick="changePage(2)">2</button>
-                <button id="btn3" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded" onclick="changePage(3)">3</button>
-               <button onclick="nextPage()" class="text-[#ababab] hover:text-[#1E1D57] transition-colors duration-300">
-                    <svg class="-rotate-180" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
-                        fill="currentColor">
-                        <g transform="translate(-781 -2356)">
-                            <rect width="40" height="40" transform="translate(781 2356)" fill="none" />
-                            <path
-                                d="M17.617,18.763l5.159,5.159-2.345,2.4L12.894,18.78l7.537-7.537,2.345,2.4L17.617,18.8Zm1.139,16.749a16.21,16.21,0,0,0,6.532-1.323A16.731,16.731,0,0,0,34.2,25.279a16.21,16.21,0,0,0,1.323-6.532A16.21,16.21,0,0,0,34.2,12.214,16.731,16.731,0,0,0,25.289,3.3,16.21,16.21,0,0,0,18.756,1.98,16.21,16.21,0,0,0,12.224,3.3a16.731,16.731,0,0,0-8.911,8.911A16.21,16.21,0,0,0,1.99,18.746a16.21,16.21,0,0,0,1.323,6.532,16.731,16.731,0,0,0,8.911,8.911A16.21,16.21,0,0,0,18.756,35.512Zm0-3.35a12.968,12.968,0,0,1-9.514-3.9,12.941,12.941,0,0,1-3.9-9.514,12.941,12.941,0,0,1,3.9-9.514,12.941,12.941,0,0,1,9.514-3.9,12.941,12.941,0,0,1,9.514,3.9,12.941,12.941,0,0,1,3.9,9.514,12.941,12.941,0,0,1-3.9,9.514A12.941,12.941,0,0,1,18.756,32.163Z"
-                                transform="translate(781.744 2356.738)" />
-                        </g>
-                    </svg>
-                </button>
+                <!-- Pagination -->
+                @if($items->hasPages())
+                <div class="flex justify-center mt-6 space-x-2">
+                    @if($items->onFirstPage())
+                        <span class="text-[#ababab] cursor-not-allowed">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
+                                <g transform="translate(-781 -2356)">
+                                    <rect width="40" height="40" transform="translate(781 2356)" fill="none" />
+                                    <path d="M17.617,18.763l5.159,5.159-2.345,2.4L12.894,18.78l7.537-7.537,2.345,2.4L17.617,18.8Zm1.139,16.749a16.21,16.21,0,0,0,6.532-1.323A16.731,16.731,0,0,0,34.2,25.279a16.21,16.21,0,0,0,1.323-6.532A16.21,16.21,0,0,0,34.2,12.214,16.731,16.731,0,0,0,25.289,3.3,16.21,16.21,0,0,0,18.756,1.98,16.21,16.21,0,0,0,12.224,3.3a16.731,16.731,0,0,0-8.911,8.911A16.21,16.21,0,0,0,1.99,18.746a16.21,16.21,0,0,0,1.323,6.532,16.731,16.731,0,0,0,8.911,8.911A16.21,16.21,0,0,0,18.756,35.512Zm0-3.35a12.968,12.968,0,0,1-9.514-3.9,12.941,12.941,0,0,1-3.9-9.514,12.941,12.941,0,0,1,3.9-9.514,12.941,12.941,0,0,1,9.514-3.9,12.941,12.941,0,0,1,9.514,3.9,12.941,12.941,0,0,1,3.9,9.514,12.941,12.941,0,0,1-3.9,9.514A12.941,12.941,0,0,1,18.756,32.163Z" transform="translate(781.744 2356.738)" />
+                                </g>
+                            </svg>
+                        </span>
+                    @else
+                        <a href="{{ $items->previousPageUrl() }}" class="text-[#ababab] hover:text-[#1E1D57] transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
+                                <g transform="translate(-781 -2356)">
+                                    <rect width="40" height="40" transform="translate(781 2356)" fill="none" />
+                                    <path d="M17.617,18.763l5.159,5.159-2.345,2.4L12.894,18.78l7.537-7.537,2.345,2.4L17.617,18.8Zm1.139,16.749a16.21,16.21,0,0,0,6.532-1.323A16.731,16.731,0,0,0,34.2,25.279a16.21,16.21,0,0,0,1.323-6.532A16.21,16.21,0,0,0,34.2,12.214,16.731,16.731,0,0,0,25.289,3.3,16.21,16.21,0,0,0,18.756,1.98,16.21,16.21,0,0,0,12.224,3.3a16.731,16.731,0,0,0-8.911,8.911A16.21,16.21,0,0,0,1.99,18.746a16.21,16.21,0,0,0,1.323,6.532,16.731,16.731,0,0,0,8.911,8.911A16.21,16.21,0,0,0,18.756,35.512Zm0-3.35a12.968,12.968,0,0,1-9.514-3.9,12.941,12.941,0,0,1-3.9-9.514,12.941,12.941,0,0,1,3.9-9.514,12.941,12.941,0,0,1,9.514-3.9,12.941,12.941,0,0,1,9.514,3.9,12.941,12.941,0,0,1,3.9,9.514,12.941,12.941,0,0,1-3.9,9.514A12.941,12.941,0,0,1,18.756,32.163Z" transform="translate(781.744 2356.738)" />
+                                </g>
+                            </svg>
+                        </a>
+                    @endif
 
-            </div>
+                    @foreach($items->getUrlRange(1, $items->lastPage()) as $page)
+                        @if($page == $items->currentPage())
+                            <span class="px-3 py-1 text-[20px] text-white bg-[#1E1D57] rounded">{{ $page }}</span>
+                        @else
+                            <a href="{{ $items->url($page) }}" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded">{{ $page }}</a>
+                        @endif
+                    @endforeach
+
+                    @if($items->hasMorePages())
+                        <a href="{{ $items->nextPageUrl() }}" class="text-[#ababab] hover:text-[#1E1D57] transition-colors duration-300">
+                            <svg class="-rotate-180" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
+                                <g transform="translate(-781 -2356)">
+                                    <rect width="40" height="40" transform="translate(781 2356)" fill="none" />
+                                    <path d="M17.617,18.763l5.159,5.159-2.345,2.4L12.894,18.78l7.537-7.537,2.345,2.4L17.617,18.8Zm1.139,16.749a16.21,16.21,0,0,0,6.532-1.323A16.731,16.731,0,0,0,34.2,25.279a16.21,16.21,0,0,0,1.323-6.532A16.21,16.21,0,0,0,34.2,12.214,16.731,16.731,0,0,0,25.289,3.3,16.21,16.21,0,0,0,18.756,1.98,16.21,16.21,0,0,0,12.224,3.3a16.731,16.731,0,0,0-8.911,8.911A16.21,16.21,0,0,0,1.99,18.746a16.21,16.21,0,0,0,1.323,6.532,16.731,16.731,0,0,0,8.911,8.911A16.21,16.21,0,0,0,18.756,35.512Zm0-3.35a12.968,12.968,0,0,1-9.514-3.9,12.941,12.941,0,0,1-3.9-9.514,12.941,12.941,0,0,1,3.9-9.514,12.941,12.941,0,0,1,9.514-3.9,12.941,12.941,0,0,1,9.514,3.9,12.941,12.941,0,0,1,3.9,9.514,12.941,12.941,0,0,1-3.9,9.514A12.941,12.941,0,0,1,18.756,32.163Z" transform="translate(781.744 2356.738)" />
+                                </g>
+                            </svg>
+                        </a>
+                    @else
+                        <span class="text-[#ababab] cursor-not-allowed">
+                            <svg class="-rotate-180" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
+                                <g transform="translate(-781 -2356)">
+                                    <rect width="40" height="40" transform="translate(781 2356)" fill="none" />
+                                    <path d="M17.617,18.763l5.159,5.159-2.345,2.4L12.894,18.78l7.537-7.537,2.345,2.4L17.617,18.8Zm1.139,16.749a16.21,16.21,0,0,0,6.532-1.323A16.731,16.731,0,0,0,34.2,25.279a16.21,16.21,0,0,0,1.323-6.532A16.21,16.21,0,0,0,34.2,12.214,16.731,16.731,0,0,0,25.289,3.3,16.21,16.21,0,0,0,18.756,1.98,16.21,16.21,0,0,0,12.224,3.3a16.731,16.731,0,0,0-8.911,8.911A16.21,16.21,0,0,0,1.99,18.746a16.21,16.21,0,0,0,1.323,6.532,16.731,16.731,0,0,0,8.911,8.911A16.21,16.21,0,0,0,18.756,35.512Zm0-3.35a12.968,12.968,0,0,1-9.514-3.9,12.941,12.941,0,0,1-3.9-9.514,12.941,12.941,0,0,1,3.9-9.514,12.941,12.941,0,0,1,9.514-3.9,12.941,12.941,0,0,1,9.514,3.9,12.941,12.941,0,0,1,3.9,9.514,12.941,12.941,0,0,1-3.9,9.514A12.941,12.941,0,0,1,18.756,32.163Z" transform="translate(781.744 2356.738)" />
+                                </g>
+                            </svg>
+                        </span>
+                    @endif
+                </div>
+                @endif
+            @else
+                <div class="text-center py-12">
+                    <p class="text-gray-600 text-lg">No resources found.</p>
+                    @if(request('search') || request('category'))
+                        <a href="{{ route('resources') }}" class="text-blue-600 hover:underline mt-2 inline-block">Clear filters</a>
+                    @endif
+                </div>
+            @endif
         </main>
     </div>
 </section>
@@ -185,15 +290,19 @@
                 <!-- Buttons fixed at the bottom right section -->
                 <div class="border-t mt-8 pt-4 flex justify-between flex-wrap gap-4 text-gray-700 text-sm">
                     <div class="flex flex-wrap gap-6">
-                        <button class="flex items-center gap-2"><i data-lucide="bookmark" class="w-4 h-4"></i>Add to
-                            your library</button>
-                        <button class="flex items-center gap-2"><i data-lucide="download" class="w-4 h-4"></i>Download
-                            file</button>
+                        <button id="modalBookmarkBtn" 
+                                class="flex items-center gap-2"
+                                onclick="toggleBookmarkModal()">
+                            <i id="modalBookmarkIcon" data-lucide="bookmark" class="w-4 h-4"></i>
+                            <span id="modalBookmarkText">Add to your library</span>
+                        </button>
+                        <a id="modalDownloadLink" href="#" class="flex items-center gap-2"><i data-lucide="download" class="w-4 h-4"></i>Download
+                            file</a>
                         <button class="flex items-center gap-2"><i data-lucide="share-2"
                                 class="w-4 h-4"></i>Share</button>
                     </div>
-                    <button class="flex items-center gap-2 font-semibold underline"><i data-lucide="more-horizontal"
-                            class="w-4 h-4"></i>More options…</button>
+                    <a id="modalMoreOptionsLink" href="#" class="flex items-center gap-2 font-semibold underline"><i data-lucide="more-horizontal"
+                            class="w-4 h-4"></i>More options…</a>
                 </div>
             </div>
         </div>
@@ -201,110 +310,141 @@
 </div>
 
 <!-- waves  -->
-    <div class=" bottom-0 left-0 right-0 bg-[#f2f2f2]">
-        <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
-            preserveAspectRatio="none">
-            <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+<div class="bottom-0 left-0 right-0 bg-[#f2f2f2]">
+    <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
+        preserveAspectRatio="none">
+        <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
         58-18 88-18 58 18 88 18v44h-352z" />
-            </defs>
-            <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)" />
-                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)" />
-                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)" />
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
-            </g>
-        </svg>
-    </div>
+        </defs>
+        <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)" />
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)" />
+            <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
+        </g>
+    </svg>
+</div>
 @endsection
 
 @push('scripts')
-<!-- <script>
-    const gradients = [
-        "bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0]",
-        "bg-gradient-to-br from-[#0E4473] to-[#25B3D8]",
-        "bg-gradient-to-br from-[#44107A] to-[#FF1361]",
-        "bg-gradient-to-br from-[#2A0845] to-[#6441A5]",
-        "bg-gradient-to-br from-[#16222A] to-[#3A6073]",
-        "bg-gradient-to-br from-[#1E3C72] to-[#2A5298]",
-        "bg-gradient-to-br from-[#134E5E] to-[#71B280]",
-        "bg-gradient-to-br from-[#373B44] to-[#4286f4]",
-        "bg-gradient-to-br from-[#20002c] to-[#cbb4d4]"
-    ];
+<script>
+    let currentModalItemId = null;
+    let currentModalBookmarked = false;
 
-    const cardsData = Array.from({ length: 36 }, (_, i) => ({
-        title: `Title of guide or document can go here over multiple line here`,
-        publisher: "Publisher name here",
-        type: ["Guide", "Video", "Podcast", "Case Study"][i % 4],
-        gradient: gradients[i % gradients.length],
-        icon: ["book", "video", "mic", "lightbulb"][i % 4]
-    }));
-
-    const cardsPerPage = 12;
-    let currentPage = 1;
-
-    function renderCards() {
-        const container = document.getElementById("card-container");
-        container.innerHTML = "";
-        const start = (currentPage - 1) * cardsPerPage;
-        const end = start + cardsPerPage;
-        const visibleCards = cardsData.slice(start, end);
-
-        visibleCards.forEach((card) => {
-            container.innerHTML += `
-                <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-                    <div class="${card.gradient} text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]">
-                        <div>
-                            <h3 class="font-semibold text-lg leading-snug">${card.title}</h3>
-                            <p class="text-sm mt-2 opacity-90">${card.publisher}</p>
-                        </div>
-                        <div class="flex items-center space-x-2 mt-12">
-                            <i data-lucide="${card.icon}" class="w-4 h-4"></i>
-                            <span class="text-sm">${card.type}</span>
-                        </div>
-                    </div>
-                    <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
-                        <i data-lucide="maximize-2" class="w-4 h-4 cursor-pointer" onclick="openModal('${card.title}', '${card.publisher}', '${card.type}', '${card.gradient}', '${card.icon}')"></i>
-                        <i data-lucide="download" class="w-4 h-4 cursor-pointer"></i>
-                        <i data-lucide="bookmark" class="w-4 h-4 cursor-pointer"></i>
-                        <i data-lucide="share-2" class="w-4 h-4 cursor-pointer"></i>
-                        
-                    </div>
-                </div>`;
-        });
-
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-    }
-
-    function changePage(page) {
-        currentPage = page;
-        renderCards();
-        document.querySelectorAll("button[id^='btn']").forEach((btn) => {
-            btn.classList.remove("bg-blue-600", "text-white");
-            btn.classList.add("bg-gray-200");
-        });
-        const activeBtn = document.getElementById(`btn${page}`);
-        if (activeBtn) {
-            activeBtn.classList.add("bg-blue-600", "text-white");
-            activeBtn.classList.remove("bg-gray-200");
-        }
-    }
-
-    function openModal(title, publisher, type, gradient, icon) {
+    function openModal(itemId, title, publisher, type, icon, description, categoryColor, gradientEnd, hasFiles, itemSlug, itemDbId, isBookmarked) {
         const modal = document.getElementById("productModal");
         modal.classList.remove("hidden");
         modal.classList.add("flex");
         document.getElementById("modalTitle").innerText = title;
         document.getElementById("modalPublisher").innerText = publisher;
         document.getElementById("modalType").innerText = type;
+        document.getElementById("modalDescription").innerText = description;
         const colorBox = document.getElementById("modalColorBox");
-        colorBox.className = `${gradient} p-8 text-white w-full md:w-1/2 flex flex-col justify-between min-h-[360px]`;
+        colorBox.className = "p-8 text-white w-full md:w-1/2 flex flex-col justify-between min-h-[360px]";
+        colorBox.style.background = `linear-gradient(to bottom right, ${categoryColor}, ${gradientEnd})`;
         document.getElementById("modalIcon").setAttribute("data-lucide", icon);
+        
+        // Store current item info for bookmark
+        currentModalItemId = itemDbId;
+        currentModalBookmarked = isBookmarked;
+        updateModalBookmarkButton(isBookmarked);
+        
+        // Update download link if files exist
+        const downloadLink = document.getElementById("modalDownloadLink");
+        if (hasFiles > 0 && itemId) {
+            downloadLink.href = `/files/${itemId}/download`;
+            downloadLink.style.pointerEvents = 'auto';
+            downloadLink.style.opacity = '1';
+        } else {
+            downloadLink.href = '#';
+            downloadLink.style.pointerEvents = 'none';
+            downloadLink.style.opacity = '0.5';
+        }
+        
+        // Update "More options" link to navigate to single product page
+        const moreOptionsLink = document.getElementById("modalMoreOptionsLink");
+        if (itemSlug) {
+            moreOptionsLink.href = `/resources/${itemSlug}`;
+        } else {
+            moreOptionsLink.href = '#';
+        }
+        
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
+    }
+
+    function updateModalBookmarkButton(isBookmarked) {
+        const icon = document.getElementById("modalBookmarkIcon");
+        const text = document.getElementById("modalBookmarkText");
+        
+        if (isBookmarked) {
+            icon.classList.add("fill-[#37C6F4]", "text-[#37C6F4]");
+            text.textContent = "Remove from library";
+        } else {
+            icon.classList.remove("fill-[#37C6F4]", "text-[#37C6F4]");
+            text.textContent = "Add to your library";
+        }
+        
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    }
+
+    function toggleBookmarkModal() {
+        if (!currentModalItemId) return;
+        toggleBookmark(currentModalItemId, document.getElementById("modalBookmarkIcon"), true);
+    }
+
+    function toggleBookmark(itemId, iconElement, isModal = false) {
+        fetch(`/items/${itemId}/bookmark`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+            },
+            credentials: 'same-origin'
+        })
+        .then(response => {
+            if (response.status === 401 || response.status === 403) {
+                window.location.href = '/login';
+                return;
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!data) return;
+            
+            if (data.error) {
+                alert(data.error);
+                if (data.error.includes('logged in')) {
+                    window.location.href = '/login';
+                }
+                return;
+            }
+            
+            // Update icon appearance
+            if (isModal) {
+                currentModalBookmarked = data.bookmarked;
+                updateModalBookmarkButton(data.bookmarked);
+            } else {
+                // Update card icon
+                if (data.bookmarked) {
+                    iconElement.classList.add("fill-[#37C6F4]", "text-[#37C6F4]");
+                } else {
+                    iconElement.classList.remove("fill-[#37C6F4]", "text-[#37C6F4]");
+                }
+                
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while bookmarking the item.');
+        });
     }
 
     function closeModal() {
@@ -313,9 +453,9 @@
         modal.classList.remove("flex");
     }
 
-    function toggleMenu(id) {
-        const menu = document.getElementById(id);
-        const icon = document.getElementById(`icon-${id}`);
+    function toggleCategory(categoryId) {
+        const menu = document.getElementById(`subcategory-${categoryId}`);
+        const icon = document.getElementById(`icon-category-${categoryId}`);
         if (menu.classList.contains("hidden")) {
             menu.classList.remove("hidden");
             icon.classList.add("rotate-180");
@@ -323,13 +463,25 @@
             menu.classList.add("hidden");
             icon.classList.remove("rotate-180");
         }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        renderCards();
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+        
+        // Auto-expand categories that have selected sub-categories
+        @if(request('category'))
+            @php
+                $selectedCategory = \App\Models\Category::find(request('category'));
+                if ($selectedCategory && $selectedCategory->parent_id) {
+                    echo "toggleCategory({$selectedCategory->parent_id});";
+                }
+            @endphp
+        @endif
     });
-</script> -->
+</script>
 @endpush

@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\ImageGeneratorController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\ResourcesController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -15,9 +16,7 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/resources', function () {
-    return view('resources');
-})->name('resources');
+Route::get('/resources', [ResourcesController::class, 'index'])->name('resources');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -31,9 +30,7 @@ Route::get('/water-ppp-resources', function () {
     return view('water_ppp_resources');
 })->name('waterpppresources');
 
-Route::get('/single-product-page', function () {
-    return view('single_product_page');
-})->name('singleproductpage');
+Route::get('/resources/{slug}', [ResourcesController::class, 'show'])->name('resources.show');
 
 Route::get('/contact-us', function () {
     return view('contact_us');
@@ -43,9 +40,12 @@ Route::get('/case-study', function () {
     return view('case_study');
 })->name('casestudy');
 
-Route::get('/my-account', function () {
-    return view('my_account');
-})->name('myaccount');
+Route::get('/my-account', [\App\Http\Controllers\MyAccountController::class, 'index'])->name('myaccount')->middleware('auth');
+
+// Bookmark routes
+Route::middleware('auth')->group(function () {
+    Route::post('/items/{item}/bookmark', [\App\Http\Controllers\BookmarkController::class, 'toggle'])->name('bookmarks.toggle');
+});
 
 // Authentication routes
 Route::middleware('guest')->group(function () {
