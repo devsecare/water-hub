@@ -348,101 +348,193 @@
         </div>
     </section>
  <!-- faq section  -->
-    <section class="bg-[#070648] text-white">
-        <section class="max-w-4xl mx-auto px-6 py-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Frequently asked questions</h2>
+    <section class="w-full bg-blue py-16 text-white">
+        <div class="max-w-4xl mx-auto px-6 lg:px-16">
 
-            <div class="space-y-2">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 max-[440px]:text-xl">
+                Frequently asked questions
+            </h2>
 
-                <!-- FAQ Item -->
-                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
-                    onclick="toggleFAQ(this)">
-                    <h3 class="font-medium text-sm md:text-base">Don’t PPPs mean privatising water?</h3>
-                    <span class="text-xl">➤</span>
-                </div>
+            <div class="space-y-4">
 
-                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
-                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
-                        Contracts ensure public ownership remains intact and the service continues to be publicly
-                        accountable.
+                <!-- FAQ 1 -->
+                <div class="bg-[#131B5A] rounded-[25px] p-4 max-[400px]:p-2">
+                    <button class="w-full flex justify-between items-center faq-btn group">
+                        <span class="font-medium text-lg max-[400px]:text-sm transition-colors group-hover:text-[#37C6F4]">
+                            Don’t PPPs mean privatising water?
+                        </span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            class="transition-transform rotate-0 duration-300">
+                            <rect width="24" height="24" fill="none"></rect>
+                            <path class="fill-[#ababab] transition-colors duration-300 group-hover:fill-[#37C6F4]"
+                                d="M12.68,12,9.6,15.08,11,16.51l4.5-4.5L11,7.51,9.6,8.94l3.08,3.08ZM12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Z">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="pt-3 text-[#FFFFFF] max-w-[719px]">
+                            No. In a PPP, the public authority retains ownership and control. Water remains a
+                            public service under public oversight. The private operator is contracted to deliver
+                            services under conditions set by the authority.
+                        </p>
                     </div>
                 </div>
 
-                <!-- FAQ Item -->
-                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
-                    onclick="toggleFAQ(this)">
-                    <h3 class="font-medium text-sm md:text-base">Will water bills increase with a PPP?</h3>
-                    <span class="text-xl">➤</span>
-                </div>
+                <!-- FAQ 2 -->
+                <div class="bg-[#131B5A] rounded-[25px] p-4 max-[400px]:p-2">
+                    <button class="w-full flex justify-between items-center faq-btn group">
+                        <span class="font-medium text-lg max-[400px]:text-sm transition-colors group-hover:text-[#37C6F4]">
+                            Will my water bills increase with a PPP?
+                        </span>
 
-                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
-                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
-                        Tariffs are regulated to ensure affordability while improving service quality.
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            class="transition-transform rotate-0 duration-300">
+                            <rect width="24" height="24" fill="none"></rect>
+                            <path class="fill-[#ababab] transition-colors duration-300 group-hover:fill-[#37C6F4]"
+                                d="M12.68,12,9.6,15.08,11,16.51l4.5-4.5L11,7.51,9.6,8.94l3.08,3.08ZM12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Z">
+                            </path>
+                        </svg>
+                    </button>
+
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="pt-3 text-[#FFFFFF] max-w-[719px]">
+                            Tariff levels are controlled by the public authority, not the operator. Any increases
+                            reflect decisions about investment needs and cost recovery that the authority has made.
+                            Many PPPs actually improve affordability through efficiency gains whilst expanding access
+                            to those previously unserved.
+                        </p>
                     </div>
                 </div>
 
-                <!-- FAQ Item (Active Example) -->
-                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer text-[#37C6F4] font-semibold transition-all duration-300"
-                    onclick="toggleFAQ(this)">
-                    <h3 class="text-sm md:text-base">What happens if the private company fails?</h3>
-                    <span class="text-xl rotate-90 transition-transform duration-300">➤</span>
-                </div>
+                <!-- FAQ 3 -->
+                <div class="bg-[#131B5A] rounded-[25px] p-4 max-[400px]:p-2">
+                    <button class="w-full flex justify-between items-center faq-btn group">
+                        <span class="font-medium text-lg max-[400px]:text-sm transition-colors group-hover:text-[#37C6F4]">
+                            Are PPPs only about profit for companies?
+                        </span>
 
-                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-[500px]">
-                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
-                        Contracts include detailed termination provisions. Assets remain public property.
-                        The authority can replace an underperforming operator or resume direct management.
-                        Well-designed contracts protect the public interest.
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            class="transition-transform rotate-0 duration-300">
+                            <path class="fill-[#ababab] transition-colors duration-300 group-hover:fill-[#37C6F4]"
+                                d="M12.68,12,9.6,15.08,11,16.51l4.5-4.5L11,7.51,9.6,8.94l3.08,3.08ZM12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Z"></path>
+                        </svg>
+                    </button>
+
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="pt-3">
+                            PPPs are about results. Operators are paid for delivering agreed performance standards –
+                            improved service, reduced water loss, expanded access, better water quality. Contracts
+                            include penalties for underperformance. The primary goal is improved public services.
+                        </p>
                     </div>
                 </div>
 
-                <!-- More FAQs -->
-                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
-                    onclick="toggleFAQ(this)">
-                    <h3 class="font-medium text-sm md:text-base">Do PPPs mean job losses?</h3>
-                    <span class="text-xl">➤</span>
-                </div>
-                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
-                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
-                        PPPs often include provisions to protect workers and improve working conditions.
+                <!-- FAQ 4 FULL (included double paragraphs) -->
+                <div class="bg-[#131B5A] rounded-[25px] p-4 max-[400px]:p-2">
+                    <button class="w-full flex justify-between items-center faq-btn group">
+                        <span class="font-medium text-lg max-[400px]:text-sm transition-colors group-hover:text-[#37C6F4]">
+                            What happens if the private company fails?
+                        </span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            class="transition-transform rotate-0 duration-300">
+                            <path class="fill-[#ababab] transition-colors duration-300 group-hover:fill-[#37C6F4]"
+                                d="M12.68,12,9.6,15.08,11,16.51l4.5-4.5L11,7.51,9.6,8.94l3.08,3.08ZM12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Z"></path>
+                        </svg>
+                    </button>
+
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="pt-3">
+                            Contracts include detailed termination provisions. Assets remain public property. The
+                            authority can replace an underperforming operator or resume direct management.
+                            Well-designed contracts protect the public interest. Do PPPs mean job losses?
+                        </p>
+
+                        <p class="pt-3">
+                            Evidence shows PPPs typically maintain or increase employment. As services expand and
+                            improve,
+                            workforce needs grow. Many contracts include provisions for transferring existing public
+                            employees with protected conditions.
+                        </p>
                     </div>
                 </div>
 
-                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
-                    onclick="toggleFAQ(this)">
-                    <h3 class="font-medium text-sm md:text-base">Are PPPs suitable for poor communities?</h3>
-                    <span class="text-xl">➤</span>
-                </div>
-                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
-                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
-                        Well-structured PPPs can include subsidies to ensure access for low-income households.
+                <!-- FAQ 5 -->
+                <div class="bg-[#131B5A] rounded-[25px] p-4 max-[400px]:p-2">
+                    <button class="w-full flex justify-between items-center faq-btn group">
+                        <span class="font-medium text-lg max-[400px]:text-sm transition-colors group-hover:text-[#37C6F4]">
+                            Are PPPs suitable for poor communities?
+                        </span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            class="transition-transform rotate-0 duration-300">
+                            <path class="fill-[#ababab] transition-colors duration-300 group-hover:fill-[#37C6F4]"
+                                d="M12.68,12,9.6,15.08,11,16.51l4.5-4.5L11,7.51,9.6,8.94l3.08,3.08ZM12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Z"></path>
+                        </svg>
+                    </button>
+
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="pt-3">
+                            Yes – particularly where traditional approaches have failed to deliver. Many successful
+                            PPPs specifically target underserved populations through subsidised connection fees,
+                            lifeline tariffs for basic consumption, and flexible payment schemes. Examples from Benin,
+                            Uganda, and Manila demonstrate pro-poor outcomes.
+                        </p>
                     </div>
                 </div>
 
-                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
-                    onclick="toggleFAQ(this)">
-                    <h3 class="font-medium text-sm md:text-base">Who monitors PPP performance?</h3>
-                    <span class="text-xl">➤</span>
-                </div>
-                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
-                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
-                        Independent regulators and public agencies monitor and report PPP performance regularly.
+                <!-- FAQ 6 -->
+                <div class="bg-[#131B5A] rounded-[25px] p-4 max-[400px]:p-2">
+                    <button class="w-full flex justify-between items-center faq-btn group">
+                        <span class="font-medium text-lg max-[400px]:text-sm transition-colors group-hover:text-[#37C6F4]">
+                            Who monitors PPP performance? 
+                        </span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            class="transition-transform rotate-0 duration-300">
+                            <path class="fill-[#ababab] transition-colors duration-300 group-hover:fill-[#37C6F4]"
+                                d="M12.68,12,9.6,15.08,11,16.51l4.5-4.5L11,7.51,9.6,8.94l3.08,3.08ZM12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Z"></path>
+                        </svg>
+                    </button>
+
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="pt-3">
+                            The public authority monitors contract performance continuously. Independent regulators
+                            often provide oversight. Performance data is typically published. Communities have
+                            channels to raise concerns. Transparency is built into contract design.
+                        </p>
                     </div>
                 </div>
 
-                <div class="bg-[#1A1F71] rounded-full px-6 py-4 flex justify-between items-center cursor-pointer transition-all duration-300"
-                    onclick="toggleFAQ(this)">
-                    <h3 class="font-medium text-sm md:text-base">What about water as a human right?</h3>
-                    <span class="text-xl">➤</span>
-                </div>
-                <div class="bg-[#1A1F71] rounded-2xl overflow-hidden transition-all duration-500 max-h-0">
-                    <div class="px-6 py-4 text-gray-300 text-sm md:text-base">
-                        PPPs are designed to ensure everyone’s right to water, improving access and quality for all.
+                <!-- FAQ 7 -->
+                <div class="bg-[#131B5A] rounded-[25px] p-4 max-[400px]:p-2">
+                    <button class="w-full flex justify-between items-center faq-btn group">
+                        <span class="font-medium text-lg max-[400px]:text-sm transition-colors group-hover:text-[#37C6F4]">
+                            What about water as a human right?
+                        </span>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                            class="transition-transform rotate-0 duration-300">
+                            <path class="fill-[#ababab] transition-colors duration-300 group-hover:fill-[#37C6F4]"
+                                d="M12.68,12,9.6,15.08,11,16.51l4.5-4.5L11,7.51,9.6,8.94l3.08,3.08ZM12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Z"></path>
+                        </svg>
+                    </button>
+
+                    <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
+                        <p class="pt-3">
+                            PPPs can advance the human right to water by expanding access, improving quality, and
+                            ensuring service sustainability. The UN recognises that different operational models –
+                            public or private – can deliver this right when properly governed. What matters is outcomes:
+                            safe, accessible, affordable water for all.
+                        </p>
                     </div>
                 </div>
 
             </div>
-        </section>
+
+        </div>
     </section>
 
     <!-- waves section  -->

@@ -66,7 +66,7 @@ function renderCards() {
             <div class="${card.gradient} text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
               <div>
                 <h3 class="font-semibold text-lg leading-snug">${card.title}</h3>
-                <p class="text-sm mt-2 opacity-90">${card.publisher}</p>
+                <p class="text-sm mt-2 opacity-90 md:mb-8">${card.publisher}</p>
               </div>
               <div class="flex items-center space-x-2 mt-12">
                 <i data-lucide="${card.icon}" class="w-4 h-4"></i>
@@ -89,12 +89,21 @@ function renderCards() {
 function changePage(page) {
   currentPage = page;
   renderCards();
-  document
-    .querySelectorAll("button[id^='btn']")
-    .forEach((btn) => btn.classList.remove("bg-blue-600", "text-white"));
+
+  document.querySelectorAll("button[id^='btn']").forEach((btn) => {
+    btn.classList.remove("text-[#37C6F4]", "text-[#1E1D57]");
+    btn.classList.add("text-[#1E1D57]"); // default color
+  });
+
   const activeBtn = document.getElementById(`btn${page}`);
-  if (activeBtn) activeBtn.classList.add("bg-blue-600", "text-white");
+  if (activeBtn) {
+    activeBtn.classList.remove("text-[#1E1D57]");
+    activeBtn.classList.add("text-[#37C6F4]");
+  }
 }
+
+
+
 
 function openModal(title, publisher, type, gradient, icon) {
   const modal = document.getElementById("productModal");

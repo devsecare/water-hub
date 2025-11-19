@@ -10,8 +10,8 @@
 <!-- ✅ HERO -->
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white">
     <div class="max-w-7xl mx-auto px-6 py-20 sm:py-24 lg:py-28">
-        <p class="text-sm text-[#37C6F4] font-semibold mb-2">WATER PPP RESOURCES</p>
-        <h1 class="text-4xl sm:text-4xl font-extrabold leading-none max-w-xl">
+        <p class="text-lg text-[#37C6F4] font-semibold mb-2">WATER PPP RESOURCES</p>
+        <h1 class="text-4xl font-appetite sm:text-4xl font-extrabold leading-none max-w-xl">
             Everything You Need To Identify, Prepare, Implement And Manage Your PPP Project
         </h1>
     </div>
@@ -30,15 +30,14 @@
 <section class="bg-[#f2f2f2]">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen">
         <!-- Sidebar -->
-        <aside class="w-full md:w-64 p-5">
+        <aside class="w-full md:w-64 lg:w-[20rem]  p-5">
             <ul class="space-y-3 text-gray-700 font-medium">
                 <li class="flex items-center gap-3 cursor-pointer hover:text-blue-600">
                     <i data-lucide="grid" class="w-5 h-5"></i> <span>All content</span>
                 </li>
 
                 <li>
-                    <button
-                        class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide='search' class='w-5 h-5'></i> Identifying
                             PPP opportunities</span>
                         <i id="icon-menu1" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
@@ -52,8 +51,7 @@
                 </li>
 
                 <li>
-                    <button
-                        class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide='briefcase' class='w-5 h-5'></i> Preparing
                             your project</span>
                         <i id="icon-menu2" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
@@ -64,8 +62,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button 
-                        class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide="layers" class="w-5 h-5"></i>
                             Implementation</span>
                         <i id="icon-menu3" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
@@ -76,8 +73,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button 
-                        class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide="settings" class="w-5 h-5"></i>
                             Management</span>
                         <i id="icon-menu4" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
@@ -88,8 +84,7 @@
                     </ul>
                 </li>
                 <li>
-                    <button 
-                        class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
                         <span class="flex items-center gap-3"><i data-lucide="book-open" class="w-5 h-5"></i>Case
                             studies</span>
                         <i id="icon-menu5" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
@@ -101,25 +96,55 @@
                 </li>
             </ul>
 
-            <div class="mb-6 relative">
-                <label for="sidebar-search" class="block text-sm font-semibold text-gray-700 mb-1">Search</label>
-                <div class="relative">
-                    <input id="sidebar-search" type="text" placeholder="Search…"
-                        class="w-full border border-gray-300 rounded-md p-2 pr-9 focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                    <i data-lucide="search" class="absolute right-2.5 top-2.5 w-4 h-4 text-gray-500"></i>
-                </div>
-            </div>
+            <div class="w-full mt-6">
+          <label class="block text-lg font-semibold text-[#000000] mb-3">Search</label>
+          <div class="relative">
+            <input type="text" placeholder="Search…" class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700 
+                   placeholder-gray-400 focus:ring-0 focus:outline-none">
+
+            <!-- Search Icon -->
+            <span class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18.095 18.095">
+                <path d="M16.681,18.1h0l-5.145-5.145a7.2,7.2,0,1,1,1.414-1.414L18.1,16.681l-1.413,1.413ZM7.2,2a5.2,5.2,0,1,0,5.2,5.2A5.206,5.206,0,0,0,7.2,2Z" fill="#1E1D57"></path>
+              </svg>
+            </span>
+          </div>
+        </div>
         </aside>
 
         <!-- ✅ MAIN CONTENT -->
         <main class="flex-1 p-6">
             <!-- Cards -->
-            <div id="card-container" class="grid grid-cols-1 w-5/6 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="card-container" class="grid grid-cols-1 lg:w-[100%] sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             <!-- Pagination -->
             <div class="flex justify-center mt-6 space-x-2">
-                <button id="btn1" class="px-3 py-1 bg-blue-600 text-white rounded" onclick="changePage(1)">1</button>
-                <button id="btn2" class="px-3 py-1 bg-gray-200 rounded" onclick="changePage(2)">2</button>
-                <button id="btn3" class="px-3 py-1 bg-gray-200 rounded" onclick="changePage(3)">3</button>
+                <button onclick="prevPage()"  class="text-[#ababab] hover:text-[#1E1D57] transition-colors duration-300 ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
+                        fill="currentColor">
+                        <g transform="translate(-781 -2356)">
+                            <rect width="40" height="40" transform="translate(781 2356)" fill="none" />
+                            <path
+                                d="M17.617,18.763l5.159,5.159-2.345,2.4L12.894,18.78l7.537-7.537,2.345,2.4L17.617,18.8Zm1.139,16.749a16.21,16.21,0,0,0,6.532-1.323A16.731,16.731,0,0,0,34.2,25.279a16.21,16.21,0,0,0,1.323-6.532A16.21,16.21,0,0,0,34.2,12.214,16.731,16.731,0,0,0,25.289,3.3,16.21,16.21,0,0,0,18.756,1.98,16.21,16.21,0,0,0,12.224,3.3a16.731,16.731,0,0,0-8.911,8.911A16.21,16.21,0,0,0,1.99,18.746a16.21,16.21,0,0,0,1.323,6.532,16.731,16.731,0,0,0,8.911,8.911A16.21,16.21,0,0,0,18.756,35.512Zm0-3.35a12.968,12.968,0,0,1-9.514-3.9,12.941,12.941,0,0,1-3.9-9.514,12.941,12.941,0,0,1,3.9-9.514,12.941,12.941,0,0,1,9.514-3.9,12.941,12.941,0,0,1,9.514,3.9,12.941,12.941,0,0,1,3.9,9.514,12.941,12.941,0,0,1-3.9,9.514A12.941,12.941,0,0,1,18.756,32.163Z"
+                                transform="translate(781.744 2356.738)" />
+                        </g>
+                    </svg>
+                </button>
+
+                <button id="btn1" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4]   rounded" onclick="changePage(1)">1</button>
+                <button id="btn2" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded" onclick="changePage(2)">2</button>
+                <button id="btn3" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded" onclick="changePage(3)">3</button>
+               <button onclick="nextPage()" class="text-[#ababab] hover:text-[#1E1D57] transition-colors duration-300">
+                    <svg class="-rotate-180" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
+                        fill="currentColor">
+                        <g transform="translate(-781 -2356)">
+                            <rect width="40" height="40" transform="translate(781 2356)" fill="none" />
+                            <path
+                                d="M17.617,18.763l5.159,5.159-2.345,2.4L12.894,18.78l7.537-7.537,2.345,2.4L17.617,18.8Zm1.139,16.749a16.21,16.21,0,0,0,6.532-1.323A16.731,16.731,0,0,0,34.2,25.279a16.21,16.21,0,0,0,1.323-6.532A16.21,16.21,0,0,0,34.2,12.214,16.731,16.731,0,0,0,25.289,3.3,16.21,16.21,0,0,0,18.756,1.98,16.21,16.21,0,0,0,12.224,3.3a16.731,16.731,0,0,0-8.911,8.911A16.21,16.21,0,0,0,1.99,18.746a16.21,16.21,0,0,0,1.323,6.532,16.731,16.731,0,0,0,8.911,8.911A16.21,16.21,0,0,0,18.756,35.512Zm0-3.35a12.968,12.968,0,0,1-9.514-3.9,12.941,12.941,0,0,1-3.9-9.514,12.941,12.941,0,0,1,3.9-9.514,12.941,12.941,0,0,1,9.514-3.9,12.941,12.941,0,0,1,9.514,3.9,12.941,12.941,0,0,1,3.9,9.514,12.941,12.941,0,0,1-3.9,9.514A12.941,12.941,0,0,1,18.756,32.163Z"
+                                transform="translate(781.744 2356.738)" />
+                        </g>
+                    </svg>
+                </button>
+
             </div>
         </main>
     </div>
@@ -174,10 +199,27 @@
         </div>
     </div>
 </div>
+
+<!-- waves  -->
+    <div class=" bottom-0 left-0 right-0 bg-[#f2f2f2]">
+        <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
+            preserveAspectRatio="none">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+        58-18 88-18 58 18 88 18v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
+            </g>
+        </svg>
+    </div>
 @endsection
 
 @push('scripts')
-<script>
+<!-- <script>
     const gradients = [
         "bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0]",
         "bg-gradient-to-br from-[#0E4473] to-[#25B3D8]",
@@ -289,5 +331,5 @@
             lucide.createIcons();
         }
     });
-</script>
+</script> -->
 @endpush
