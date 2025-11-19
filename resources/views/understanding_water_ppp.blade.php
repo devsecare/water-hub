@@ -7,8 +7,8 @@
     <!-- hero section  -->
     <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white">
         <div class="max-w-7xl mx-auto px-6 lg:px-12 py-12  sm:py-24 lg:py-28">
-            <p class="text-sm text-[#37C6F4] font-semibold mb-3">WHAT ARE WATER AND WASTEWATER PPPs</p>
-            <h1 class="text-4xl sm:text-5xl font-extrabold leading-none max-w-xl">
+            <p class="text-xl text-[#37C6F4] font-semibold mb-2">WHAT ARE WATER AND WASTEWATER PPPs</p>
+            <h1 class="text-4xl font-appetite sm:text-5xl font-extrabold leading-none max-w-xl">
                 Understanding Water PPPs – The Facts
             </h1>
         </div>
@@ -322,7 +322,7 @@
                     safely for use, collecting wastewater, treating it to remove pollution, and returning it to nature.
                     This cycle must be sustainable.
                 </p>
-                <h1 class="text-[22px] mb-6 font-extrabold text-[#1E1D57]">
+                <h1 class="text-[20px] mb-6 font-extrabold text-[#1E1D57]">
                     Private operators support community sustainability by:
                 </h1>
                 <ul class="list-disc pl-4 space-y-2 text-gray-700 mb-6">
@@ -348,7 +348,8 @@
         </div>
     </section>
  <!-- faq section  -->
-    <section class="w-full bg-blue py-16 text-white">
+
+    <section class="w-full bg-regal-blue py-16 pb-36 text-white">
         <div class="max-w-4xl mx-auto px-6 lg:px-16">
 
             <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 max-[440px]:text-xl">
@@ -536,6 +537,8 @@
 
         </div>
     </section>
+
+
 
     <!-- waves section  -->
     <div class=" bottom-0 left-0 right-0">

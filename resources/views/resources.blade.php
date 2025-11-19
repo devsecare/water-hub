@@ -30,6 +30,83 @@
 <section class="bg-[#f2f2f2]">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row min-h-screen">
         <!-- Sidebar -->
+        <div class="mob-search-filters relative">
+            <div class="filter-main-tab py-8">
+                <button class="search-filter-open-close bg-[#1E1D57] flex text-[#fff] gap-4 py-4 px-6 rounded-r-[50px]">
+                    Search and Filter results
+                    <span><svg xmlns="http://www.w3.org/2000/svg" width="16.403" height="16.403" viewBox="0 0 16.403 16.403">
+                        <path id="discover_tune_24dp_5F6368_FILL0_wght400_GRAD0_opsz24_1_" data-name="discover_tune_24dp_5F6368_FILL0_wght400_GRAD0_opsz24 (1)" d="M129.113-834.532v-1.823h2.734V-840h1.823v3.645H136.4v1.823Zm2.734,10.936v-9.113h1.823v9.113Zm-9.113,0v-3.645H120v-1.823h7.29v1.823h-2.734v3.645Zm0-7.29V-840h1.823v9.113Z" transform="translate(-120 840)" fill="#fff"/>
+                        </svg>
+                    </span>
+                </button>
+            </div>
+            <div class="mobile-filter-list mobile-filter-list absolute top-100% bg-white">
+                <ul class="space-y-3 text-gray-700 font-medium">
+                    <li class="flex items-center gap-3 cursor-pointer hover:text-blue-600">
+                        <i data-lucide="grid" class="w-5 h-5"></i> <span>All content</span>
+                    </li>
+
+                    <li>
+                        <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                            <span class="flex items-center gap-3"><i data-lucide='search' class='w-5 h-5'></i> Identifying
+                                PPP opportunities</span>
+                            <i id="icon-menu1" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                        </button>
+                        <ul id="menu1" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
+                            <li>Sub category topic 1</li>
+                            <li>Sub category topic with a longer title 2</li>
+                            <li>Sub category topic 3</li>
+                            <li>Sub category topic 4</li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                            <span class="flex items-center gap-3"><i data-lucide='briefcase' class='w-5 h-5'></i> Preparing
+                                your project</span>
+                            <i id="icon-menu2" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                        </button>
+                        <ul id="menu2" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
+                            <li>Sub topic 1</li>
+                            <li>Sub topic 2</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                            <span class="flex items-center gap-3"><i data-lucide="layers" class="w-5 h-5"></i>
+                                Implementation</span>
+                            <i id="icon-menu3" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                        </button>
+                        <ul id="menu3" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
+                            <li>Sub topic 1</li>
+                            <li>Sub topic 2</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                            <span class="flex items-center gap-3"><i data-lucide="settings" class="w-5 h-5"></i>
+                                Management</span>
+                            <i id="icon-menu4" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                        </button>
+                        <ul id="menu4" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
+                            <li>Sub topic 1</li>
+                            <li>Sub topic 2</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold mt-3">
+                            <span class="flex items-center gap-3"><i data-lucide="book-open" class="w-5 h-5"></i>Case
+                                studies</span>
+                            <i id="icon-menu5" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
+                        </button>
+                        <ul id="menu5" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
+                            <li>Sub topic 1</li>
+                            <li>Sub topic 2</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <aside class="w-full md:w-64 lg:w-[20rem]  p-5">
             <ul class="space-y-3 text-gray-700 font-medium">
                 <li class="flex items-center gap-3 cursor-pointer hover:text-blue-600">

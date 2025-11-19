@@ -82,7 +82,7 @@ function renderCards() {
             </div>
           </div>`;
     });
-     if (window.lucide) lucide.createIcons();
+    if (window.lucide) lucide.createIcons();
   }
 }
 
@@ -101,9 +101,6 @@ function changePage(page) {
     activeBtn.classList.add("text-[#37C6F4]");
   }
 }
-
-
-
 
 function openModal(title, publisher, type, gradient, icon) {
   const modal = document.getElementById("productModal");
@@ -212,13 +209,52 @@ function validateForm(event) {
 const slider = document.getElementById("cardSlider");
 const progress = document.getElementById("progressFill");
 if (slider && progress) {
-slider.addEventListener("scroll", () => {
-  const scrollLeft = slider.scrollLeft;
-  const maxScroll = slider.scrollWidth - slider.clientWidth;
+  slider.addEventListener("scroll", () => {
+    const scrollLeft = slider.scrollLeft;
+    const maxScroll = slider.scrollWidth - slider.clientWidth;
 
-  const percent = (scrollLeft / maxScroll) * 100;
-  progress.style.width = percent + "%";
-});
+    const percent = (scrollLeft / maxScroll) * 100;
+    progress.style.width = percent + "%";
+  });
 }
 // home page card scroll horizontal end
 
+// faq section start
+
+const buttons = document.querySelectorAll(".faq-btn");
+
+buttons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const content = btn.nextElementSibling;
+    const text = btn.querySelector("span");
+    const icon = btn.querySelector("svg");
+    const path = icon.querySelector("path");
+
+    // Close all others
+    document.querySelectorAll(".accordion-content").forEach((c) => {
+      if (c !== content) c.style.maxHeight = null;
+    });
+
+    document
+      .querySelectorAll(".faq-btn span")
+      .forEach((t) => t.classList.remove("text-[#37C6F4]"));
+    document
+      .querySelectorAll(".faq-btn svg")
+      .forEach((i) => (i.style.transform = "rotate(0deg)"));
+    document
+      .querySelectorAll(".faq-btn path")
+      .forEach((p) => p.classList.remove("fill-[#37C6F4]"));
+
+    // Toggle selected
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+      icon.style.transform = "rotate(90deg)";
+      text.classList.add("text-[#37C6F4]");
+      path.classList.add("fill-[#37C6F4]");
+    }
+  });
+});
+
+// faq section end

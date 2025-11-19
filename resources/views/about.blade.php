@@ -15,8 +15,8 @@
     <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent"></div>
 
     <!-- Text Content -->
-    <div class="relative z-10 flex items-center h-full">
-        <div class="w-full max-w-7xl mx-auto px-6 md:px-12 text-left">
+    <div class="relative z-10 flex items-center py-16 px-6 h-full ">
+        <div class="w-full max-w-7xl mx-auto  text-left">
             <p class="text-sky-300 font-medium uppercase tracking-wide mb-2 text-sm sm:text-base">
                 About Us
             </p>
@@ -29,8 +29,8 @@
     </div>
 </section>
 <!-- About Section -->
-<section class="w-full bg-white my-10 lg:my-20 md:h-[165px] flex items-center">
-    <div class="max-w-7xl mx-auto px-6 md:px-12 w-full">
+<section class="w-full bg-white my-10 lg:my-20 md:h-[165px] py-16 px-6 flex items-center">
+    <div class="max-w-7xl mx-auto  w-full">
         <div class="max-w-[790px] text-left">
             <!-- First Bold Paragraph -->
             <p class="text-[#1E1D57] font-semibold text-sm sm:text-base md:text-[18px] md:leading-[1.35rem] mb-4">
@@ -46,7 +46,7 @@
 </section>
 
 <!-- about section part two  -->
-<section class="max-w-7xl mx-auto md:max-h-[730px] my-10 lg:my-20 px-6 md:px-12 flex flex-col lg:flex-row gap-[30px]">
+<section class="max-w-7xl mx-auto md:max-h-[730px] my-10 lg:my-20 py-16 px-6 flex flex-col lg:flex-row gap-[30px]">
     <!-- Left Section -->
     <div class="lg:w-1/2">
         <h2 class="text-3xl md:text-4xl font-bold text-[#0C134F] leading-tight">
