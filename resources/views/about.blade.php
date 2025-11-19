@@ -15,7 +15,7 @@
     <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent"></div>
 
     <!-- Text Content -->
-    <div class="relative z-10 flex items-center py-16 px-6 h-full ">
+    <div class="relative z-10 flex items-center py-16 px-6 lg:px-16 h-full ">
         <div class="w-full max-w-7xl mx-auto  text-left">
             <p class="text-sky-300 font-medium uppercase tracking-wide mb-2 text-sm sm:text-base">
                 About Us
@@ -29,65 +29,75 @@
     </div>
 </section>
 <!-- About Section -->
-<section class="w-full bg-white my-10 lg:my-20 md:h-[165px] py-16 px-6 flex items-center">
+<section class="w-full bg-white my-10 lg:my-20 md:h-[165px] px-6 lg:px-16 flex items-center">
     <div class="max-w-7xl mx-auto  w-full">
         <div class="max-w-[790px] text-left">
             <!-- First Bold Paragraph -->
             <p class="text-[#1E1D57] font-semibold text-sm sm:text-base md:text-[18px] md:leading-[1.35rem] mb-4">
-                For 20 years, AquaFed has been the global voice of water partnership expertise – connecting 400+ operators across 40 countries to deliver sustainable water solutions worldwide.
+                For 20 years, AquaFed has been the global voice of water partnership expertise – connecting 400+
+                operators across 40 countries to deliver sustainable water solutions worldwide.
             </p>
 
             <!-- Second Regular Paragraph -->
             <p class="text-[#1E1D57] text-sm sm:text-base lg:mt-8 md:text-[18px] md:leading-[1.35rem]">
-                We accelerate the creation and development of markets for public-private partnerships in water and wastewater services. By consolidating best practices, proven models, and expert knowledge from operators worldwide, we help governments, consultants, and investors build water systems that work – transparently, sustainably, and at scale.
+                We accelerate the creation and development of markets for public-private partnerships in water and
+                wastewater services. By consolidating best practices, proven models, and expert knowledge from operators
+                worldwide, we help governments, consultants, and investors build water systems that work –
+                transparently, sustainably, and at scale.
             </p>
         </div>
     </div>
 </section>
 
 <!-- about section part two  -->
-<section class="max-w-7xl mx-auto md:max-h-[730px] my-10 lg:my-20 py-16 px-6 flex flex-col lg:flex-row gap-[30px]">
-    <!-- Left Section -->
-    <div class="lg:w-1/2">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#0C134F] leading-tight">
-            Why we built the Water<br />
-            and Wastewater PPP Hub
-        </h2>
+<section class="px-6 lg:px-16">
+    <section class="max-w-7xl mx-auto md:max-h-[730px] my-10 lg:my-20  flex flex-col lg:flex-row gap-[30px]">
+        <!-- Left Section -->
+        <div class="lg:w-1/2">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#0C134F] leading-tight">
+                Why we built the Water<br />
+                and Wastewater PPP Hub
+            </h2>
 
-        <p class="mt-6 text-base text-gray-700">
-            <a href="#" class="text-sky-500 font-semibold underline">The Hub</a> exists to break down barriers to successful water partnerships.
-            For too long, essential PPP guidance has been scattered, technical, and difficult to navigate.
-            This platform consolidates the best resources from our global network into one accessible space –
-            offering clear guidance, practical tools, and unbiased knowledge to anyone working to improve water and wastewater services.
-        </p>
+            <p class="mt-6 text-base text-gray-700">
+                <a href="#" class="text-sky-500 font-semibold underline">The Hub</a> exists to break down barriers to
+                successful water partnerships.
+                For too long, essential PPP guidance has been scattered, technical, and difficult to navigate.
+                This platform consolidates the best resources from our global network into one accessible space –
+                offering clear guidance, practical tools, and unbiased knowledge to anyone working to improve water and
+                wastewater services.
+            </p>
 
-        <p class="mt-6 font-semibold text-gray-900">
-            Our goal is simple:
-            <span class="font-normal">
-                to grow the pipeline of PPP projects and strengthen the long-term resilience of water systems worldwide.
-            </span>
-        </p>
-    </div>
+            <p class="mt-6 font-semibold text-gray-900">
+                Our goal is simple:
+                <span class="font-normal">
+                    to grow the pipeline of PPP projects and strengthen the long-term resilience of water systems
+                    worldwide.
+                </span>
+            </p>
+        </div>
 
-    <!-- Right Section -->
-    <div class="lg:w-1/2">
-        <h2 class="text-3xl md:text-4xl font-bold text-[#0C134F] leading-tight">
-            Built for the people<br />
-            shaping water's future
-        </h2>
+        <!-- Right Section -->
+        <div class="lg:w-1/2">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#0C134F] leading-tight">
+                Built for the people<br />
+                shaping water's future
+            </h2>
 
-        <p class="mt-6 text-base text-gray-700">
-            This Hub serves government officials, PPP units, development partners, consultants, and investors —
-            anyone committed to delivering safe, reliable water and sanitation services. Whether you're exploring
-            PPPs for the first time or managing complex contracts, you'll find resources tailored to your needs.
-            We meet you where you are in the PPP journey, offering foundational knowledge and technical depth in equal measure.
-        </p>
-    </div>
+            <p class="mt-6 text-base text-gray-700">
+                This Hub serves government officials, PPP units, development partners, consultants, and investors —
+                anyone committed to delivering safe, reliable water and sanitation services. Whether you're exploring
+                PPPs for the first time or managing complex contracts, you'll find resources tailored to your needs.
+                We meet you where you are in the PPP journey, offering foundational knowledge and technical depth in
+                equal measure.
+            </p>
+        </div>
+    </section>
 </section>
 
 <!-- a global community section  -->
-<section class="bg-[#181A4B] text-white py-16 sm:py-20 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col lg:flex-row items-start justify-between gap-[30px]">
+<section class="bg-[#181A4B] text-white py-16 sm:py-20 px-6 lg:px-16 overflow-hidden">
+    <div class="max-w-7xl mx-auto  flex flex-col lg:flex-row items-start justify-between gap-[30px]">
         <!-- Left Text -->
         <div class="max-w-[604px] text-left flex-shrink-0">
             <h2 class="text-3xl md:text-4xl font-bold leading-tight mb-6">
@@ -124,19 +134,22 @@
         <div class="flex flex-col gap-4 lg:gap-6 flex-1 w-full lg:max-w-[605px]">
             <!-- Top Image -->
             <div class="rounded-2xl overflow-hidden h-[220px] sm:h-[260px] w-full">
-                <img src="{{ asset('images/drink-water.jpg') }}" alt="Child drinking water" class="w-full h-full object-cover" />
+                <img src="{{ asset('images/drink-water.jpg') }}" alt="Child drinking water"
+                    class="w-full h-full object-cover" />
             </div>
 
             <!-- Bottom Images -->
             <div class="flex lg:justify-end flex-col sm:flex-row gap-4 lg:gap-6">
                 <!-- Bottom Left -->
                 <div class="rounded-[30px] sm:rounded-[24px] overflow-hidden">
-                    <img src="{{ asset('images/global-water.jpg') }}" alt="Water drop" class="h-full w-full object-cover">
+                    <img src="{{ asset('images/global-water.jpg') }}" alt="Water drop"
+                        class="h-full w-full object-cover">
                 </div>
 
                 <!-- Bottom Right -->
                 <div class="rounded-[30px] sm:rounded-[24px] overflow-hidden">
-                    <img src="{{ asset('images/global-water-purify.jpg') }}" alt="Water treatment plant" class="w-full h-full object-cover">
+                    <img src="{{ asset('images/global-water-purify.jpg') }}" alt="Water treatment plant"
+                        class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -144,8 +157,9 @@
 </section>
 
 <!-- Comprehensive water PPP section  -->
-<section class="bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-10 md:py-20">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8 px-6 md:px-12">
+<section
+    class="bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-10 md:py-20 px-6 lg:px-16">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8 ">
         <div class="max-w-[604px]">
             <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-semibold leading-tight mb-4">
                 Comprehensive water PPP knowledge in a format that works for you
@@ -157,14 +171,11 @@
             </p>
         </div>
 
-        <a href="{{ route('resources') }}" 
-            class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[55px] py-[10px] px-[27px] 
+        <a href="{{ route('resources') }}" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[55px] py-[10px] px-[27px] 
                 hover:bg-[#37C6F4] hover:text-[#1E1D57] transition duration-300">
             The resource library
             <!-- SVG Icon placed after text -->
-            <svg xmlns="http://www.w3.org/2000/svg"
-                width="24" height="20"
-                viewBox="0 0 24 24"
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 24"
                 class="ml-2 transition-all duration-200 fill-[#37C6F4] group-hover:fill-[#1E1D57]">
                 <rect width="24" height="24" fill="none"></rect>
                 <path d="M12.6,12,8,7.4,9.4,6l6,6-6,6L8,16.6,12.6,12Z"></path>
@@ -174,35 +185,39 @@
 </section>
 
 <!-- Help us build a better resource section  -->
-<section class="max-w-7xl flex mx-auto px-6 md:px-12 py-10 md:py-20">
-    <div class="text-left">
-        <!-- Heading -->
-        <h2 class="text-3xl md:text-4xl lg:max-w-[605px] font-bold text-[#1e1b4b] mb-6">
-            Help us build a better resource
-        </h2>
+<section class="px-6 lg:px-16">
+    <section class="max-w-7xl flex mx-auto  py-10 md:py-20">
+        <div class="text-left">
+            <!-- Heading -->
+            <h2 class="text-3xl md:text-4xl lg:max-w-[605px] font-bold text-[#1e1b4b] mb-6">
+                Help us build a better resource
+            </h2>
 
-        <!-- Paragraph -->
-        <p class="text-[#000000] text-[16px] lg:max-w-[590px] mb-6">
-            <span class="font-semibold">This Hub grows stronger with your input.</span>
-            If you've developed useful PPP materials, identified gaps in our resources,
-            or have feedback on how we can improve, we want to hear from you.
-            Share your insights, suggest content, or let us know what's working – together,
-            we'll create the most valuable water PPP platform in the world.
-        </p>
+            <!-- Paragraph -->
+            <p class="text-[#000000] text-[16px] lg:max-w-[590px] mb-6">
+                <span class="font-semibold">This Hub grows stronger with your input.</span>
+                If you've developed useful PPP materials, identified gaps in our resources,
+                or have feedback on how we can improve, we want to hear from you.
+                Share your insights, suggest content, or let us know what's working – together,
+                we'll create the most valuable water PPP platform in the world.
+            </p>
 
-        <!-- Link -->
-        <a href="{{ route('contact') }}" class="inline-flex items-center text-sky-500 font-semibold hover:text-sky-600 transition-colors">
-            Get in touch
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-        </a>
-    </div>
+            <!-- Link -->
+            <a href="{{ route('contact') }}"
+                class="inline-flex items-center text-sky-500 font-semibold hover:text-sky-600 transition-colors">
+                Get in touch
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
+    </section>
 </section>
-
 <!-- waves section  -->
 <div class="bottom-0 left-0 right-0">
-    <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+    <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
+        preserveAspectRatio="none">
         <defs>
             <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />
         </defs>
@@ -215,4 +230,3 @@
     </svg>
 </div>
 @endsection
-

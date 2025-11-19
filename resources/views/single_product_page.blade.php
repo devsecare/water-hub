@@ -4,8 +4,8 @@
 
 @section('content')
 
-<section class="bg-[#F2F2F2]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<section class="bg-[#F2F2F2] px-6 lg:px-16">
+    <div class="max-w-7xl mx-auto  py-16">
 
         <!-- Back link -->
 
@@ -206,11 +206,11 @@
     </div>
 </section>
 <!-- Related Content -->
-<section class="py-12 bg-[#F7F7F7]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="py-12 bg-[#F7F7F7] px-6 lg:px-16">
+    <div class="max-w-7xl mx-auto ">
         <h2 class="text-4xl md:text-5xl text-[#1E1D57] font-bold mb-8">Related content</h2>
 
-        <div  class="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-[128px]">
+        <div  class="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-[100px]">
             <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
                 <div
                     class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
