@@ -290,6 +290,10 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994" class="absolute top-0 z-111 right-[10%] hidden md:block  ">
   <path id="Path_432" data-name="Path 432" d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#f2f2f2"></path>
 </svg>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994" class="-translate-x-1/2 left-1/2 absolute top-[-10px] z-111 md:hidden max-w-[400px] items-center justify-center">
+  <path id="Path_432" data-name="Path 432" d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#f2f2f2"></path>
+</svg>
     <!-- Wave Shape at Top -->
     <!-- <div class="absolute top-0 left-0 w-full">
         <svg viewBox="0 0 1440 320" class="w-full h-24 md:h-32" preserveAspectRatio="none">
@@ -302,7 +306,7 @@
     <!-- Background Gradient -->
     <div
         class="bg-[linear-gradient(103deg,#37C6F4_0%,#5CD3CE_100%)] opacity-100 text-center py-20 px-6 md:px-16 text-white relative z-10">
-        <h2 class="text-4xl md:text-5xl font-bold text-[#1E1D57] mb-6">Real-World Success</h2>
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-[#1E1D57] mb-6">Real-World Success</h2>
         <p class="text-[#1E1D57] max-w-5xl mx-auto leading-relaxed text-lg md:text-[22px]">
             There’s evidence from around the world demonstrates PPPs’ impact.
             In Manila, Philippines, access jumped from 26% to 99% since 1997,
