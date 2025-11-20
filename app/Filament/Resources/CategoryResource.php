@@ -8,6 +8,7 @@ use App\Models\Category;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -30,24 +31,28 @@ class CategoryResource extends Resource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(function (Forms\Set $set, $state) {
+                            ->afterStateUpdated(function ($state, Set $set) {
                                 $set('slug', \Illuminate\Support\Str::slug($state));
                             }),
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->maxLength(255)
-                            ->unique(ignoreRecord: true),
-                        Forms\Components\TextInput::make('color')
-                            ->label('Color (Hex)')
-                            ->maxLength(7)
+                            ->unique(ignoreRecord: true)
+                            ->dehydrated()
+                            ->helperText('Auto-generated from name. You can edit it if needed.'),
+                        Forms\Components\ColorPicker::make('color')
+                            ->label('Category Color')
+                            ->required()
                             ->default('#3B82F6')
-                            ->helperText('Enter a hex color code (e.g., #3B82F6)'),
+                            ->helperText('This color will be used as the gradient background for category items on the resources page.'),
                         Forms\Components\TextInput::make('icon')
+                            ->label('Icon')
                             ->maxLength(255)
-                            ->helperText('Icon name or class (e.g., heroicon-o-folder)'),
+                            ->default('folder')
+                            ->helperText('Enter a Material Symbols icon name (e.g., view_agenda, folder, search). See Material Symbols guide for available icons.'),
                     ])
                     ->columns(2),
-                
+
                 Forms\Components\Section::make('Media & Hierarchy')
                     ->schema([
                         CuratorPicker::make('image_id')
@@ -55,20 +60,31 @@ class CategoryResource extends Resource
                             ->relationship('image', 'id'),
                         Forms\Components\Select::make('parent_id')
                             ->label('Parent Category')
-                            ->relationship('parent', 'name')
                             ->searchable()
                             ->preload()
-                            ->helperText('Leave empty for top-level categories'),
+                            ->helperText('Select a parent category to make this a sub-category. Leave empty for a top-level category.')
+                            ->options(function ($record) {
+                                // Only show top-level categories (no parent) as parent options
+                                // Exclude the current category to prevent self-reference
+                                $query = Category::where('is_active', true)
+                                    ->whereNull('parent_id');
+
+                                if ($record) {
+                                    $query->where('id', '!=', $record->id);
+                                }
+
+                                return $query->pluck('name', 'id');
+                            }),
                     ])
                     ->columns(2),
-                
+
                 Forms\Components\Section::make('Description')
                     ->schema([
                         Forms\Components\Textarea::make('description')
                             ->rows(4)
                             ->columnSpanFull(),
                     ]),
-                
+
                 Forms\Components\Section::make('Status')
                     ->schema([
                         Forms\Components\Toggle::make('is_active')
@@ -112,6 +128,8 @@ class CategoryResource extends Resource
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('icon')
+                    ->label('Icon')
+                    ->badge()
                     ->searchable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\ColorColumn::make('color')
