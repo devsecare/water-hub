@@ -3,26 +3,41 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
     /**
      * Run the migrations.
-     * 
-     * This migration drops the old Spatie Media Library table
-     * so that Curator can create its own media table structure.
      */
     public function up(): void
     {
-        // Drop the old Spatie Media Library table
+        // Disable FK checks temporarily
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+
+        // Drop any foreign keys referencing the media table
+        $foreignKeys = DB::select("
+            SELECT TABLE_NAME, CONSTRAINT_NAME
+            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+            WHERE REFERENCED_TABLE_NAME = 'media'
+              AND CONSTRAINT_SCHEMA = DATABASE()
+        ");
+
+        foreach ($foreignKeys as $fk) {
+            Schema::table($fk->TABLE_NAME, function (Blueprint $table) use ($fk) {
+                $table->dropForeign($fk->CONSTRAINT_NAME);
+            });
+        }
+
+        // Now safely drop the media table
         Schema::dropIfExists('media');
+
+        // Re-enable FK checks
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }
 
     /**
      * Reverse the migrations.
-     * 
-     * Note: This will recreate the Spatie structure if you need to rollback.
-     * However, you should only use this if you're reverting to Spatie.
      */
     public function down(): void
     {
@@ -48,4 +63,3 @@ return new class extends Migration
         });
     }
 };
-
