@@ -21,7 +21,7 @@ return new class extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('file_name');
+            $table->string('file_name')->nullable();
             $table->string('mime_type')->nullable();
             $table->string('disk')->default('public');
             $table->string('directory')->nullable();
