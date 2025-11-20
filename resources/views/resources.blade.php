@@ -49,221 +49,15 @@
                 </button>
             </div>
             <div  class="mobile-filter-list absolute top-full bg-white py-6 px-6 rounded-r-[24px] -left-100 transition-all duration-300 w-full max-w-[300px]">
-                <div class="filter-top pb-6">
-                    <ul class="flex flex-col gap-3">
-                        <li>
-                            <a href="javascript:void(0)" class="flex gap-2"><span><svg id="book-icon"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path id="Path_395" data-name="Path 395"
-                                            d="M6,22a3,3,0,0,1-3.01-3.01V5a2.9,2.9,0,0,1,.88-2.13A2.883,2.883,0,0,1,6,1.99H17v16H6a1,1,0,1,0,0,2H19V4h2V22Zm3-6h6V4H9ZM7,16V4H6A.99.99,0,0,0,5,5V16.18c.17-.05.33-.09.49-.13A2.1,2.1,0,0,1,6,16H7ZM5,4V4Z"
-                                            fill="currentColor" />
-                                        <rect id="Rectangle_50" data-name="Rectangle 50" width="24" height="24"
-                                            fill="none" />
-                                    </svg>
-                                </span>All content
-                            </a>
-                        </li>
-                        <li>
-                            <a href="javascript:void(0)" class="flex gap-2"><span><svg id="casestudy-icon"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path id="Path_397" data-name="Path 397"
-                                            d="M12,22a2.262,2.262,0,0,1-1.18-.31,2.3,2.3,0,0,1-.83-.84,2.015,2.015,0,0,1-2-2V15.3a7.241,7.241,0,0,1-2.36-2.58,7.1,7.1,0,0,1-.89-3.48A6.987,6.987,0,0,1,6.85,4.1a6.987,6.987,0,0,1,5.14-2.11A6.987,6.987,0,0,1,17.13,4.1a6.987,6.987,0,0,1,2.11,5.14,7.033,7.033,0,0,1-.89,3.5,7.317,7.317,0,0,1-2.36,2.55v3.55a2.015,2.015,0,0,1-2,2,2.3,2.3,0,0,1-.83.84,2.237,2.237,0,0,1-1.18.31Zm-2-3.15h4v-.9H10Zm0-1.9h4V16H10ZM9.8,14h1.45V11.3L9.05,9.1,10.1,8.05,12,9.95l1.9-1.9L14.95,9.1l-2.2,2.2V14H14.2a5.478,5.478,0,0,0,2.2-1.91,4.945,4.945,0,0,0,.85-2.84,5.07,5.07,0,0,0-1.53-3.73,5.07,5.07,0,0,0-3.73-1.53A5.07,5.07,0,0,0,8.26,5.52,5.07,5.07,0,0,0,6.73,9.25a4.945,4.945,0,0,0,.85,2.84A5.478,5.478,0,0,0,9.78,14Z"
-                                            fill="currentColor" />
-                                        <rect id="Rectangle_52" data-name="Rectangle 52" width="24" height="24"
-                                            fill="none" />
-                                    </svg>
-                                </span>All case studies
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="filter-middle py-6 border-t border-b border-[#D1D1D1]">
-                    <ul class="space-y-4">
-                        <li class="border border-[#1E1D57] rounded-full px-3 py-2">
-                            <a href="javascript:void(0)" class="flex gap-2"><span><svg id="target-icon"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path id="Path_407" data-name="Path 407"
-                                            d="M12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Zm0-2a5.773,5.773,0,0,1-4.25-1.75A5.773,5.773,0,0,1,6,12,5.773,5.773,0,0,1,7.75,7.75,5.773,5.773,0,0,1,12,6a5.773,5.773,0,0,1,4.25,1.75A5.773,5.773,0,0,1,18,12a5.975,5.975,0,0,1-6,6Zm0-2a4.029,4.029,0,0,0,4.01-4.01A4.029,4.029,0,0,0,12,7.98a4.029,4.029,0,0,0-4.01,4.01A4.029,4.029,0,0,0,12,16Zm0-2a1.994,1.994,0,0,1-1.41-3.41,1.994,1.994,0,1,1,2.82,2.82A1.926,1.926,0,0,1,12,14Z"
-                                            fill="#1E1D57" />
-                                        <rect id="Rectangle_62" data-name="Rectangle 62" width="24" height="24"
-                                            fill="none" />
-                                    </svg>
+                
+                @include('helpers.resources-filter')
 
-                                </span>Identifying PPP opportunities
-                            </a>
-                        </li>
-                        <li class="border border-[#1E1D57] rounded-full px-3 py-2">
-                            <a href="javascript:void(0)" class="flex gap-2"><span><svg id="planning-icon"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path id="Path_426" data-name="Path 426"
-                                            d="M5,11a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,3,9V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,5,3H19a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,21,5V9a2.015,2.015,0,0,1-2,2ZM5,9H19V5H5ZM5,21a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,3,19V15a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,5,13H19a2.015,2.015,0,0,1,2,2v4a2.015,2.015,0,0,1-2,2Zm0-2H19V15H5ZM5,5V5ZM5,15v0Z"
-                                            fill="#1E1D57" />
-                                        <rect id="Rectangle_72" data-name="Rectangle 72" width="24" height="24"
-                                            fill="none" />
-                                    </svg>
-
-                                </span>Preparing your project
-                            </a>
-                        </li>
-                        <li class="border border-[#1E1D57] rounded-full px-3 py-2">
-                            <a href="javascript:void(0)" class="flex gap-2"><span><svg id="implementation-icon"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path id="Path_425" data-name="Path 425"
-                                            d="M21.6,23l-3.08-3.05a3.707,3.707,0,0,1-.96.41,4.166,4.166,0,0,1-1.06.14,4.029,4.029,0,0,1-4.01-4.01,4.029,4.029,0,0,1,4.01-4.01,4.029,4.029,0,0,1,4.01,4.01,3.879,3.879,0,0,1-.15,1.09,3.763,3.763,0,0,1-.43.96l3.08,3.05-1.4,1.4ZM5.5,20.5a3.853,3.853,0,0,1-2.83-1.18,3.984,3.984,0,0,1,0-5.66A3.875,3.875,0,0,1,5.5,12.48a3.853,3.853,0,0,1,2.83,1.18,3.984,3.984,0,0,1,0,5.66A3.853,3.853,0,0,1,5.5,20.5Zm0-2a2,2,0,1,0-1.41-3.41A2,2,0,0,0,5.5,18.5Zm11,0a2.015,2.015,0,1,0-1.41-.59A1.926,1.926,0,0,0,16.5,18.5Zm-11-9A3.853,3.853,0,0,1,2.67,8.32,3.875,3.875,0,0,1,1.49,5.49,3.853,3.853,0,0,1,2.67,2.66,3.875,3.875,0,0,1,5.5,1.48,3.853,3.853,0,0,1,8.33,2.66,3.853,3.853,0,0,1,9.51,5.49,3.853,3.853,0,0,1,8.33,8.32,3.853,3.853,0,0,1,5.5,9.5Zm11,0a3.853,3.853,0,0,1-2.83-1.18,3.853,3.853,0,0,1-1.18-2.83,3.853,3.853,0,0,1,1.18-2.83,3.984,3.984,0,0,1,5.66,0,3.853,3.853,0,0,1,1.18,2.83,3.853,3.853,0,0,1-1.18,2.83A3.853,3.853,0,0,1,16.5,9.5Zm-11-2a2.015,2.015,0,0,0,2-2,2.015,2.015,0,0,0-2-2,2.015,2.015,0,0,0-2,2,2.015,2.015,0,0,0,2,2Zm11,0a2.015,2.015,0,0,0,2-2,2,2,0,1,0-3.41,1.41A1.926,1.926,0,0,0,16.5,7.5Z"
-                                            fill="#1E1D57" />
-                                        <rect id="Rectangle_71" data-name="Rectangle 71" width="24" height="24"
-                                            fill="none" />
-                                    </svg>
-                                </span>Implementation
-                            </a>
-                        </li>
-                        <li class="border border-[#1E1D57] rounded-full px-3 py-2">
-                            <a href="javascript:void(0)" class="flex gap-2"><span><svg id="droplet-icon"
-                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                        <path id="Path_401" data-name="Path 401"
-                                            d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                                            fill="#1E1D57" />
-                                        <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24"
-                                            fill="none" />
-                                    </svg>
-
-                                </span>Management
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="w-full mt-6">
-                <label class="block text-lg font-semibold text-[#000000] mb-3">Search</label>
-                <div class="relative">
-                    <input type="text" placeholder="Search…" class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700 
-                   placeholder-gray-400 focus:ring-0 focus:outline-none">
-
-                    <!-- Search Icon -->
-                    <span class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18.095 18.095">
-                            <path
-                                d="M16.681,18.1h0l-5.145-5.145a7.2,7.2,0,1,1,1.414-1.414L18.1,16.681l-1.413,1.413ZM7.2,2a5.2,5.2,0,1,0,5.2,5.2A5.206,5.206,0,0,0,7.2,2Z"
-                                fill="#1E1D57"></path>
-                        </svg>
-                    </span>
-                </div>
-            </div>
 
             </div>
         </div>
         <!-- side bar desktop  -->
         <aside class="w-full md:w-64 lg:w-[20rem] p-6 lg:p-0 hidden md:block">
-            <ul class="space-y-3 text-gray-700 font-medium space-y-6">
-                <li class="flex items-center gap-3 cursor-pointer hover:text-blue-600">
-                    <svg id="book-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path id="Path_395" data-name="Path 395"
-                            d="M6,22a3,3,0,0,1-3.01-3.01V5a2.9,2.9,0,0,1,.88-2.13A2.883,2.883,0,0,1,6,1.99H17v16H6a1,1,0,1,0,0,2H19V4h2V22Zm3-6h6V4H9ZM7,16V4H6A.99.99,0,0,0,5,5V16.18c.17-.05.33-.09.49-.13A2.1,2.1,0,0,1,6,16H7ZM5,4V4Z"
-                            fill="#1E1D57" />
-                        <rect id="Rectangle_50" data-name="Rectangle 50" width="24" height="24" fill="none" />
-                    </svg>
-                    <span>All content</span>
-                </li>
-                <li class="flex items-center gap-3 cursor-pointer border-b border-[#D1D1D1] pb-6  hover:text-blue-600">
-                    <svg id="casestudy-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24">
-                        <path id="Path_397" data-name="Path 397"
-                            d="M12,22a2.262,2.262,0,0,1-1.18-.31,2.3,2.3,0,0,1-.83-.84,2.015,2.015,0,0,1-2-2V15.3a7.241,7.241,0,0,1-2.36-2.58,7.1,7.1,0,0,1-.89-3.48A6.987,6.987,0,0,1,6.85,4.1a6.987,6.987,0,0,1,5.14-2.11A6.987,6.987,0,0,1,17.13,4.1a6.987,6.987,0,0,1,2.11,5.14,7.033,7.033,0,0,1-.89,3.5,7.317,7.317,0,0,1-2.36,2.55v3.55a2.015,2.015,0,0,1-2,2,2.3,2.3,0,0,1-.83.84,2.237,2.237,0,0,1-1.18.31Zm-2-3.15h4v-.9H10Zm0-1.9h4V16H10ZM9.8,14h1.45V11.3L9.05,9.1,10.1,8.05,12,9.95l1.9-1.9L14.95,9.1l-2.2,2.2V14H14.2a5.478,5.478,0,0,0,2.2-1.91,4.945,4.945,0,0,0,.85-2.84,5.07,5.07,0,0,0-1.53-3.73,5.07,5.07,0,0,0-3.73-1.53A5.07,5.07,0,0,0,8.26,5.52,5.07,5.07,0,0,0,6.73,9.25a4.945,4.945,0,0,0,.85,2.84A5.478,5.478,0,0,0,9.78,14Z"
-                            fill="#1E1D57" />
-                        <rect id="Rectangle_52" data-name="Rectangle 52" width="24" height="24" fill="none" />
-                    </svg> <span>All case study</span>
-                </li>
-
-                <li class="border rounded-3xl border-[#1E1D57]">
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold p-2">
-                        <span class="flex items-center gap-3"><svg id="target-icon" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24">
-                                <path id="Path_407" data-name="Path 407"
-                                    d="M12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Zm0-2a5.773,5.773,0,0,1-4.25-1.75A5.773,5.773,0,0,1,6,12,5.773,5.773,0,0,1,7.75,7.75,5.773,5.773,0,0,1,12,6a5.773,5.773,0,0,1,4.25,1.75A5.773,5.773,0,0,1,18,12a5.975,5.975,0,0,1-6,6Zm0-2a4.029,4.029,0,0,0,4.01-4.01A4.029,4.029,0,0,0,12,7.98a4.029,4.029,0,0,0-4.01,4.01A4.029,4.029,0,0,0,12,16Zm0-2a1.994,1.994,0,0,1-1.41-3.41,1.994,1.994,0,1,1,2.82,2.82A1.926,1.926,0,0,1,12,14Z"
-                                    fill="#1E1D57" />
-                                <rect id="Rectangle_62" data-name="Rectangle 62" width="24" height="24" fill="none" />
-                            </svg>
-                            Identifying
-                            PPP opportunities</span>
-                        <i id="icon-menu1" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu1" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub category topic 1</li>
-                        <li>Sub category topic with a longer title 2</li>
-                        <li>Sub category topic 3</li>
-                        <li>Sub category topic 4</li>
-                    </ul>
-                </li>
-
-                <li class="border rounded-3xl border-[#1E1D57]">
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold p-2">
-                        <span class="flex items-center gap-3"><svg id="planning-icon" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24">
-                                <path id="Path_426" data-name="Path 426"
-                                    d="M5,11a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,3,9V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,5,3H19a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,21,5V9a2.015,2.015,0,0,1-2,2ZM5,9H19V5H5ZM5,21a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,3,19V15a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,5,13H19a2.015,2.015,0,0,1,2,2v4a2.015,2.015,0,0,1-2,2Zm0-2H19V15H5ZM5,5V5ZM5,15v0Z"
-                                    fill="#1E1D57" />
-                                <rect id="Rectangle_72" data-name="Rectangle 72" width="24" height="24" fill="none" />
-                            </svg>
-                            Preparing
-                            your project</span>
-                        <i id="icon-menu2" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu2" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub topic 1</li>
-                        <li>Sub topic 2</li>
-                    </ul>
-                </li>
-                <li class="border rounded-3xl border-[#1E1D57]">
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold p-2">
-                        <span class="flex items-center gap-3"><svg id="implementation-icon"
-                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                <path id="Path_425" data-name="Path 425"
-                                    d="M21.6,23l-3.08-3.05a3.707,3.707,0,0,1-.96.41,4.166,4.166,0,0,1-1.06.14,4.029,4.029,0,0,1-4.01-4.01,4.029,4.029,0,0,1,4.01-4.01,4.029,4.029,0,0,1,4.01,4.01,3.879,3.879,0,0,1-.15,1.09,3.763,3.763,0,0,1-.43.96l3.08,3.05-1.4,1.4ZM5.5,20.5a3.853,3.853,0,0,1-2.83-1.18,3.984,3.984,0,0,1,0-5.66A3.875,3.875,0,0,1,5.5,12.48a3.853,3.853,0,0,1,2.83,1.18,3.984,3.984,0,0,1,0,5.66A3.853,3.853,0,0,1,5.5,20.5Zm0-2a2,2,0,1,0-1.41-3.41A2,2,0,0,0,5.5,18.5Zm11,0a2.015,2.015,0,1,0-1.41-.59A1.926,1.926,0,0,0,16.5,18.5Zm-11-9A3.853,3.853,0,0,1,2.67,8.32,3.875,3.875,0,0,1,1.49,5.49,3.853,3.853,0,0,1,2.67,2.66,3.875,3.875,0,0,1,5.5,1.48,3.853,3.853,0,0,1,8.33,2.66,3.853,3.853,0,0,1,9.51,5.49,3.853,3.853,0,0,1,8.33,8.32,3.853,3.853,0,0,1,5.5,9.5Zm11,0a3.853,3.853,0,0,1-2.83-1.18,3.853,3.853,0,0,1-1.18-2.83,3.853,3.853,0,0,1,1.18-2.83,3.984,3.984,0,0,1,5.66,0,3.853,3.853,0,0,1,1.18,2.83,3.853,3.853,0,0,1-1.18,2.83A3.853,3.853,0,0,1,16.5,9.5Zm-11-2a2.015,2.015,0,0,0,2-2,2.015,2.015,0,0,0-2-2,2.015,2.015,0,0,0-2,2,2.015,2.015,0,0,0,2,2Zm11,0a2.015,2.015,0,0,0,2-2,2,2,0,1,0-3.41,1.41A1.926,1.926,0,0,0,16.5,7.5Z"
-                                    fill="#1E1D57" />
-                                <rect id="Rectangle_71" data-name="Rectangle 71" width="24" height="24" fill="none" />
-                            </svg>
-                            Implementation</span>
-                        <i id="icon-menu3" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu3" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub topic 1</li>
-                        <li>Sub topic 2</li>
-                    </ul>
-                </li>
-                <li class="border rounded-3xl border-[#1E1D57]">
-                    <button class="flex items-center justify-between w-full text-left text-gray-700 font-semibold p-2">
-                        <span class="flex items-center gap-3"><svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg"
-                                width="24" height="24" viewBox="0 0 24 24">
-                                <path id="Path_401" data-name="Path 401"
-                                    d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                                    fill="#1E1D57" />
-                                <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none" />
-                            </svg>
-                            Management</span>
-                        <i id="icon-menu4" data-lucide="chevron-down" class="w-4 h-4 transition-transform"></i>
-                    </button>
-                    <ul id="menu4" class="ml-8 mt-2 space-y-1 text-sm text-gray-600 hidden">
-                        <li>Sub topic 1</li>
-                        <li>Sub topic 2</li>
-                    </ul>
-                </li>
-            </ul>
-
-            <div class="w-full mt-6">
-                <label class="block text-lg font-semibold text-[#000000] mb-3">Search</label>
-                <div class="relative">
-                    <input type="text" placeholder="Search…" class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700 
-                   placeholder-gray-400 focus:ring-0 focus:outline-none">
-
-                    <!-- Search Icon -->
-                    <span class="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18.095 18.095">
-                            <path
-                                d="M16.681,18.1h0l-5.145-5.145a7.2,7.2,0,1,1,1.414-1.414L18.1,16.681l-1.413,1.413ZM7.2,2a5.2,5.2,0,1,0,5.2,5.2A5.206,5.206,0,0,0,7.2,2Z"
-                                fill="#1E1D57"></path>
-                        </svg>
-                    </span>
-                </div>
-            </div>
+        @include('helpers.resources-filter')
         </aside>
 
         <!-- ✅ MAIN CONTENT -->
@@ -500,6 +294,7 @@
         const filterOverlay = document.querySelector(".overlay-btm");
         const body = document.body;
         const mobFilters = document.querySelector(".mob-search-filters");
+    const categoryLinks = document.querySelectorAll(".category-with-sub > a");
         const HIDDEN_CLASS = "-left-100";
         const VISIBLE_CLASS = "left-0";
 
@@ -514,6 +309,20 @@
                 }
             });
         }
+
+    categoryLinks.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            event.preventDefault();
+            const parentItem = link.closest(".category-with-sub");
+            if (!parentItem) return;
+            const subCat = parentItem.querySelector(".sub-cat");
+            const isActive = parentItem.classList.toggle("active");
+            if (subCat) {
+                subCat.style.maxHeight = isActive ? `${subCat.scrollHeight}px` : "0";
+                subCat.style.opacity = isActive ? "1" : "0";
+            }
+        });
+    });
     });
 
 </script>

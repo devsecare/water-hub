@@ -155,6 +155,52 @@
       overflow-x: hidden;
     }
 
+.category-with-sub .sub-cat {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+.filter-middle > ul > li {
+  position: relative;
+  transition: all 0.3s linear;
+}
+.filter-middle > ul > li:before {
+  content: "";
+  display: block;
+  height: 17px;
+  width: 1px;
+  background-color: #1E1D57;
+  position: absolute;
+  top: 100%;
+  left: 18px;
+}
+.filter-middle > ul > li:last-child:before {
+  display: none;
+}
+.filter-middle > ul > li span.arrow-right {
+  transition: all 0.3s linear;
+}
+.filter-middle > ul > li.active span.arrow-right {
+  transform: rotate(90deg);
+}
+.filter-middle > ul > li.active, .filter-middle > ul > li:hover {
+  color: #37C6F4;
+}
+
+.category-with-sub.active .sub-cat {
+  opacity: 1;
+}
+.filter-middle li {
+  font-size: 15px;
+}
+.filter-middle li li {
+  font-size: 14px;
+}
+ul.sub-cat {
+  padding-left: 32px;
+}
+
     .mob-hamburger {
       width: 24px;
       display: flex;

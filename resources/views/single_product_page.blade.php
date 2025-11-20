@@ -25,7 +25,7 @@
         <div class="flex flex-col lg:flex-row gap-12">
 
             <!-- LEFT SECTION -->
-            <div class="w-full lg:w-[350px] flex flex-col">
+            <div class="w-full lg:max-w-[350px] flex flex-col">
 
                 <!-- Blue Card -->
                 <div
@@ -97,7 +97,7 @@
                 <div class="flex flex-col-reverse md:flex-row gap-8">
 
                     <!-- LEFT TEXT SECTION – takes 2/3 -->
-                    <div class="md:col-span-2 md:max-w-[347px] text-[#000000]">
+                    <div class="md:col-span-2 lg:max-w-[60%]  md:max-w-1/2 text-[#000000]">
                         <p class=" mb-6 leading-relaxed">
                             <span class="text-black font-bold">Short description: </span>Summarise what they will
                             get
@@ -144,7 +144,7 @@
                     <!-- RIGHT ADDITIONAL RESOURCES (1/3) -->
                     <div class="md:col-span-1">
 
-                        <h3 class=" font-semibold text-[#0E1C4E] mb-4">
+                        <h3 class=" font-semibold text-[#37C6F4] text-2xl mb-4 max-[1100px]:text-lg max-[1200px]:text-xl">
                             Additional resources
                         </h3>
 

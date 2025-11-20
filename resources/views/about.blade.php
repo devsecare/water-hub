@@ -16,6 +16,9 @@
 
     <!-- Text Content -->
     <div class="relative z-10 flex items-center py-16 px-6 lg:px-16 h-full ">
+        <svg xmlns="http://www.w3.org/2000/svg" width="440" height="20.722" viewBox="0 0 440 20.722" class="absolute top-0 w-[80%] max-w-fit left-0 right-auto h-auto z-10">
+        <path id="Path_412" data-name="Path 412" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
+    </svg>
         <div class="w-full max-w-7xl mx-auto  text-left">
             <p class="text-sky-300 font-medium uppercase tracking-wide mb-2 text-sm sm:text-base">
                 About Us
@@ -96,7 +99,7 @@
 </section>
 
 <!-- a global community section  -->
-<section class="bg-[#181A4B] text-white py-16 sm:py-20 px-6 lg:px-16 overflow-hidden">
+<section class="bg-[#181A4B] text-white py-16 sm:py-20 px-6 lg:px-16 overflow-hidden hidden">
     <div class="max-w-7xl mx-auto  flex flex-col lg:flex-row items-start justify-between gap-[30px]">
         <!-- Left Text -->
         <div class="max-w-[604px] text-left flex-shrink-0">
@@ -157,8 +160,15 @@
 </section>
 
 <!-- Comprehensive water PPP section  -->
-<section
-    class="bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-10 md:py-20 px-6 lg:px-16">
+<section class="bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-15 md:py-20 px-6 lg:px-16 relative">
+
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722" class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full">
+                <path id="Path_435" data-name="Path 435" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
+            </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="710" height="33.437" viewBox="0 0 710 33.437" class="absolute top-0 xl:left-[15%] hidden md:block ">
+        <path id="Path_419" data-name="Path 419" d="M0,21.645c207.154,0,277.811,33.437,371.982,33.437S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
+        </svg>
+
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8 ">
         <div class="max-w-[604px]">
             <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-semibold leading-tight mb-4">
@@ -203,12 +213,10 @@
             </p>
 
             <!-- Link -->
-            <a href="{{ route('contact') }}"
-                class="inline-flex items-center text-sky-500 font-semibold hover:text-sky-600 transition-colors">
-                Get in touch
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            <a href="{{ route('contact') }}" class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold transition-colors">
+                <span class="group-hover:text-[#1E1D57] transition-colors">Get in touch</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-[24px] w-[24px] text-bold ml-1 transition-colors  group-hover:text-[#1E1D57]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
                 </svg>
             </a>
         </div>
