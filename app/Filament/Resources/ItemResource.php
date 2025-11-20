@@ -4,10 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ItemResource\Pages;
 use App\Filament\Resources\ItemResource\RelationManagers;
+use App\Models\Category;
 use App\Models\Item;
 use Awcodes\Curator\Components\Forms\CuratorPicker;
+use Awcodes\Curator\Components\Tables\CuratorColumn;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Set;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -18,13 +21,7 @@ class ItemResource extends Resource
 {
     protected static ?string $model = Item::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
-
-    protected static ?string $navigationGroup = 'Content';
-
-    protected static ?string $navigationLabel = 'Items';
-
-    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -37,19 +34,60 @@ class ItemResource extends Resource
                             ->relationship('category', 'name')
                             ->searchable()
                             ->preload()
-                            ->required(),
+                            ->required()
+                            ->options(function () {
+                                $categories = Category::where('is_active', true)
+                                    ->with('parent')
+                                    ->orderBy('name')
+                                    ->get();
+
+                                $options = [];
+                                foreach ($categories as $category) {
+                                    if ($category->parent_id) {
+                                        // Sub-category: show as "Parent > Sub-category"
+                                        $options[$category->id] = $category->parent->name . ' > ' . $category->name;
+                                    } else {
+                                        // Parent category
+                                        $options[$category->id] = $category->name;
+                                    }
+                                }
+                                return $options;
+                            })
+                            ->helperText('Select a category or sub-category for this item.'),
                         Forms\Components\TextInput::make('title')
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->afterStateUpdated(function (Forms\Set $set, $state) {
+                            ->afterStateUpdated(function ($state, Set $set) {
                                 $set('slug', \Illuminate\Support\Str::slug($state));
                             }),
                         Forms\Components\TextInput::make('slug')
                             ->required()
                             ->maxLength(255)
-                            ->unique(ignoreRecord: true),
+                            ->unique(ignoreRecord: true)
+                            ->dehydrated()
+                            ->helperText('Auto-generated from title. You can edit it if needed.'),
+                    ])
+                    ->columns(2),
+
+                Forms\Components\Section::make('Content')
+                    ->schema([
+                        Forms\Components\Textarea::make('description')
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('short_description')
+                            ->label('Short Description')
+                            ->helperText('Brief description for modal display')
+                            ->rows(3)
+                            ->columnSpanFull(),
+                    ]),
+
+                Forms\Components\Section::make('Metadata')
+                    ->schema([
+                        Forms\Components\TextInput::make('publisher')
+                            ->label('Publisher')
+                            ->maxLength(255),
                         Forms\Components\Select::make('type')
+                            ->label('Resource Type')
                             ->options([
                                 'guide' => 'Guide',
                                 'video' => 'Video',
@@ -57,58 +95,38 @@ class ItemResource extends Resource
                                 'case_study' => 'Case Study',
                             ])
                             ->default('guide')
-                            ->required()
-                            ->native(false),
+                            ->required(),
                     ])
                     ->columns(2),
-                
-                Forms\Components\Section::make('Content')
+
+                Forms\Components\Section::make('Media')
                     ->schema([
-                        Forms\Components\Textarea::make('short_description')
-                            ->label('Short Description')
-                            ->rows(3)
-                            ->maxLength(500)
-                            ->helperText('Brief summary of the item (max 500 characters)'),
-                        Forms\Components\Textarea::make('description')
-                            ->rows(5)
-                            ->columnSpanFull(),
-                    ]),
-                
-                Forms\Components\Section::make('Publisher & Media')
-                    ->schema([
-                        Forms\Components\TextInput::make('publisher')
-                            ->maxLength(255)
-                            ->helperText('Name of the publisher or author'),
                         CuratorPicker::make('featured_image_id')
                             ->label('Featured Image')
-                            ->relationship('featuredImage', 'id'),
-                    ])
-                    ->columns(2),
-                
-                Forms\Components\Section::make('Location (Optional)')
+                            ->relationship('featuredImage', 'id')
+                            ->buttonLabel('Select Featured Image')
+                            ->listDisplay(true)
+                            ->columnSpanFull(),
+                    ]),
+
+                Forms\Components\Section::make('Location')
                     ->schema([
                         Forms\Components\TextInput::make('latitude')
                             ->numeric()
-                            ->default(null)
-                            ->helperText('Latitude coordinate'),
+                            ->default(null),
                         Forms\Components\TextInput::make('longitude')
                             ->numeric()
-                            ->default(null)
-                            ->helperText('Longitude coordinate'),
+                            ->default(null),
                         Forms\Components\TextInput::make('address')
                             ->maxLength(255)
-                            ->default(null)
-                            ->columnSpanFull(),
+                            ->default(null),
                     ])
-                    ->columns(2)
-                    ->collapsible(),
-                
+                    ->columns(2),
+
                 Forms\Components\Section::make('Status')
                     ->schema([
                         Forms\Components\Toggle::make('is_active')
-                            ->label('Active')
-                            ->default(true)
-                            ->helperText('Inactive items will be hidden from public view'),
+                            ->required(),
                     ]),
             ]);
     }
@@ -116,111 +134,86 @@ class ItemResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function (Builder $query) {
+                $query->with(['category.parent']);
+            })
             ->columns([
-                Tables\Columns\ImageColumn::make('featuredImage.path')
-                    ->label('Image')
-                    ->circular()
-                    ->defaultImageUrl(url('/images/placeholder.png'))
-                    ->toggleable(),
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Category')
+                    ->formatStateUsing(function ($record) {
+                        if ($record->category && $record->category->parent) {
+                            return $record->category->parent->name . ' > ' . $record->category->name;
+                        }
+                        return $record->category->name ?? 'N/A';
+                    })
                     ->searchable()
                     ->sortable(),
+
                 Tables\Columns\TextColumn::make('title')
-                    ->searchable()
-                    ->sortable()
-                    ->weight('bold')
-                    ->limit(40),
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('publisher')
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('type')
-                    ->label('Type')
                     ->badge()
-                    ->formatStateUsing(fn ($state) => match($state) {
+                    ->formatStateUsing(fn (string $state): string => match($state) {
                         'guide' => 'Guide',
                         'video' => 'Video',
                         'podcast' => 'Podcast',
                         'case_study' => 'Case Study',
-                        default => 'Guide',
+                        default => $state,
                     })
-                    ->color(fn ($state) => match($state) {
+                    ->color(fn (string $state): string => match($state) {
                         'guide' => 'success',
-                        'video' => 'warning',
-                        'podcast' => 'info',
+                        'video' => 'info',
+                        'podcast' => 'warning',
                         'case_study' => 'danger',
                         default => 'gray',
-                    })
+                    }),
+
+                Tables\Columns\TextColumn::make('slug')
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('latitude')
+                    ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('publisher')
-                    ->searchable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('short_description')
-                    ->label('Short Description')
-                    ->limit(50)
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('files_count')
-                    ->label('Files')
-                    ->counts('files')
-                    ->sortable()
-                    ->toggleable(),
-                Tables\Columns\TextColumn::make('bookmarkedByUsers_count')
-                    ->label('Bookmarks')
-                    ->counts('bookmarkedByUsers')
-                    ->sortable()
-                    ->toggleable(),
+
+                Tables\Columns\TextColumn::make('longitude')
+                    ->numeric()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('address')
+                    ->searchable(),
+
+                CuratorColumn::make('featured_image_id')
+                    ->label('Featured Image'),
+
                 Tables\Columns\IconColumn::make('is_active')
-                    ->boolean()
-                    ->sortable(),
+                    ->boolean(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('category_id')
-                    ->label('Category')
-                    ->relationship('category', 'name')
-                    ->searchable()
-                    ->preload(),
-                Tables\Filters\SelectFilter::make('type')
-                    ->options([
-                        'guide' => 'Guide',
-                        'video' => 'Video',
-                        'podcast' => 'Podcast',
-                        'case_study' => 'Case Study',
-                    ])
-                    ->multiple(),
-                Tables\Filters\TernaryFilter::make('is_active')
-                    ->label('Active')
-                    ->placeholder('All')
-                    ->trueLabel('Active only')
-                    ->falseLabel('Inactive only'),
-                Tables\Filters\Filter::make('has_files')
-                    ->label('Has Files')
-                    ->query(fn (Builder $query): Builder => $query->has('files')),
-                Tables\Filters\Filter::make('has_bookmarks')
-                    ->label('Has Bookmarks')
-                    ->query(fn (Builder $query): Builder => $query->has('bookmarkedByUsers')),
+                //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ])
-            ->defaultSort('created_at', 'desc');
-    }
-    
-    public static function getEloquentQuery(): Builder
-    {
-        return parent::getEloquentQuery()
-            ->withCount(['files', 'bookmarkedByUsers']);
+            ]);
     }
 
     public static function getRelations(): array
