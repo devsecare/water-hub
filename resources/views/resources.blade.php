@@ -114,7 +114,8 @@
 
         <div class="flex flex-col md:flex-row">
             <!-- Left gradient -->
-            <div id="modalColorBox" class="p-8 text-white rounded-2xl w-full  md:w-1/2 flex flex-col justify-between min-h-[360px]">
+            <div id="modalColorBox"
+                class="p-8 text-white rounded-2xl w-full  md:w-1/2 flex flex-col justify-between min-h-[360px]">
                 <div>
                     <h3 id="modalTitle" class="text-2xl font-semibold leading-snug mb-3">title goes here</h3>
                     <p id="modalPublisher" class="text-sm opacity-90 mb-4">Publisher name here</p>
@@ -133,22 +134,49 @@
                         Summarise what they will get from the document and also mention the kinds of support files
                         available. Audio, video etc.
                     </p>
+                     <p id="modalDescription">
+                        Summarise what they will get from the document and also mention the kinds of support files
+                        available. Audio, video etc.
+                    </p>
                 </div>
 
-                <!-- Buttons fixed at the bottom right section -->
-                <div class="border-t mt-8 pt-4 flex justify-between flex-wrap gap-4 text-gray-700 text-sm">
-                    <div class="flex flex-wrap gap-6">
-                        <button class="flex items-center gap-2"><i data-lucide="bookmark" class="w-4 h-4"></i>Add to
-                            your library</button>
-                        <button class="flex items-center gap-2"><i data-lucide="download" class="w-4 h-4"></i>Download
-                            file</button>
-                        <button class="flex items-center gap-2"><i data-lucide="share-2"
-                                class="w-4 h-4"></i>Share</button>
-                    </div>
-                    <button class="flex items-center gap-2 font-semibold underline"><i data-lucide="more-horizontal"
-                            class="w-4 h-4"></i>More options…</button>
-                </div>
             </div>
+        </div>
+        <!-- Buttons fixed at the bottom section -->
+        <div class="border-t mt-8 pt-4 flex justify-between flex-wrap gap-4 text-gray-700 text-sm">
+            <div class="flex flex-wrap gap-6">
+                <button class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" data-lucide="bookmark" class="lucide lucide-bookmark w-4 h-4">
+                        <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+                    </svg>Add to
+                    your library</button>
+                <button class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" data-lucide="download" class="lucide lucide-download w-4 h-4">
+                        <path d="M12 15V3"></path>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <path d="m7 10 5 5 5-5"></path>
+                    </svg>Download
+                    file</button>
+                <button class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" data-lucide="share-2" class="lucide lucide-share-2 w-4 h-4">
+                        <circle cx="18" cy="5" r="3"></circle>
+                        <circle cx="6" cy="12" r="3"></circle>
+                        <circle cx="18" cy="19" r="3"></circle>
+                        <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
+                        <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
+                    </svg>Share</button>
+            </div>
+            <button class="flex items-center gap-2 font-semibold underline"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" data-lucide="more-horizontal"
+                    class="lucide lucide-more-horizontal w-4 h-4">
+                    <circle cx="12" cy="12" r="1"></circle>
+                    <circle cx="19" cy="12" r="1"></circle>
+                    <circle cx="5" cy="12" r="1"></circle>
+                </svg>More options…</button>
         </div>
     </div>
 </div>

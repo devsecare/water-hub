@@ -110,7 +110,7 @@ function openModal(title, publisher, type, gradient, icon) {
   document.getElementById("modalPublisher").innerText = publisher;
   document.getElementById("modalType").innerText = type;
   const colorBox = document.getElementById("modalColorBox");
-  colorBox.className = `${gradient} p-8 text-white w-full md:w-1/2 flex flex-col justify-between min-h-[360px]`;
+  colorBox.className = `${gradient} p-8 text-white w-full md:w-1/2 rounded-3xl flex flex-col justify-between min-h-[360px]`;
   document.getElementById("modalIcon").setAttribute("data-lucide", icon);
   lucide.createIcons();
 }
