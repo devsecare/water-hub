@@ -38,4 +38,20 @@ class User extends Authenticatable implements FilamentUser
     {
         return true; // allow all logged in users
     }
+
+    /**
+     * Get the bookmarks for the user
+     */
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
+
+    /**
+     * Get the items bookmarked by the user
+     */
+    public function bookmarkedItems()
+    {
+        return $this->belongsToMany(Item::class, 'bookmarks', 'user_id', 'item_id')->withTimestamps();
+    }
 }
