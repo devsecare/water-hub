@@ -97,7 +97,16 @@
 
 <!-- Comprehensive water PPP knowledge in a format that works for you  -->
 <section class="relative bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-10 md:py-24 px-6 lg:px-16 ">
-    <div  class="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8  ">
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722" class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full">
+                <path id="Path_435" data-name="Path 435" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
+            </svg>
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="710" height="33.437" viewBox="0 0 710 33.437" class="absolute top-0 right-[15%] hidden md:block ">
+        <path id="Path_419" data-name="Path 419" d="M0,21.645c207.154,0,277.811,33.437,371.982,33.437S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
+        </svg>
+
+
+<div  class="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8  ">
         <div class="max-w-[604px]">
             <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-semibold leading-tight mb-4">
                 Comprehensive water PPP knowledge in a format that works for you
@@ -110,7 +119,7 @@
         </div>
 
 
-        <a href="https://water-hub.ecareinfoway.com/resources" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[15px] py-[10px] px-[27px] 
+        <a href="https://water-hub.ecareinfoway.com/resources" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[25px] py-[10px] px-[27px] 
                         hover:bg-[#37C6F4] hover:text-[#1E1D57] transition duration-300">
             The resource library
             <!-- SVG Icon placed after text -->
