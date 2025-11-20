@@ -20,7 +20,7 @@
 <!-- ✅ INTRO -->
 <section class="px-6 lg:px-16 py-12 sm:py-16 lg:py-20">
     <section class="max-w-7xl mx-auto ">
-        <p class="text-[19px] sm:text-xl md:text-lg max-w-2xl">
+        <p class="text-[19px] text-[#1E1D57] sm:text-xl md:text-lg max-w-2xl">
             Browse by category to find the guidance you need – from foundational PPP concepts to contract management and
             monitoring. Bookmark resources to save and view them in your account, or download documents, audio, and
             video
@@ -48,8 +48,9 @@
                     </span>
                 </button>
             </div>
-            <div  class="mobile-filter-list absolute top-full bg-white py-6 px-6 rounded-r-[24px] -left-100 transition-all duration-300 w-full max-w-[300px]">
-                
+            <div
+                class="mobile-filter-list absolute top-full bg-white py-6 px-6 rounded-r-[24px] -left-100 transition-all duration-300 w-full max-w-[300px]">
+
                 @include('helpers.resources-filter')
 
 
@@ -57,7 +58,7 @@
         </div>
         <!-- side bar desktop  -->
         <aside class="w-full md:w-64 lg:w-[20rem] p-6 lg:p-0 hidden md:block">
-        @include('helpers.resources-filter')
+            @include('helpers.resources-filter')
         </aside>
 
         <!-- ✅ MAIN CONTENT -->
@@ -106,16 +107,16 @@
 <div id="productModal"
     class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-300">
     <div
-        class="bg-white rounded-2xl shadow-xl max-w-4xl w-[90%] md:w-[70%] p-0 relative animate-fadeIn overflow-hidden">
+        class="bg-white rounded-2xl shadow-xl max-w-[51rem] w-[90%] md:w-[70%] p-8 relative animate-fadeIn overflow-hidden">
         <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-600 hover:text-black z-10">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
 
         <div class="flex flex-col md:flex-row">
             <!-- Left gradient -->
-            <div id="modalColorBox" class="p-8 text-white w-full md:w-1/2 flex flex-col justify-between min-h-[360px]">
+            <div id="modalColorBox" class="p-8 text-white rounded-2xl w-full  md:w-1/2 flex flex-col justify-between min-h-[360px]">
                 <div>
-                    <h3 id="modalTitle" class="text-2xl font-semibold leading-snug mb-3">Title goes here</h3>
+                    <h3 id="modalTitle" class="text-2xl font-semibold leading-snug mb-3">title goes here</h3>
                     <p id="modalPublisher" class="text-sm opacity-90 mb-4">Publisher name here</p>
                 </div>
                 <div class="flex items-center gap-2 mt-auto">
@@ -294,7 +295,7 @@
         const filterOverlay = document.querySelector(".overlay-btm");
         const body = document.body;
         const mobFilters = document.querySelector(".mob-search-filters");
-    const categoryLinks = document.querySelectorAll(".category-with-sub > a");
+        const categoryLinks = document.querySelectorAll(".category-with-sub > a");
         const HIDDEN_CLASS = "-left-100";
         const VISIBLE_CLASS = "left-0";
 
@@ -310,19 +311,19 @@
             });
         }
 
-    categoryLinks.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            event.preventDefault();
-            const parentItem = link.closest(".category-with-sub");
-            if (!parentItem) return;
-            const subCat = parentItem.querySelector(".sub-cat");
-            const isActive = parentItem.classList.toggle("active");
-            if (subCat) {
-                subCat.style.maxHeight = isActive ? `${subCat.scrollHeight}px` : "0";
-                subCat.style.opacity = isActive ? "1" : "0";
-            }
+        categoryLinks.forEach((link) => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+                const parentItem = link.closest(".category-with-sub");
+                if (!parentItem) return;
+                const subCat = parentItem.querySelector(".sub-cat");
+                const isActive = parentItem.classList.toggle("active");
+                if (subCat) {
+                    subCat.style.maxHeight = isActive ? `${subCat.scrollHeight}px` : "0";
+                    subCat.style.opacity = isActive ? "1" : "0";
+                }
+            });
         });
-    });
     });
 
 </script>

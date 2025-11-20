@@ -1,5 +1,5 @@
 <div class="filter-top pb-6">
-    <ul class="flex flex-col gap-3">
+    <ul class="flex flex-col gap-3 text-[#1E1D57] font-bold">
         <li>
             <a href="javascript:void(0)" class="flex gap-2"><span class="material-symbols-outlined">book_4</span>All content
             </a>
@@ -11,7 +11,7 @@
     </ul>
 </div>
 <div class="filter-middle py-6 border-t border-b border-[#D1D1D1]">
-    <ul class="space-y-4">
+    <ul class="space-y-4 text-[#1E1D57] font-semibold">
         <li class="category-with-sub border border-[#1E1D57] rounded-[25px] px-3 py-2 bg-white">
             <a href="javascript:void(0)" class="flex gap-2"><span class="material-symbols-outlined">target</span>
                 Identifying PPP opportunities

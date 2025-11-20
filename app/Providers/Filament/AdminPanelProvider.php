@@ -40,6 +40,7 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            // ->canAccess(fn($user) => true) 
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

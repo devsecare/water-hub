@@ -205,48 +205,40 @@
     </svg>
 </section>
 
-<!-- the economi of water section  -->
+<!-- The Economics of Water PPPs section  -->
 <section class="px-6 lg:px-16 py-12">
-    <div class="max-w-7xl mx-auto lg:pt-12 pt-8">
-        <h1 class="text-lg sm:text-4xl sm:text-4xl font-extrabold text-blue-900 ">
-            The Economics of Water PPPs
-        </h1>
-    </div>
-    <div class="max-w-7xl py-8 lg:py-12 mx-auto grid lg:grid-cols-2 gap-10 ">
+    <div class="max-w-7xl mx-auto  py-12">
+        <div class="flex flex-col lg:flex-row gap-6 md:gap-10">
+            <!-- Right Content -->
+            <div class="lg:w-1/2 flex flex-col justify-center">
+                <h1 class="text-lg sm:text-4xl sm:text-4xl font-extrabold text-[#1E1D57] mb-6">
+                    The Economics of Water PPPs
+                </h1>
+                <p class="text-[#000000] mb-4">Sustainable water services require cost recovery. Most costs – labour,
+                    energy, chemicals, financing for infrastructure – are external factors, not controlled by operators.
+                    When authorities engage private operators, they often make important economic decisions
+                    simultaneously:</p>
 
-        <!-- bottom Section -->
-        <div>
-            <p class="text-gray-700 mb-4">
-                Sustainable water services require cost recovery. Most costs – labour, energy, chemicals, financing
-                for
-                infrastructure – are external factors, not controlled by operators. When authorities engage private
-                operators, they often make important economic decisions simultaneously:
-            </p>
+                <ul class="list-disc list-outside pl-4 text-[#000000] space-y-1 mb-4">
+                    <li>Moving from tax-funded services to direct user charges (making costs visible)</li>
+                    <li>Implementing needed investment programmes to restore or upgrade infrastructure</li>
+                    <li>Establishing tariff structures that ensure long-term sustainability</li>
+                </ul>
 
-            <ul class="list-disc pl-6 space-y-2 text-gray-700 mb-6">
-                <li>Moving from tax-funded services to direct user charges (making costs visible)</li>
-                <li>Implementing needed investment programmes to restore or upgrade infrastructure</li>
-                <li>Establishing tariff structures that ensure long-term sustainability</li>
-            </ul>
-
-            <p class="text-gray-700">
-                This means PPPs sometimes “appear” more expensive, but they’re often simply reflecting decisions
-                about
-                investment and cost recovery that the authority has already made and would occur regardless of who
-                operates the service.
-            </p>
-        </div>
-
-        <!-- Right Section (Suggested Graphic Placeholder) -->
-        <div class="bg-blue-50 rounded-2xl p-6 flex flex-col justify-center">
-            <h2 class="font-semibold text-gray-800 mb-2">SUGGESTED GRAPHIC:</h2>
-            <p class="text-gray-700">
-                Simple breakdown showing what makes up the cost of water services – positioned here.
-                Can this be done?
-            </p>
+                <p class="text-[#000000]">This means PPPs sometimes “appear” more expensive, but they’re often simply
+                    reflecting decisions about investment and cost recovery that the authority has already made and
+                    would occur regardless of who operates the service.
+                </p>
+            </div>
+            <!-- Left Image -->
+            <div class="lg:w-1/2">
+                <img src="images/The-Economics-of-Water-PPPs-min.png" alt="Water Infrastructure"
+                    class="md:w-full md:h-full object-contain rounded-2xl">
+            </div>
         </div>
     </div>
 </section>
+
 <!-- financial water infrastructure  -->
 
 <section class="bg-[#f2f2f2] px-6 lg:px-16">
@@ -255,20 +247,20 @@
 
             <!-- Left Image -->
             <div class="lg:w-1/2">
-                <img src="images/financial-water-infrastructure.jpg" alt="Water Infrastructure"
+                <img src="images/Financing-Water-Infrastructure.png" alt="Water Infrastructure"
                     class="md:w-full md:h-full object-contain rounded-2xl">
             </div>
 
             <!-- Right Content -->
             <div class="lg:w-1/2 flex flex-col justify-center">
-                <h2 class="text-2xl md:text-3xl font-bold text-indigo-900 mb-4">
+                 <h1 class="text-lg sm:text-4xl sm:text-4xl font-extrabold text-[#1E1D57] mb-6">
                     Financing Water Infrastructure
-                </h2>
-                <p class="text-gray-700 mb-4">
+                </h1>
+                <p class="text-[#000000] mb-4">
                     Private operators access various financing sources to fund needed investments:
                 </p>
 
-                <ul class="list-disc list-outside pl-4 text-gray-700 space-y-1 mb-4">
+                <ul class="list-disc list-outside pl-4 text-[#000000] space-y-1 mb-4">
                     <li>Bank loans or financial institution borrowing</li>
                     <li>Capital investment from financial investors or the operator itself</li>
                     <li>Repayable subsidies from government or revolving funds</li>
@@ -276,7 +268,7 @@
                     <li>Non-repayable grants from donors (for specific social programmes)</li>
                 </ul>
 
-                <p class="text-gray-700">
+                <p class="text-[#000000]">
                     All financing mechanisms except grants require repayment over the contract term through the
                     agreed revenue model.
                 </p>
@@ -287,13 +279,19 @@
 
 <!-- real world success  -->
 <section class="relative overflow-hidden relative">
-    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994" class="absolute top-0 z-111 right-[10%] hidden md:block  ">
-  <path id="Path_432" data-name="Path 432" d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#f2f2f2"></path>
-</svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994"
+        class="absolute top-0 z-111 right-[10%] hidden md:block  ">
+        <path id="Path_432" data-name="Path 432"
+            d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z"
+            transform="translate(0 -21.645)" fill="#f2f2f2"></path>
+    </svg>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994" class="-translate-x-1/2 left-1/2 absolute top-[-10px] z-111 md:hidden max-w-[400px] items-center justify-center">
-  <path id="Path_432" data-name="Path 432" d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#f2f2f2"></path>
-</svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994"
+        class="-translate-x-1/2 left-1/2 absolute top-[-10px] z-111 md:hidden max-w-[400px] items-center justify-center">
+        <path id="Path_432" data-name="Path 432"
+            d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z"
+            transform="translate(0 -21.645)" fill="#f2f2f2"></path>
+    </svg>
     <!-- Wave Shape at Top -->
     <!-- <div class="absolute top-0 left-0 w-full">
         <svg viewBox="0 0 1440 320" class="w-full h-24 md:h-32" preserveAspectRatio="none">
@@ -345,7 +343,7 @@
         <!-- bottom Section -->
         <div>
 
-            <p class="text-gray-700 mb-4">
+            <p class="text-[#000000] mb-4">
                 Water operators link the natural and human water cycles – taking water from nature, treating it
                 safely for use, collecting wastewater, treating it to remove pollution, and returning it to nature.
                 This cycle must be sustainable.
@@ -353,7 +351,7 @@
             <h1 class="text-[20px] mb-6 font-extrabold text-[#1E1D57]">
                 Private operators support community sustainability by:
             </h1>
-            <ul class="list-disc pl-4 space-y-2 text-gray-700 mb-6">
+            <ul class="list-disc pl-4 space-y-2 text-[#000000] mb-6">
                 <li>Protecting water resources through better management </li>
                 <li>Reducing energy consumption and carbon footprint</li>
                 <li>mplementing climate resilience measures </li>
