@@ -6,8 +6,11 @@
 
 <!-- hero section  -->
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16 relative">
-    <svg xmlns="http://www.w3.org/2000/svg" width="440" height="20.722" viewBox="0 0 440 20.722" class="absolute top-0 w-[80%] max-w-fit left-0 right-auto h-auto z-10">
-        <path id="Path_412" data-name="Path 412" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
+    <svg xmlns="http://www.w3.org/2000/svg" width="440" height="20.722" viewBox="0 0 440 20.722"
+        class="absolute top-0 w-[80%] max-w-fit left-0 right-auto h-auto z-10">
+        <path id="Path_412" data-name="Path 412"
+            d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z"
+            transform="translate(0 -21.645)" fill="#fff"></path>
     </svg>
     <div class="max-w-7xl mx-auto  py-12  sm:py-24 lg:py-28">
         <p class="text-xl text-[#37C6F4] font-semibold mb-2">WHAT ARE WATER AND WASTEWATER PPPs</p>
@@ -156,7 +159,8 @@
         <p class="text-lg mb-12 max-w-2xl">
             A critical fact often misunderstood: the public authority always controls the contract and pricing
             policy. Water remains a public service under public control. The private operator works within the
-            framework set by the authority.</p>
+            framework set by the authority.
+        </p>
 
         <!-- Bottom two-column section -->
         <div class="flex flex-col md:flex-row  lg:max-w-[70%] gap-10">
@@ -187,13 +191,22 @@
 
         </div>
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="33.437" viewBox="0 0 710 33.437" class="absolute -bottom-[33px] -left-[50px] hidden md:block">
-  <path id="Path_433" data-name="Path 433" d="M0,21.645c207.154,0,277.811,33.437,371.982,33.437S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#1e1d57"></path>
-</svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="33.437" viewBox="0 0 710 33.437"
+        class="absolute -bottom-[33px] -left-[10px] lg:left-[10%] hidden md:block">
+        <path id="Path_433" data-name="Path 433"
+            d="M0,21.645c207.154,0,277.811,33.437,371.982,33.437S537.765,21.645,710,21.645H0Z"
+            transform="translate(0 -21.645)" fill="#1e1d57"></path>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="310.156" height="32.563" viewBox="0 0 310.156 32.563"
+        class="absolute -bottom-[15px] left-1/2 -translate-x-1/2 block md:hidden">
+        <path id="Path_434" data-name="Path 434"
+            d="M0,16.636c90.493,0,121.359,15.926,162.5,15.926s72.421-15.926,147.66-15.926V0H0Z"
+            transform="translate(0 0.001)" fill="#1E1D4E"></path>
+    </svg>
 </section>
 
 <!-- the economi of water section  -->
-<section class="px-6 lg:px-16 py-12" >
+<section class="px-6 lg:px-16 py-12">
     <div class="max-w-7xl mx-auto lg:pt-12 pt-8">
         <h1 class="text-lg sm:text-4xl sm:text-4xl font-extrabold text-blue-900 ">
             The Economics of Water PPPs
@@ -273,15 +286,18 @@
 </section>
 
 <!-- real world success  -->
-<section class="relative overflow-hidden">
+<section class="relative overflow-hidden relative">
+    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994" class="absolute top-0 z-111 right-[10%] hidden md:block  ">
+  <path id="Path_432" data-name="Path 432" d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#f2f2f2"></path>
+</svg>
     <!-- Wave Shape at Top -->
-    <div class="absolute top-0 left-0 w-full">
+    <!-- <div class="absolute top-0 left-0 w-full">
         <svg viewBox="0 0 1440 320" class="w-full h-24 md:h-32" preserveAspectRatio="none">
             <path fill="#ffffff"
                 d="M0,64L60,80C120,96,240,128,360,154.7C480,181,600,203,720,197.3C840,192,960,160,1080,149.3C1200,139,1320,149,1380,154.7L1440,160L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
             </path>
         </svg>
-    </div>
+    </div> -->
 
     <!-- Background Gradient -->
     <div
