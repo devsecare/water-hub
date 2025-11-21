@@ -7,6 +7,259 @@
 @endpush
 
 @section('content')
+@if(isset($requiresAuth) && $requiresAuth)
+<!-- Registration/Login Overlay for Guest Users -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50" id="authModal">
+    <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md mx-4 relative">
+        <!-- Register Form -->
+        <div id="registerForm">
+            <h2 class="text-2xl font-bold text-center text-gray-900 mb-1" style="color: #1E1D57;">
+                Register to create your account
+            </h2>
+            <p class="text-sm text-center text-gray-500 mb-6">
+                Already registered? <a href="javascript:void(0)" id="showLogin" class="text-blue-600 font-medium hover:underline">Log in</a>.
+            </p>
+
+            <form id="registerFormElement" method="POST" action="{{ route('register') }}" class="space-y-4" novalidate>
+                @csrf
+
+                <div>
+                    <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                    <input id="first_name" name="first_name" type="text" required value="{{ old('first_name') }}"
+                        class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('first_name') border-red-500 @enderror">
+                    @error('first_name')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="organisation" class="block text-sm font-medium text-gray-700 mb-1">Organisation</label>
+                    <input id="organisation" name="organisation" type="text" value="{{ old('organisation') }}"
+                        class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('organisation') border-red-500 @enderror">
+                    @error('organisation')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input id="email" name="email" type="email" required value="{{ old('email') }}"
+                        class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('email') border-red-500 @enderror">
+                    @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <input id="password" name="password" type="password" required
+                            class="w-full border border-gray-300 rounded-[20px] px-3 py-2 pr-10 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('password') border-red-500 @enderror">
+                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    @error('password')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <button type="submit" class="w-full bg-[#37C6F4] text-white rounded-[20px] py-2.5 mt-2 text-[16px] font-medium transition hover:bg-[#2CB0D9]">
+                    Register
+                </button>
+            </form>
+
+            <p class="text-xs text-center text-gray-500 mt-6 leading-snug">
+                By registering you agree with the
+                <a href="#" class="text-blue-600 hover:underline">Terms and Conditions</a>
+                and
+                <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>.
+            </p>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="hidden">
+            <h2 class="text-2xl font-bold text-center text-gray-900 mb-1" style="color: #1E1D57;">
+                Sign in to your account
+            </h2>
+            <p class="text-sm text-center text-gray-500 mb-6">
+                Don't have an account? <a href="javascript:void(0)" id="showRegister" class="text-blue-600 font-medium hover:underline">Register</a>.
+            </p>
+
+            <form id="loginFormElement" method="POST" action="{{ route('login') }}" class="space-y-4" novalidate>
+                @csrf
+
+                <div>
+                    <label for="login_email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input id="login_email" name="email" type="email" required value="{{ old('email') }}"
+                        class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('email') border-red-500 @enderror">
+                    @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="login_password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <input id="login_password" name="password" type="password" required
+                            class="w-full border border-gray-300 rounded-[20px] px-3 py-2 pr-10 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('password') border-red-500 @enderror">
+                        <button type="button" id="toggleLoginPassword" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    @error('password')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <button type="submit" class="w-full bg-[#37C6F4] text-white rounded-[20px] py-2.5 mt-2 text-[16px] font-medium transition hover:bg-[#2CB0D9]">
+                    Sign in
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@push('scripts')
+<script>
+    // Toggle between login and register forms
+    document.getElementById('showLogin')?.addEventListener('click', function() {
+        document.getElementById('registerForm').classList.add('hidden');
+        document.getElementById('loginForm').classList.remove('hidden');
+    });
+
+    document.getElementById('showRegister')?.addEventListener('click', function() {
+        document.getElementById('loginForm').classList.add('hidden');
+        document.getElementById('registerForm').classList.remove('hidden');
+    });
+
+    // Password toggle for register
+    const togglePassword = document.getElementById("togglePassword");
+    const password = document.getElementById("password");
+    if (togglePassword && password) {
+        togglePassword.addEventListener("click", () => {
+            const type = password.getAttribute("type") === "password" ? "text" : "password";
+            password.setAttribute("type", type);
+        });
+    }
+
+    // Password toggle for login
+    const toggleLoginPassword = document.getElementById("toggleLoginPassword");
+    const loginPassword = document.getElementById("login_password");
+    if (toggleLoginPassword && loginPassword) {
+        toggleLoginPassword.addEventListener("click", () => {
+            const type = loginPassword.getAttribute("type") === "password" ? "text" : "password";
+            loginPassword.setAttribute("type", type);
+        });
+    }
+
+    // Handle form submissions with AJAX to stay on page
+    document.getElementById('registerFormElement')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = this;
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Registering...';
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                }
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                window.location.href = data.redirect || window.location.href;
+            } else {
+                // Handle validation errors
+                if (data.errors) {
+                    Object.keys(data.errors).forEach(field => {
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (input) {
+                            input.classList.add('border-red-500');
+                            const errorDiv = document.createElement('p');
+                            errorDiv.className = 'text-red-500 text-sm mt-1';
+                            errorDiv.textContent = data.errors[field][0];
+                            input.parentNode.appendChild(errorDiv);
+                        }
+                    });
+                }
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+        }
+    });
+
+    document.getElementById('loginFormElement')?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = this;
+        const formData = new FormData(form);
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+
+        submitButton.disabled = true;
+        submitButton.textContent = 'Signing in...';
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json',
+                }
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                window.location.href = data.redirect || window.location.href;
+            } else {
+                // Handle errors
+                if (data.errors) {
+                    Object.keys(data.errors).forEach(field => {
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (input) {
+                            input.classList.add('border-red-500');
+                            const errorDiv = document.createElement('p');
+                            errorDiv.className = 'text-red-500 text-sm mt-1';
+                            errorDiv.textContent = data.errors[field][0];
+                            input.parentNode.appendChild(errorDiv);
+                        }
+                    });
+                }
+                submitButton.disabled = false;
+                submitButton.textContent = originalText;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+        }
+    });
+</script>
+@endpush
+@endif
+
+@if(!isset($requiresAuth) || !$requiresAuth)
 <!-- ✅ HERO -->
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16">
     <div class="max-w-7xl mx-auto  py-20 sm:py-24 lg:py-28">
@@ -65,8 +318,12 @@
         <main class="flex-1 p-6">
             <!-- Cards -->
             <div id="card-container" class="grid grid-cols-1 lg:w-[100%] sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <!-- No Data Message -->
+            <div id="no-data-message" class="hidden text-center py-12">
+                <p class="text-[#868686] text-lg">No resources found for the selected category.</p>
+            </div>
             <!-- Pagination -->
-            <div class="flex justify-center mt-6 space-x-2">
+            <div class="flex justify-center mt-6 space-x-2 hidden" id="pagination-container">
                 <button onclick="prevPage()"
                     class="text-[#ababab] hover:text-[#1E1D57] transition-colors duration-300 ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"
@@ -79,13 +336,6 @@
                         </g>
                     </svg>
                 </button>
-
-                <button id="btn1" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4]   rounded"
-                    onclick="changePage(1)">1</button>
-                <button id="btn2" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded"
-                    onclick="changePage(2)">2</button>
-                <button id="btn3" class="px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded"
-                    onclick="changePage(3)">3</button>
                 <button onclick="nextPage()" class="text-[#ababab] hover:text-[#1E1D57] transition-colors duration-300">
                     <svg class="-rotate-180" xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                         viewBox="0 0 40 40" fill="currentColor">
@@ -97,7 +347,6 @@
                         </g>
                     </svg>
                 </button>
-
             </div>
         </main>
     </div>
@@ -131,10 +380,6 @@
                 <div>
                     <p class="font-semibold text-black mb-2">Short description:</p>
                     <p id="modalDescription">
-                        Summarise what they will get from the document and also mention the kinds of support files
-                        available. Audio, video etc.
-                    </p>
-                     <p id="modalDescription">
                         Summarise what they will get from the document and also mention the kinds of support files
                         available. Audio, video etc.
                     </p>
@@ -186,7 +431,7 @@
     <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
         preserveAspectRatio="none">
         <defs>
-            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18
         58-18 88-18 58 18 88 18v44h-352z" />
         </defs>
         <g class="parallax">
@@ -200,47 +445,64 @@
 
 
 <div class="overlay-btm"></div>
+@endif
 @endsection
 
+@if(!isset($requiresAuth) || !$requiresAuth)
 @push('scripts')
-<!-- <script>
-    const gradients = [
-        "bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0]",
-        "bg-gradient-to-br from-[#0E4473] to-[#25B3D8]",
-        "bg-gradient-to-br from-[#44107A] to-[#FF1361]",
-        "bg-gradient-to-br from-[#2A0845] to-[#6441A5]",
-        "bg-gradient-to-br from-[#16222A] to-[#3A6073]",
-        "bg-gradient-to-br from-[#1E3C72] to-[#2A5298]",
-        "bg-gradient-to-br from-[#134E5E] to-[#71B280]",
-        "bg-gradient-to-br from-[#373B44] to-[#4286f4]",
-        "bg-gradient-to-br from-[#20002c] to-[#cbb4d4]"
-    ];
-
-    const cardsData = Array.from({ length: 36 }, (_, i) => ({
-        title: `Title of guide or document can go here over multiple line here`,
-        publisher: "Publisher name here",
-        type: ["Guide", "Video", "Podcast", "Case Study"][i % 4],
-        gradient: gradients[i % gradients.length],
-        icon: ["book", "video", "mic", "lightbulb"][i % 4]
-    }));
-
+<script>
+    (function() {
+    const itemsData = @json($items);
     const cardsPerPage = 12;
     let currentPage = 1;
+    let filteredData = [...itemsData];
+    let activeFilter = 'all';
+    let activeCategoryId = null;
+
+    function formatGradient(color) {
+        // Start color is always #0E1C62, end color is dynamic based on category
+        const startColor = '#070648';
+        const endColor = color || '#2CBFA0'; // Use category color or default
+        return `background: linear-gradient(to bottom, ${startColor}, ${endColor});`;
+    }
 
     function renderCards() {
         const container = document.getElementById("card-container");
+        const noDataMessage = document.getElementById("no-data-message");
+        const paginationContainer = document.getElementById("pagination-container");
+
         container.innerHTML = "";
+
+        // Show/hide no data message and pagination
+        if (filteredData.length === 0) {
+            noDataMessage.classList.remove("hidden");
+            if (paginationContainer) {
+                paginationContainer.classList.add("hidden");
+            }
+            return;
+        } else {
+            noDataMessage.classList.add("hidden");
+            if (paginationContainer) {
+                paginationContainer.classList.remove("hidden");
+            }
+        }
+
         const start = (currentPage - 1) * cardsPerPage;
         const end = start + cardsPerPage;
-        const visibleCards = cardsData.slice(start, end);
+        const visibleCards = filteredData.slice(start, end);
 
         visibleCards.forEach((card) => {
+            const gradientStyle = formatGradient(card.category_color);
+            const titleEscaped = card.title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+            const publisherEscaped = (card.publisher || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+            const descriptionEscaped = (card.short_description || card.description || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+
             container.innerHTML += `
                 <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-                    <div class="${card.gradient} text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]">
+                    <div style="${gradientStyle}" class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]">
                         <div>
                             <h3 class="font-semibold text-lg leading-snug">${card.title}</h3>
-                            <p class="text-sm mt-2 opacity-90">${card.publisher}</p>
+                            <p class="text-sm mt-2 opacity-90">${card.publisher || ''}</p>
                         </div>
                         <div class="flex items-center space-x-2 mt-12">
                             <i data-lucide="${card.icon}" class="w-4 h-4"></i>
@@ -248,17 +510,45 @@
                         </div>
                     </div>
                     <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
-                        <i data-lucide="maximize-2" class="w-4 h-4 cursor-pointer" onclick="openModal('${card.title}', '${card.publisher}', '${card.type}', '${card.gradient}', '${card.icon}')"></i>
+                        <i data-lucide="maximize-2" class="w-4 h-4 cursor-pointer" onclick="openModal(${card.id})"></i>
                         <i data-lucide="download" class="w-4 h-4 cursor-pointer"></i>
                         <i data-lucide="bookmark" class="w-4 h-4 cursor-pointer"></i>
                         <i data-lucide="share-2" class="w-4 h-4 cursor-pointer"></i>
-                        
                     </div>
                 </div>`;
         });
 
+        // Update pagination
+        updatePagination();
+
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
+        }
+    }
+
+    function updatePagination() {
+        const totalPages = Math.ceil(filteredData.length / cardsPerPage);
+        const paginationContainer = document.getElementById('pagination-container');
+
+        if (!paginationContainer) return;
+
+        // Remove existing page buttons (keep prev/next)
+        const existingButtons = paginationContainer.querySelectorAll("button[id^='btn']");
+        existingButtons.forEach(btn => btn.remove());
+
+        // Add page buttons
+        const prevBtn = paginationContainer.querySelector('button[onclick="prevPage()"]');
+
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.id = `btn${i}`;
+            btn.className = `px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded`;
+            if (i === currentPage) {
+                btn.classList.add('bg-blue-600', 'text-white');
+            }
+            btn.textContent = i;
+            btn.onclick = () => changePage(i);
+            prevBtn.insertAdjacentElement('afterend', btn);
         }
     }
 
@@ -267,25 +557,45 @@
         renderCards();
         document.querySelectorAll("button[id^='btn']").forEach((btn) => {
             btn.classList.remove("bg-blue-600", "text-white");
-            btn.classList.add("bg-gray-200");
         });
         const activeBtn = document.getElementById(`btn${page}`);
         if (activeBtn) {
             activeBtn.classList.add("bg-blue-600", "text-white");
-            activeBtn.classList.remove("bg-gray-200");
         }
     }
 
-    function openModal(title, publisher, type, gradient, icon) {
+    function prevPage() {
+        if (currentPage > 1) {
+            changePage(currentPage - 1);
+        }
+    }
+
+    function nextPage() {
+        const totalPages = Math.ceil(filteredData.length / cardsPerPage);
+        if (currentPage < totalPages) {
+            changePage(currentPage + 1);
+        }
+    }
+
+    function openModal(itemId) {
+        const item = itemsData.find(i => i.id === itemId);
+        if (!item) return;
+
         const modal = document.getElementById("productModal");
         modal.classList.remove("hidden");
         modal.classList.add("flex");
-        document.getElementById("modalTitle").innerText = title;
-        document.getElementById("modalPublisher").innerText = publisher;
-        document.getElementById("modalType").innerText = type;
+        document.getElementById("modalTitle").innerText = item.title;
+        document.getElementById("modalPublisher").innerText = item.publisher || '';
+        document.getElementById("modalType").innerText = item.type;
         const colorBox = document.getElementById("modalColorBox");
-        colorBox.className = `${gradient} p-8 text-white w-full md:w-1/2 flex flex-col justify-between min-h-[360px]`;
-        document.getElementById("modalIcon").setAttribute("data-lucide", icon);
+        const gradientStyle = formatGradient(item.category_color);
+        colorBox.className = `p-8 text-white rounded-2xl w-full md:w-1/2 flex flex-col justify-between min-h-[360px]`;
+        colorBox.setAttribute('style', gradientStyle);
+        document.getElementById("modalIcon").setAttribute("data-lucide", item.icon);
+        const modalDescription = document.getElementById("modalDescription");
+        if (modalDescription) {
+            modalDescription.innerText = item.short_description || item.description || '';
+        }
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
@@ -297,25 +607,138 @@
         modal.classList.remove("flex");
     }
 
-    function toggleMenu(id) {
-        const menu = document.getElementById(id);
-        const icon = document.getElementById(`icon-${id}`);
-        if (menu.classList.contains("hidden")) {
-            menu.classList.remove("hidden");
-            icon.classList.add("rotate-180");
-        } else {
-            menu.classList.add("hidden");
-            icon.classList.remove("rotate-180");
+    function filterItems() {
+        filteredData = itemsData.filter(item => {
+            if (activeFilter === 'case_study' && item.type_value !== 'case_study') {
+                return false;
+            }
+            if (activeFilter === 'all' && activeCategoryId === null) {
+                return true;
+            }
+            if (activeCategoryId !== null && item.category_id !== activeCategoryId) {
+                return false;
+            }
+            return true;
+        });
+        currentPage = 1;
+        updateActiveFilter();
+        renderCards();
+    }
+
+    function updateActiveFilter() {
+        // Remove active class from all filter links
+        document.querySelectorAll('.filter-link').forEach(link => {
+            link.classList.remove('active');
+            // Remove active styling
+            link.classList.remove('text-[#37C6F4]');
+            const icon = link.querySelector('.material-symbols-outlined');
+            if (icon && !icon.classList.contains('arrow-right')) {
+                icon.classList.remove('text-[#37C6F4]');
+            }
+            // Reset parent li styling
+            const parentLi = link.closest('li');
+            if (parentLi) {
+                parentLi.classList.remove('border-[#37C6F4]');
+            }
+        });
+
+        // Add active class to selected filter
+        let activeLink = null;
+        if (activeFilter === 'all' && activeCategoryId === null) {
+            activeLink = document.querySelector('.filter-link[data-filter="all"]');
+        } else if (activeFilter === 'case_study') {
+            activeLink = document.querySelector('.filter-link[data-filter="case_study"]');
+        } else if (activeCategoryId !== null) {
+            activeLink = document.querySelector(`.filter-link[data-category-id="${activeCategoryId}"]`);
+        }
+
+        if (activeLink) {
+            activeLink.classList.add('active', 'text-[#37C6F4]');
+            const icon = activeLink.querySelector('.material-symbols-outlined');
+            if (icon && !icon.classList.contains('arrow-right')) {
+                icon.classList.add('text-[#37C6F4]');
+            }
+            // Update parent li border color
+            const parentLi = activeLink.closest('li');
+            if (parentLi) {
+                parentLi.classList.add('border-[#37C6F4]');
+            }
         }
     }
 
-    document.addEventListener("DOMContentLoaded", () => {
+    // Filter event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterLinks = document.querySelectorAll('.filter-link');
+        filterLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const filter = this.getAttribute('data-filter');
+                const categoryId = this.getAttribute('data-category-id');
+
+                if (filter) {
+                    activeFilter = filter;
+                    activeCategoryId = null;
+                } else if (categoryId) {
+                    activeCategoryId = parseInt(categoryId);
+                    activeFilter = 'all';
+                }
+
+                filterItems();
+            });
+        });
+
+        // Search functionality - attach to both mobile and desktop search inputs
+        const searchInputs = document.querySelectorAll('.resources-search-input');
+        searchInputs.forEach(searchInput => {
+            searchInput.addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase().trim();
+                if (searchTerm === '') {
+                    // Reset to current filter when search is cleared
+                    filterItems();
+                } else {
+                    // Apply search on top of current filter
+                    filteredData = itemsData.filter(item => {
+                        // First check if item matches current filter
+                        let matchesFilter = true;
+                        if (activeFilter === 'case_study' && item.type_value !== 'case_study') {
+                            matchesFilter = false;
+                        } else if (activeFilter === 'all' && activeCategoryId === null) {
+                            matchesFilter = true;
+                        } else if (activeCategoryId !== null && item.category_id !== activeCategoryId) {
+                            matchesFilter = false;
+                        }
+
+                        if (!matchesFilter) {
+                            return false;
+                        }
+
+                        // Then check if item matches search term
+                        const matchesSearch = item.title.toLowerCase().includes(searchTerm) ||
+                            (item.publisher && item.publisher.toLowerCase().includes(searchTerm)) ||
+                            (item.description && item.description.toLowerCase().includes(searchTerm)) ||
+                            (item.short_description && item.short_description.toLowerCase().includes(searchTerm));
+
+                        return matchesSearch;
+                    });
+                    currentPage = 1;
+                    renderCards();
+                }
+            });
+        });
+
+        // Initialize active state on page load
+        updateActiveFilter();
         renderCards();
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
     });
-</script> -->
+
+    // Expose functions to global scope for onclick handlers
+    window.openModal = openModal;
+    window.closeModal = closeModal;
+    window.prevPage = prevPage;
+    window.nextPage = nextPage;
+    window.changePage = changePage;
+    })();
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const toggleBtn = document.querySelector(".search-filter-open-close");
@@ -356,3 +779,4 @@
 
 </script>
 @endpush
+@endif

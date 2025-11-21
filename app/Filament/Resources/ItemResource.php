@@ -102,9 +102,9 @@ class ItemResource extends Resource
                 Forms\Components\Section::make('Media')
                     ->schema([
                         CuratorPicker::make('featured_image_id')
-                            ->label('Featured Image')
+                            ->label('Media')
                             ->relationship('featuredImage', 'id')
-                            ->buttonLabel('Select Featured Image')
+                            ->buttonLabel('Select Media')
                             ->listDisplay(true)
                             ->columnSpanFull(),
                     ]),
@@ -187,7 +187,7 @@ class ItemResource extends Resource
                     ->searchable(),
 
                 CuratorColumn::make('featured_image_id')
-                    ->label('Featured Image'),
+                    ->label('Media'),
 
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),

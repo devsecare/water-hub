@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\ImageGeneratorController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\ResourcesController;
 use Illuminate\Support\Facades\Route;
 
 // Public routes
@@ -15,9 +16,7 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/resources', function () {
-    return view('resources');
-})->name('resources');
+Route::get('/resources', [ResourcesController::class, 'index'])->name('resources');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -49,10 +48,7 @@ Route::get('/my-account', function () {
 
 // Authentication routes
 Route::middleware('guest')->group(function () {
-    Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::post('/register', [RegisterController::class, 'register']);
-
-       Route::get('/register', function () {
+    Route::get('/register', function () {
         return view('auth.register');
     })->name('register');
 
@@ -69,12 +65,48 @@ Route::middleware('guest')->group(function () {
 
         if (\Illuminate\Support\Facades\Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('/map');
+            // Check if request is AJAX
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json(['success' => true, 'redirect' => route('resources')]);
+            }
+            return redirect()->intended('/resources');
+        }
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json([
+                'success' => false,
+                'errors' => ['email' => 'The provided credentials do not match our records.']
+            ], 422);
         }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    });
+    
+    Route::post('/register', function (\Illuminate\Http\Request $request) {
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'organisation' => 'nullable|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+        ]);
+
+        $user = \App\Models\User::create([
+            'name' => $request->first_name, // Keep name for compatibility
+            'first_name' => $request->first_name,
+            'organisation' => $request->organisation,
+            'email' => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+        ]);
+
+        \Illuminate\Support\Facades\Auth::login($user);
+
+        if ($request->ajax() || $request->wantsJson()) {
+            return response()->json(['success' => true, 'redirect' => route('resources')]);
+        }
+
+        return redirect()->route('resources');
     });
 });
 
