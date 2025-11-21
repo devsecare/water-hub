@@ -103,19 +103,36 @@
     </svg>
 </div>
 <!-- hero footer end  -->
+<!-- A step-by-step guide to water secton start  -->
+<section class="px-6 lg:px-16">
+    <div class="max-w-7xl mx-auto py-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#1E1D57] leading-tight">
+            A step-by-step guide to water<br class="hidden md:block">
+            PPP implementation
+        </h1>
+
+        <p class="mt-6 text-[#000000] text-[16px] max-w-[922px] leading-relaxed">
+            Every successful water PPP follows a structured path from initial decision
+            through to contract signing. This diagram maps the essential phases – showing
+            you what happens when, who needs to be involved, and the key activities at
+            each stage. Whether you’re exploring PPPs for the first time or planning your next
+            project, use this as your roadmap.
+        </p>
+    </div>
+</section>
+<!-- A step-by-step guide to water secton start  -->
 
 <!-- 3 image section start  -->
-<section
+<!-- <section
     class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 p-6 lg:p-16 overflow-hidden">
-    <!-- LEFT IMAGES (always side by side) -->
+  >
     <div class="flex gap-4 w-full md:max-h-[400px] lg:max-h-[500px] lg:max-w-[606px] flex-shrink-0">
-        <!-- Left tall image -->
+
         <div class="flex-1 rounded-2xl overflow-hidden">
             <img src="{{ asset('images/rundenk_33646_macro_shots_of_flowing_water_--ar_169_--raw_--sre_e0f0745b-99e9-436a-b375-ff2018445efb.jpg') }}"
                 alt="Water Image" class="w-full h-full object-cover" />
         </div>
 
-        <!-- Right stacked images -->
         <div class="flex lg:max-w-[287px] flex-col gap-4 flex-1">
             <div class="rounded-2xl overflow-hidden flex-1">
                 <img src="{{ asset('images/jacek-dylag-Vve7XkiUq_Y-unsplash.jpg') }}" alt="Faucet Image"
@@ -129,7 +146,7 @@
         </div>
     </div>
 
-    <!-- RIGHT TEXT -->
+
     <div class="w-full lg:max-w-lg flex flex-col justify-center">
         <h2 class="text-4xl md:text-4xl font-bold text-[#1E1B4B] mb-4">
             Are you lost in a maze of <br class="hidden md:block"> PPP documentation?
@@ -150,15 +167,13 @@
             place.
         </p>
 
-        <!-- <a href="{{ route('about') }}" class="text-[#E8960F] flex text-xl font-semibold hover:underline">
-            Learn more about water PPPs <span> <img src="{{ asset('images/right-icon.svg') }}" alt=""></span>
-        </a> -->
+   
         <a href="{{ route('about') }}"
             class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold hover:text-[#1E1D57] hover:underline">
 
             Learn more about water PPPs
 
-            <!-- SVG Icon -->
+
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                 class="ml-2 transition-all duration-200 fill-[#37C6F4] group-hover:fill-[#1E1D57]">
                 <rect width="24" height="24" fill="none"></rect>
@@ -167,12 +182,12 @@
         </a>
 
     </div>
-</section>
+</section> -->
 <!-- 3 image section end   -->
 
 <!-- from complex document start  -->
 <section
-    class="bg-gradient-to-r from-[#37C6F4] to-[#15769A] relative bg-[length:auto] opacity-100 text-black px-6 md:px-16 py-16">
+    class="bg-gradient-to-r from-[#37C6F4] to-[#15769A] relative bg-[length:auto] opacity-100 text-black px-6 lg:px-16 py-16">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722"
         class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full">
         <path id="Path_435" data-name="Path 435"
@@ -383,7 +398,7 @@
 <!-- slider infinite end -->
 
 <!-- wave Section -->
-<section class="relative bg-cover bg-center  bg-no-repeat text-white overflow-hidden"
+<section class="relative bg-cover bg-center px-6 lg:px-16  bg-no-repeat text-white overflow-hidden"
     style="background-image: url('{{ asset('images/bitmapbg.jpg') }}');">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722"
         class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full z-50">
@@ -401,7 +416,7 @@
     <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
 
     <!-- Content -->
-    <div class="relative max-w-7xl mx-auto px-6 py-32 md:py-40 flex flex-col justify-center">
+    <div class="relative max-w-7xl mx-auto py-32 md:py-40 flex flex-col justify-center">
         <div class="max-w-2xl">
             <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
                 Gain a better understanding<br>
@@ -420,12 +435,12 @@
                 View Map
             </a>
             @else
-           
+
             <a href="{{ route('register') }}"
                 class="inline-block bg-[#3DB8FF] text-[#0F172A] font-semibold text-lg w-[145px] h-[40px] py-2 px-10 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
                 Register
             </a>
-          
+
 
             @endauth
         </div>
