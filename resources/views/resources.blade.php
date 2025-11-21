@@ -512,7 +512,7 @@
                     <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
                         <i data-lucide="maximize-2" class="w-4 h-4 cursor-pointer" onclick="openModal(${card.id})"></i>
                         <i data-lucide="download" class="w-4 h-4 cursor-pointer"></i>
-                        <i data-lucide="bookmark" class="w-4 h-4 cursor-pointer"></i>
+                        <i data-lucide="bookmark" class="w-4 h-4 cursor-pointer bookmark-icon ${card.is_bookmarked ? 'fill-[#37C6F4]' : ''}" data-item-id="${card.id}" onclick="toggleBookmark(${card.id}, this)"></i>
                         <i data-lucide="share-2" class="w-4 h-4 cursor-pointer"></i>
                     </div>
                 </div>`;
@@ -731,12 +731,13 @@
         renderCards();
     });
 
-    // Expose functions to global scope for onclick handlers
+    // Expose functions and data to global scope for onclick handlers
     window.openModal = openModal;
     window.closeModal = closeModal;
     window.prevPage = prevPage;
     window.nextPage = nextPage;
     window.changePage = changePage;
+    window.itemsData = itemsData; // Expose itemsData for bookmark function
     })();
 </script>
 <script>
@@ -777,6 +778,54 @@
         });
     });
 
+    // Bookmark functionality
+    window.toggleBookmark = async function(itemId, element) {
+        const isAuthenticated = @json(auth()->check());
+        if (!isAuthenticated) {
+            alert('Please login to bookmark items');
+            return;
+        }
+
+        try {
+            const response = await fetch('{{ route('bookmark.toggle') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ item_id: itemId })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Update icon color
+                if (data.status === 'added') {
+                    element.classList.add('fill-[#37C6F4]');
+                    // Update the item's bookmark status in the data
+                    const item = window.itemsData.find(i => i.id === itemId);
+                    if (item) {
+                        item.is_bookmarked = true;
+                    }
+                } else if (data.status === 'removed') {
+                    element.classList.remove('fill-[#37C6F4]');
+                    // Update the item's bookmark status in the data
+                    const item = window.itemsData.find(i => i.id === itemId);
+                    if (item) {
+                        item.is_bookmarked = false;
+                    }
+                }
+                console.log(data.message);
+            } else {
+                console.error('Bookmark toggle failed:', data);
+                alert('Failed to toggle bookmark: ' + (data.message || 'Unknown error'));
+            }
+        } catch (error) {
+            console.error('Error toggling bookmark:', error);
+            alert('An error occurred while toggling bookmark.');
+        }
+    };
 </script>
 @endpush
 @endif

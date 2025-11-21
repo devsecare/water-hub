@@ -29,11 +29,14 @@ class ResourcesController extends Controller
             ->get();
 
         // Get all active items with their relationships
+        $user = auth()->user();
+        $bookmarkedItemIds = $user ? $user->bookmarks()->pluck('item_id')->toArray() : [];
+
         $items = Item::where('is_active', true)
             ->with(['category.parent', 'featuredImage'])
             ->orderBy('created_at', 'desc')
             ->get()
-            ->map(function ($item) {
+            ->map(function ($item) use ($bookmarkedItemIds) {
                 return [
                     'id' => $item->id,
                     'title' => $item->title,
@@ -48,6 +51,7 @@ class ResourcesController extends Controller
                     'category_name' => $item->category ? $item->category->name : '',
                     'category_color' => $item->category ? $item->category->color : '#3B82F6',
                     'featured_image_url' => $item->featuredImage ? $item->featuredImage->url : null,
+                    'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
                 ];
             });
 

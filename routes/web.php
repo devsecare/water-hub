@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\ImageGeneratorController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\ResourcesController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,9 +44,7 @@ Route::get('/case-study', function () {
     return view('case_study');
 })->name('casestudy');
 
-Route::get('/my-account', function () {
-    return view('my_account');
-})->name('myaccount');
+Route::get('/my-account', [MyAccountController::class, 'index'])->name('myaccount')->middleware('auth');
 
 // Authentication routes
 Route::middleware('guest')->group(function () {
@@ -188,6 +188,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/files/{file}/signed-url', [FileDownloadController::class, 'getSignedUrl'])
         ->name('files.signed-url')
         ->middleware('throttle:20,1');
+
+    // Bookmarks
+    Route::post('/bookmark/toggle', [BookmarkController::class, 'toggle'])->name('bookmark.toggle');
 });
 
 // Public image generation (for featured images)

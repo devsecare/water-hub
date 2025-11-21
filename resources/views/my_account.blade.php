@@ -4,17 +4,21 @@
 
 @section('content')
 
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <!-- HEADER SECTION -->
 <section class="bg-gradient-to-r from-[#070648] to-[#2C75BE] text-white px-6 lg:px-16">
   <div class="max-w-7xl mx-auto py-20 sm:py-24 lg:py-28">
     <p class="text-xl text-[#37C6F4] font-semibold mb-2">MY ACCOUNT</p>
     <h1 class="text-3xl font-appetite sm:text-5xl font-bold leading-tight max-w-3xl">
-      Hello <span class="text-blue-400">Username</span>
+      Hello <span class="text-blue-400">{{ $user->first_name ?? $user->name }}</span>
     </h1>
     <p class="text-lg font-appetite font-semibold mt-2 mb-2">
-      (Not Username? <a href="#" class="text-blue-400 hover:underline">Sign out</a>)
+      (Not {{ $user->first_name ?? $user->name }}? <a href="{{ route('logout') }}" class="text-blue-400 hover:underline" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>)
     </p>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
   </div>
 </section>
 
@@ -37,41 +41,23 @@
           </svg> My saved content
         </label>
 
-        <label class="flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox"
-            class="w-5 h-5 rounded border border-gray-400 bg-white checked:bg-white checked:border-gray-400 checked:ring-0 focus:ring-0">
-          <span class="text-[#1E1D57] text-[16px] font-semibold">Identifying PPP opportunities</span>
-        </label>
-
-        <label class="flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox"
-            class="w-5 h-5 rounded border border-gray-400 bg-white checked:bg-white checked:border-gray-400 checked:ring-0 focus:ring-0">
-          <span class="text-[#1E1D57] text-[16px] font-semibold">Preparing your project</span>
-        </label>
-
-        <label class="flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox" checked=""
-            class="w-5 h-5 rounded border border-gray-400 bg-white checked:bg-white checked:border-gray-400 checked:ring-0 focus:ring-0">
-          <span class="text-[#1E1D57] text-[16px] font-semibold">Implementation</span>
-        </label>
-
-        <label class="flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox"
-            class="w-5 h-5 rounded border border-gray-400 bg-white checked:bg-white checked:border-gray-400 checked:ring-0 focus:ring-0">
-          <span class="text-[#1E1D57] text-[16px] font-semibold">Management</span>
-        </label>
-
-        <label class="flex items-center space-x-2 cursor-pointer">
-          <input type="checkbox"
-            class="w-5 h-5 rounded border border-gray-400 bg-white checked:bg-white checked:border-gray-400 checked:ring-0 focus:ring-0">
-          <span class="text-[#1E1D57] text-[16px] font-semibold">Case studies</span>
-        </label>
+        @if($categories->count() > 0)
+          @foreach($categories as $category)
+            <label class="flex items-center space-x-2 cursor-pointer category-filter-item" data-category-id="{{ $category['id'] }}">
+              <input type="checkbox" value="{{ $category['id'] }}"
+                class="category-checkbox w-5 h-5 rounded border border-gray-400 bg-white checked:bg-white checked:border-gray-400 checked:ring-0 focus:ring-0">
+              <span class="text-[#1E1D57] text-[16px] font-semibold">{{ $category['name'] }}</span>
+            </label>
+          @endforeach
+        @else
+          <p class="text-[#868686] text-sm">No categories available</p>
+        @endif
 
       </div>
       <div class="w-full mt-6">
         <label class="block text-lg font-semibold text-[#000000] mb-3">Search</label>
         <div class="relative">
-          <input type="text" placeholder="Search…" class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700 
+          <input type="text" id="my-account-search" placeholder="Search…" class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700 
                    placeholder-gray-400 focus:ring-0 focus:outline-none">
 
           <!-- Search Icon -->
@@ -100,7 +86,7 @@
         </a>
 
         <!-- Sign out link -->
-        <a href="#" class="flex items-center gap-3  py-2 rounded-md  ">
+        <a href="{{ route('logout') }}" class="flex items-center gap-3  py-2 rounded-md  " onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <!-- Sign out SVG -->
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none">
             <rect width="24" height="24" fill="none"></rect>
@@ -115,413 +101,46 @@
 
     <!-- MAIN CONTENT -->
     <main class="flex-1 p-6 lg:px-0">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-
-        <!-- CARD TEMPLATE -->
-
-        <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-          <div
-            class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-            <div>
-              <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                multiple line here</h3>
-              <p class="text-sm mt-2 mb-8 opacity-90">Publisher name here</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="bookmarked-items-container">
+        @if($bookmarkedItems->count() > 0)
+          @foreach($bookmarkedItems as $item)
+            <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between item-card" data-category-id="{{ $item['category_id'] }}" data-title="{{ strtolower($item['title']) }}" data-publisher="{{ strtolower($item['publisher'] ?? '') }}" data-description="{{ strtolower($item['short_description'] ?? $item['description'] ?? '') }}">
+              <div style="background: linear-gradient(to bottom, #070648, {{ $item['category_color'] ?? '#2CBFA0' }});" class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]">
+                <div>
+                  <h3 class="font-semibold text-lg leading-snug">{{ $item['title'] }}</h3>
+                  <p class="text-sm mt-2 mb-8 opacity-90">{{ $item['publisher'] ?? '' }}</p>
+                </div>
+                <div class="flex items-center space-x-2 mt-12">
+                  <i data-lucide="{{ $item['icon'] }}" class="w-4 h-4"></i>
+                  <span class="text-sm">{{ $item['type'] ?? 'Guide' }}</span>
+                </div>
+              </div>
+              <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer" onclick="openItemModal({{ $item['id'] }})">
+                  <path d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z"></path>
+                  <rect width="24" height="24" fill="none"></rect>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="fill-[#37C6F4] transition-colors duration-200 cursor-pointer" onclick="toggleBookmark({{ $item['id'] }}, this)">
+                  <path d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z"></path>
+                  <rect width="24" height="24" fill="none"></rect>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
+                  <path d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z"></path>
+                  <rect width="24" height="24" fill="none"></rect>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
+                  <path d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z"></path>
+                  <rect width="24" height="24" fill="none"></rect>
+                </svg>
+              </div>
             </div>
-            <div class="flex items-center space-x-2 mt-12">
-              <svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path id="Path_401" data-name="Path 401"
-                  d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                  fill="#fff"></path>
-                <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none"></rect>
-              </svg>
-
-
-              <span class="text-lg">Management</span>
-            </div>
+          @endforeach
+        @else
+          <div class="col-span-full text-center py-12">
+            <p class="text-[#868686] text-lg">No bookmarked items yet.</p>
+            <a href="{{ route('resources') }}" class="text-[#37C6F4] hover:underline mt-4 inline-block">Browse resources</a>
           </div>
-          <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-          </div>
-        </div>
-        <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-          <div
-            class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-            <div>
-              <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                multiple line here</h3>
-              <p class="text-sm mt-2 mb-8 opacity-90">Publisher name here</p>
-            </div>
-            <div class="flex items-center space-x-2 mt-12">
-              <svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path id="Path_401" data-name="Path 401"
-                  d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                  fill="#fff"></path>
-                <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none"></rect>
-              </svg>
-
-
-              <span class="text-lg">Management</span>
-            </div>
-          </div>
-          <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-          </div>
-        </div>
-        <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-          <div
-            class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-            <div>
-              <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                multiple line here</h3>
-              <p class="text-sm mt-2 mb-8 opacity-90">Publisher name here</p>
-            </div>
-            <div class="flex items-center space-x-2 mt-12">
-              <svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path id="Path_401" data-name="Path 401"
-                  d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                  fill="#fff"></path>
-                <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none"></rect>
-              </svg>
-
-
-              <span class="text-lg">Management</span>
-            </div>
-          </div>
-          <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-          </div>
-        </div>
-        <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-          <div
-            class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-            <div>
-              <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                multiple line here</h3>
-              <p class="text-sm mt-2 mb-8 opacity-90">Publisher name here</p>
-            </div>
-            <div class="flex items-center space-x-2 mt-12">
-              <svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path id="Path_401" data-name="Path 401"
-                  d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                  fill="#fff"></path>
-                <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none"></rect>
-              </svg>
-
-
-              <span class="text-lg">Management</span>
-            </div>
-          </div>
-          <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-          </div>
-        </div>
-        <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-          <div
-            class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-            <div>
-              <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                multiple line here</h3>
-              <p class="text-sm mt-2 mb-8 opacity-90">Publisher name here</p>
-            </div>
-            <div class="flex items-center space-x-2 mt-12">
-              <svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path id="Path_401" data-name="Path 401"
-                  d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                  fill="#fff"></path>
-                <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none"></rect>
-              </svg>
-
-
-              <span class="text-lg">Management</span>
-            </div>
-          </div>
-          <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-          </div>
-        </div>
-        <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-          <div
-            class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-            <div>
-              <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                multiple line here</h3>
-              <p class="text-sm mt-2 mb-8 opacity-90">Publisher name here</p>
-            </div>
-            <div class="flex items-center space-x-2 mt-12">
-              <svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path id="Path_401" data-name="Path 401"
-                  d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                  fill="#fff"></path>
-                <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none"></rect>
-              </svg>
-
-
-              <span class="text-lg">Management</span>
-            </div>
-          </div>
-          <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-          </div>
-        </div>
-        <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-          <div
-            class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-            <div>
-              <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                multiple line here</h3>
-              <p class="text-sm mt-2 mb-8 opacity-90">Publisher name here</p>
-            </div>
-            <div class="flex items-center space-x-2 mt-12">
-              <svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                <path id="Path_401" data-name="Path 401"
-                  d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                  fill="#fff"></path>
-                <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none"></rect>
-              </svg>
-
-
-              <span class="text-lg">Management</span>
-            </div>
-          </div>
-          <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-              class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-              <path
-                d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z">
-              </path>
-              <rect width="24" height="24" fill="none"></rect>
-            </svg>
-
-          </div>
-        </div>
-
-
-
-        <!--card end  -->
+        @endif
       </div>
     </main>
 
@@ -546,5 +165,168 @@
   </svg>
 </div>
 
+
+@push('scripts')
+<script>
+    (function() {
+    // Initialize Lucide icons function
+    function initializeIcons() {
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    }
+
+    // Initialize icons when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(initializeIcons, 100); // Small delay to ensure Lucide is loaded
+        });
+    } else {
+        setTimeout(initializeIcons, 100); // Small delay to ensure Lucide is loaded
+    }
+
+    // Filtering functionality
+    const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
+    const searchInput = document.getElementById('my-account-search');
+
+    function filterItems() {
+        // Re-query item cards to get current state (in case cards were removed)
+        const itemCards = document.querySelectorAll('.item-card');
+        const noDataMessage = document.querySelector('#bookmarked-items-container .col-span-full');
+
+        // Get selected category IDs
+        const selectedCategories = Array.from(categoryCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => parseInt(checkbox.value));
+
+        // Get search term
+        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+        let visibleCount = 0;
+
+        itemCards.forEach(card => {
+            const categoryId = parseInt(card.getAttribute('data-category-id'));
+            const title = card.getAttribute('data-title') || '';
+            const publisher = card.getAttribute('data-publisher') || '';
+            const description = card.getAttribute('data-description') || '';
+
+            // Check category filter
+            const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(categoryId);
+
+            // Check search filter
+            const matchesSearch = searchTerm === '' || 
+                title.includes(searchTerm) || 
+                publisher.includes(searchTerm) || 
+                description.includes(searchTerm);
+
+            if (matchesCategory && matchesSearch) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Show/hide no data message
+        if (noDataMessage) {
+            if (visibleCount === 0 && itemCards.length > 0) {
+                // Items exist but are filtered out
+                if (!document.getElementById('filtered-no-data')) {
+                    const container = document.getElementById('bookmarked-items-container');
+                    const messageDiv = document.createElement('div');
+                    messageDiv.id = 'filtered-no-data';
+                    messageDiv.className = 'col-span-full text-center py-12';
+                    messageDiv.innerHTML = `
+                        <p class="text-[#868686] text-lg">No items match your filters.</p>
+                    `;
+                    container.appendChild(messageDiv);
+                }
+            } else {
+                const filteredMessage = document.getElementById('filtered-no-data');
+                if (filteredMessage) {
+                    filteredMessage.remove();
+                }
+            }
+        }
+        
+        // Re-initialize icons after filtering
+        initializeIcons();
+    }
+
+    // Add event listeners
+    categoryCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterItems);
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', filterItems);
+    }
+
+    // Expose filterItems and initializeIcons to global scope
+    window.filterItems = filterItems;
+    window.initializeIcons = initializeIcons;
+
+    // Placeholder for openItemModal - implement as needed
+    function openItemModal(itemId) {
+        console.log('Opening modal for item:', itemId);
+        // Implement modal logic here, e.g., fetch item details and display
+    }
+    window.openItemModal = openItemModal; // Expose to global scope
+
+    // Bookmark toggle function for my account page
+    async function toggleBookmark(itemId, iconElement) {
+        try {
+            const response = await fetch('{{ route('bookmark.toggle') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ item_id: itemId })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                console.log(data.message);
+                if (data.status === 'removed') {
+                    // If bookmark is removed from my_account page, remove the card
+                    const cardElement = iconElement.closest('.bg-white.shadow-md.p-4.rounded-\\[25px\\]');
+                    if (cardElement) {
+                        cardElement.remove();
+                        // Re-filter items after removal
+                        filterItems();
+                    }
+                    // Check if no items are left and display message
+                    const container = document.getElementById('bookmarked-items-container');
+                    if (container) {
+                        // Check if container has any direct child divs (excluding the "no items" message)
+                        const childDivs = Array.from(container.children).filter(child => 
+                            child.tagName === 'DIV' && !child.classList.contains('col-span-full')
+                        );
+                        if (childDivs.length === 0) {
+                            container.innerHTML = `
+                                <div class="col-span-full text-center py-12">
+                                    <p class="text-[#868686] text-lg">No bookmarked items yet.</p>
+                                    <a href="{{ route('resources') }}" class="text-[#37C6F4] hover:underline mt-4 inline-block">Browse resources</a>
+                                </div>
+                            `;
+                        }
+                    }
+                }
+                // No 'added' state expected on my_account page, as items are already bookmarked
+            } else {
+                console.error('Error:', data.message);
+                alert('Failed to toggle bookmark: ' + data.message);
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            alert('An error occurred while toggling bookmark.');
+        }
+    }
+    window.toggleBookmark = toggleBookmark; // Expose to global scope
+    })();
+</script>
+@endpush
 
 @endsection
