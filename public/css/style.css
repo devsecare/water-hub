@@ -1,159 +1,157 @@
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+}
 
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-Heavy.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-Bold.otf') format('opentype');
-      font-weight: 700;
-      font-style: normal;
-    }
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-HeavyItalic.otf") format("opentype");
+  font-weight: 800;
+  font-style: italic;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-BoldItalic.otf') format('opentype');
-      font-weight: 700;
-      font-style: italic;
-    }
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-Heavy.otf') format('opentype');
-      font-weight: 800;
-      font-style: normal;
-    }
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-HeavyItalic.otf') format('opentype');
-      font-weight: 800;
-      font-style: italic;
-    }
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-Italic.otf') format('opentype');
-      font-weight: 400;
-      font-style: italic;
-    }
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-Light.otf') format('opentype');
-      font-weight: 300;
-      font-style: normal;
-    }
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-MediumItalic.otf")
+    format("opentype");
+  font-weight: 500;
+  font-style: italic;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-LightItalic.otf') format('opentype');
-      font-weight: 300;
-      font-style: italic;
-    }
+@font-face {
+  font-family: "AppetitePro";
+  src: url("/fonts/Appetite pro/AppetitePro-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-Medium.otf') format('opentype');
-      font-weight: 500;
-      font-style: normal;
-    }
+.font-appetite {
+  font-family: "AppetitePro", sans-serif;
+  font-style: normal;
+  line-height: 1.1 !important;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-MediumItalic.otf') format('opentype');
-      font-weight: 500;
-      font-style: italic;
-    }
+body {
+  font-family: "Public Sans", sans-serif;
+}
 
-    @font-face {
-      font-family: 'AppetitePro';
-      src: url('/fonts/Appetite pro/AppetitePro-Regular.otf') format('opentype');
-      font-weight: 400;
-      font-style: normal;
-    }
+.bg-overlay {
+  background: transparent url("/images/Bitmap.jpg") 0% 0% no-repeat padding-box;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0.15;
+}
 
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
 
+.waves-animation {
+  position: relative;
+  text-align: center;
+  background: linear-gradient(
+    60deg,
+    rgba(198, 198, 208, 0.49) 0%,
+    rgba(55, 198, 244, 0.49) 100%
+  );
+  color: white;
+  margin-bottom: -5px;
+  /* removes any visible line gap */
+}
 
-    .font-appetite {
-      font-family: 'AppetitePro', sans-serif;
-      font-style: normal;
-      line-height: 1.1 !important;
-    }
+.waves {
+  position: relative;
+  width: 100%;
+  height: 15vh;
+  margin-bottom: -7px;
+  min-height: 100px;
+  max-height: 150px;
+  transform: rotate(180deg);
+}
 
-    body {
-      font-family: 'Public Sans', sans-serif;
-    }
+.parallax > use {
+  animation: move-forever 15s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
 
-    .bg-overlay {
-      background: transparent url('/images/Bitmap.jpg') 0% 0% no-repeat padding-box;
-      background-size: cover;
-      background-position: center center;
-      opacity: 0.15;
-    }
+.parallax > use:nth-child(1) {
+  animation-delay: -1s;
+  animation-duration: 4s;
+}
 
+.parallax > use:nth-child(2) {
+  animation-delay: -2s;
+  animation-duration: 6s;
+}
 
+.parallax > use:nth-child(3) {
+  animation-delay: -3s;
+  animation-duration: 8s;
+}
 
-    @import url(//fonts.googleapis.com/css?family=Lato:300:400);
+.parallax > use:nth-child(4) {
+  animation-delay: -4s;
+  animation-duration: 10s;
+}
 
-    .waves-animation {
-      position: relative;
-      text-align: center;
-      background: linear-gradient(60deg, rgba(198, 198, 208, 0.49) 0%, rgba(55, 198, 244, 0.49) 100%);
-      color: white;
-      margin-bottom: -5px;
-      /* removes any visible line gap */
-    }
+.page-hero-section-overlay:after {
+  content: "";
+  background-color: hsl(241deg 50% 23% / 39%);
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+}
 
-    .waves {
-      position: relative;
-      width: 100%;
-      height: 15vh;
-      margin-bottom: -7px;
-      min-height: 100px;
-      max-height: 150px;
-      transform: rotate(180deg);
-    }
+body.no-scroll {
+  overflow-y: hidden;
+}
 
-    .parallax>use {
-      animation: move-forever 15s cubic-bezier(.55, .5, .45, .5) infinite;
-    }
-
-    .parallax>use:nth-child(1) {
-      animation-delay: -1s;
-      animation-duration: 4s;
-    }
-
-    .parallax>use:nth-child(2) {
-      animation-delay: -2s;
-      animation-duration: 6s;
-    }
-
-    .parallax>use:nth-child(3) {
-      animation-delay: -3s;
-      animation-duration: 8s;
-    }
-
-    .parallax>use:nth-child(4) {
-      animation-delay: -4s;
-      animation-duration: 10s;
-    }
-
-    .page-hero-section-overlay:after {
-      content: "";
-      background-color: hsl(241deg 50% 23% / 39%);
-      height: 100%;
-      width: 100%;
-      z-index: 1;
-      position: absolute;
-      top: 0;
-    }
-
-    body.no-scroll {
-      overflow-y: hidden;
-    }
-
-    body {
-      overflow-x: hidden;
-    }
+body {
+  overflow-x: hidden;
+}
 
 .category-with-sub .sub-cat {
   max-height: 0;
@@ -170,7 +168,7 @@
   display: block;
   height: 17px;
   width: 1px;
-  background-color: #1E1D57;
+  background-color: #1e1d57;
   position: absolute;
   top: 100%;
   left: 18px;
@@ -184,8 +182,9 @@
 .filter-middle > ul > li.active span.arrow-right {
   transform: rotate(90deg);
 }
-.filter-middle > ul > li.active, .filter-middle > ul > li:hover {
-  color: #37C6F4;
+.filter-middle > ul > li.active,
+.filter-middle > ul > li:hover {
+  color: #37c6f4;
 }
 
 .category-with-sub.active .sub-cat {
@@ -201,36 +200,37 @@ ul.sub-cat {
   padding-left: 32px;
 }
 
-    .mob-hamburger {
-      width: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-  }
-  .mob-hamburger span.ham-line {
-      width: 100%;
-      display: block;
-      height: 2px;
-      background-color: #000;
-  }
-  .mob-hamburger:hover span.ham-line, .mob-hamburger.active span.ham-line {
-    background-color: #37C6F4;
-    transition: all 0.3s linear;
+.mob-hamburger {
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
-  .mob-hamburger.active span.ham-line.line2 {
-    margin-bottom: 4px;
+.mob-hamburger span.ham-line {
+  width: 100%;
+  display: block;
+  height: 2px;
+  background-color: #000;
+}
+.mob-hamburger:hover span.ham-line,
+.mob-hamburger.active span.ham-line {
+  background-color: #37c6f4;
+  transition: all 0.3s linear;
+}
+.mob-hamburger.active span.ham-line.line2 {
+  margin-bottom: 4px;
 }
 
 .mob-menu > a {
   padding: 15px 0;
-  border-bottom: 1px solid #F2F2F2;
+  border-bottom: 1px solid #f2f2f2;
   /* font-size: 16px; */
 }
 
 .acc-login-reg {
-  border-bottom: 1px solid #F2F2F2;
+  border-bottom: 1px solid #f2f2f2;
   padding: 10px 0;
-  border-top: 1px solid #F2F2F2;
+  border-top: 1px solid #f2f2f2;
 }
 
 .overlay-btm {
@@ -238,7 +238,7 @@ ul.sub-cat {
   height: 100%;
   width: 100%;
   top: 0;
-  background-color: #16181E;
+  background-color: #16181e;
   z-index: 0;
   filter: blur(5px) brightness(0.5) opacity(0.29);
   backdrop-filter: blur(5px);
@@ -248,54 +248,61 @@ ul.sub-cat {
   display: block;
 }
 
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
 
-    @keyframes move-forever {
-      0% {
-        transform: translate3d(-90px, 0, 0);
-      }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
 
-      100% {
-        transform: translate3d(85px, 0, 0);
-      }
-    }
+@media (max-width: 768px) {
+  .waves {
+    height: 40px;
+    min-height: 40px;
+  }
+}
+/* slider infinite */
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
 
-    @media (max-width: 768px) {
-      .waves {
-        height: 40px;
-        min-height: 40px;
-      }
-    }
-    /* slider infinite */
-    @keyframes slide {
-      0% {
-        transform: translateX(0);
-      }
+  100% {
+    transform: translateX(-50%);
+  }
+}
 
-      100% {
-        transform: translateX(-50%);
-      }
-    }
+.animate-slide {
+  animation: slide 12s linear infinite;
+}
 
-    .animate-slide {
-      animation: slide 12s linear infinite;
-    }
+/* water ppp resources page  */
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
 
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
-    /* water ppp resources page  */
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out;
+}
 
-        @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.97);
-      }
+.slide {
+  overflow: hidden;
+  display: none;
+}
 
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
-    .animate-fadeIn {
-      animation: fadeIn 0.25s ease-out;
-    }
+.swiper-button-next,
+.swiper-button-prev {
+  color: #161b52 !important;
+}

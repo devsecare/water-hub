@@ -1,4 +1,4 @@
-<footer class=" text-white">
+<!-- <footer class=" text-white">
     <div class="bg-[#1E1D57] py-12 px-6 md:px-20">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
             <div>
@@ -46,4 +46,75 @@
         </div>
     </div>
 </footer>
+ -->
 
+
+
+     <footer class=" text-white">
+        <div class="bg-[#1E1D57] py-12 px-6 lg:px-16">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 lg:gap-[8rem]">
+                <div class="lg:max-w-[391px] md:max-w-[300px]">
+                    <a href="{{ route('home') }}" class="text-xl font-semibold text-white mb-4">
+                        <img src="/images/footerlogo.png" alt="">
+                    </a>
+                    <p class="text-[16px] mb-6 text-[#FFFFFF] max-w-[392px]">
+                        Join our newsletter to stay up to date when content is updated or new content is released
+                    </p>
+
+                    <form class="flex items-center rounded-3xl overflow-hidden max-w-sm"
+                        style="background-color:#37c6f445;">
+                        <input type="email" placeholder="Enter your email address"
+                            class="w-full px-4 py-3 text-sm text-white bg-transparent focus:outline-none">
+                        <button class="bg-transparent hover:bg-[#2f6990] text-[#37C6F4] px-4 py-3">Subscribe</button>
+                    </form>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-10 md:mt-8">
+                    <ul class="space-y-3">
+                        <li><a href="https://water-hub.ecareinfoway.com/about" class="hover:text-white">About water
+                                PPPs</a></li>
+                        <li><a href="https://water-hub.ecareinfoway.com/resources" class="hover:text-white">Water PPP
+                                Resources</a></li>
+                        <li><a href="{{ route('casestudy') }}" class="hover:text-white">Case study</a></li>
+                        <li><a href="#" class="hover:text-white">Who we are</a></li>
+                        <li><a href="{{ route('contactus') }}" class="hover:text-white">Contact us</a>
+                        </li>
+                    </ul>
+                    <ul class="space-y-3">
+                        @auth
+                        <li><a href="{{ route('myaccount') }}"
+                                class="flex gap-2 items-center text-[#37C6F4]"><span><span
+                                        class="material-symbols-outlined">
+                                        account_circle
+                                    </span></span>
+                                My account
+                            </a></li>
+                        @else
+                        <li>
+                            <a href="{{ route('login') }}" class="hover:text-white"> Sign in</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('register') }}" class="hover:text-white">Register an account</a>
+                        </li>
+                        @endauth
+                        <li class="flex items-center gap-2 pt-2 sm:pt-[4rem]">
+                            <a href="https://in.linkedin.com/" target="_blank" rel="noopener noreferrer"
+                                class="hover:text-white flex items-center gap-2">
+                                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn"
+                                    class="h-5 w-5">
+                                <span>Find us on LinkedIn</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <section class="w-full bg-[#07074F] text-white py-3 px-6 lg:px-16">
+            <div
+                class="max-w-7xl mx-auto max-[540px]:flex-col flex items-center max-[540px]:items-start max-[540px]:gap-4 gap-10 ">
+                <p class="text-sm">© <span id="year">2025</span>. All right reserved.</p>
+                <a href="" class="text-[#37C6F4] text-sm hover:text-white hover:underline hover:underline-offset-4">Privacy Policy</a>
+                <a href="" class="text-[#37C6F4] text-sm hover:text-white hover:underline hover:underline-offset-4">Terms of Service</a>
+
+            </div>
+        </section>
+    </footer>

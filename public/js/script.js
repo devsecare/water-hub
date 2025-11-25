@@ -63,7 +63,7 @@ function renderCards() {
     visibleCards.forEach((card) => {
       container.innerHTML += `
           <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-            <div class="${card.gradient} text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
+            <div class="${card.gradient} text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow drop-shadow-[0 2px 4px rgba(0,0,0, 0.50)]">
               <div>
                 <h3 class="font-semibold text-lg leading-snug">${card.title}</h3>
                 <p class="text-sm mt-2 opacity-90 md:mb-8">${card.publisher}</p>
@@ -258,3 +258,64 @@ buttons.forEach((btn) => {
 });
 
 // faq section end
+ 
+// footer year start
+
+document.addEventListener("DOMContentLoaded", function () {
+  var currentYear = new Date().getFullYear();
+  document.querySelectorAll(".year").forEach(function (el) {
+    el.textContent = currentYear;
+  });
+});
+// footer year end
+
+
+
+// CARDS SLIDER HOME PAGE START 
+// FIXED-WIDTH CARD SLIDER
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: "auto",   // fixed width cards (no resizing)
+            spaceBetween: 32,
+            speed: 600,
+            grabCursor: true,
+
+            navigation: {
+                nextEl: ".prev",
+                prevEl: ".next",
+            }
+        });
+
+        // ACCORDION TOGGLE + AUTO CLOSE
+        $(document).on("click", ".toggleBtn", function () {
+
+            const card = $(this).closest(".card");
+            const slideBox = card.find(".slideBox");
+            const arrow = $(this).find(".toggleArrow");
+            const btnText = $(this).find(".btnText");
+
+            const wasOpen = slideBox.is(":visible");
+
+            // Close other cards
+            $(".slideBox:visible").not(slideBox).slideUp(250);
+            $(".btnText").not(btnText).text("More information");
+            $(".toggleArrow").not(arrow).css({
+                transform: "rotate(0deg)",
+                color: "white"
+            });
+            $(".toggleBtn").not($(this)).css("color", "white");
+
+            // Open / Close current card
+            slideBox.slideToggle(250);
+
+            btnText.text(wasOpen ? "More information" : "Close");
+
+            arrow.css({
+                transform: wasOpen ? "rotate(0deg)" : "rotate(-90deg)",
+                color: wasOpen ? "white" : "#37C6F4"
+            });
+
+            $(this).css("color", wasOpen ? "white" : "#37C6F4");
+        });
+
+        // CARDS SLIDER HOME PAGE END
+

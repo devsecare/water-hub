@@ -270,17 +270,18 @@
     </div>
 </section>
 
-<!-- ✅ INTRO -->
-<section class="px-6 lg:px-16 py-12 sm:py-16 lg:py-20">
-    <section class="max-w-7xl mx-auto ">
-        <p class="text-[19px] text-[#1E1D57] sm:text-xl md:text-lg max-w-2xl">
-            Browse by category to find the guidance you need – from foundational PPP concepts to contract management and
+ <!-- intro section start  -->
+<section class="px-6 lg:px-16 lg:py-20 py-10 ">
+    <div class="max-w-7xl mx-auto">
+        <p class="text-[#1E1D57] text-lg font-bold max-w-[604px]"> Browse by category to find the guidance you need – from foundational PPP concepts to contract management and
             monitoring. Bookmark resources to save and view them in your account, or download documents, audio, and
             video
             files to access offline anytime.
         </p>
-    </section>
+    </div>
 </section>
+ <!-- intro section end  -->
+
 
 <!-- ✅ MAIN -->
 <section class="bg-[#f2f2f2]  lg:px-16 py-12 sm:py-16 lg:py-20">
@@ -289,7 +290,7 @@
         <div class="mob-search-filters relative md:hidden z-10">
             <div class="filter-main-tab py-8 pb-2">
                 <button
-                    class="search-filter-open-close bg-[#1E1D57] flex text-[#fff] gap-4 py-3 px-6 rounded-r-[25px] w-full max-w-[300px] justify-between items-center">
+                    class="search-filter-open-close bg-[#1E1D57] flex text-[#fff] gap-4 py-3 px-6 rounded-r-[25px] w-full max-w-[350px] justify-between items-center">
                     Search and Filter results
                     <span><svg xmlns="http://www.w3.org/2000/svg" width="16.403" height="16.403"
                             viewBox="0 0 16.403 16.403">
@@ -302,7 +303,7 @@
                 </button>
             </div>
             <div
-                class="mobile-filter-list absolute top-full bg-white py-6 px-6 rounded-r-[24px] -left-100 transition-all duration-300 w-full max-w-[300px]">
+                class="mobile-filter-list absolute top-full bg-white py-6 px-6 rounded-r-[24px] -left-100 transition-all duration-300 w-full max-w-[350px]">
 
                 @include('helpers.resources-filter')
 
@@ -317,7 +318,7 @@
         <!-- ✅ MAIN CONTENT -->
         <main class="flex-1 p-6">
             <!-- Cards -->
-            <div id="card-container" class="grid grid-cols-1 lg:w-[100%] sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="card-container" class="grid grid-cols-1 lg:w-[100%] sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 [@media(min-width:768px)_and_(max-width:830px)]:grid-cols-1"></div>
             <!-- No Data Message -->
             <div id="no-data-message" class="hidden text-center py-12">
                 <p class="text-[#868686] text-lg">No resources found for the selected category.</p>
@@ -482,8 +483,14 @@
             return;
         } else {
             noDataMessage.classList.add("hidden");
+            // Calculate total pages and only show pagination if more than 1 page
+            const totalPages = Math.ceil(filteredData.length / cardsPerPage);
             if (paginationContainer) {
-                paginationContainer.classList.remove("hidden");
+                if (totalPages > 1) {
+                    paginationContainer.classList.remove("hidden");
+                } else {
+                    paginationContainer.classList.add("hidden");
+                }
             }
         }
 
@@ -499,7 +506,7 @@
 
             container.innerHTML += `
                 <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-                    <div style="${gradientStyle}" class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]">
+                    <div style="${gradientStyle}" class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow drop-shadow-[0 2px 4px rgba(0,0,0, 0.50)]">
                         <div>
                             <h3 class="font-semibold text-lg leading-snug">${card.title}</h3>
                             <p class="text-sm mt-2 opacity-90">${card.publisher || ''}</p>
@@ -510,10 +517,10 @@
                         </div>
                     </div>
                     <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
-                        <i data-lucide="maximize-2" class="w-4 h-4 cursor-pointer" onclick="openModal(${card.id})"></i>
-                        <i data-lucide="download" class="w-4 h-4 cursor-pointer"></i>
-                        <i data-lucide="bookmark" class="w-4 h-4 cursor-pointer bookmark-icon ${card.is_bookmarked ? 'fill-[#37C6F4]' : ''}" data-item-id="${card.id}" onclick="toggleBookmark(${card.id}, this)"></i>
-                        <i data-lucide="share-2" class="w-4 h-4 cursor-pointer"></i>
+                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openModal(${card.id})">eye_tracking</span>
+                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">download</span>
+                        <span class="material-symbols-outlined  cursor-pointer hover:text-[#37C6F4] duration-250 ${card.is_bookmarked ? 'text-[#37C6F4]' : ''}" data-item-id="${card.id}" onclick="toggleBookmark(${card.id}, this)">bookmark</span>
+                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">share</span>
                     </div>
                 </div>`;
         });
@@ -544,7 +551,7 @@
             btn.id = `btn${i}`;
             btn.className = `px-3 py-1 text-[20px] text-[#1E1D57] hover:text-[#37C6F4] rounded`;
             if (i === currentPage) {
-                btn.classList.add('bg-blue-600', 'text-white');
+                btn.classList.add('text-[#37C6F4]');
             }
             btn.textContent = i;
             btn.onclick = () => changePage(i);
@@ -752,7 +759,28 @@
         const VISIBLE_CLASS = "left-0";
 
         if (toggleBtn && filterList && filterOverlay && body) {
+            // Function to check if screen is mobile (below 768px)
+            const isMobileScreen = () => {
+                return window.innerWidth < 768;
+            };
+
+            // Function to close the filter list
+            const closeFilterList = () => {
+                filterList.classList.add(HIDDEN_CLASS);
+                filterList.classList.remove(VISIBLE_CLASS);
+                filterOverlay.classList.remove("active");
+                body.classList.remove("no-scroll");
+            };
+
+            // Function to check if filter list is open
+            const isFilterListOpen = () => {
+                return filterList.classList.contains(VISIBLE_CLASS);
+            };
+
             toggleBtn.addEventListener("click", () => {
+                // Only work on mobile screens (below 768px)
+                if (!isMobileScreen()) return;
+
                 const isHidden = filterList.classList.toggle(HIDDEN_CLASS);
                 filterList.classList.toggle(VISIBLE_CLASS, !isHidden);
                 filterOverlay.classList.toggle("active", !isHidden);
@@ -761,6 +789,45 @@
                     mobFilters.scrollIntoView({ behavior: "smooth", block: "start" });
                 }
             });
+
+            // Close filter list when clicking/touching outside (only on mobile)
+            document.addEventListener("click", (event) => {
+                if (!isMobileScreen() || !isFilterListOpen()) return;
+
+                const clickedElement = event.target;
+                const isClickInsideToggle = toggleBtn.contains(clickedElement);
+                const isClickInsideFilterList = filterList.contains(clickedElement);
+
+                if (!isClickInsideToggle && !isClickInsideFilterList) {
+                    closeFilterList();
+                }
+            });
+
+            // Also handle touch events for mobile
+            document.addEventListener("touchend", (event) => {
+                if (!isMobileScreen() || !isFilterListOpen()) return;
+
+                const touchedElement = event.target;
+                const isTouchInsideToggle = toggleBtn.contains(touchedElement);
+                const isTouchInsideFilterList = filterList.contains(touchedElement);
+
+                if (!isTouchInsideToggle && !isTouchInsideFilterList) {
+                    closeFilterList();
+                }
+            });
+
+            // Remove "active" class from overlay and close filter list if screen width is 768px or greater
+            const checkScreenWidth = () => {
+                if (window.innerWidth >= 768) {
+                    closeFilterList();
+                }
+            };
+
+            // Check on initial load
+            checkScreenWidth();
+
+            // Check on window resize
+            window.addEventListener("resize", checkScreenWidth);
         }
 
         categoryLinks.forEach((link) => {
@@ -802,14 +869,16 @@
             if (response.ok) {
                 // Update icon color
                 if (data.status === 'added') {
-                    element.classList.add('fill-[#37C6F4]');
+                    element.classList.add('text-[#37C6F4]');
+                    element.classList.remove('text-[#ababab]');
                     // Update the item's bookmark status in the data
                     const item = window.itemsData.find(i => i.id === itemId);
                     if (item) {
                         item.is_bookmarked = true;
                     }
                 } else if (data.status === 'removed') {
-                    element.classList.remove('fill-[#37C6F4]');
+                    element.classList.remove('text-[#37C6F4]');
+                    element.classList.add('text-[#ababab]');
                     // Update the item's bookmark status in the data
                     const item = window.itemsData.find(i => i.id === itemId);
                     if (item) {

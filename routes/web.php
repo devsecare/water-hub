@@ -44,6 +44,10 @@ Route::get('/case-study', function () {
     return view('case_study');
 })->name('casestudy');
 
+Route::get('/account-details', function () {
+    return view('account_details');
+})->name('accountdetails');
+
 Route::get('/my-account', [MyAccountController::class, 'index'])->name('myaccount')->middleware('auth');
 
 // Authentication routes

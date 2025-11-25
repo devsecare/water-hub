@@ -15,8 +15,7 @@
     <div class="absolute inset-0 bg-overlay"></div>
 
     <!-- Hero content -->
-    <div
-        class="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-24 flex flex-col items-center text-center space-y-4 sm:space-y-6 md:space-y-8">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-12 sm:py-16 md:py-30 flex flex-col items-center text-center space-y-4 sm:space-y-6 md:space-y-8">
         <p class="text-xs sm:text-sm md:text-base tracking-wide uppercase text-[#37C6F4]">
             THE GLOBAL WATER PPP HUB
         </p>
@@ -33,7 +32,7 @@
 
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 md:gap-4 mt-3 sm:mt-4 md:mt-6">
             @auth
-            <a href="{{ route('map.index') }}"
+            <a href="{{ route('casestudy') }}"
                 class="bg-[#00BFFF] text-black text-[18px] px-5 sm:px-6 md:px-8 py-2 sm:py-1 rounded-full shadow hover:bg-blue-500 transition">
                 View Map
             </a>
@@ -70,7 +69,7 @@
 <!-- main hero section end  -->
 
 <!-- hero footer start  -->
-<div class="bg-[#09094f] relative mx-auto px-4 py-[22px]">
+<div class="bg-[#09094f] relative mx-auto px-4 py-[25px]">
     <div class="grid max-w-7xl mx-auto text-[18px] text-white grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 text-center">
         <div class="md:max-w-[392px]">
             <p class="font-semibold">
@@ -103,9 +102,10 @@
     </svg>
 </div>
 <!-- hero footer end  -->
+
 <!-- A step-by-step guide to water secton start  -->
-<section class="px-6 lg:px-16">
-    <div class="max-w-7xl mx-auto py-12">
+<section class="px-6 lg:px-16 py-12 lg:pt-22 pb-8">
+    <div class="max-w-7xl mx-auto ">
         <h1 class="text-3xl md:text-4xl font-bold text-[#1E1D57] leading-tight">
             A step-by-step guide to water<br class="hidden md:block">
             PPP implementation
@@ -122,72 +122,509 @@
 </section>
 <!-- A step-by-step guide to water secton start  -->
 
-<!-- 3 image section start  -->
-<!-- <section
-    class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-10 p-6 lg:p-16 overflow-hidden">
-  >
-    <div class="flex gap-4 w-full md:max-h-[400px] lg:max-h-[500px] lg:max-w-[606px] flex-shrink-0">
+<!-- CARDS SLIDER SECTION START  -->
+<section class="px-6 lg:px-16 ">
+    <div class="max-w-7xl mx-auto flex gap-4">
+        <button class="next group">
+            <span class="material-symbols-outlined rotate-180 text-4xl transition-all group-hover:!text-[#1E1D57]">
+                expand_circle_right
+            </span>
+        </button>
 
-        <div class="flex-1 rounded-2xl overflow-hidden">
-            <img src="{{ asset('images/rundenk_33646_macro_shots_of_flowing_water_--ar_169_--raw_--sre_e0f0745b-99e9-436a-b375-ff2018445efb.jpg') }}"
-                alt="Water Image" class="w-full h-full object-cover" />
-        </div>
+        <button class="prev group">
+            <span class="material-symbols-outlined text-4xl transition-all group-hover:!text-[#1E1D57]">
+                expand_circle_right
+            </span>
+        </button>
+    </div>
+</section>
+<section class="pl-6 lg:pl-16  py-4 max-w-[1580px] ml-auto">
+    <div class="relative">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
 
-        <div class="flex lg:max-w-[287px] flex-col gap-4 flex-1">
-            <div class="rounded-2xl overflow-hidden flex-1">
-                <img src="{{ asset('images/jacek-dylag-Vve7XkiUq_Y-unsplash.jpg') }}" alt="Faucet Image"
-                    class="w-full h-full object-cover" />
-            </div>
+                <!-- ========= CARD TEMPLATE (Copy 10 times) ========= -->
+                <div class="swiper-slide max-w-[286px]">
+                    <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        <div class="p-5 space-y-3 card-before">
+                            <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
 
-            <div class="rounded-2xl overflow-hidden lg:max-h-[201px] flex-1">
-                <img src="{{ asset('images/patrick-federi-bjcceKhRsqA-unsplash.jpg') }}" alt="Water Plant Image"
-                    class="w-full h-full object-cover" />
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                     <div class="p-5 space-y-6 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+
+                        <div class="p-5 space-y-3 card-before">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52]">Technical</p>
+                                <p class="font-semibold text-[#161b52]">Institutional</p>
+                                <p class="font-semibold text-[#161b52] leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-
-    <div class="w-full lg:max-w-lg flex flex-col justify-center">
-        <h2 class="text-4xl md:text-4xl font-bold text-[#1E1B4B] mb-4">
-            Are you lost in a maze of <br class="hidden md:block"> PPP documentation?
-        </h2>
-
-        <p class="text-black text-lg mb-4">
-            PPP guidance is scattered across dozens of sites, making it nearly impossible to find what you need to
-            identify, prepare, implement and manage your PPP projects.
-        </p>
-
-        <p class="text-black text-lg mb-4">
-            Technical documents are often dense and time-consuming, leaving government officials and practitioners
-            struggling to extract key information quickly.
-        </p>
-
-        <p class="text-black text-lg mb-6">
-            The <span class="font-semibold">Water PPP Hub</span> will provide you with the right guidance, all in one
-            place.
-        </p>
-
-   
-        <a href="{{ route('about') }}"
-            class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold hover:text-[#1E1D57] hover:underline">
-
-            Learn more about water PPPs
-
-
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                class="ml-2 transition-all duration-200 fill-[#37C6F4] group-hover:fill-[#1E1D57]">
-                <rect width="24" height="24" fill="none"></rect>
-                <path d="M12.6,12,8,7.4,9.4,6l6,6-6,6L8,16.6,12.6,12Z"></path>
-            </svg>
-        </a>
-
-    </div>
-</section> -->
-<!-- 3 image section end   -->
+</section>
+<!-- CARDS SLIDER SECTION end  -->
 
 <!-- from complex document start  -->
-<section
-    class="bg-gradient-to-r from-[#37C6F4] to-[#15769A] relative bg-[length:auto] opacity-100 text-black px-6 lg:px-16 py-16">
+<section class="bg-[linear-gradient(111deg,#37C6F4_0%,#5CD3CE_100%)] opacity-100 mt-4  text-black px-6 lg:px-16 py-[80px]">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722"
         class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full">
         <path id="Path_435" data-name="Path 435"
@@ -200,7 +637,7 @@
             d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z"
             transform="translate(0 -21.645)" fill="#fff"></path>
     </svg>
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:gap-8 mb-12">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:gap-8">
         <div class="max-w-[604px]">
             <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-semibold leading-tight mb-4">
                 From complex documents to clear guidance – all in one place
@@ -225,7 +662,7 @@
 
 
     </div>
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-7xl mx-auto pt-6">
 
         <!-- Slider -->
         <div id="cardSlider" class="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-10
@@ -287,12 +724,12 @@
 <!-- from complex document end  -->
 
 <!-- your partner section start  -->
-<section class="bg-[#1E1D57] py-16 px-6 lg:px-16">
+<section class="bg-[#1E1D57] py-18 lg:py-20 px-6 lg:px-16">
 
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <div class="flex-1 text-white md:max-w-[604px]">
             <img src="/images/aquafedlogo.png" alt="aquafed logo" class="mb-2">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6 leading-snug">
+            <h2 class="text-3xl md:text-[40px] font-bold mb-6 leading-snug">
                 Your partner in water and wastewater PPP development
             </h2>
             <p class="text-base leading-relaxed">
@@ -304,18 +741,14 @@
         </div>
 
         <div class="flex-shrink-0">
-            <!-- <a href="{{ route('about') }}" class="text-[#ED960F] font-medium inline-flex items-center gap-1">
-                Learn more about AquaFed
-                <span class="text-[#ED960F] text-xl"><img src="{{ asset('images/right-icon.svg') }}" alt=""></span>
-            </a> -->
             <a href="{{ route('about') }}"
-                class="group inline-flex items-center text-[#37C6F4] text-lg font-semibold  hover:underline">
+                class="group inline-flex items-center text-[#37C6F4] text-lg font-semibold  hover:underline hover:underline-offset-4 hover:text-white">
 
                 Learn more about AquaFed
 
                 <!-- SVG Icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    class="ml-2 transition-all duration-200 fill-[#37C6F4] ">
+                    class="ml-2 transition-all duration-200 fill-[#37C6F4] group-hover:fill-white ">
                     <rect width="24" height="24" fill="none"></rect>
                     <path d="M12.6,12,8,7.4,9.4,6l6,6-6,6L8,16.6,12.6,12Z"></path>
                 </svg>
@@ -328,9 +761,9 @@
 <!-- Featuring content start  -->
 
 
-<section class="py-6 px-6 lg:px-16">
+<section class="lg:py-8  pt-16 px-6 lg:px-16">
     <div class="max-w-7xl mx-auto  items-start ">
-        <h3 class="text-[#1E1D57] text-lg sm:text-xl md:text-2xl font-semibold">
+        <h3 class="text-[#1E1D57] text-[22px] md:text-2xl font-bold">
             Featuring content from
         </h3>
     </div>
@@ -339,7 +772,7 @@
 <!-- Featuring content end   -->
 
 <!-- slider infinite start -->
-<section class="w-full overflow-hidden   mb-2 sm:mb-4 lg:mb-16">
+<section class="w-full overflow-hidden   mb-4 sm:mb-6 lg:mb-16">
 
     <ul class="flex animate-slide mt-6 w-[200%]">
         <!-- Original Set -->
@@ -398,7 +831,7 @@
 <!-- slider infinite end -->
 
 <!-- wave Section -->
-<section class="relative bg-cover bg-center px-6 lg:px-16  bg-no-repeat text-white overflow-hidden"
+<section class="relative bg-cover bg-center px-6 lg:px-16  bg-no-repeat text-white overflow-hidden py-20 lg:pb-24"
     style="background-image: url('{{ asset('images/bitmapbg.jpg') }}');">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722"
         class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full z-50">
@@ -416,7 +849,7 @@
     <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
 
     <!-- Content -->
-    <div class="relative max-w-7xl mx-auto py-32 md:py-40 flex flex-col justify-center">
+    <div class="relative max-w-7xl mx-auto flex flex-col justify-center mb-12">
         <div class="max-w-2xl">
             <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
                 Gain a better understanding<br>
@@ -448,7 +881,7 @@
 
     <!-- Waves (inside hero section for overlap effect) -->
     <div class="absolute bottom-0 left-0 right-0">
-        <svg class="w-full h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
+        <svg class="w-full h-10 md:h-20" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
             preserveAspectRatio="none">
             <defs>
                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />

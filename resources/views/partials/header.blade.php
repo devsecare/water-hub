@@ -1,4 +1,7 @@
 <header class="w-full bg-[#fbfbfb] relative z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" width="440" height="20.722" viewBox="0 0 440 20.722" class="absolute top-[100%] w-[80%] max-w-fit left-0 right-auto h-auto z-10">
+        <path id="Path_412" data-name="Path 412" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
+    </svg>
     <div class="mx-auto flex items-center justify-between py-3 px-4 md:px-6 overflow-x-auto whitespace-nowrap relative z-10 bg-white">
         <!-- Logo -->
         <a href="{{ route('home') }}" class="flex-shrink-0">

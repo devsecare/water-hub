@@ -8,7 +8,7 @@
   <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white">
     <div class="max-w-7xl mx-auto px-6 py-20 sm:py-24 lg:py-28">
       <p class="text-sm text-[#37C6F4] font-semibold mb-2">WATER PPP RESOURCES</p>
-      <h1 class="text-4xl sm:text-4xl font-extrabold leading-none max-w-xl">
+      <h1 class="text-4xl sm:text-4xl font-extrabold leading-none max-w-xl font-appetite">
         Everything You Need To Identify, Prepare, Implement And Manage Your PPP Project
       </h1>
     </div>

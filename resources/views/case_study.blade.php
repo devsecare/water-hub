@@ -5,8 +5,9 @@
 @section('content')
 
 
+<!-- hero section start  -->
+<section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16 relative">
 
-<section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16">
     <div class="max-w-7xl mx-auto  py-20 sm:py-24 lg:py-28">
         <p class="text-[18px] text-[#37C6F4] font-semibold mb-6">WATER PPP CASE STUDIES</p>
         <h1 class=" font-appetite text-3xl sm:text-5xl font-extrabold leading-none max-w-[500px]">
@@ -14,11 +15,24 @@
         </h1>
     </div>
 </section>
-<section class=" mt-[40px] lg:mt-[80px] px-6 lg:px-16">
+<!-- hero section end  -->
+ <!-- intro section start  -->
+<section class="px-6 lg:px-16 lg:py-20 py-10 ">
+    <div class="max-w-7xl mx-auto">
+        <p class="text-[#1E1D57] text-lg font-bold max-w-[604px]">Explore proven water PPP projects from around the world. Use the map and filters to find case studies by
+            location, country, or project phase – then discover what worked, what challenges arose, and how successful
+            partnerships were structured and delivered.
+        </p>
+    </div>
+</section>
+ <!-- intro section end  -->
+
+<!-- country button start -->
+<section class=" px-6 lg:px-16">
     <div class="max-w-7xl mx-auto flex  flex-wrap items-center gap-4 lg:gap-8">
 
         <!-- COUNTRY DROPDOWN -->
-        <div class="">
+        <div class="relative">
             <input type="checkbox" id="countryToggle" class="peer hidden">
             <label for="countryToggle"
                 class="flex items-center justify-between bg-[#F3F3F3] text-[#1C1C3C] px-6 py-3 rounded-full w-[286px] text-sm cursor-pointer select-none">
@@ -83,6 +97,7 @@
 
     </div>
 </section>
+<!-- country button end  -->
 
 <!-- MAP SECTION -->
 <section class=" mb-16 mt-[40px]  px-6  lg:px-16">
@@ -96,17 +111,24 @@
 </section>
 
 <!-- Comprehensive water PPP knowledge in a format that works for you  -->
-<section class="relative bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-10 md:py-24 px-6 lg:px-16 ">
-   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722" class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full">
-                <path id="Path_435" data-name="Path 435" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
-            </svg>
+<section
+    class="relative bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-10 md:py-24 px-6 lg:px-16 ">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722"
+        class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full">
+        <path id="Path_435" data-name="Path 435"
+            d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z"
+            transform="translate(0 -21.645)" fill="#fff"></path>
+    </svg>
 
-            <svg xmlns="http://www.w3.org/2000/svg" width="710" height="33.437" viewBox="0 0 710 33.437" class="absolute top-0 right-[15%] hidden md:block ">
-        <path id="Path_419" data-name="Path 419" d="M0,21.645c207.154,0,277.811,33.437,371.982,33.437S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
-        </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="33.437" viewBox="0 0 710 33.437"
+        class="absolute top-0 right-[15%] hidden md:block ">
+        <path id="Path_419" data-name="Path 419"
+            d="M0,21.645c207.154,0,277.811,33.437,371.982,33.437S537.765,21.645,710,21.645H0Z"
+            transform="translate(0 -21.645)" fill="#fff"></path>
+    </svg>
 
 
-<div  class="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8  ">
+    <div class="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8  ">
         <div class="max-w-[604px]">
             <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-semibold leading-tight mb-4">
                 Comprehensive water PPP knowledge in a format that works for you

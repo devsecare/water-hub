@@ -6,12 +6,6 @@
 
 <!-- hero section  -->
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16 relative">
-    <svg xmlns="http://www.w3.org/2000/svg" width="440" height="20.722" viewBox="0 0 440 20.722"
-        class="absolute top-0 w-[80%] max-w-fit left-0 right-auto h-auto z-10">
-        <path id="Path_412" data-name="Path 412"
-            d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z"
-            transform="translate(0 -21.645)" fill="#fff"></path>
-    </svg>
     <div class="max-w-7xl mx-auto  py-12  sm:py-24 lg:py-28">
         <p class="text-xl text-[#37C6F4] font-semibold mb-2">WHAT ARE WATER AND WASTEWATER PPPs</p>
         <h1 class="text-4xl font-appetite sm:text-5xl font-extrabold leading-none max-w-xl">
@@ -21,7 +15,7 @@
 </section>
 
 <!-- about text  -->
-<section class="w-full bg-white my-10 lg:my-20 flex items-center px-6 lg:px-16">
+<section class="w-full bg-white py-10 md:py-20 flex items-center px-6 lg:px-16">
     <div class="max-w-7xl mx-auto  w-full">
         <div class="max-w-[790px] text-left">
             <!-- First Bold Paragraph -->
@@ -46,19 +40,19 @@
 <section class="px-6 lg:px-16">
     <div class="max-w-7xl mx-auto ">
         <!-- Main Heading -->
-        <h1 class="text-4xl font-bold text-blue-900 mb-8">
+        <h1 class="text-4xl font-bold text-blue-900 mb-6">
             Why PPPs matter for water
         </h1>
 
         <!-- 3 Column Layout -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <!-- Left Column -->
-            <div class="text-[17px] leading-relaxed space-y-3">
+            <div class="text-[16px] lg:max-w-[392px] leading-relaxed space-y-3">
                 <p>
                     Almost 1 billion people still use unsafe drinking water sources, whilst 2.5 billion lack proper
                     sanitation
                     facilities. The water sector globally is chronically underfunded and inefficient. Meeting
-                    <a href="#" class="text-blue-600 font-semibold hover:underline">Sustainable Development Goal 6</a>
+                    <a href="#" class="text-[#37C6F4] font-semibold hover:underline">Sustainable Development Goal 6</a>
                     – universal access to safe water and sanitation by 2030 – requires massive investment that
                     traditional funding
                     alone cannot deliver.
@@ -66,9 +60,9 @@
             </div>
 
             <!-- Middle Column -->
-            <div class="text-[17px] leading-relaxed">
+            <div class="text-[16px] lg:max-w-[392px] leading-relaxed">
                 <p class="font-semibold mb-3">PPPs offer a mechanism to:</p>
-                <ul class="list-disc pl-6 space-y-1">
+                <ul class="list-disc pl-6 space-y-1 lg:max-w-[378px]">
                     <li>Fund critical infrastructure investment</li>
                     <li>Introduce new technology and innovation (desalination, water reuse, smart systems)</li>
                     <li>Improve operational efficiency and reduce water loss</li>
@@ -78,7 +72,7 @@
             </div>
 
             <!-- Right Column -->
-            <div class="text-[17px] leading-relaxed space-y-4">
+            <div class="text-[16px] lg:max-w-[392px] leading-relaxed space-y-6">
                 <p>
                     Private operators now include increasingly local and regional providers, bringing down costs through
                     competition whilst understanding local contexts.
@@ -93,10 +87,10 @@
 </section>
 
 <!-- type of ppps section  -->
-<section class="px-6 lg:px-16">
-    <div class="max-w-7xl mx-auto py-20">
+<section class="px-6 lg:px-16 lg:py-20 py-10">
+    <div class="max-w-7xl mx-auto">
         <!-- Main Heading -->
-        <h1 class="text-4xl font-bold text-blue-900 mb-6">
+        <h1 class="text-[40px] font-bold text-[#1E1D57] mb-6">
             Types of PPPs
         </h1>
 
@@ -107,39 +101,39 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 text-[17px] leading-relaxed">
 
             <!-- Left Column -->
-            <div class="space-y-5">
+            <div class="lg:space-y-6 space-y-2">
                 <p class="text-[17px] leading-relaxed ">
                     Contracts vary significantly in scope and duration, typically ranging from 3 to 30+ years depending
                     on complexity:
                 </p>
                 <p>
-                    <span class="font-semibold">Technical Assistance Contracts (3–5 years):</span>
+                    <span class="font-bold text-[#000000]">Technical Assistance Contracts (3–5 years):</span>
                     Providing specific expertise – reducing water loss, improving billing, implementing new technology.
                 </p>
 
                 <p>
-                    <span class="font-semibold">Management Contracts (3–5 years):</span>
+                    <span class="font-bold text-[#000000]">Management Contracts (3–5 years):</span>
                     Private operator manages day-to-day operations whilst the public authority retains assets and
                     investment responsibility.
                 </p>
             </div>
 
             <!-- Right Column -->
-            <div class="space-y-5">
+            <div class="lg:space-y-6 space-y-2">
                 <p>
-                    <span class="font-semibold">Lease/Affermage Contracts (8–15 years):</span>
+                    <span class="font-bold text-[#000000]">Lease/Affermage Contracts (8–15 years):</span>
                     Operator leases the infrastructure, manages operations and maintenance, and collects revenue whilst
                     the authority retains ownership.
                 </p>
 
                 <p>
-                    <span class="font-semibold">Design-Build-Operate Contracts (15–25 years):</span>
+                    <span class="font-bold text-[#000000]">Design-Build-Operate Contracts (15–25 years):</span>
                     Private partner designs, builds, and operates new facilities – common for wastewater treatment
                     plants or desalination facilities.
                 </p>
 
                 <p>
-                    <span class="font-semibold">Concessions (20–30 years):</span>
+                    <span class="font-bold text-[#000000]">Concessions (20–30 years):</span>
                     Comprehensive contracts where the operator takes on significant investment obligations whilst
                     operating the service.
                 </p>
@@ -153,7 +147,7 @@
     <div class="max-w-7xl mx-auto ">
 
         <!-- Heading -->
-        <h1 class="text-4xl font-bold mb-6">Who controls what?</h1>
+        <h1 class="text-[40px] font-bold mb-6">Who controls what?</h1>
 
         <!-- Description -->
         <p class="text-lg mb-12 max-w-2xl">
@@ -206,15 +200,15 @@
 </section>
 
 <!-- The Economics of Water PPPs section  -->
-<section class="px-6 lg:px-16 py-12">
-    <div class="max-w-7xl mx-auto  py-12">
+<section class="px-6 lg:px-16 py-20">
+    <div class="max-w-7xl mx-auto">
         <div class="flex flex-col lg:flex-row gap-6 md:gap-10">
             <!-- Right Content -->
             <div class="lg:w-1/2 flex flex-col justify-center">
-                <h1 class="text-lg sm:text-4xl sm:text-4xl font-extrabold text-[#1E1D57] mb-6">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-[#1E1D57] mb-6">
                     The Economics of Water PPPs
                 </h1>
-                <p class="text-[#000000] mb-4">Sustainable water services require cost recovery. Most costs – labour,
+                <p class="text-[#000000] mb-4 leading-relaxed">Sustainable water services require cost recovery. Most costs – labour,
                     energy, chemicals, financing for infrastructure – are external factors, not controlled by operators.
                     When authorities engage private operators, they often make important economic decisions
                     simultaneously:</p>
@@ -225,7 +219,7 @@
                     <li>Establishing tariff structures that ensure long-term sustainability</li>
                 </ul>
 
-                <p class="text-[#000000]">This means PPPs sometimes “appear” more expensive, but they’re often simply
+                <p class="text-[#000000] leading-relaxed">This means PPPs sometimes “appear” more expensive, but they’re often simply
                     reflecting decisions about investment and cost recovery that the authority has already made and
                     would occur regardless of who operates the service.
                 </p>
@@ -243,7 +237,7 @@
 
 <section class="bg-[#f2f2f2] px-6 lg:px-16">
     <div class="max-w-7xl mx-auto  py-12">
-        <div class="flex flex-col lg:flex-row gap-6 md:gap-10">
+        <div class="flex flex-col-reverse lg:flex-row gap-6 md:gap-10">
 
             <!-- Left Image -->
             <div class="lg:w-1/2">
@@ -268,7 +262,7 @@
                     <li>Non-repayable grants from donors (for specific social programmes)</li>
                 </ul>
 
-                <p class="text-[#000000]">
+                <p class="text-[#000000] leading-relaxed">
                     All financing mechanisms except grants require repayment over the contract term through the
                     agreed revenue model.
                 </p>
@@ -292,18 +286,10 @@
             d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z"
             transform="translate(0 -21.645)" fill="#f2f2f2"></path>
     </svg>
-    <!-- Wave Shape at Top -->
-    <!-- <div class="absolute top-0 left-0 w-full">
-        <svg viewBox="0 0 1440 320" class="w-full h-24 md:h-32" preserveAspectRatio="none">
-            <path fill="#ffffff"
-                d="M0,64L60,80C120,96,240,128,360,154.7C480,181,600,203,720,197.3C840,192,960,160,1080,149.3C1200,139,1320,149,1380,154.7L1440,160L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z">
-            </path>
-        </svg>
-    </div> -->
-
+ 
     <!-- Background Gradient -->
     <div
-        class="bg-[linear-gradient(103deg,#37C6F4_0%,#5CD3CE_100%)] opacity-100 text-center py-20 px-6 md:px-16 text-white relative z-10">
+        class="bg-[linear-gradient(103deg,#37C6F4_0%,#5CD3CE_100%)] opacity-100 text-center py-16 px-6 md:px-16 text-white relative z-10">
         <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-[#1E1D57] mb-6">Real-World Success</h2>
         <p class="text-[#1E1D57] max-w-5xl mx-auto leading-relaxed text-lg md:text-[22px]">
             There’s evidence from around the world demonstrates PPPs’ impact.
@@ -332,9 +318,9 @@
     </div>
 </section>
 <!-- PPPs and sustainability  -->
-<section class="lg:py-12 px-6 lg:px-16">
-    <div class="max-w-7xl mx-auto  lg:pt-12 pt-8">
-        <h1 class="text-lg sm:text-4xl sm:text-4xl font-extrabold text-[#1E1D57] ">
+<section class="lg:py-20 py-10 lg:pb-[90px] px-6 lg:px-16">
+    <div class="max-w-7xl mx-auto pb-6">
+        <h1 class="text-xl sm:text-[40px] font-extrabold text-[#1E1D57] ">
             PPPs and sustainability
         </h1>
     </div>
@@ -343,12 +329,12 @@
         <!-- bottom Section -->
         <div>
 
-            <p class="text-[#000000] mb-4">
+            <p class="text-[#000000] mb-6">
                 Water operators link the natural and human water cycles – taking water from nature, treating it
                 safely for use, collecting wastewater, treating it to remove pollution, and returning it to nature.
                 This cycle must be sustainable.
             </p>
-            <h1 class="text-[20px] mb-6 font-extrabold text-[#1E1D57]">
+            <h1 class="text-[22px] mb-4 font-bold text-[#1E1D57]">
                 Private operators support community sustainability by:
             </h1>
             <ul class="list-disc pl-4 space-y-2 text-[#000000] mb-6">
@@ -375,7 +361,7 @@
 </section>
 <!-- faq section  -->
 
-<section class="w-full bg-regal-blue py-16 pb-36 text-white">
+<section class="w-full bg-regal-blue lg:py-20 py-10 lg:pb-50 text-white">
     <div class="max-w-4xl mx-auto px-6 lg:px-16">
 
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 max-[440px]:text-xl">
