@@ -16,6 +16,7 @@ class Item extends Model
         'slug',
         'description',
         'publisher',
+        'author',
         'type',
         'short_description',
         'latitude',

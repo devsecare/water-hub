@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 
-@section('title', 'PPP Water Hub')
+@section('title', $item->title . ' - PPP Water Hub')
 
 @section('content')
 
@@ -10,7 +10,7 @@
         <!-- Back link -->
 
 
-        <a href="#" class="inline-flex items-center gap-2 text-lg text-[#37C6F4] font-semibold mb-12">
+        <a href="{{ route('resources') }}" class="inline-flex items-center gap-2 text-lg text-[#37C6F4] font-semibold mb-12">
             <svg id="chevron-right-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                 class="transition-all duration-200 fill-[#37C6F4] rotate-180">
                 <rect width="24" height="24" fill="none"></rect>
@@ -28,32 +28,34 @@
             <div class="w-full lg:max-w-[350px] flex flex-col">
 
                 <!-- Blue Card -->
+                @php
+                    $startColor = '#070648';
+                    $endColor = $item->category ? $item->category->color : '#2CBFA0';
+                @endphp
                 <div
-                    class="bg-gradient-to-b from-blue-900 to-emerald-500 text-white rounded-lg shadow-xl p-6 flex flex-col lg:w-[350px] justify-between h-full">
+                    class="text-white rounded-lg shadow-xl p-6 flex flex-col lg:w-[350px] justify-between h-full"
+                    style="background: linear-gradient(to bottom, {{ $startColor }}, {{ $endColor }});">
                     <div>
                         <h1 class="text-3xl font-bold leading-tight mb-6">
-                            Title of guide or document can go here over multiple lines
+                            {{ $item->title }}
                         </h1>
-                        <p class="text-sm opacity-90 mt-10">Publisher name here</p>
+                        @if($item->author || $item->publisher)
+                        <p class="text-sm opacity-90 mt-10">{{ $item->author ?? $item->publisher }}</p>
+                        @endif
                     </div>
 
                     <div class="flex items-center space-x-2 mt-20">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="30" viewBox="0 0 24 30">
-                            <path id="Path_399" data-name="Path 399"
-                                d="M10,18.5H22v-3H10ZM10,23H22V20H10Zm0,4.5h7.5v-3H10ZM7,32a2.89,2.89,0,0,1-2.115-.885A2.89,2.89,0,0,1,4,29V5a2.89,2.89,0,0,1,.885-2.115A2.89,2.89,0,0,1,7,2H19l9,9V29a3.022,3.022,0,0,1-3,3ZM17.5,12.5V5H7V29H25V12.5ZM7,5V5Z"
-                                transform="translate(-4 -2)" fill="#fff" />
-                        </svg>
-
-                        <span class="text-[18px]  font-semibold">Identifying PPP opportunities</span>
+                        <i data-lucide="{{ $item->type_icon }}" class="w-6 h-8"></i>
+                        <span class="text-[18px] font-semibold">{{ $item->type_label }}</span>
                     </div>
                 </div>
 
                 <!-- Save / Download -->
                 <div class="flex justify-between items-center mt-6 border-t pt-4 text-sm text-gray-700">
 
-                    <button class="group flex items-center transition-colors duration-200">
+                    <button onclick="toggleBookmark({{ $item->id }}, this)" class="group flex items-center transition-colors duration-200 {{ $isBookmarked ? 'text-[#37C6F4]' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
-                            class="fill-[#1e1d57] hover:fill-[#37C6F4] transition">
+                            class="fill-[#1e1d57] hover:fill-[#37C6F4] transition {{ $isBookmarked ? 'fill-[#37C6F4]' : '' }}">
                             <path
                                 d="M5,29V5.889a2.785,2.785,0,0,1,.851-2.037A2.776,2.776,0,0,1,7.884,3H22.307a2.776,2.776,0,0,1,2.034.852,2.785,2.785,0,0,1,.851,2.037V29L15.1,24.667Zm2.884-4.406L15.1,21.489l7.211,3.106V5.889H7.884Z"
                                 transform="translate(0.904)" />
@@ -61,13 +63,15 @@
 
 
                         <span
-                            class="sm:ml-2 text-[#000000] text-[16px] group-hover:text-[#37C6F4] transition-colors duration-200">
+                            class="sm:ml-2 text-[#000000] text-[16px] group-hover:text-[#37C6F4] transition-colors duration-200 {{ $isBookmarked ? 'text-[#37C6F4]' : '' }}">
                             Add to your library
                         </span>
                     </button>
 
 
-                    <a href="#" class="group flex items-center transition-colors duration-200">
+
+                    @if($item->featuredImage)
+                    <a href="{{ route('media.download', $item->featuredImage) }}" class="group flex items-center transition-colors duration-200">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
                             class="fill-[#1e1d57] hover:fill-[#37C6F4] transition">
                             <path
@@ -80,8 +84,7 @@
                             Download file
                         </span>
                     </a>
-
-
+                    @endif
 
                 </div>
             </div>
@@ -90,7 +93,7 @@
             <div class="lg:max-w-[65%]">
 
                 <h2 class=" text-2xl md:text-3xl text-[#1E1D57] md:max-w-[90%] font-bold leading-tight mb-6">
-                    Title of guide or document can go here over multiple lines
+                    {{ $item->title }}
                 </h2>
 
                 <!-- RIGHT SIDE GRID (TEXT LEFT + RESOURCES RIGHT) -->
@@ -98,28 +101,17 @@
 
                     <!-- LEFT TEXT SECTION – takes 2/3 -->
                     <div class="md:col-span-2 lg:max-w-[60%]  md:max-w-1/2 text-[#000000]">
+                        @if($item->short_description)
                         <p class=" mb-6 leading-relaxed">
-                            <span class="text-black font-bold">Short description: </span>Summarise what they will
-                            get
-                            from the docuemtn and also mention the kinds of support files available. Audio video
-                            etc.
+                            <span class="text-black font-bold">Short description: </span>{{ $item->short_description }}
                         </p>
+                        @endif
 
+                        @if($item->description)
                         <div class="space-y-6 leading-relaxed">
-                            <p>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                                tempor
-                                invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
-                                accusam et justo duo dolores et ea rebum.
-                            </p>
-                            <p>
-                                Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                                Lorem
-                                ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt.
-                            </p>
-
+                            {!! nl2br(e($item->description)) !!}
                         </div>
+                        @endif
 
                         <!-- Share Icon -->
 
@@ -142,14 +134,36 @@
                     </div>
 
                     <!-- RIGHT ADDITIONAL RESOURCES (1/3) -->
+                    @if($item->files->count() > 0 || ($item->author || $item->publisher))
                     <div class="md:col-span-1">
-
+                        @if($item->files->count() > 0)
                         <h3 class=" font-semibold text-[#37C6F4] text-2xl mb-4 max-[1100px]:text-lg max-[1200px]:text-xl">
                             Additional resources
                         </h3>
 
+                        @php
+                            // Categorize files by type
+                            $documentFiles = $item->files->filter(function($file) {
+                                $mime = $file->mime_type ?? '';
+                                return str_starts_with($mime, 'application/pdf') ||
+                                       str_starts_with($mime, 'application/msword') ||
+                                       str_starts_with($mime, 'application/vnd.openxmlformats-officedocument') ||
+                                       str_contains($mime, 'document') ||
+                                       (!str_starts_with($mime, 'video/') && !str_starts_with($mime, 'audio/') && $mime !== '');
+                            });
+
+                            $videoFiles = $item->files->filter(function($file) {
+                                return str_starts_with($file->mime_type ?? '', 'video/');
+                            });
+
+                            $audioFiles = $item->files->filter(function($file) {
+                                return str_starts_with($file->mime_type ?? '', 'audio/');
+                            });
+                        @endphp
+
                         <ul class="space-y-3  text-[#000000] text-[16px]">
-                            <li class="flex items-center gap-2  cursor-pointer">
+                            @if($documentFiles->count() > 0)
+                            <li class="flex items-center gap-2 cursor-pointer">
                                 <svg id="summary-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
                                     <path id="Path_406" data-name="Path 406"
@@ -158,10 +172,13 @@
                                     <rect id="Rectangle_61" data-name="Rectangle 61" width="24" height="24"
                                         fill="none" />
                                 </svg>
-
-                                View summary file
+                                <a href="{{ route('files.download', $documentFiles->first()) }}" class="hover:text-[#37C6F4] transition-colors">
+                                    View summary file
+                                </a>
                             </li>
+                            @endif
 
+                            @if($videoFiles->count() > 0)
                             <li class="flex items-center gap-2 cursor-pointer">
                                 <svg id="video-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
@@ -171,10 +188,13 @@
                                     <rect id="Rectangle_63" data-name="Rectangle 63" width="24" height="24"
                                         fill="none" />
                                 </svg>
-
-                                Play video summary
+                                <a href="{{ route('files.download', $videoFiles->first()) }}" class="hover:text-[#37C6F4] transition-colors">
+                                    Play video summary
+                                </a>
                             </li>
+                            @endif
 
+                            @if($audioFiles->count() > 0)
                             <li class="flex items-center gap-2 cursor-pointer">
                                 <svg id="podcast-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
@@ -184,19 +204,85 @@
                                     <rect id="Rectangle_58" data-name="Rectangle 58" width="24" height="24"
                                         fill="none" />
                                 </svg>
-
-                                Play audio summary
+                                <a href="{{ route('files.download', $audioFiles->first()) }}" class="hover:text-[#37C6F4] transition-colors">
+                                    Play audio summary
+                                </a>
                             </li>
+                            @endif
                         </ul>
 
                         <div class="mt-8 text-lg text-[#37C6F4] space-y-2">
-                            <p><span class="font-semibold text-[#1E1D57]">File type:</span> PDF</p>
+                            @php
+                                $firstFile = $item->files->first();
+                                $fileExtension = null;
+
+                                // Priority 1: Get extension from original_name
+                                if ($firstFile->original_name) {
+                                    $ext = pathinfo($firstFile->original_name, PATHINFO_EXTENSION);
+                                    if (!empty($ext)) {
+                                        $fileExtension = strtoupper($ext);
+                                    }
+                                }
+
+                                // Priority 2: Get extension from file path
+                                if (empty($fileExtension) && $firstFile->path) {
+                                    $ext = pathinfo($firstFile->path, PATHINFO_EXTENSION);
+                                    if (!empty($ext)) {
+                                        $fileExtension = strtoupper($ext);
+                                    }
+
+                                    // Fallback: Check if path contains common extensions
+                                    if (empty($fileExtension)) {
+                                        $path = strtolower($firstFile->path);
+                                        $commonExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'mp4', 'mov', 'avi', 'mp3', 'wav', 'jpg', 'jpeg', 'png', 'gif'];
+                                        foreach ($commonExtensions as $ext) {
+                                            if (str_contains($path, '.' . $ext)) {
+                                                $fileExtension = strtoupper($ext);
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                // Priority 3: Use mime_type to determine file type (only if not generic octet-stream)
+                                if (empty($fileExtension) && $firstFile->mime_type && $firstFile->mime_type !== 'application/octet-stream') {
+                                    $mimeType = $firstFile->mime_type;
+                                    $mimeToExtension = [
+                                        'application/pdf' => 'PDF',
+                                        'application/msword' => 'DOC',
+                                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'DOCX',
+                                        'application/vnd.ms-excel' => 'XLS',
+                                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'XLSX',
+                                        'video/mp4' => 'MP4',
+                                        'video/quicktime' => 'MOV',
+                                        'video/x-msvideo' => 'AVI',
+                                        'audio/mpeg' => 'MP3',
+                                        'audio/wav' => 'WAV',
+                                        'audio/mp4' => 'M4A',
+                                        'image/jpeg' => 'JPG',
+                                        'image/png' => 'PNG',
+                                        'image/gif' => 'GIF',
+                                    ];
+
+                                    if (isset($mimeToExtension[$mimeType])) {
+                                        $fileExtension = $mimeToExtension[$mimeType];
+                                    }
+                                }
+                            @endphp
+                            <p><span class="font-semibold text-[#1E1D57]">File type:</span> {{ $fileExtension ?: 'N/A' }}</p>
+                        </div>
+                        @endif
+
+                        @if($item->author || $item->publisher)
+                        <div class="mt-8 text-lg text-[#37C6F4] space-y-2">
                             <p>
                                 <span class="font-semibold text-[#1E1D57]">Author:</span>
-                                Mary Matherson, World Bank
+                                {{ $item->author ?? $item->publisher }}
                             </p>
                         </div>
+                        @endif
                     </div>
+                    @endif
                 </div>
             </div>
 
@@ -206,175 +292,72 @@
     </div>
 </section>
 <!-- Related Content -->
+@if($relatedItems->count() > 0)
 <section class="py-12 bg-[#F7F7F7] px-6 lg:px-16">
     <div class="max-w-7xl mx-auto ">
         <h2 class="text-4xl md:text-5xl text-[#1E1D57] font-bold mb-8">Related content</h2>
 
         <div  class="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-[100px]">
+            @foreach($relatedItems as $relatedItem)
+            @php
+                $startColor = '#070648';
+                $endColor = $relatedItem['category_color'] ?? '#2CBFA0';
+            @endphp
             <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
                 <div
-                    class="bg-gradient-to-br from-[#0E1C62] to-[#2CBFA0] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
+                    class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]"
+                    style="background: linear-gradient(to bottom right, {{ $startColor }}, {{ $endColor }});">
                     <div>
-                        <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                            multiple line here</h3>
-                        <p class="text-sm mt-2 opacity-90">Publisher name here</p>
+                        <h3 class="font-semibold text-lg leading-snug">{{ $relatedItem['title'] }}</h3>
+                                    <p class="text-sm mt-2 opacity-90">{{ $relatedItem['publisher'] ?? 'N/A' }}</p>
                     </div>
                     <div class="flex items-center space-x-2 mt-12">
-                        <svg id="droplet-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24">
-                            <path id="Path_401" data-name="Path 401"
-                                d="M12.28,19a.815.815,0,0,0,.51-.24.694.694,0,0,0,.21-.51.738.738,0,0,0-.23-.56.758.758,0,0,0-.58-.19,3.965,3.965,0,0,1-2.18-.56,3.062,3.062,0,0,1-1.45-2.31.742.742,0,0,0-.26-.45A.724.724,0,0,0,7.81,14a.752.752,0,0,0-.58.26.67.67,0,0,0-.15.61,4.557,4.557,0,0,0,2,3.25,5.384,5.384,0,0,0,3.18.88ZM12,22a7.625,7.625,0,0,1-5.71-2.35A8.047,8.047,0,0,1,4,13.8,9.863,9.863,0,0,1,5.99,8.36,33.335,33.335,0,0,1,12,2a33.018,33.018,0,0,1,6.01,6.36A9.942,9.942,0,0,1,20,13.8a8.047,8.047,0,0,1-2.29,5.85A7.64,7.64,0,0,1,12,22Zm0-2a5.737,5.737,0,0,0,4.3-1.76A6.136,6.136,0,0,0,18,13.8a7.753,7.753,0,0,0-1.51-4.13A28.007,28.007,0,0,0,12,4.64,28.057,28.057,0,0,0,7.51,9.67,7.725,7.725,0,0,0,6,13.8a6.168,6.168,0,0,0,1.7,4.44A5.7,5.7,0,0,0,12,20Z"
-                                fill="#fff" />
-                            <rect id="Rectangle_56" data-name="Rectangle 56" width="24" height="24" fill="none" />
-                        </svg>
-
-
-                        <span class="text-lg">Management</span>
+                        <i data-lucide="{{ $relatedItem['icon'] }}" class="w-6 h-6"></i>
+                        <span class="text-lg">{{ $relatedItem['type'] }}</span>
                     </div>
                 </div>
                 <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-                </div>
-            </div>
-            <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-                <div
-                    class="bg-gradient-to-br from-[#0E4473] to-[#25B3D8] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-                    <div>
-                        <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                            multiple line here</h3>
-                        <p class="text-sm mt-2 opacity-90">Publisher name here</p>
-                    </div>
-                    <div class="flex items-center space-x-2 mt-12">
-                        <svg id="casestudy-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24">
-                            <path id="Path_397" data-name="Path 397"
-                                d="M12,22a2.262,2.262,0,0,1-1.18-.31,2.3,2.3,0,0,1-.83-.84,2.015,2.015,0,0,1-2-2V15.3a7.241,7.241,0,0,1-2.36-2.58,7.1,7.1,0,0,1-.89-3.48A6.987,6.987,0,0,1,6.85,4.1a6.987,6.987,0,0,1,5.14-2.11A6.987,6.987,0,0,1,17.13,4.1a6.987,6.987,0,0,1,2.11,5.14,7.033,7.033,0,0,1-.89,3.5,7.317,7.317,0,0,1-2.36,2.55v3.55a2.015,2.015,0,0,1-2,2,2.3,2.3,0,0,1-.83.84,2.237,2.237,0,0,1-1.18.31Zm-2-3.15h4v-.9H10Zm0-1.9h4V16H10ZM9.8,14h1.45V11.3L9.05,9.1,10.1,8.05,12,9.95l1.9-1.9L14.95,9.1l-2.2,2.2V14H14.2a5.478,5.478,0,0,0,2.2-1.91,4.945,4.945,0,0,0,.85-2.84,5.07,5.07,0,0,0-1.53-3.73,5.07,5.07,0,0,0-3.73-1.53A5.07,5.07,0,0,0,8.26,5.52,5.07,5.07,0,0,0,6.73,9.25a4.945,4.945,0,0,0,.85,2.84A5.478,5.478,0,0,0,9.78,14Z"
-                                fill="#fff" />
-                            <rect id="Rectangle_52" data-name="Rectangle 52" width="24" height="24" fill="none" />
+                    <a href="{{ route('resources.show', $relatedItem['slug']) }}" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                            <path
+                                d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z" />
+                            <rect width="24" height="24" fill="none" />
                         </svg>
-
-                        <span class="text-lg">Case study</span>
-                    </div>
-                </div>
-                <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-                </div>
-            </div>
-            <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-                <div
-                    class="bg-gradient-to-br from-[#44107A] to-[#FF1361] text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] ">
-                    <div>
-                        <h3 class="font-semibold text-lg leading-snug">Title of guide or document can go here over
-                            multiple line here</h3>
-                        <p class="text-sm mt-2 opacity-90">Publisher name here</p>
-                    </div>
-                    <div class="flex items-center space-x-2 mt-12">
-                        <svg id="planning-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                            viewBox="0 0 24 24">
-                            <path id="Path_426" data-name="Path 426"
-                                d="M5,11a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,3,9V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,5,3H19a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,21,5V9a2.015,2.015,0,0,1-2,2ZM5,9H19V5H5ZM5,21a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,3,19V15a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,5,13H19a2.015,2.015,0,0,1,2,2v4a2.015,2.015,0,0,1-2,2Zm0-2H19V15H5ZM5,5V5ZM5,15v0Z"
-                                fill="#fff" />
-                            <rect id="Rectangle_72" data-name="Rectangle 72" width="24" height="24" fill="none" />
+                    </a>
+                    <a href="{{ route('resources.show', $relatedItem['slug']) }}" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                            <path
+                                d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z" />
+                            <rect width="24" height="24" fill="none" />
                         </svg>
-
-                        <span class="text-lg">Preparing your project</span>
-                    </div>
-                </div>
-                <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M6,23H3a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,1,21V18H3v3H6Zm12,0V21h3V18h2v3a2.015,2.015,0,0,1-2,2Zm-6-4.5a9,9,0,0,1-5.44-1.78A10.135,10.135,0,0,1,3,11.99,10.251,10.251,0,0,1,6.56,7.26,8.977,8.977,0,0,1,12,5.48a9,9,0,0,1,5.44,1.78A10.185,10.185,0,0,1,21,11.99a10.251,10.251,0,0,1-3.56,4.73A9.063,9.063,0,0,1,12,18.5Zm0-2a7.189,7.189,0,0,0,4.03-1.2,7.74,7.74,0,0,0,2.8-3.3,7.74,7.74,0,0,0-2.8-3.3,7.367,7.367,0,0,0-8.06,0A7.74,7.74,0,0,0,5.17,12a7.74,7.74,0,0,0,2.8,3.3A7.189,7.189,0,0,0,12,16.5Zm0-1a3.517,3.517,0,0,0,3.51-3.51A3.517,3.517,0,0,0,12,8.48a3.517,3.517,0,0,0-3.51,3.51A3.517,3.517,0,0,0,12,15.5Zm0-2a1.442,1.442,0,0,1-1.06-.44A1.5,1.5,0,1,1,12,13.5ZM1,6V3a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,3,1H6V3H3V6ZM21,6V3H18V1h3a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,23,3V6Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
-                        class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
-                        <path
-                            d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z" />
-                        <rect width="24" height="24" fill="none" />
-                    </svg>
+                    </a>
+                    <button onclick="toggleBookmark({{ $relatedItem['id'] }}, this)" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer {{ $relatedItem['is_bookmarked'] ? 'fill-[#37C6F4]' : '' }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                            <path
+                                d="M5,21V5a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,7,3H17a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,19,5V21l-7-3Zm2-3.05,5-2.15,5,2.15V5H7ZM7,5H7Z" />
+                            <rect width="24" height="24" fill="none" />
+                        </svg>
+                    </button>
+                    <a href="{{ route('resources.show', $relatedItem['slug']) }}" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+                            <path
+                                d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z" />
+                            <rect width="24" height="24" fill="none" />
+                        </svg>
+                    </a>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </section>
+@endif
 <!-- wave section  -->
 <div class=" bottom-0 left-0 right-0">
     <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
         preserveAspectRatio="none">
         <defs>
-            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18
         58-18 88-18 58 18 88 18v44h-352z" />
         </defs>
         <g class="parallax">
@@ -389,4 +372,64 @@
 
 
 
+@push('scripts')
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+
+    // Bookmark functionality
+    window.toggleBookmark = async function(itemId, element) {
+        const isAuthenticated = @json(auth()->check());
+        if (!isAuthenticated) {
+            alert('Please login to bookmark items');
+            return;
+        }
+
+        try {
+            const response = await fetch('{{ route('bookmark.toggle') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ item_id: itemId })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Update icon color
+                if (data.status === 'added') {
+                    element.classList.add('text-[#37C6F4]');
+                    element.classList.remove('text-[#ababab]');
+                    const svg = element.querySelector('svg');
+                    if (svg) {
+                        svg.classList.add('fill-[#37C6F4]');
+                        svg.classList.remove('fill-[#1e1d57]');
+                    }
+                } else if (data.status === 'removed') {
+                    element.classList.remove('text-[#37C6F4]');
+                    element.classList.add('text-[#ababab]');
+                    const svg = element.querySelector('svg');
+                    if (svg) {
+                        svg.classList.remove('fill-[#37C6F4]');
+                        svg.classList.add('fill-[#1e1d57]');
+                    }
+                }
+                console.log(data.message);
+            } else {
+                console.error('Bookmark toggle failed:', data);
+                alert('Failed to toggle bookmark: ' + (data.message || 'Unknown error'));
+            }
+        } catch (error) {
+            console.error('Error toggling bookmark:', error);
+            alert('An error occurred while toggling bookmark.');
+        }
+    };
+</script>
+@endpush
 @endsection

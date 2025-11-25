@@ -12,28 +12,39 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Disable FK checks temporarily
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
+        $driver = DB::getDriverName();
+        
+        if ($driver === 'mysql') {
+            // MySQL: Disable FK checks temporarily
+            DB::statement('SET FOREIGN_KEY_CHECKS = 0;');
 
-        // Drop any foreign keys referencing the media table
-        $foreignKeys = DB::select("
-            SELECT TABLE_NAME, CONSTRAINT_NAME
-            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
-            WHERE REFERENCED_TABLE_NAME = 'media'
-              AND CONSTRAINT_SCHEMA = DATABASE()
-        ");
+            // Drop any foreign keys referencing the media table
+            $foreignKeys = DB::select("
+                SELECT TABLE_NAME, CONSTRAINT_NAME
+                FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+                WHERE REFERENCED_TABLE_NAME = 'media'
+                  AND CONSTRAINT_SCHEMA = DATABASE()
+            ");
 
-        foreach ($foreignKeys as $fk) {
-            Schema::table($fk->TABLE_NAME, function (Blueprint $table) use ($fk) {
-                $table->dropForeign($fk->CONSTRAINT_NAME);
-            });
+            foreach ($foreignKeys as $fk) {
+                try {
+                    Schema::table($fk->TABLE_NAME, function (Blueprint $table) use ($fk) {
+                        $table->dropForeign($fk->CONSTRAINT_NAME);
+                    });
+                } catch (\Exception $e) {
+                    // Ignore if foreign key doesn't exist
+                }
+            }
+
+            // Now safely drop the media table
+            Schema::dropIfExists('media');
+
+            // Re-enable FK checks
+            DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+        } else {
+            // SQLite: Just drop the table if it exists
+            Schema::dropIfExists('media');
         }
-
-        // Now safely drop the media table
-        Schema::dropIfExists('media');
-
-        // Re-enable FK checks
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }
 
     /**

@@ -5,6 +5,7 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\ImageGeneratorController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\MediaDownloadController;
 use App\Http\Controllers\MyAccountController;
 use App\Http\Controllers\ResourcesController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/resources', [ResourcesController::class, 'index'])->name('resources');
+Route::get('/resources/{slug}', [ResourcesController::class, 'show'])->name('resources.show');
 
 Route::get('/contact', function () {
     return view('contact');
@@ -192,6 +194,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/files/{file}/signed-url', [FileDownloadController::class, 'getSignedUrl'])
         ->name('files.signed-url')
         ->middleware('throttle:20,1');
+    
+    // Media downloads (for featured images)
+    Route::get('/media/{media}/download', [MediaDownloadController::class, 'download'])
+        ->name('media.download')
+        ->middleware('throttle:10,1');
 
     // Bookmarks
     Route::post('/bookmark/toggle', [BookmarkController::class, 'toggle'])->name('bookmark.toggle');

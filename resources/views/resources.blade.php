@@ -391,12 +391,30 @@
         <!-- Buttons fixed at the bottom section -->
         <div class="border-t mt-8 pt-4 flex justify-between flex-wrap gap-4 text-gray-700 text-sm">
             <div class="flex flex-wrap gap-6">
-                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250 text-[#37C6F4]" data-item-id="1" onclick="toggleBookmark(1, this)"><span class="material-symbols-outlined">bookmark</span>Add to your library</button>
-                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250"><span class="material-symbols-outlined">download</span>Download
+                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250" id="modalBookmarkBtn" onclick="toggleBookmarkFromModal(this)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" data-lucide="bookmark" class="lucide lucide-bookmark w-4 h-4">
+                        <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+                    </svg>Add to
+                    your library</button>
+                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250" onclick="downloadFileFromModal()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" data-lucide="download" class="lucide lucide-download w-4 h-4">
+                        <path d="M12 15V3"></path>
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <path d="m7 10 5 5 5-5"></path>
+                    </svg>Download
                     file</button>
                 <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250"><span class="material-symbols-outlined">share</span>Share</button>
             </div>
-            <button class="flex items-center gap-2 font-semibold underline cursor-pointer hover:text-[#37C6F4] duration-250">More options…</button>
+            <button class="flex items-center gap-2 font-semibold underline cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openItemPage()"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" data-lucide="more-horizontal"
+                    class="lucide lucide-more-horizontal w-4 h-4">
+                    <circle cx="12" cy="12" r="1"></circle>
+                    <circle cx="19" cy="12" r="1"></circle>
+                    <circle cx="5" cy="12" r="1"></circle>
+                </svg>More options…</button>
         </div>
     </div>
 </div>
@@ -492,7 +510,7 @@
                     </div>
                     <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
                         <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openModal(${card.id})">eye_tracking</span>
-                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">download</span>
+                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="downloadFile(${card.id})">download</span>
                         <span class="material-symbols-outlined  cursor-pointer hover:text-[#37C6F4] duration-250 ${card.is_bookmarked ? 'text-[#37C6F4]' : ''}" data-item-id="${card.id}" onclick="toggleBookmark(${card.id}, this)">bookmark</span>
                         <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">share</span>
                     </div>
@@ -558,9 +576,13 @@
         }
     }
 
+    let currentModalItemId = null;
+
     function openModal(itemId) {
         const item = itemsData.find(i => i.id === itemId);
         if (!item) return;
+
+        currentModalItemId = itemId;
 
         const modal = document.getElementById("productModal");
         modal.classList.remove("hidden");
@@ -577,6 +599,17 @@
         if (modalDescription) {
             modalDescription.innerText = item.short_description || item.description || '';
         }
+
+        // Update bookmark button state
+        const modalBookmarkBtn = document.getElementById("modalBookmarkBtn");
+        if (modalBookmarkBtn) {
+            if (item.is_bookmarked) {
+                modalBookmarkBtn.classList.add('text-[#37C6F4]');
+            } else {
+                modalBookmarkBtn.classList.remove('text-[#37C6F4]');
+            }
+        }
+
         if (typeof lucide !== 'undefined') {
             lucide.createIcons();
         }
@@ -712,12 +745,55 @@
         renderCards();
     });
 
+    function downloadFile(itemId) {
+        const item = itemsData.find(i => i.id === itemId);
+        if (!item) {
+            alert('Item not found');
+            return;
+        }
+
+        if (!item.files || item.files.length === 0) {
+            alert('No files available for download');
+            return;
+        }
+
+        // Download the first file
+        const file = item.files[0];
+        const downloadUrl = `/files/${file.id}/download`;
+        window.location.href = downloadUrl;
+    }
+
+    function downloadFileFromModal() {
+        if (currentModalItemId) {
+            downloadFile(currentModalItemId);
+        }
+    }
+
+    function openItemPage() {
+        if (currentModalItemId) {
+            const item = itemsData.find(i => i.id === currentModalItemId);
+            if (item && item.slug) {
+                window.location.href = `/resources/${item.slug}`;
+            }
+        }
+    }
+
+    function toggleBookmarkFromModal(element) {
+        if (currentModalItemId) {
+            toggleBookmark(currentModalItemId, element);
+        }
+    }
+
     // Expose functions and data to global scope for onclick handlers
     window.openModal = openModal;
     window.closeModal = closeModal;
     window.prevPage = prevPage;
     window.nextPage = nextPage;
     window.changePage = changePage;
+    window.downloadFile = downloadFile;
+    window.downloadFileFromModal = downloadFileFromModal;
+    window.openItemPage = openItemPage;
+    window.toggleBookmarkFromModal = toggleBookmarkFromModal;
     window.itemsData = itemsData; // Expose itemsData for bookmark function
     })();
 </script>

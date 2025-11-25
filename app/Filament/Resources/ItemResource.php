@@ -83,9 +83,10 @@ class ItemResource extends Resource
 
                 Forms\Components\Section::make('Metadata')
                     ->schema([
-                        Forms\Components\TextInput::make('publisher')
-                            ->label('Publisher')
-                            ->maxLength(255),
+                        Forms\Components\TextInput::make('author')
+                            ->label('Author / Publisher')
+                            ->maxLength(255)
+                            ->helperText('Author or publisher name (e.g., Mary Matherson, World Bank)'),
                         Forms\Components\Select::make('type')
                             ->label('Resource Type')
                             ->options([
@@ -102,10 +103,71 @@ class ItemResource extends Resource
                 Forms\Components\Section::make('Media')
                     ->schema([
                         CuratorPicker::make('featured_image_id')
-                            ->label('Media')
+                            ->label('Featured Image')
                             ->relationship('featuredImage', 'id')
                             ->buttonLabel('Select Media')
                             ->listDisplay(true)
+                            ->columnSpanFull(),
+                    ]),
+
+                Forms\Components\Section::make('Additional Resources')
+                    ->schema([
+                        Forms\Components\Repeater::make('files')
+                            ->label('Files')
+                            ->schema([
+                                Forms\Components\Hidden::make('id'),
+                                Forms\Components\Placeholder::make('existing_file_info')
+                                    ->label('Existing File')
+                                    ->content(function (Forms\Get $get) {
+                                        $id = $get('id');
+                                        if ($id) {
+                                            $file = \App\Models\File::find($id);
+                                            if ($file) {
+                                                $size = $file->size;
+                                                $units = ['B', 'KB', 'MB', 'GB'];
+                                                $bytes = $size;
+                                                for ($i = 0; $bytes > 1024 && $i < count($units) - 1; $i++) {
+                                                    $bytes /= 1024;
+                                                }
+                                                $formattedSize = round($bytes, 2) . ' ' . $units[$i];
+                                                return $file->original_name . ' (' . $formattedSize . ')';
+                                            }
+                                        }
+                                        return null;
+                                    })
+                                    ->visible(fn (Forms\Get $get) => !empty($get('id'))),
+                                CuratorPicker::make('media_id')
+                                    ->label('Select File from Media Library')
+                                    ->required(fn (Forms\Get $get) => empty($get('id')))
+                                    ->buttonLabel('Select Media')
+                                    ->listDisplay(true)
+                                    ->multiple(false)
+                                    ->helperText('Select a file from the media library (only for new files)')
+                                    ->visible(fn (Forms\Get $get) => empty($get('id')))
+                                    ->afterStateUpdated(function ($state, Forms\Set $set, Forms\Get $get) {
+                                        if ($state) {
+                                            $mediaId = is_array($state) ? (reset($state) ?: null) : $state;
+                                            if ($mediaId) {
+                                                $media = \App\Models\Media::find($mediaId);
+                                                if ($media && $media instanceof \App\Models\Media) {
+                                                    $extension = pathinfo($media->file_name ?? $media->name, PATHINFO_EXTENSION) ?: $media->ext;
+                                                    $set('original_name', $media->file_name ?? $media->name ?? 'file.' . $extension);
+                                                }
+                                            }
+                                        }
+                                    }),
+                                Forms\Components\TextInput::make('original_name')
+                                    ->label('File Name')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->helperText('The original name of the file (auto-filled from media selection for new files)'),
+                            ])
+                            ->defaultItems(0)
+                            ->addActionLabel('Add File')
+                            ->reorderable(false)
+                            ->collapsible()
+                            ->itemLabel(fn (array $state): ?string => $state['original_name'] ?? null)
+                            ->dehydrated(true)
                             ->columnSpanFull(),
                     ]),
 
@@ -152,7 +214,9 @@ class ItemResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('publisher')
+                Tables\Columns\TextColumn::make('author')
+                    ->label('Author / Publisher')
+                    ->formatStateUsing(fn ($record) => $record->author ?? $record->publisher ?? 'N/A')
                     ->searchable(),
 
                 Tables\Columns\TextColumn::make('type')

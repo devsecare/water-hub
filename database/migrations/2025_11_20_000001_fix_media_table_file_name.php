@@ -13,10 +13,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (Schema::hasTable('media') && Schema::hasColumn('media', 'file_name')) {
-            // Use raw SQL to modify the column (doesn't require doctrine/dbal)
-            DB::statement('ALTER TABLE `media` MODIFY COLUMN `file_name` VARCHAR(255) NULL');
+        $driver = DB::getDriverName();
+        
+        // SQLite doesn't support MODIFY COLUMN
+        // The file_name column should already be nullable from the create migration
+        // This migration is a no-op for SQLite
+        if ($driver === 'mysql') {
+            if (Schema::hasTable('media') && Schema::hasColumn('media', 'file_name')) {
+                // Use raw SQL to modify the column (doesn't require doctrine/dbal)
+                DB::statement('ALTER TABLE `media` MODIFY COLUMN `file_name` VARCHAR(255) NULL');
+            }
         }
+        // For SQLite, the column should already be nullable from the create migration
     }
 
     /**
@@ -24,10 +32,16 @@ return new class extends Migration
      */
     public function down(): void
     {
-        if (Schema::hasTable('media') && Schema::hasColumn('media', 'file_name')) {
-            // Revert to NOT NULL (though this might fail if there are NULL values)
-            DB::statement('ALTER TABLE `media` MODIFY COLUMN `file_name` VARCHAR(255) NOT NULL');
+        $driver = DB::getDriverName();
+        
+        // SQLite doesn't support MODIFY COLUMN
+        if ($driver === 'mysql') {
+            if (Schema::hasTable('media') && Schema::hasColumn('media', 'file_name')) {
+                // Revert to NOT NULL (though this might fail if there are NULL values)
+                DB::statement('ALTER TABLE `media` MODIFY COLUMN `file_name` VARCHAR(255) NOT NULL');
+            }
         }
+        // For SQLite, no action needed
     }
 };
 
