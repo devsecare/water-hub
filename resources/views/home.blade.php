@@ -32,9 +32,13 @@
 
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 md:gap-4 mt-3 sm:mt-4 md:mt-6">
             @auth
-            <a href="{{ route('casestudy') }}"
+            <!-- <a href="{{ route('casestudy') }}"
                 class="bg-[#00BFFF] text-black text-[18px] px-5 sm:px-6 md:px-8 py-2 sm:py-1 rounded-full shadow hover:bg-blue-500 transition">
                 View Map
+            </a> -->
+             <a href="{{ route('casestudy') }}"
+                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg w-[145px] h-[40px] py-2 px-5 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
+               View Map
             </a>
             @else
             <!-- <a href="{{ route('register') }}" 
@@ -42,7 +46,7 @@
                      rounded-full shadow transition duration-300 hover:bg-[#1E1D57] hover:text-[#37C6F4]"> Register
                 </a> -->
             <a href="{{ route('register') }}"
-                class="inline-block bg-[#3DB8FF] text-[#0F172A] font-semibold text-lg w-[145px] h-[40px] py-2 px-10 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
+                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg w-[145px] h-[40px] py-2 px-10 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
                 Register
             </a>
 
@@ -126,13 +130,13 @@
 <section class="px-6 lg:px-16 ">
     <div class="max-w-7xl mx-auto flex gap-4">
         <button class="next group">
-            <span class="material-symbols-outlined rotate-180 text-4xl transition-all group-hover:!text-[#1E1D57]">
+            <span class="material-symbols-outlined rotate-180 text-4xl transition-all group-hover:!text-[#1E1D57] slide-button">
                 expand_circle_right
             </span>
         </button>
 
         <button class="prev group">
-            <span class="material-symbols-outlined text-4xl transition-all group-hover:!text-[#1E1D57]">
+            <span class="material-symbols-outlined text-4xl transition-all group-hover:!text-[#1E1D57] slide-button">
                 expand_circle_right
             </span>
         </button>
@@ -145,7 +149,7 @@
 
                 <!-- ========= CARD TEMPLATE (Copy 10 times) ========= -->
                 <div class="swiper-slide max-w-[286px]">
-                    <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                    <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
                         <div class="p-5 space-y-3 card-before">
                             <div class="space-y-1">
                                 <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
@@ -174,7 +178,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                      <div class="p-5 space-y-6 card-before">
                              <div class="space-y-1">
@@ -205,7 +209,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">
@@ -251,7 +255,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">
@@ -297,7 +301,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">
@@ -343,7 +347,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">
@@ -389,7 +393,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">
@@ -435,7 +439,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">
@@ -481,7 +485,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">
@@ -527,7 +531,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">
@@ -573,7 +577,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-gray-200">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before">
                              <div class="space-y-1">

@@ -24,7 +24,7 @@
                 About Us
             </p>
 
-            <h1 class="text-2xl sm:text-3xl md:text-5xl font-extrabold leading-snug font-appetite text-white">
+            <h1 class="text-3xl sm:text-[48px] font-bold leading-snug font-appetite text-white max-w-[730px]">
                 The trusted federation <br class="hidden sm:block" />
                 advancing water PPPs globally
             </h1>

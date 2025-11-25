@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // CARDS SLIDER HOME PAGE START 
 // FIXED-WIDTH CARD SLIDER
         var swiper = new Swiper(".mySwiper", {
-            slidesPerView: "auto",   // fixed width cards (no resizing)
+            slidesPerView: "4.2",   // fixed width cards (no resizing)
             spaceBetween: 32,
             speed: 600,
             grabCursor: true,

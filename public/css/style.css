@@ -306,3 +306,6 @@ ul.sub-cat {
 .swiper-button-prev {
   color: #161b52 !important;
 }
+.slide-button {
+    font-size: 40px !important;
+}

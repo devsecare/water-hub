@@ -17,7 +17,7 @@
                 Register to create your account
             </h2>
             <p class="text-sm text-center text-gray-500 mb-6">
-                Already registered? <a href="javascript:void(0)" id="showLogin" class="text-blue-600 font-medium hover:underline">Log in</a>.
+                Already registered? <a href="javascript:void(0)" id="showLogin" class="text-gray-900 font-medium hover:underline">Log in</a>.
             </p>
 
             <form id="registerFormElement" method="POST" action="{{ route('register') }}" class="space-y-4" novalidate>
@@ -67,7 +67,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="w-full bg-[#37C6F4] text-white rounded-[20px] py-2.5 mt-2 text-[16px] font-medium transition hover:bg-[#2CB0D9]">
+                <button type="submit" class="w-full bg-[#37C6F4] hover:bg-[#1E1D57] text-[#1E1D57] hover:text-[#37C6F4] rounded-[20px] py-2.5 mt-2 text-[16px] font-medium transition ">
                     Register
                 </button>
             </form>
@@ -86,7 +86,7 @@
                 Sign in to your account
             </h2>
             <p class="text-sm text-center text-gray-500 mb-6">
-                Don't have an account? <a href="javascript:void(0)" id="showRegister" class="text-blue-600 font-medium hover:underline">Register</a>.
+                Don't have an account? <a href="javascript:void(0)" id="showRegister" class="text-gray-900 font-medium hover:underline">Register</a>.
             </p>
 
             <form id="loginFormElement" method="POST" action="{{ route('login') }}" class="space-y-4" novalidate>
@@ -118,7 +118,7 @@
                     @enderror
                 </div>
 
-                <button type="submit" class="w-full bg-[#37C6F4] text-white rounded-[20px] py-2.5 mt-2 text-[16px] font-medium transition hover:bg-[#2CB0D9]">
+                <button type="submit" class="w-full bg-[#37C6F4] hover:bg-[#1E1D57] text-[#1E1D57] hover:text-[#37C6F4] rounded-[20px] py-2.5 mt-2 text-[16px] font-medium transition">
                     Sign in
                 </button>
             </form>
@@ -264,7 +264,7 @@
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16">
     <div class="max-w-7xl mx-auto  py-20 sm:py-24 lg:py-28">
         <p class="text-lg text-[#37C6F4] font-semibold mb-2">WATER PPP RESOURCES</p>
-        <h1 class="text-4xl font-appetite sm:text-4xl font-extrabold leading-none max-w-xl">
+        <h1 class="text-4xl font-appetite sm:text-[48px] font-bold leading-none max-w-[710px]">
             Everything You Need To Identify, Prepare, Implement And Manage Your PPP Project
         </h1>
     </div>
@@ -358,7 +358,7 @@
     class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-300">
     <div
         class="bg-white rounded-2xl shadow-xl max-w-[51rem] w-[90%] md:w-[70%] p-8 relative animate-fadeIn overflow-hidden">
-        <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-600 hover:text-black z-10">
+        <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-600 hover:text-black z-10 cursor-pointer">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
 
@@ -391,38 +391,12 @@
         <!-- Buttons fixed at the bottom section -->
         <div class="border-t mt-8 pt-4 flex justify-between flex-wrap gap-4 text-gray-700 text-sm">
             <div class="flex flex-wrap gap-6">
-                <button class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" data-lucide="bookmark" class="lucide lucide-bookmark w-4 h-4">
-                        <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
-                    </svg>Add to
-                    your library</button>
-                <button class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" data-lucide="download" class="lucide lucide-download w-4 h-4">
-                        <path d="M12 15V3"></path>
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <path d="m7 10 5 5 5-5"></path>
-                    </svg>Download
+                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250 text-[#37C6F4]" data-item-id="1" onclick="toggleBookmark(1, this)"><span class="material-symbols-outlined">bookmark</span>Add to your library</button>
+                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250"><span class="material-symbols-outlined">download</span>Download
                     file</button>
-                <button class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" data-lucide="share-2" class="lucide lucide-share-2 w-4 h-4">
-                        <circle cx="18" cy="5" r="3"></circle>
-                        <circle cx="6" cy="12" r="3"></circle>
-                        <circle cx="18" cy="19" r="3"></circle>
-                        <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"></line>
-                        <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"></line>
-                    </svg>Share</button>
+                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250"><span class="material-symbols-outlined">share</span>Share</button>
             </div>
-            <button class="flex items-center gap-2 font-semibold underline"><svg xmlns="http://www.w3.org/2000/svg"
-                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" data-lucide="more-horizontal"
-                    class="lucide lucide-more-horizontal w-4 h-4">
-                    <circle cx="12" cy="12" r="1"></circle>
-                    <circle cx="19" cy="12" r="1"></circle>
-                    <circle cx="5" cy="12" r="1"></circle>
-                </svg>More options…</button>
+            <button class="flex items-center gap-2 font-semibold underline cursor-pointer hover:text-[#37C6F4] duration-250">More options…</button>
         </div>
     </div>
 </div>
