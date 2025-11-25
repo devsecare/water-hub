@@ -10,7 +10,7 @@
 
     <div class="max-w-7xl mx-auto  py-20 sm:py-24 lg:py-28">
         <p class="text-[18px] text-[#37C6F4] font-semibold mb-6">WATER PPP CASE STUDIES</p>
-        <h1 class=" font-appetite text-3xl sm:text-5xl font-extrabold leading-none max-w-[500px]">
+        <h1 class=" font-appetite text-3xl sm:text-5xl font-bold leading-none max-w-[500px]">
             Learn from water PPP success stories
         </h1>
     </div>

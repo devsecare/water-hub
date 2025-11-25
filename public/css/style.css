@@ -309,3 +309,17 @@ ul.sub-cat {
 .slide-button {
     font-size: 40px !important;
 }
+
+.card-before:before {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 40px;
+    background-color: #1e1d57;
+    position: absolute;
+    top: 150px;
+    left: 100%;
+}
+.swiper-slide:last-child .card-before:before{
+  display: none;
+}

@@ -18,7 +18,8 @@
             Register to create your account
         </h2>
         <p class="text-sm text-center text-gray-500 mb-6">
-            Already registered? <a href="{{ route('login') }}" class="text-blue-600 font-medium hover:underline">Log in</a>.
+            Already registered? <a href="{{ route('login') }}" class="text-gray-500 font-medium hover:underline">Log
+                in</a>.
         </p>
 
         <form method="POST" action="{{ route('register') }}" class="space-y-4" novalidate>
@@ -29,7 +30,7 @@
                 <input id="name" name="name" type="text" required value="{{ old('name') }}"
                     class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none @error('name') border-red-500 @enderror">
                 @error('name')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -38,7 +39,7 @@
                 <input id="email" name="email" type="email" required value="{{ old('email') }}"
                     class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none @error('email') border-red-500 @enderror">
                 @error('email')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
@@ -47,22 +48,25 @@
                 <div class="relative">
                     <input id="password" name="password" type="password" required
                         class="w-full border border-gray-300 rounded-[20px] px-3 py-2 pr-10 text-gray-900 text-[15px] bg-gray-100 focus:outline-none @error('password') border-red-500 @enderror">
-                    <button type="button" id="togglePassword" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
-                        👁️
+                    <button type="button" id="togglePassword"
+                        class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+                        <span class="material-symbols-outlined">visibility_off</span>
                     </button>
                 </div>
                 @error('password')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
             <div>
-                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+                <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirm
+                    Password</label>
                 <input id="password_confirmation" name="password_confirmation" type="password" required
                     class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none">
             </div>
 
-            <button type="submit" class="w-full bg-[#37C6F4] text-white rounded-[20px] py-2 mt-2 text-[16px] font-medium transition">
+            <button type="submit"
+                class="w-full bg-[#37C6F4] hover:bg-[#1E1D57] text-[#1E1D57] hover:text-[#37C6F4] rounded-[20px] py-2 mt-2 text-[16px] font-medium transition">
                 Register
             </button>
         </form>
@@ -84,7 +88,7 @@
     togglePassword.addEventListener("click", () => {
         const type = password.getAttribute("type") === "password" ? "text" : "password";
         password.setAttribute("type", type);
-        togglePassword.textContent = type === "password" ? "👁️" : "🙈";
+        togglePassword.innerHTML = type === "password" ? '<span class="material-symbols-outlined">visibility_off</span>' : '<span class="material-symbols-outlined">visibility</span>';
     });
 </script>
 @endpush

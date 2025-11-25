@@ -32,21 +32,13 @@
 
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 md:gap-4 mt-3 sm:mt-4 md:mt-6">
             @auth
-            <!-- <a href="{{ route('casestudy') }}"
-                class="bg-[#00BFFF] text-black text-[18px] px-5 sm:px-6 md:px-8 py-2 sm:py-1 rounded-full shadow hover:bg-blue-500 transition">
-                View Map
-            </a> -->
              <a href="{{ route('casestudy') }}"
-                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg w-[145px] h-[40px] py-2 px-5 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
+                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg  py-[6px] px-[31px] rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
                View Map
             </a>
             @else
-            <!-- <a href="{{ route('register') }}" 
-                    class="bg-[#37C6F4] text-[#1E1D57] text-[18px] px-5 sm:px-7 md:px-8 py-2 sm:py-2
-                     rounded-full shadow transition duration-300 hover:bg-[#1E1D57] hover:text-[#37C6F4]"> Register
-                </a> -->
             <a href="{{ route('register') }}"
-                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg w-[145px] h-[40px] py-2 px-10 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
+                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg  py-[6px] px-9 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
                 Register
             </a>
 
@@ -142,7 +134,7 @@
         </button>
     </div>
 </section>
-<section class="pl-6 lg:pl-16  py-4 max-w-[1580px] ml-auto">
+<section class="pl-6   py-4 max-w-[1590px] ml-auto">
     <div class="relative">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper">
@@ -150,16 +142,10 @@
                 <!-- ========= CARD TEMPLATE (Copy 10 times) ========= -->
                 <div class="swiper-slide max-w-[286px]">
                     <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                             <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
-                                    Commercial/financial/<br>economic
-                                </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Section one</p>
+                              
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -180,16 +166,10 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                     <div class="p-5 space-y-6 card-before">
+                     <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
-                                    Commercial/financial/economic
-                                </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold  text-[#161b52]">Lorem ipsum dolor sit amet, consetetur sadipscing elitr orem ipsum dolor sit amet, consetetur sadipscing elitr</p>
+                                
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -211,62 +191,16 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
                                     Commercial/financial/<br>economic
                                 </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
-                            </div>
-                            <div class="flex items-start space-x-2 text-[#37C6F4]">
-                                <!-- Icon -->
-                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    chat
-                                </span>
-
-                                <!-- Two-line text -->
-                                <div class="text-sm leading-tight">
-                                    <div>Stakeholder</div>
-                                    <div>consultation phase</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
-                            <p class="text-sm">• Section 2 content</p>
-                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                            </ul>
-                        </div>
-
-                        <button
-                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
-                            <span class="btnText">More information</span>
-                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="swiper-slide max-w-[286px]">
-                    <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
-
-                        <div class="p-5 space-y-3 card-before">
-                             <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
-                                    Commercial/financial/<br>economic
-                                </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -303,16 +237,16 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
                                     Commercial/financial/<br>economic
                                 </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -349,16 +283,16 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
                                     Commercial/financial/<br>economic
                                 </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -395,16 +329,16 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
                                     Commercial/financial/<br>economic
                                 </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -441,16 +375,16 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
                                     Commercial/financial/<br>economic
                                 </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -487,16 +421,16 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
                                     Commercial/financial/<br>economic
                                 </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -533,16 +467,16 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
                                     Commercial/financial/<br>economic
                                 </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -579,16 +513,62 @@
                     <div
                         class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
 
-                        <div class="p-5 space-y-3 card-before">
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52]">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52]">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52]">Technical</p>
-                                <p class="font-semibold text-[#161b52]">Institutional</p>
-                                <p class="font-semibold text-[#161b52] leading-tight">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
                                     Commercial/financial/<br>economic
                                 </p>
-                                <p class="font-semibold text-[#161b52]">Procurement process</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
+                            </div>
+                            <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                <!-- Icon -->
+                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
+                                    chat
+                                </span>
+
+                                <!-- Two-line text -->
+                                <div class="text-sm leading-tight">
+                                    <div>Stakeholder</div>
+                                    <div>consultation phase</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
+                            <p class="text-sm">• Section 2 content</p>
+                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                                <li>Lorem ipsum dolor sit amet</li>
+                            </ul>
+                        </div>
+
+                        <button
+                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
+                            <span class="btnText">More information</span>
+                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide max-w-[286px]">
+                    <div
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+
+                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
+                             <div class="space-y-1">
+                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
+                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
+                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
+                                    Commercial/financial/<br>economic
+                                </p>
+                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
@@ -868,13 +848,13 @@
 
             @auth
             <a href="{{ route('map.index') }}"
-                class="inline-block bg-[#3DB8FF] text-[#0F172A] font-semibold text-lg px-6 py-3 rounded-full hover:bg-[#2FA3E0] transition-all duration-300">
+                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg  py-[6px] px-[31px] rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
                 View Map
             </a>
             @else
 
-            <a href="{{ route('register') }}"
-                class="inline-block bg-[#3DB8FF] text-[#0F172A] font-semibold text-lg w-[145px] h-[40px] py-2 px-10 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
+          <a href="{{ route('register') }}"
+                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg  py-[6px] px-9 rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
                 Register
             </a>
 

@@ -8,7 +8,7 @@
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16 relative">
     <div class="max-w-7xl mx-auto  py-12  sm:py-24 lg:py-28">
         <p class="text-xl text-[#37C6F4] font-semibold mb-2">WHAT ARE WATER AND WASTEWATER PPPs</p>
-        <h1 class="text-4xl font-appetite sm:text-5xl font-extrabold leading-none max-w-xl">
+        <h1 class="text-4xl font-appetite sm:text-5xl font-bold leading-none max-w-xl">
             Understanding Water PPPs – The Facts
         </h1>
     </div>

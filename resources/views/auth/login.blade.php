@@ -18,7 +18,7 @@
         <h2 class="text-2xl font-bold text-center text-gray-900">Sign in to your account</h2>
         <p class="text-center text-gray-500 mt-2">
             Don't have an account?
-            <a href="{{ route('register') }}" class="text-blue-600 hover:underline font-medium">Register.</a>
+            <a href="{{ route('register') }}" class="text-gray-500 hover:underline font-medium">Register.</a>
         </p>
 
         <!-- Form -->
@@ -41,7 +41,7 @@
                 <input type="password" id="password" name="password" required
                        class="w-full px-3 py-2 rounded-[20px] bg-gray-100 focus:outline-none pr-10 @error('password') border-red-500 @enderror">
                 <button type="button" id="togglePassword" class="absolute inset-y-0 right-3 top-6 flex items-center text-gray-400 hover:text-gray-600">
-                    👁️
+                    <span class="material-symbols-outlined">visibility_off</span>
                 </button>
                 @error('password')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -55,7 +55,7 @@
             </div>
 
             <!-- Login Button -->
-            <button type="submit" class="w-full py-3 bg-sky-500 hover:bg-sky-600 text-white font-medium rounded-full transition duration-200">
+            <button type="submit" class="w-full py-3 bg-[#37C6F4] hover:bg-[#1E1D57] text-[#1E1D57] hover:text-[#37C6F4] font-medium rounded-full transition duration-200">
                 Log in
             </button>
 
@@ -75,7 +75,7 @@
     togglePassword.addEventListener('click', () => {
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
-        togglePassword.textContent = type === 'password' ? '👁️' : '🙈';
+         togglePassword.innerHTML = type === "password" ? '<span class="material-symbols-outlined">visibility_off</span>' : '<span class="material-symbols-outlined">visibility</span>';
     });
 </script>
 @endpush

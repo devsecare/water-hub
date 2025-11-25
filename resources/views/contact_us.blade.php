@@ -9,7 +9,7 @@
 
   <div class="max-w-7xl mx-auto  py-20 sm:py-24 lg:py-28">
     <p class="text-[18px] text-[#37C6F4] font-semibold mb-6">CONTACT US</p>
-    <h1 class=" font-appetite text-4xl sm:text-5xl font-extrabold leading-none max-w-[710px]">
+    <h1 class=" font-appetite text-3xl sm:text-5xl font-bold leading-none max-w-[710px]">
       Get in touch with the Water and Wastewater PPP Hub
     </h1>
   </div>
