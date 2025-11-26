@@ -323,3 +323,7 @@ ul.sub-cat {
 .swiper-slide:last-child .card-before:before{
   display: none;
 }
+
+.swiper{
+  overflow: visible !important;
+}
