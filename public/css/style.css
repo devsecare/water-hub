@@ -327,3 +327,11 @@ ul.sub-cat {
 .swiper{
   overflow: visible !important;
 }
+
+.swiper-left-hide > div {
+    clip-path: inset(0 -30% -10% 0px);
+}
+
+.swiper-button-disabled {
+    color: #ABABAB;
+}
