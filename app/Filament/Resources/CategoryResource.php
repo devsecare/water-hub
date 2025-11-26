@@ -121,6 +121,8 @@ class CategoryResource extends Resource
             ->filters([
                 //
             ])
+            ->reorderable('sort')
+            ->defaultSort('sort')
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

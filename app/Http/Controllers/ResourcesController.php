@@ -22,10 +22,11 @@ class ResourcesController extends Controller
         // Get all active categories with their children
         $categories = Category::where('is_active', true)
             ->with(['children' => function ($query) {
-                $query->where('is_active', true);
+                $query->where('is_active', true)
+                    ->orderBy('sort');
             }])
             ->whereNull('parent_id')
-            ->orderBy('name')
+            ->orderBy('sort')
             ->get();
 
         // Get all active items with their relationships

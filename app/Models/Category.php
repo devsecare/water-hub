@@ -19,6 +19,7 @@ class Category extends Model
         'parent_id',
         'description',
         'is_active',
+        'sort',
     ];
 
     protected $casts = [
@@ -62,6 +63,14 @@ class Category extends Model
         static::creating(function ($category) {
             if (empty($category->slug)) {
                 $category->slug = Str::slug($category->name);
+            }
+            
+            // Set sort order to the next available number if not set
+            if (!isset($category->sort)) {
+                $maxSort = static::whereNull('parent_id')
+                    ->orWhere('parent_id', $category->parent_id)
+                    ->max('sort') ?? 0;
+                $category->sort = $maxSort + 1;
             }
         });
 
