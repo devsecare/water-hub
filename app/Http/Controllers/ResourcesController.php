@@ -52,6 +52,7 @@ class ResourcesController extends Controller
                     'category_name' => $item->category ? $item->category->name : '',
                     'category_color' => $item->category ? $item->category->color : '#3B82F6',
                     'featured_image_url' => $item->featuredImage ? $item->featuredImage->url : null,
+                    'featured_image_id' => $item->featuredImage ? $item->featuredImage->id : null,
                     'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
                     'files' => $item->files->map(function ($file) {
                         return [

@@ -752,14 +752,13 @@
             return;
         }
 
-        if (!item.files || item.files.length === 0) {
-            alert('No files available for download');
+        if (!item.featured_image_id) {
+            alert('No file available for download');
             return;
         }
 
-        // Download the first file
-        const file = item.files[0];
-        const downloadUrl = `/files/${file.id}/download`;
+        // Download the featured image
+        const downloadUrl = `/media/${item.featured_image_id}/download`;
         window.location.href = downloadUrl;
     }
 
