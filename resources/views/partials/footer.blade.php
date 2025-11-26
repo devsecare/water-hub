@@ -75,7 +75,7 @@
                     <li><a href="https://water-hub.ecareinfoway.com/resources" class="hover:text-white">Water PPP
                             Resources</a></li>
                     <li><a href="{{ route('casestudy') }}" class="hover:text-white">Case study</a></li>
-                    <li><a href="#" class="hover:text-white">Who we are</a></li>
+                    <li><a href="{{ route('understandingWater') }}" class="hover:text-white">Who we are</a></li>
                     <li><a href="{{ route('contactus') }}" class="hover:text-white">Contact us</a>
                     </li>
                 </ul>

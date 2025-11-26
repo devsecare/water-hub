@@ -136,12 +136,12 @@
 </section>
 <section class="pl-6   py-4 max-w-[1590px] ml-auto">
     <div class="relative">
-        <div class="swiper mySwiper">
+        <div class="swiper mySwiper overflow-y-visible">
             <div class="swiper-wrapper">
 
                 <!-- ========= CARD TEMPLATE (Copy 10 times) ========= -->
                 <div class="swiper-slide max-w-[286px]">
-                    <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                    <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                             <div class="space-y-1">
                                 <p class="font-semibold text-[#161b52] text-lg">Section one</p>
@@ -164,7 +164,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                      <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -189,7 +189,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -235,7 +235,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -281,7 +281,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -327,7 +327,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -373,7 +373,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -419,7 +419,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -465,7 +465,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -511,7 +511,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">
@@ -557,7 +557,7 @@
                 </div>
                 <div class="swiper-slide max-w-[286px]">
                     <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-md overflow-hidden border border-[#1E1D57]">
+                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
 
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                              <div class="space-y-1">

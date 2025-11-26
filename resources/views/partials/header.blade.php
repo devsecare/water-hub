@@ -10,10 +10,10 @@
 
         <!-- Desktop Menu -->
         <nav class="hidden xl:flex items-center font-medium space-x-6 xl:space-x-8 flex-nowrap overflow-hidden">
-            <a href="{{ route('about') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">About water PPPs</a>
+            <a href="{{ route('understandingWater') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">About water PPPs</a>
             <a href="{{ route('resources') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Water PPP Resources</a>
             <a href="{{ route('casestudy') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Case studies</a>
-            <a href="#" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Who we are</a>
+            <a href="{{ route('about') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Who we are</a>
             <a href="{{ route('contactus') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Contact us</a>
             @auth
             <a href="{{ route('myaccount') }}" class="flex gap-2 items-center text-[#37C6F4]"><span><svg id="account-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -63,11 +63,11 @@
                 @endauth
 
             </div>
-            <a href="{{ route('about') }}" class="hover:text-blue-600">About water PPPs</a>
+            <a href="{{ route('understandingWater') }}" class="hover:text-blue-600">About water PPPs</a>
             <a href="{{ route('resources') }}" class="hover:text-blue-600">Water PPP Resources</a>
             <a href="#" class="hover:text-blue-600">Case studies</a>
-            <a href="#" class="hover:text-blue-600">Who we are</a>
-            <a href="{{ route('contact') }}" class="hover:text-blue-600">Contact us</a>
+            <a href="{{ route('about') }}" class="hover:text-blue-600">Who we are</a>
+            <a href="{{ route('contactus') }}" class="hover:text-blue-600">Contact us</a>
             
                 <!-- <a href="{{ route('map.index') }}" class="hover:text-blue-600">Map</a>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
