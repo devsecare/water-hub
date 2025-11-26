@@ -37,13 +37,31 @@ class MediaDownloadController extends Controller
         }
 
         // Get the original filename for download
-        $fileName = $media->file_name ?? $media->name ?? 'download';
+        // Priority: file_name > title > extract from path > default
+        $fileName = null;
         
-        // If no extension in filename, try to get it from path or ext field
+        if (!empty($media->file_name)) {
+            $fileName = $media->file_name;
+        } elseif (!empty($media->title)) {
+            $fileName = $media->title;
+        } else {
+            // Try to extract filename from path
+            $pathInfo = pathinfo($media->path);
+            if (!empty($pathInfo['filename'])) {
+                $fileName = $pathInfo['filename'];
+            }
+        }
+        
+        // If still no filename, use default
+        if (empty($fileName)) {
+            $fileName = 'download';
+        }
+        
+        // Ensure filename has extension
         if (!pathinfo($fileName, PATHINFO_EXTENSION)) {
             $extension = $media->ext ?? pathinfo($media->path, PATHINFO_EXTENSION);
             if ($extension) {
-                $fileName .= '.' . $extension;
+                $fileName .= '.' . ltrim($extension, '.');
             }
         }
 
