@@ -27,7 +27,13 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::get('/about-water-ppps', function () {
-    return view('understanding_water_ppp');
+    $faqs = \App\Models\Faq::where('is_active', true)
+        ->orderBy('sort')
+        ->get();
+    
+    return view('understanding_water_ppp', [
+        'faqs' => $faqs,
+    ]);
 })->name('understandingWater');
 
 Route::get('/water-ppp-resources', function () {
