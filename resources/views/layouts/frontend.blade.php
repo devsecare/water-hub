@@ -23,6 +23,7 @@
            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     @stack('styles')
+    <link rel="icon" type="image/jpeg" href="{{ asset('images/Favicon.jpg') }}">
 </head>
 <body class="bg-white text-gray-900">
     @include('partials.header')
