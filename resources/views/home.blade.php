@@ -139,91 +139,45 @@
     <div class="relative  max-w-7xl mx-auto">
         <div class="swiper mySwiper overflow-y-visible">
             <div class="swiper-wrapper">
-
-                <!-- ========= CARD TEMPLATE (Copy 10 times) ========= -->
+                @forelse($sliderCards ?? [] as $card)
                 <div class="swiper-slide max-w-[286px]">
                     <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
                         <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
                             <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52] text-lg">Section one</p>
-                              
+                                @php
+                                    // Split title by newlines to handle multiline titles
+                                    $titleLines = explode("\n", $card->title);
+                                @endphp
+                                @foreach($titleLines as $line)
+                                    <p class="font-semibold text-[#161b52] text-lg">{{ trim($line) }}</p>
+                                @endforeach
                             </div>
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
                                 <!-- Icon -->
                                 <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    chat
+                                    {{ $card->icon ?? 'chat' }}
                                 </span>
 
                                 <!-- Two-line text -->
                                 <div class="text-sm leading-tight">
-                                    <div>Stakeholder</div>
-                                    <div>consultation phase</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide max-w-[286px]">
-                    <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
-
-                     <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
-                             <div class="space-y-1">
-                                <p class="font-semibold  text-[#161b52]">Lorem ipsum dolor sit amet, consetetur sadipscing elitr orem ipsum dolor sit amet, consetetur sadipscing elitr</p>
-                                
-                            </div>
-                            <div class="flex items-start space-x-2 text-[#37C6F4]">
-                                <!-- Icon -->
-                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    chat
-                                </span>
-
-                                <!-- Two-line text -->
-                                <div class="text-sm leading-tight">
-                                    <div>Stakeholder</div>
-                                    <div>consultation phase</div>
+                                    <div>{{ $card->subtitle_line_1 ?? '' }}</div>
+                                    <div>{{ $card->subtitle_line_2 ?? '' }}</div>
                                 </div>
                             </div>
                         </div>
 
-                    </div>
-                </div>
-                <div class="swiper-slide max-w-[286px]">
-                    <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
-
-                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
-                             <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
-                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
-                                    Commercial/financial/<br>economic
-                                </p>
-                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
-                            </div>
-                            <div class="flex items-start space-x-2 text-[#37C6F4]">
-                                <!-- Icon -->
-                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    chat
-                                </span>
-
-                                <!-- Two-line text -->
-                                <div class="text-sm leading-tight">
-                                    <div>Stakeholder</div>
-                                    <div>consultation phase</div>
-                                </div>
-                            </div>
-                        </div>
-
+                        @if($card->has_expandable && ($card->expandable_title || $card->expandable_items))
                         <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
-                            <p class="text-sm">• Section 2 content</p>
+                            @if($card->expandable_title)
+                            <p class="text-sm">• {{ $card->expandable_title }}</p>
+                            @endif
+                            @if($card->expandable_items && is_array($card->expandable_items) && count($card->expandable_items) > 0)
                             <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
+                                @foreach($card->expandable_items as $item)
+                                <li>{{ $item }}</li>
+                                @endforeach
                             </ul>
+                            @endif
                         </div>
 
                         <button
@@ -231,193 +185,12 @@
                             <span class="btnText">More information</span>
                             <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
                         </button>
-
+                        @endif
                     </div>
                 </div>
-                <div class="swiper-slide max-w-[286px]">
-                    <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
-
-                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
-                             <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
-                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
-                                    Commercial/financial/<br>economic
-                                </p>
-                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
-                            </div>
-                            <div class="flex items-start space-x-2 text-[#37C6F4]">
-                                <!-- Icon -->
-                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    chat
-                                </span>
-
-                                <!-- Two-line text -->
-                                <div class="text-sm leading-tight">
-                                    <div>Stakeholder</div>
-                                    <div>consultation phase</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
-                            <p class="text-sm">• Section 2 content</p>
-                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                            </ul>
-                        </div>
-
-                        <button
-                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
-                            <span class="btnText">More information</span>
-                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="swiper-slide max-w-[286px]">
-                    <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
-
-                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
-                             <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
-                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
-                                    Commercial/financial/<br>economic
-                                </p>
-                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
-                            </div>
-                            <div class="flex items-start space-x-2 text-[#37C6F4]">
-                                <!-- Icon -->
-                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    chat
-                                </span>
-
-                                <!-- Two-line text -->
-                                <div class="text-sm leading-tight">
-                                    <div>Stakeholder</div>
-                                    <div>consultation phase</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
-                            <p class="text-sm">• Section 2 content</p>
-                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                            </ul>
-                        </div>
-
-                        <button
-                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
-                            <span class="btnText">More information</span>
-                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="swiper-slide max-w-[286px]">
-                    <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
-
-                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
-                             <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
-                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
-                                    Commercial/financial/<br>economic
-                                </p>
-                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
-                            </div>
-                            <div class="flex items-start space-x-2 text-[#37C6F4]">
-                                <!-- Icon -->
-                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    chat
-                                </span>
-
-                                <!-- Two-line text -->
-                                <div class="text-sm leading-tight">
-                                    <div>Stakeholder</div>
-                                    <div>consultation phase</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
-                            <p class="text-sm">• Section 2 content</p>
-                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                            </ul>
-                        </div>
-
-                        <button
-                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
-                            <span class="btnText">More information</span>
-                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
-                        </button>
-
-                    </div>
-                </div>
-                <div class="swiper-slide max-w-[286px]">
-                    <div
-                        class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
-
-                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
-                             <div class="space-y-1">
-                                <p class="font-semibold text-[#161b52] text-lg">PPP preparation/feasibility</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Legal/Regulatory</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Technical</p>
-                                <p class="font-semibold text-[#161b52] text-lg">Institutional</p>
-                                <p class="font-semibold text-[#161b52] text-lg leading-tight">
-                                    Commercial/financial/<br>economic
-                                </p>
-                                <p class="font-semibold text-[#161b52] text-lg">Procurement process</p>
-                            </div>
-                            <div class="flex items-start space-x-2 text-[#37C6F4]">
-                                <!-- Icon -->
-                                <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    chat
-                                </span>
-
-                                <!-- Two-line text -->
-                                <div class="text-sm leading-tight">
-                                    <div>Stakeholder</div>
-                                    <div>consultation phase</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="slideBox slide bg-[#161b52] text-white px-5 pt-5 pb-3 space-y-3">
-                            <p class="text-sm">• Section 2 content</p>
-                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                                <li>Lorem ipsum dolor sit amet</li>
-                            </ul>
-                        </div>
-
-                        <button
-                            class="toggleBtn w-full bg-[#161b52] text-white flex justify-between items-center px-5 py-4 text-lg font-medium">
-                            <span class="btnText">More information</span>
-                            <span class="toggleArrow material-symbols-outlined">expand_circle_right</span>
-                        </button>
-
-                    </div>
-                </div>
+                @empty
+                <!-- No slider cards available -->
+                @endforelse
             </div>
         </div>
     </div>
