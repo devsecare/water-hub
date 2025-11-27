@@ -213,7 +213,7 @@
             </p>
 
             <!-- Link -->
-            <a href="{{ route('contact') }}" class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold transition-colors">
+            <a href="{{ route('contactus') }}" class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold transition-colors">
                 <span class="group-hover:text-[#1E1D57] transition-colors">Get in touch</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-[24px] w-[24px] text-bold ml-1 transition-colors  group-hover:text-[#1E1D57]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>

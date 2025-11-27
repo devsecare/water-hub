@@ -96,7 +96,7 @@ body {
     rgba(198, 198, 208, 0.49) 0%,
     rgba(55, 198, 244, 0.49) 100%
   );
-  color: white;
+  color:white;
   margin-bottom: -5px;
   /* removes any visible line gap */
 }

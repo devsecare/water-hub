@@ -234,7 +234,6 @@ buttons.forEach((btn) => {
     document.querySelectorAll(".accordion-content").forEach((c) => {
       if (c !== content) c.style.maxHeight = null;
     });
-
     document
       .querySelectorAll(".faq-btn span")
       .forEach((t) => t.classList.remove("text-[#37C6F4]"));
@@ -243,7 +242,10 @@ buttons.forEach((btn) => {
       .forEach((i) => (i.style.transform = "rotate(0deg)"));
     document
       .querySelectorAll(".faq-btn path")
-      .forEach((p) => p.classList.remove("fill-[#37C6F4]"));
+      .forEach((p) =>{
+         p.classList.remove("fill-[#37C6F4]")
+        p.classList.add("fill-[#ababab]");
+      });
 
     // Toggle selected
     if (content.style.maxHeight) {
@@ -253,12 +255,14 @@ buttons.forEach((btn) => {
       icon.style.transform = "rotate(90deg)";
       text.classList.add("text-[#37C6F4]");
       path.classList.add("fill-[#37C6F4]");
+      path.classList.remove("fill-[#ababab]");
+     
     }
   });
 });
 
 // faq section end
- 
+
 // footer year start
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -269,53 +273,49 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // footer year end
 
-
-
-// CARDS SLIDER HOME PAGE START 
+// CARDS SLIDER HOME PAGE START
 // FIXED-WIDTH CARD SLIDER
-        var swiper = new Swiper(".mySwiper", {
-            slidesPerView: "auto",   // fixed width cards (no resizing)
-            spaceBetween: 32,
-            speed: 600,
-            grabCursor: true,
+var swiper = new Swiper(".mySwiper", {
+  slidesPerView: "auto", // fixed width cards (no resizing)
+  spaceBetween: 32,
+  speed: 600,
+  grabCursor: true,
 
-            navigation: {
-                nextEl: ".prev",
-                prevEl: ".next",
-            }
-        });
+  navigation: {
+    nextEl: ".prev",
+    prevEl: ".next",
+  },
+});
 
-        // ACCORDION TOGGLE + AUTO CLOSE
-        $(document).on("click", ".toggleBtn", function () {
+// ACCORDION TOGGLE + AUTO CLOSE
+$(document).on("click", ".toggleBtn", function () {
+  const card = $(this).closest(".card");
+  const slideBox = card.find(".slideBox");
+  const arrow = $(this).find(".toggleArrow");
+  const btnText = $(this).find(".btnText");
 
-            const card = $(this).closest(".card");
-            const slideBox = card.find(".slideBox");
-            const arrow = $(this).find(".toggleArrow");
-            const btnText = $(this).find(".btnText");
+  const wasOpen = slideBox.is(":visible");
 
-            const wasOpen = slideBox.is(":visible");
+  // Close other cards
+  $(".slideBox:visible").not(slideBox).slideUp(250);
+  $(".btnText").not(btnText).text("More information");
+  $(".toggleArrow").not(arrow).css({
+    transform: "rotate(0deg)",
+    color: "white",
+  });
+  $(".toggleBtn").not($(this)).css("color", "white");
 
-            // Close other cards
-            $(".slideBox:visible").not(slideBox).slideUp(250);
-            $(".btnText").not(btnText).text("More information");
-            $(".toggleArrow").not(arrow).css({
-                transform: "rotate(0deg)",
-                color: "white"
-            });
-            $(".toggleBtn").not($(this)).css("color", "white");
+  // Open / Close current card
+  slideBox.slideToggle(250);
 
-            // Open / Close current card
-            slideBox.slideToggle(250);
+  btnText.text(wasOpen ? "More information" : "Close");
 
-            btnText.text(wasOpen ? "More information" : "Close");
+  arrow.css({
+    transform: wasOpen ? "rotate(0deg)" : "rotate(-90deg)",
+    color: wasOpen ? "white" : "#37C6F4",
+  });
 
-            arrow.css({
-                transform: wasOpen ? "rotate(0deg)" : "rotate(-90deg)",
-                color: wasOpen ? "white" : "#37C6F4"
-            });
+  $(this).css("color", wasOpen ? "white" : "#37C6F4");
+});
 
-            $(this).css("color", wasOpen ? "white" : "#37C6F4");
-        });
-
-        // CARDS SLIDER HOME PAGE END
-
+// CARDS SLIDER HOME PAGE END

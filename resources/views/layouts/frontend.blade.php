@@ -24,6 +24,8 @@
 
     @stack('styles')
     <link rel="icon" type="image/jpeg" href="{{ asset('images/Favicon.jpg') }}">
+
+    <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-RCSFBB40JT"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-RCSFBB40JT'); </script>
 </head>
 <body class="bg-white text-gray-900">
     @include('partials.header')

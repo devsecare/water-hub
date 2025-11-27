@@ -361,7 +361,7 @@
 </section>
 <!-- faq section  -->
 
-<section class="w-full bg-regal-blue lg:py-20 py-10 lg:pb-50 text-white">
+<section class="w-full bg-regal-blue lg:py-20 py-10 lg:pb-50 text-white relative mb-10">
     <div class="max-w-4xl mx-auto px-6 lg:px-16">
 
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 max-[440px]:text-xl">
@@ -397,27 +397,21 @@
             </div>
             @endforelse
         </div>
-
+    </div>
+    <!-- waves section  -->
+    <div class=" -bottom-[40px] absolute left-0 right-0">
+        <svg class="w-full h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+        58-18 88-18 58 18 88 18v44h-352z"></path>
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57"></use>
+            </g>
+        </svg>
     </div>
 </section>
-
-
-
-<!-- waves section  -->
-<div class=" bottom-0 left-0 right-0">
-    <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
-        preserveAspectRatio="none">
-        <defs>
-            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
-        58-18 88-18 58 18 88 18v44h-352z" />
-        </defs>
-        <g class="parallax">
-            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)" />
-            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)" />
-            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)" />
-            <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
-        </g>
-    </svg>
-</div>
-
 @endsection

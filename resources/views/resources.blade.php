@@ -12,6 +12,9 @@
 <div class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50" id="authModal">
     <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md mx-4 relative">
         <!-- Register Form -->
+         <div class="close-form cursor-pointer absolute top-[-19px] right-[-15px] flex p-[5px] rounded-full border bg-white">
+            <a href="/" class="flex"><span class="material-symbols-outlined">close</span></a>
+         </div>
         <div id="registerForm">
             <h2 class="text-2xl font-bold text-center text-gray-900 mb-1" style="color: #1E1D57;">
                 Register to create your account

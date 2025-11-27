@@ -7,6 +7,8 @@
     <title>@yield('title', config('app.name', 'AquaFed'))</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
+
+    
 </head>
 <body class="bg-gray-50">
     <nav class="bg-white shadow-sm">
