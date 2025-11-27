@@ -36,9 +36,7 @@ class SliderCardResource extends Resource
                         
                         Forms\Components\TextInput::make('icon')
                             ->label('Icon')
-                            ->required()
-                            ->default('chat')
-                            ->helperText('Material Symbols icon name (e.g., chat, settings, info)')
+                            ->helperText('Material Symbols icon name (e.g., chat, settings, info). Leave empty to hide icon section.')
                             ->maxLength(255),
                         
                         Forms\Components\TextInput::make('subtitle_line_1')

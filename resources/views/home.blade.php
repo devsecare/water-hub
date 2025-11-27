@@ -152,18 +152,24 @@
                                     <p class="font-semibold text-[#161b52] text-lg">{{ trim($line) }}</p>
                                 @endforeach
                             </div>
+                            @if($card->icon || $card->subtitle_line_1 || $card->subtitle_line_2)
                             <div class="flex items-start space-x-2 text-[#37C6F4]">
+                                @if($card->icon)
                                 <!-- Icon -->
                                 <span class="material-symbols-outlined text-[#37C6F4] text-[20px] leading-none">
-                                    {{ $card->icon ?? 'chat' }}
+                                    {{ $card->icon }}
                                 </span>
+                                @endif
 
+                                @if($card->subtitle_line_1 || $card->subtitle_line_2)
                                 <!-- Two-line text -->
                                 <div class="text-sm leading-tight">
                                     <div>{{ $card->subtitle_line_1 ?? '' }}</div>
                                     <div>{{ $card->subtitle_line_2 ?? '' }}</div>
                                 </div>
+                                @endif
                             </div>
+                            @endif
                         </div>
 
                         @if($card->has_expandable && ($card->expandable_title || $card->expandable_items))

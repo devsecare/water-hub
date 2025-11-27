@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('slider_cards', function (Blueprint $table) {
             $table->id();
             $table->text('title'); // Main title (can be multiline)
-            $table->string('icon')->default('chat'); // Material Symbols icon name
+            $table->string('icon')->nullable()->default('chat'); // Material Symbols icon name
             $table->string('subtitle_line_1')->nullable(); // First line of subtitle
             $table->string('subtitle_line_2')->nullable(); // Second line of subtitle
             $table->boolean('has_expandable')->default(false); // Whether card has expandable content
