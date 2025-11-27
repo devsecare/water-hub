@@ -20,7 +20,7 @@ Route::get('/who-we-are', function () {
 })->name('about');
 
 Route::get('/resources', [ResourcesController::class, 'index'])->name('resources');
-Route::get('/resources/{slug}', [ResourcesController::class, 'show'])->name('resources.show');
+Route::get('/resources/{slug}', [ResourcesController::class, 'show'])->name('resources.show')->middleware('auth');
 
 Route::get('/contact', function () {
     return view('contact');

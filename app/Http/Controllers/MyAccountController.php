@@ -37,16 +37,18 @@ class MyAccountController extends Controller
                     'category_id' => $item->category_id,
                     'category_name' => $item->category ? $item->category->name : '',
                     'category_color' => $item->category ? $item->category->color : '#3B82F6',
+                    'category_icon' => $item->category ? ($item->category->icon ?? 'folder') : 'folder',
+                    'parent_category_id' => $item->category && $item->category->parent ? $item->category->parent->id : ($item->category && !$item->category->parent ? $item->category_id : null),
                     'featured_image_url' => $item->featuredImage ? $item->featuredImage->url : null,
                     'is_bookmarked' => true,
                 ];
             });
 
-        // Get unique categories from bookmarked items
-        $bookmarkedCategoryIds = $bookmarkedItems->pluck('category_id')->filter()->unique();
-        
-        $categories = Category::whereIn('id', $bookmarkedCategoryIds)
-            ->where('is_active', true)
+        // Get all active parent categories (top-level categories only) with their children
+        $categories = Category::where('is_active', true)
+            ->whereNull('parent_id')
+            ->with('children')
+            ->orderBy('sort')
             ->orderBy('name')
             ->get()
             ->map(function ($category) {
@@ -55,6 +57,7 @@ class MyAccountController extends Controller
                     'name' => $category->name,
                     'icon' => $category->icon ?? 'folder',
                     'color' => $category->color ?? '#3B82F6',
+                    'child_ids' => $category->children->pluck('id')->toArray(),
                 ];
             });
 

@@ -72,12 +72,11 @@ class ItemResource extends Resource
 
                 Forms\Components\Section::make('Content')
                     ->schema([
-                        Forms\Components\Textarea::make('description')
+                        Forms\Components\RichEditor::make('description')
                             ->columnSpanFull(),
-                        Forms\Components\Textarea::make('short_description')
+                        Forms\Components\RichEditor::make('short_description')
                             ->label('Short Description')
                             ->helperText('Brief description for modal display')
-                            ->rows(3)
                             ->columnSpanFull(),
                     ]),
 
@@ -112,11 +111,11 @@ class ItemResource extends Resource
 
                 Forms\Components\Section::make('Additional Resources')
                     ->schema([
-                        Forms\Components\Repeater::make('files')
+                        Forms\Components\Repeater::make('additional_files')
                             ->label('Files')
                             ->schema([
                                 Forms\Components\Hidden::make('id'),
-                                Forms\Components\Placeholder::make('existing_file_info')
+                                Forms\Components\Placeholder::make('existing_file')
                                     ->label('Existing File')
                                     ->content(function (Forms\Get $get) {
                                         $id = $get('id');
@@ -144,7 +143,8 @@ class ItemResource extends Resource
                                     ->multiple(false)
                                     ->helperText('Select a file from the media library (only for new files)')
                                     ->visible(fn (Forms\Get $get) => empty($get('id')))
-                                    ->afterStateUpdated(function ($state, Forms\Set $set, Forms\Get $get) {
+                                    ->dehydrated(true)
+                                    ->afterStateUpdated(function ($state, Forms\Set $set) {
                                         if ($state) {
                                             $mediaId = is_array($state) ? (reset($state) ?: null) : $state;
                                             if ($mediaId) {
@@ -160,7 +160,7 @@ class ItemResource extends Resource
                                     ->label('File Name')
                                     ->required()
                                     ->maxLength(255)
-                                    ->helperText('The original name of the file (auto-filled from media selection for new files)'),
+                                    ->helperText('The original name of the file'),
                             ])
                             ->defaultItems(0)
                             ->addActionLabel('Add File')

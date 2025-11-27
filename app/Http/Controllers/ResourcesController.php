@@ -51,6 +51,7 @@ class ResourcesController extends Controller
                     'category_id' => $item->category_id,
                     'category_name' => $item->category ? $item->category->name : '',
                     'category_color' => $item->category ? $item->category->color : '#3B82F6',
+                    'category_icon' => $item->category ? ($item->category->icon ?? 'folder') : 'folder',
                     'featured_image_url' => $item->featuredImage ? $item->featuredImage->url : null,
                     'featured_image_id' => $item->featuredImage ? $item->featuredImage->id : null,
                     'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
@@ -101,6 +102,7 @@ class ResourcesController extends Controller
                     'category_id' => $relatedItem->category_id,
                     'category_name' => $relatedItem->category ? $relatedItem->category->name : '',
                     'category_color' => $relatedItem->category ? $relatedItem->category->color : '#3B82F6',
+                    'category_icon' => $relatedItem->category ? ($relatedItem->category->icon ?? 'folder') : 'folder',
                     'featured_image_url' => $relatedItem->featuredImage ? $relatedItem->featuredImage->url : null,
                     'is_bookmarked' => in_array($relatedItem->id, $bookmarkedItemIds),
                 ];

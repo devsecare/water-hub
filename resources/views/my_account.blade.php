@@ -33,17 +33,17 @@
 
       <div class="space-y-6">
 
-        <label class="flex text-[16px] gap-3 items-center space-x-2 text-[#1E1D57] font-semibold">
+        <button type="button" class="flex text-[16px] gap-3 items-center space-x-2 text-[#1E1D57] font-semibold cursor-pointer hover:text-[#37C6F4] transition-colors my-saved-content-btn">
           <span class="material-symbols-outlined text-[#1E1D57]">
             book_4
           </span> My saved content
-        </label>
+        </button>
 
         @if($categories->count() > 0)
         @foreach($categories as $category)
         <label class="flex items-center space-x-2 cursor-pointer category-filter-item"
           data-category-id="{{ $category['id'] }}">
-          <input type="checkbox" value="{{ $category['id'] }}" class="w-6 h-6 appearance-none rounded-md border-2 border-[#1E1D57]
+          <input type="checkbox" value="{{ $category['id'] }}" class="category-checkbox w-6 h-6 appearance-none rounded-md border-2 border-[#1E1D57]
          checked:bg-white checked:border-[#1E1D57]
          checked:before:content-['✔'] checked:before:text-[#1E1D57]
          checked:before:flex checked:before:items-center checked:before:justify-center
@@ -103,7 +103,9 @@
         @if($bookmarkedItems->count() > 0)
         @foreach($bookmarkedItems as $item)
         <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between item-card"
-          data-category-id="{{ $item['category_id'] }}" data-title="{{ strtolower($item['title']) }}"
+          data-category-id="{{ $item['category_id'] }}" 
+          data-parent-category-id="{{ $item['parent_category_id'] ?? '' }}"
+          data-title="{{ strtolower($item['title']) }}"
           data-publisher="{{ strtolower($item['publisher'] ?? '') }}"
           data-description="{{ strtolower($item['short_description'] ?? $item['description'] ?? '') }}">
           <div style="background: linear-gradient(to bottom, #070648, {{ $item['category_color'] ?? '#2CBFA0' }});"
@@ -113,15 +115,15 @@
               <p class="text-sm mt-2 mb-8 opacity-90">{{ $item['publisher'] ?? '' }}</p>
             </div>
             <div class="flex items-center space-x-2 mt-12">
-              <i data-lucide="{{ $item['icon'] }}" class="w-4 h-4"></i>
-              <span class="text-sm">{{ $item['type'] ?? 'Guide' }}</span>
+              <span class="material-symbols-outlined text-sm">{{ $item['category_icon'] ?? 'folder' }}</span>
+              <span class="text-sm">{{ $item['category_name'] ?? $item['type'] ?? 'Guide' }}</span>
             </div>
           </div>
           <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
             <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openItemModal({{ $item['id'] }})">eye_tracking</span>
             <span class="material-symbols-outlined  cursor-pointer hover:text-[#37C6F4] duration-250 text-[#37C6F4]" data-item-id="${card.id}" onclick="toggleBookmark({{ $item['id'] }}, this)">bookmark</span>
             <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">download</span>
-            <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">share</span>
+            <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="shareItem('{{ route('resources.show', $item['slug']) }}', '{{ $item['title'] }}')">share</span>
           </div>
         </div>
         @endforeach
@@ -217,6 +219,9 @@
 @push('scripts')
 <script>
   (function () {
+    // Categories data with child IDs for filtering
+    const categoriesData = @json($categories);
+    
     // Initialize Lucide icons function
     function initializeIcons() {
       if (typeof lucide !== 'undefined') {
@@ -254,12 +259,40 @@
 
       itemCards.forEach(card => {
         const categoryId = parseInt(card.getAttribute('data-category-id'));
+        const parentCategoryId = card.getAttribute('data-parent-category-id') ? parseInt(card.getAttribute('data-parent-category-id')) : null;
         const title = card.getAttribute('data-title') || '';
         const publisher = card.getAttribute('data-publisher') || '';
         const description = card.getAttribute('data-description') || '';
 
-        // Check category filter
-        const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(categoryId);
+        // Check category filter - include items if:
+        // 1. No categories selected, OR
+        // 2. Item's category matches selected category, OR
+        // 3. Item's parent category matches selected category, OR
+        // 4. Item's category is a child of selected parent category
+        let matchesCategory = selectedCategories.length === 0;
+        
+        if (!matchesCategory && selectedCategories.length > 0) {
+          for (const selectedCategoryId of selectedCategories) {
+            // Direct match
+            if (categoryId === selectedCategoryId) {
+              matchesCategory = true;
+              break;
+            }
+            
+            // Parent category match
+            if (parentCategoryId === selectedCategoryId) {
+              matchesCategory = true;
+              break;
+            }
+            
+            // Check if item's category is a child of selected parent
+            const selectedCategory = categoriesData.find(cat => cat.id === selectedCategoryId);
+            if (selectedCategory && selectedCategory.child_ids && selectedCategory.child_ids.includes(categoryId)) {
+              matchesCategory = true;
+              break;
+            }
+          }
+        }
 
         // Check search filter
         const matchesSearch = searchTerm === '' ||
@@ -276,24 +309,25 @@
       });
 
       // Show/hide no data message
-      if (noDataMessage) {
-        if (visibleCount === 0 && itemCards.length > 0) {
-          // Items exist but are filtered out
-          if (!document.getElementById('filtered-no-data')) {
-            const container = document.getElementById('bookmarked-items-container');
-            const messageDiv = document.createElement('div');
-            messageDiv.id = 'filtered-no-data';
-            messageDiv.className = 'col-span-full text-center py-12';
-            messageDiv.innerHTML = `
-                        <p class="text-[#868686] text-lg">No items match your filters.</p>
-                    `;
-            container.appendChild(messageDiv);
-          }
-        } else {
-          const filteredMessage = document.getElementById('filtered-no-data');
-          if (filteredMessage) {
-            filteredMessage.remove();
-          }
+      const container = document.getElementById('bookmarked-items-container');
+      const filteredMessage = document.getElementById('filtered-no-data');
+      
+      if (visibleCount === 0 && itemCards.length > 0) {
+        // Items exist but are filtered out - show "No bookmarked items yet" message
+        if (!filteredMessage) {
+          const messageDiv = document.createElement('div');
+          messageDiv.id = 'filtered-no-data';
+          messageDiv.className = 'col-span-full text-center py-12';
+          messageDiv.innerHTML = `
+            <p class="text-[#868686] text-lg">No bookmarked items yet.</p>
+            <a href="{{ route('resources') }}" class="text-[#37C6F4] hover:underline mt-4 inline-block">Browse resources</a>
+          `;
+          container.appendChild(messageDiv);
+        }
+      } else {
+        // Remove filtered message if items are visible
+        if (filteredMessage) {
+          filteredMessage.remove();
         }
       }
 
@@ -310,9 +344,73 @@
       searchInput.addEventListener('input', filterItems);
     }
 
+    // Share functionality
+    function shareItem(url, title) {
+      // Check if URL is already absolute (starts with http:// or https://)
+      let shareUrl = url;
+      if (url.startsWith('http://') || url.startsWith('https://')) {
+        // URL is already absolute, use as-is
+        shareUrl = url;
+      } else if (url.startsWith('/')) {
+        // Relative URL starting with /, prepend origin
+        shareUrl = window.location.origin + url;
+      } else {
+        // Relative URL without leading /, prepend origin and /
+        shareUrl = window.location.origin + '/' + url;
+      }
+      
+      if (navigator.share) {
+        // Use Web Share API if available (mobile devices)
+        navigator.share({
+          title: title,
+          text: `Check out this resource: ${title}`,
+          url: shareUrl,
+        }).catch(err => {
+          console.log('Error sharing:', err);
+          // Fallback to clipboard
+          copyToClipboard(shareUrl);
+        });
+      } else {
+        // Fallback to clipboard for desktop
+        copyToClipboard(shareUrl);
+      }
+    }
+
+    function copyToClipboard(text) {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Link copied to clipboard!');
+        }).catch(err => {
+          console.error('Failed to copy:', err);
+          fallbackCopyToClipboard(text);
+        });
+      } else {
+        fallbackCopyToClipboard(text);
+      }
+    }
+
+    function fallbackCopyToClipboard(text) {
+      const textArea = document.createElement('textarea');
+      textArea.value = text;
+      textArea.style.position = 'fixed';
+      textArea.style.left = '-999999px';
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        alert('Link copied to clipboard!');
+      } catch (err) {
+        console.error('Fallback copy failed:', err);
+        prompt('Copy this link:', text);
+      }
+      document.body.removeChild(textArea);
+    }
+
     // Expose filterItems and initializeIcons to global scope
     window.filterItems = filterItems;
     window.initializeIcons = initializeIcons;
+    window.shareItem = shareItem;
 
     // Placeholder for openItemModal - implement as needed
     function openItemModal(itemId) {
@@ -378,12 +476,22 @@
     const accountDetailsTrigger = document.querySelector('.account-details-opn');
     const accountDetailsPanel = document.querySelector('.account-details-main');
     const otherAccountDetails = document.querySelector('.other-accnt-dtails');
+    const mySavedContentBtn = document.querySelector('.my-saved-content-btn');
+    
     if (accountDetailsTrigger && accountDetailsPanel) {
       accountDetailsTrigger.addEventListener('click', () => {
         accountDetailsPanel.classList.remove('hidden');
         if (otherAccountDetails) {
           otherAccountDetails.classList.add('hidden');
         }
+      });
+    }
+    
+    // My saved content button - switch back to main content
+    if (mySavedContentBtn && accountDetailsPanel && otherAccountDetails) {
+      mySavedContentBtn.addEventListener('click', () => {
+        accountDetailsPanel.classList.add('hidden');
+        otherAccountDetails.classList.remove('hidden');
       });
     }
   })();

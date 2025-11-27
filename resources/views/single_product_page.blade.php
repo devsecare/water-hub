@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="flex items-center space-x-2 mt-20">
-                        <i data-lucide="{{ $item->type_icon }}" class="w-6 h-8"></i>
+                        <span class="material-symbols-outlined text-[18px]">{{ $item->category->icon ?? 'folder' }}</span>
                         <span class="text-[18px] font-semibold">{{ $item->category->name }}</span>
                     </div>
                 </div>
@@ -102,14 +102,17 @@
                     <!-- LEFT TEXT SECTION – takes 2/3 -->
                     <div class="md:col-span-2 lg:max-w-[60%]  md:max-w-1/2 text-[#000000]">
                         @if($item->short_description)
-                        <p class=" mb-6 leading-relaxed">
-                            <span class="text-black font-bold">Short description: </span>{{ $item->short_description }}
-                        </p>
+                        <div class="mb-6 leading-relaxed">
+                            <span class="text-black font-bold">Short description: </span>
+                            <div class="prose prose-sm max-w-none">
+                                {!! $item->short_description !!}
+                            </div>
+                        </div>
                         @endif
 
                         @if($item->description)
-                        <div class="space-y-6 leading-relaxed">
-                            {!! nl2br(e($item->description)) !!}
+                        <div class="space-y-6 leading-relaxed prose prose-sm max-w-none">
+                            {!! $item->description !!}
                         </div>
                         @endif
 
@@ -163,6 +166,9 @@
 
                         <ul class="space-y-3  text-[#000000] text-[16px]">
                             @if($documentFiles->count() > 0)
+                            @php
+                                $firstDocument = $documentFiles->first();
+                            @endphp
                             <li class="flex items-center gap-2 cursor-pointer">
                                 <svg id="summary-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
@@ -172,13 +178,16 @@
                                     <rect id="Rectangle_61" data-name="Rectangle 61" width="24" height="24"
                                         fill="none" />
                                 </svg>
-                                <a href="{{ route('files.download', $documentFiles->first()) }}" class="hover:text-[#37C6F4] transition-colors">
-                                    View summary file
+                                <a href="{{ route('files.download', $firstDocument) }}" class="hover:text-[#37C6F4] transition-colors">
+                                    {{ $firstDocument->original_name }}
                                 </a>
                             </li>
                             @endif
 
                             @if($videoFiles->count() > 0)
+                            @php
+                                $firstVideo = $videoFiles->first();
+                            @endphp
                             <li class="flex items-center gap-2 cursor-pointer">
                                 <svg id="video-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
@@ -188,13 +197,16 @@
                                     <rect id="Rectangle_63" data-name="Rectangle 63" width="24" height="24"
                                         fill="none" />
                                 </svg>
-                                <a href="{{ route('files.download', $videoFiles->first()) }}" class="hover:text-[#37C6F4] transition-colors">
-                                    Play video summary
+                                <a href="{{ route('files.download', $firstVideo) }}" class="hover:text-[#37C6F4] transition-colors">
+                                    {{ $firstVideo->original_name }}
                                 </a>
                             </li>
                             @endif
 
                             @if($audioFiles->count() > 0)
+                            @php
+                                $firstAudio = $audioFiles->first();
+                            @endphp
                             <li class="flex items-center gap-2 cursor-pointer">
                                 <svg id="podcast-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                     viewBox="0 0 24 24">
@@ -204,49 +216,43 @@
                                     <rect id="Rectangle_58" data-name="Rectangle 58" width="24" height="24"
                                         fill="none" />
                                 </svg>
-                                <a href="{{ route('files.download', $audioFiles->first()) }}" class="hover:text-[#37C6F4] transition-colors">
-                                    Play audio summary
+                                <a href="{{ route('files.download', $firstAudio) }}" class="hover:text-[#37C6F4] transition-colors">
+                                    {{ $firstAudio->original_name }}
                                 </a>
                             </li>
                             @endif
                         </ul>
 
+                        @if($item->featuredImage)
                         <div class="mt-8 text-lg text-[#37C6F4] space-y-2">
                             @php
-                                $firstFile = $item->files->first();
+                                $mediaFile = $item->featuredImage;
                                 $fileExtension = null;
 
-                                // Priority 1: Get extension from original_name
-                                if ($firstFile->original_name) {
-                                    $ext = pathinfo($firstFile->original_name, PATHINFO_EXTENSION);
+                                // Priority 1: Get extension from ext field (Curator Media model)
+                                if (!empty($mediaFile->ext)) {
+                                    $fileExtension = strtoupper($mediaFile->ext);
+                                }
+
+                                // Priority 2: Get extension from file_name
+                                if (empty($fileExtension) && !empty($mediaFile->file_name)) {
+                                    $ext = pathinfo($mediaFile->file_name, PATHINFO_EXTENSION);
                                     if (!empty($ext)) {
                                         $fileExtension = strtoupper($ext);
                                     }
                                 }
 
-                                // Priority 2: Get extension from file path
-                                if (empty($fileExtension) && $firstFile->path) {
-                                    $ext = pathinfo($firstFile->path, PATHINFO_EXTENSION);
+                                // Priority 3: Get extension from path
+                                if (empty($fileExtension) && !empty($mediaFile->path)) {
+                                    $ext = pathinfo($mediaFile->path, PATHINFO_EXTENSION);
                                     if (!empty($ext)) {
                                         $fileExtension = strtoupper($ext);
                                     }
-
-                                    // Fallback: Check if path contains common extensions
-                                    if (empty($fileExtension)) {
-                                        $path = strtolower($firstFile->path);
-                                        $commonExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'mp4', 'mov', 'avi', 'mp3', 'wav', 'jpg', 'jpeg', 'png', 'gif'];
-                                        foreach ($commonExtensions as $ext) {
-                                            if (str_contains($path, '.' . $ext)) {
-                                                $fileExtension = strtoupper($ext);
-                                                break;
-                                            }
-                                        }
-                                    }
                                 }
 
-                                // Priority 3: Use mime_type to determine file type (only if not generic octet-stream)
-                                if (empty($fileExtension) && $firstFile->mime_type && $firstFile->mime_type !== 'application/octet-stream') {
-                                    $mimeType = $firstFile->mime_type;
+                                // Priority 4: Use mime_type to determine file type
+                                if (empty($fileExtension) && !empty($mediaFile->mime_type)) {
+                                    $mimeType = $mediaFile->mime_type;
                                     $mimeToExtension = [
                                         'application/pdf' => 'PDF',
                                         'application/msword' => 'DOC',
@@ -260,8 +266,11 @@
                                         'audio/wav' => 'WAV',
                                         'audio/mp4' => 'M4A',
                                         'image/jpeg' => 'JPG',
+                                        'image/jpg' => 'JPG',
                                         'image/png' => 'PNG',
                                         'image/gif' => 'GIF',
+                                        'image/webp' => 'WEBP',
+                                        'image/svg+xml' => 'SVG',
                                     ];
 
                                     if (isset($mimeToExtension[$mimeType])) {
@@ -271,6 +280,7 @@
                             @endphp
                             <p><span class="font-semibold text-[#1E1D57]">File type:</span> {{ $fileExtension ?: 'N/A' }}</p>
                         </div>
+                        @endif
                         @endif
 
                         @if($item->author || $item->publisher)
@@ -312,8 +322,8 @@
                                     <p class="text-sm mt-2 opacity-90">{{ $relatedItem['publisher'] ?? 'N/A' }}</p>
                     </div>
                     <div class="flex items-center space-x-2 mt-12">
-                        <i data-lucide="{{ $relatedItem['icon'] }}" class="w-6 h-6"></i>
-                        <span class="text-lg">{{ $relatedItem['type'] }}</span>
+                        <span class="material-symbols-outlined text-lg">{{ $relatedItem['category_icon'] ?? 'folder' }}</span>
+                        <span class="text-lg">{{ $relatedItem['category_name'] ?? $relatedItem['type'] }}</span>
                     </div>
                 </div>
                 <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">

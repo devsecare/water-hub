@@ -14,14 +14,34 @@ class CreateItem extends CreateRecord
 {
     protected static string $resource = ItemResource::class;
 
-    protected function afterCreate(): void
+    protected $additionalFilesData = [];
+
+    protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $this->processFiles();
+        // Capture additional_files data before create
+        $this->additionalFilesData = $data['additional_files'] ?? [];
+        \Log::info('Captured additional_files before create', [
+            'count' => count($this->additionalFilesData),
+            'data' => $this->additionalFilesData
+        ]);
+        
+        // Remove from data so it doesn't try to save to Item model
+        unset($data['additional_files']);
+        
+        return $data;
     }
 
-    protected function processFiles(): void
+    protected function afterCreate(): void
     {
-        $filesData = $this->data['files'] ?? [];
+        $this->processAdditionalFiles($this->additionalFilesData);
+    }
+
+    protected function processAdditionalFiles(array $filesData = []): void
+    {
+        // If no data provided, try to get from captured data
+        if (empty($filesData)) {
+            $filesData = $this->additionalFilesData ?? [];
+        }
         
         if (empty($filesData)) {
             return;

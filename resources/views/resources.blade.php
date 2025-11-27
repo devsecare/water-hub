@@ -374,7 +374,7 @@
                     <p id="modalPublisher" class="text-sm opacity-90 mb-4">Publisher name here</p>
                 </div>
                 <div class="flex items-center gap-2 mt-auto">
-                    <i id="modalIcon" class="w-4 h-4"></i>
+                    <span id="modalIcon" class="material-symbols-outlined text-sm">folder</span>
                     <span id="modalType" class="text-sm">Guide</span>
                 </div>
             </div>
@@ -383,10 +383,10 @@
             <div class="flex-1 bg-white p-8 text-gray-700 text-sm leading-relaxed flex flex-col justify-between">
                 <div>
                     <p class="font-semibold text-black mb-2">Short description:</p>
-                    <p id="modalDescription">
+                    <div id="modalDescription" class="prose prose-sm max-w-none">
                         Summarise what they will get from the document and also mention the kinds of support files
                         available. Audio, video etc.
-                    </p>
+                    </div>
                 </div>
 
             </div>
@@ -507,8 +507,8 @@
                             <p class="text-sm mt-2 opacity-90">${card.publisher || ''}</p>
                         </div>
                         <div class="flex items-center space-x-2 mt-12">
-                            <i data-lucide="${card.icon}" class="w-4 h-4"></i>
-                            <span class="text-sm">${card.type}</span>
+                            <span class="material-symbols-outlined text-sm">${card.category_icon || 'folder'}</span>
+                            <span class="text-sm">${card.category_name}</span>
                         </div>
                     </div>
                     <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
@@ -592,15 +592,15 @@
         modal.classList.add("flex");
         document.getElementById("modalTitle").innerText = item.title;
         document.getElementById("modalPublisher").innerText = item.publisher || '';
-        document.getElementById("modalType").innerText = item.type;
+        document.getElementById("modalType").innerText = item.category_name || item.type;
         const colorBox = document.getElementById("modalColorBox");
         const gradientStyle = formatGradient(item.category_color);
         colorBox.className = `p-8 text-white rounded-2xl w-full md:w-1/2 flex flex-col justify-between min-h-[360px]`;
         colorBox.setAttribute('style', gradientStyle);
-        document.getElementById("modalIcon").setAttribute("data-lucide", item.icon);
+        document.getElementById("modalIcon").innerText = item.category_icon || item.icon || 'folder';
         const modalDescription = document.getElementById("modalDescription");
         if (modalDescription) {
-            modalDescription.innerText = item.short_description || item.description || '';
+            modalDescription.innerHTML = item.short_description || item.description || '';
         }
 
         // Update bookmark button state
