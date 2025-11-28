@@ -86,18 +86,7 @@ class ItemResource extends Resource
                             ->label('Author / Publisher')
                             ->maxLength(255)
                             ->helperText('Author or publisher name (e.g., Mary Matherson, World Bank)'),
-                        Forms\Components\Select::make('type')
-                            ->label('Resource Type')
-                            ->options([
-                                'guide' => 'Guide',
-                                'video' => 'Video',
-                                'podcast' => 'Podcast',
-                                'case_study' => 'Case Study',
-                            ])
-                            ->default('guide')
-                            ->required(),
-                    ])
-                    ->columns(2),
+                    ]),
 
                 Forms\Components\Section::make('Media')
                     ->schema([
@@ -171,6 +160,16 @@ class ItemResource extends Resource
                             ->columnSpanFull(),
                     ]),
 
+                Forms\Components\Section::make('Case Study')
+                    ->schema([
+                        Forms\Components\Toggle::make('is_case_study')
+                            ->label('Is Case Study')
+                            ->default(false)
+                            ->required()
+                            ->live()
+                            ->helperText('Enable if this is a case study'),
+                    ]),
+
                 Forms\Components\Section::make('Location')
                     ->schema([
                         Forms\Components\TextInput::make('latitude')
@@ -182,8 +181,23 @@ class ItemResource extends Resource
                         Forms\Components\TextInput::make('address')
                             ->maxLength(255)
                             ->default(null),
+                        Forms\Components\TextInput::make('country')
+                            ->label('Country')
+                            ->maxLength(255)
+                            ->default(null),
+                        Forms\Components\Select::make('project_phase')
+                            ->label('Project Phase')
+                            ->options([
+                                'construction' => 'Construction',
+                                'completed' => 'Completed',
+                                'planning' => 'Planning',
+                                'proposal' => 'Proposal',
+                            ])
+                            ->nullable()
+                            ->searchable(),
                     ])
-                    ->columns(2),
+                    ->columns(2)
+                    ->visible(fn (Forms\Get $get) => $get('is_case_study')),
 
                 Forms\Components\Section::make('Status')
                     ->schema([
@@ -219,22 +233,10 @@ class ItemResource extends Resource
                     ->formatStateUsing(fn ($record) => $record->author ?? $record->publisher ?? 'N/A')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('type')
-                    ->badge()
-                    ->formatStateUsing(fn (string $state): string => match($state) {
-                        'guide' => 'Guide',
-                        'video' => 'Video',
-                        'podcast' => 'Podcast',
-                        'case_study' => 'Case Study',
-                        default => $state,
-                    })
-                    ->color(fn (string $state): string => match($state) {
-                        'guide' => 'success',
-                        'video' => 'info',
-                        'podcast' => 'warning',
-                        'case_study' => 'danger',
-                        default => 'gray',
-                    }),
+                Tables\Columns\IconColumn::make('is_case_study')
+                    ->label('Case Study')
+                    ->boolean()
+                    ->toggleable(),
 
                 Tables\Columns\TextColumn::make('slug')
                     ->searchable(),

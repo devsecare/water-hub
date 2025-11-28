@@ -22,14 +22,18 @@ class Item extends Model
         'latitude',
         'longitude',
         'address',
+        'country',
+        'project_phase',
         'featured_image_id',
         'is_active',
+        'is_case_study',
     ];
 
     protected $casts = [
         'latitude' => 'decimal:8',
         'longitude' => 'decimal:8',
         'is_active' => 'boolean',
+        'is_case_study' => 'boolean',
     ];
 
     public function getTypeLabelAttribute(): string
