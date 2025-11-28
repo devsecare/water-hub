@@ -118,7 +118,7 @@
 
                         <!-- Share Icon -->
 
-                        <button class="group flex items-center text-[#000000] mt-8">
+                        <button class="group flex items-center text-[#000000] mt-8" onclick="shareItem('{{ route('resources.show', $item->slug) }}', '{{ addslashes($item->title) }}')">
                             <svg xmlns="http://www.w3.org/2000/svg" width="85.283" height="32" viewBox="0 0 85.283 32">
                                 <!-- Text -->
                                 <text id="Tagline" transform="translate(41.283 21.5)" font-size="16"
@@ -440,6 +440,72 @@
             alert('An error occurred while toggling bookmark.');
         }
     };
+
+    // Share functionality
+    function shareItem(url, title) {
+        // Check if URL is already absolute (starts with http:// or https://)
+        let shareUrl = url;
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+            // URL is already absolute, use as-is
+            shareUrl = url;
+        } else if (url.startsWith('/')) {
+            // Relative URL starting with /, prepend origin
+            shareUrl = window.location.origin + url;
+        } else {
+            // Relative URL without leading /, prepend origin and /
+            shareUrl = window.location.origin + '/' + url;
+        }
+        
+        if (navigator.share) {
+            // Use Web Share API if available (mobile devices)
+            navigator.share({
+                title: title,
+                text: `Check out this resource: ${title}`,
+                url: shareUrl,
+            }).catch(err => {
+                console.log('Error sharing:', err);
+                // Fallback to clipboard
+                copyToClipboard(shareUrl);
+            });
+        } else {
+            // Fallback to clipboard for desktop
+            copyToClipboard(shareUrl);
+        }
+    }
+
+    function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                fallbackCopyToClipboard(text);
+            });
+        } else {
+            fallbackCopyToClipboard(text);
+        }
+    }
+
+    function fallbackCopyToClipboard(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            alert('Link copied to clipboard!');
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            prompt('Copy this link:', text);
+        }
+        document.body.removeChild(textArea);
+    }
+
+    // Expose shareItem to global scope
+    window.shareItem = shareItem;
 </script>
 @endpush
 @endsection

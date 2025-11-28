@@ -408,7 +408,7 @@
                         <path d="m7 10 5 5 5-5"></path>
                     </svg>Download
                     file</button>
-                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250"><span class="material-symbols-outlined">share</span>Share</button>
+                <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250" onclick="shareItemFromModal()"><span class="material-symbols-outlined">share</span>Share</button>
             </div>
             <button class="flex items-center gap-2 font-semibold underline cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openItemPage()"><svg xmlns="http://www.w3.org/2000/svg"
                     width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -515,7 +515,7 @@
                         <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openModal(${card.id})">eye_tracking</span>
                         <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="downloadFile(${card.id})">download</span>
                         <span class="material-symbols-outlined  cursor-pointer hover:text-[#37C6F4] duration-250 ${card.is_bookmarked ? 'text-[#37C6F4]' : ''}" data-item-id="${card.id}" onclick="toggleBookmark(${card.id}, this)">bookmark</span>
-                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">share</span>
+                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="shareCardItem('${card.slug}', '${titleEscaped.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">share</span>
                     </div>
                 </div>`;
         });
@@ -786,6 +786,84 @@
         }
     }
 
+    // Share functionality
+    function shareItem(url, title) {
+        // Check if URL is already absolute (starts with http:// or https://)
+        let shareUrl = url;
+        if (url.startsWith('http://') || url.startsWith('https://')) {
+            // URL is already absolute, use as-is
+            shareUrl = url;
+        } else if (url.startsWith('/')) {
+            // Relative URL starting with /, prepend origin
+            shareUrl = window.location.origin + url;
+        } else {
+            // Relative URL without leading /, prepend origin and /
+            shareUrl = window.location.origin + '/' + url;
+        }
+        
+        if (navigator.share) {
+            // Use Web Share API if available (mobile devices)
+            navigator.share({
+                title: title,
+                text: `Check out this resource: ${title}`,
+                url: shareUrl,
+            }).catch(err => {
+                console.log('Error sharing:', err);
+                // Fallback to clipboard
+                copyToClipboard(shareUrl);
+            });
+        } else {
+            // Fallback to clipboard for desktop
+            copyToClipboard(shareUrl);
+        }
+    }
+
+    function shareItemFromModal() {
+        if (currentModalItemId) {
+            const item = itemsData.find(i => i.id === currentModalItemId);
+            if (item && item.slug) {
+                const url = `${window.location.origin}/resources/${item.slug}`;
+                shareItem(url, item.title);
+            }
+        }
+    }
+
+    function shareCardItem(slug, title) {
+        const url = `${window.location.origin}/resources/${slug}`;
+        shareItem(url, title);
+    }
+
+    function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Link copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+                fallbackCopyToClipboard(text);
+            });
+        } else {
+            fallbackCopyToClipboard(text);
+        }
+    }
+
+    function fallbackCopyToClipboard(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            alert('Link copied to clipboard!');
+        } catch (err) {
+            console.error('Fallback copy failed:', err);
+            prompt('Copy this link:', text);
+        }
+        document.body.removeChild(textArea);
+    }
+
     // Expose functions and data to global scope for onclick handlers
     window.openModal = openModal;
     window.closeModal = closeModal;
@@ -796,6 +874,9 @@
     window.downloadFileFromModal = downloadFileFromModal;
     window.openItemPage = openItemPage;
     window.toggleBookmarkFromModal = toggleBookmarkFromModal;
+    window.shareItem = shareItem;
+    window.shareItemFromModal = shareItemFromModal;
+    window.shareCardItem = shareCardItem;
     window.itemsData = itemsData; // Expose itemsData for bookmark function
     })();
 </script>
