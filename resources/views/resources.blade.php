@@ -496,6 +496,9 @@
         visibleCards.forEach((card) => {
             const gradientStyle = formatGradient(card.category_color);
             const titleEscaped = card.title.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+            // Escape for JavaScript string in HTML attribute
+            const titleForShare = (card.title || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
+            const slugEscaped = (card.slug || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"');
             const publisherEscaped = (card.publisher || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
             const descriptionEscaped = (card.short_description || card.description || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
@@ -515,7 +518,7 @@
                         <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openModal(${card.id})">eye_tracking</span>
                         <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="downloadFile(${card.id})">download</span>
                         <span class="material-symbols-outlined  cursor-pointer hover:text-[#37C6F4] duration-250 ${card.is_bookmarked ? 'text-[#37C6F4]' : ''}" data-item-id="${card.id}" onclick="toggleBookmark(${card.id}, this)">bookmark</span>
-                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="shareCardItem('${card.slug}', '${titleEscaped.replace(/'/g, "\\'").replace(/"/g, '&quot;')}')">share</span>
+                        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="shareCardItem('${slugEscaped}', '${titleForShare}')">share</span>
                     </div>
                 </div>`;
         });
@@ -787,7 +790,14 @@
     }
 
     // Share functionality
+    let isSharing = false;
+    
     function shareItem(url, title) {
+        // Prevent concurrent share operations
+        if (isSharing) {
+            return;
+        }
+        
         // Check if URL is already absolute (starts with http:// or https://)
         let shareUrl = url;
         if (url.startsWith('http://') || url.startsWith('https://')) {
@@ -803,12 +813,19 @@
         
         if (navigator.share) {
             // Use Web Share API if available (mobile devices)
+            isSharing = true;
             navigator.share({
                 title: title,
                 text: `Check out this resource: ${title}`,
                 url: shareUrl,
+            }).then(() => {
+                isSharing = false;
             }).catch(err => {
-                console.log('Error sharing:', err);
+                isSharing = false;
+                // Only log non-user-cancelled errors
+                if (err.name !== 'AbortError') {
+                    console.log('Error sharing:', err);
+                }
                 // Fallback to clipboard
                 copyToClipboard(shareUrl);
             });
@@ -836,7 +853,11 @@
     function copyToClipboard(text) {
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Link copied to clipboard!');
+                if (typeof showToast === 'function') {
+                    showToast('Link copied to clipboard!', 'success');
+                } else {
+                    alert('Link copied to clipboard!');
+                }
             }).catch(err => {
                 console.error('Failed to copy:', err);
                 fallbackCopyToClipboard(text);
@@ -856,10 +877,18 @@
         textArea.select();
         try {
             document.execCommand('copy');
-            alert('Link copied to clipboard!');
+            if (typeof showToast === 'function') {
+                showToast('Link copied to clipboard!', 'success');
+            } else {
+                alert('Link copied to clipboard!');
+            }
         } catch (err) {
             console.error('Fallback copy failed:', err);
-            prompt('Copy this link:', text);
+            if (typeof showToast === 'function') {
+                showToast('Failed to copy link. Please copy manually.', 'error');
+            } else {
+                prompt('Copy this link:', text);
+            }
         }
         document.body.removeChild(textArea);
     }

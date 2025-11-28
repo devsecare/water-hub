@@ -442,7 +442,14 @@
     };
 
     // Share functionality
+    let isSharing = false;
+    
     function shareItem(url, title) {
+        // Prevent concurrent share operations
+        if (isSharing) {
+            return;
+        }
+        
         // Check if URL is already absolute (starts with http:// or https://)
         let shareUrl = url;
         if (url.startsWith('http://') || url.startsWith('https://')) {
@@ -458,12 +465,19 @@
         
         if (navigator.share) {
             // Use Web Share API if available (mobile devices)
+            isSharing = true;
             navigator.share({
                 title: title,
                 text: `Check out this resource: ${title}`,
                 url: shareUrl,
+            }).then(() => {
+                isSharing = false;
             }).catch(err => {
-                console.log('Error sharing:', err);
+                isSharing = false;
+                // Only log non-user-cancelled errors
+                if (err.name !== 'AbortError') {
+                    console.log('Error sharing:', err);
+                }
                 // Fallback to clipboard
                 copyToClipboard(shareUrl);
             });
@@ -476,7 +490,11 @@
     function copyToClipboard(text) {
         if (navigator.clipboard && navigator.clipboard.writeText) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Link copied to clipboard!');
+                if (typeof showToast === 'function') {
+                    showToast('Link copied to clipboard!', 'success');
+                } else {
+                    alert('Link copied to clipboard!');
+                }
             }).catch(err => {
                 console.error('Failed to copy:', err);
                 fallbackCopyToClipboard(text);
@@ -496,10 +514,18 @@
         textArea.select();
         try {
             document.execCommand('copy');
-            alert('Link copied to clipboard!');
+            if (typeof showToast === 'function') {
+                showToast('Link copied to clipboard!', 'success');
+            } else {
+                alert('Link copied to clipboard!');
+            }
         } catch (err) {
             console.error('Fallback copy failed:', err);
-            prompt('Copy this link:', text);
+            if (typeof showToast === 'function') {
+                showToast('Failed to copy link. Please copy manually.', 'error');
+            } else {
+                prompt('Copy this link:', text);
+            }
         }
         document.body.removeChild(textArea);
     }

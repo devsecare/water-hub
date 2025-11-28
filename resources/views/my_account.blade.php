@@ -379,7 +379,11 @@
     function copyToClipboard(text) {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(text).then(() => {
-          alert('Link copied to clipboard!');
+          if (typeof showToast === 'function') {
+            showToast('Link copied to clipboard!', 'success');
+          } else {
+            alert('Link copied to clipboard!');
+          }
         }).catch(err => {
           console.error('Failed to copy:', err);
           fallbackCopyToClipboard(text);
@@ -399,10 +403,18 @@
       textArea.select();
       try {
         document.execCommand('copy');
-        alert('Link copied to clipboard!');
+        if (typeof showToast === 'function') {
+          showToast('Link copied to clipboard!', 'success');
+        } else {
+          alert('Link copied to clipboard!');
+        }
       } catch (err) {
         console.error('Fallback copy failed:', err);
-        prompt('Copy this link:', text);
+        if (typeof showToast === 'function') {
+          showToast('Failed to copy link. Please copy manually.', 'error');
+        } else {
+          prompt('Copy this link:', text);
+        }
       }
       document.body.removeChild(textArea);
     }
