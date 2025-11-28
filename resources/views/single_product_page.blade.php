@@ -33,7 +33,7 @@
                     $endColor = $item->category ? $item->category->color : '#2CBFA0';
                 @endphp
                 <div
-                    class="text-white rounded-lg shadow-xl p-6 flex flex-col lg:w-[350px] justify-between h-full max-h-[400px]"
+                    class="text-white rounded-lg shadow-xl p-6 flex flex-col lg:w-[350px] justify-between"
                     style="background: linear-gradient(to bottom, {{ $startColor }}, {{ $endColor }});">
                     <div>
                         <h1 class="text-3xl font-bold leading-tight mb-6">
