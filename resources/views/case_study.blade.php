@@ -16,16 +16,17 @@
     </div>
 </section>
 <!-- hero section end  -->
- <!-- intro section start  -->
+<!-- intro section start  -->
 <section class="px-6 lg:px-16 lg:py-20 py-10 ">
     <div class="max-w-7xl mx-auto">
-        <p class="text-[#1E1D57] text-lg font-bold max-w-[604px]">Explore proven water PPP projects from around the world. Use the map and filters to find case studies by
+        <p class="text-[#1E1D57] text-lg font-bold max-w-[604px]">Explore proven water PPP projects from around the
+            world. Use the map and filters to find case studies by
             location, country, or project phase – then discover what worked, what challenges arose, and how successful
             partnerships were structured and delivered.
         </p>
     </div>
 </section>
- <!-- intro section end  -->
+<!-- intro section end  -->
 
 <!-- country button start -->
 <section class=" px-6 lg:px-16">
@@ -109,6 +110,42 @@
         </div>
     </div>
 </section>
+
+<!-- map popup card start -->
+<div class="bg-white shadow-md p-4 rounded-[25px] max-w-[254px] flex flex-col justify-between">
+    <section class="flex gap-2 flex-start">
+        <div style="background: linear-gradient(to bottom, #070648, #e0b810);"
+            class="text-white p-6 gap-8 rounded-[15px] max-w-[197px] flex flex-col justify-between flex-grow drop-shadow-[0 2px 4px rgba(0,0,0, 0.50)]">
+            <div>
+                <h3 class="font-semibold text-lg leading-snug">Implementation item for testing </h3>
+                <p class="text-sm mt-2 opacity-90">World Bank</p>
+            </div>
+            <div class="flex items-center space-x-2 mt-12">
+                <span class="material-symbols-outlined text-sm">action_key</span>
+                <span class="text-sm">Implementation</span>
+            </div>
+        </div>
+        <div>
+            <button class="group flex cursor-pointer">
+                <span class="material-symbols-outlined group-hover:text-red-500 transition-colors duration-200">
+                    close
+                </span>
+            </button>
+        </div>
+
+    </section>
+    <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
+        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250"
+            onclick="openModal(2)">eye_tracking</span>
+        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250"
+            onclick="downloadFile(2)">download</span>
+        <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250 "
+            data-item-id="2" onclick="toggleBookmark(2, this)">bookmark</span>
+        <span
+            class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">share</span>
+    </div>
+</div>
+<!-- map popup card start -->
 
 <!-- Comprehensive water PPP knowledge in a format that works for you  -->
 <section

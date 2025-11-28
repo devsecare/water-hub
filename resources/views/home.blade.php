@@ -142,8 +142,8 @@
                 @forelse($sliderCards ?? [] as $card)
                 <div class="swiper-slide max-w-[286px]">
                     <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
-                        <div class="p-5 space-y-3 card-before h-[284px] flex flex-col justify-between">
-                            <div class="space-y-1">
+                        <div class="p-5 space-y-3 card-before h-[300px] flex flex-col justify-between">
+                            <div class="space-y-1 ">
                                 @php
                                     // Split title by newlines to handle multiline titles
                                     $titleLines = explode("\n", $card->title);
@@ -178,7 +178,7 @@
                             <p class="text-sm">• {{ $card->expandable_title }}</p>
                             @endif
                             @if($card->expandable_items && is_array($card->expandable_items) && count($card->expandable_items) > 0)
-                            <ul class="text-sm space-y-2 list-disc list-inside marker:text-white">
+                            <ul class="text-sm space-y-2 list-disc list-outside pl-4 marker:text-white">
                                 @foreach($card->expandable_items as $item)
                                 <li>{{ $item }}</li>
                                 @endforeach
