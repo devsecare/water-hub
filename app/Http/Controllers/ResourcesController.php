@@ -114,4 +114,90 @@ class ResourcesController extends Controller
             'relatedItems' => $relatedItems,
         ]);
     }
+
+    public function caseStudy(Request $request)
+    {
+        // Get filter parameters
+        $selectedCountry = $request->get('country');
+        $selectedPhase = $request->get('phase');
+        $searchKeyword = $request->get('search');
+
+        // Get all active items with latitude and longitude
+        $user = auth()->user();
+        $bookmarkedItemIds = $user ? $user->bookmarks()->pluck('item_id')->toArray() : [];
+
+        // Build query
+        $query = Item::where('is_active', true)
+            ->whereNotNull('latitude')
+            ->whereNotNull('longitude')
+            ->with(['category', 'featuredImage', 'files']);
+
+        // Apply filters
+        if ($selectedCountry) {
+            $query->where('country', $selectedCountry);
+        }
+
+        if ($selectedPhase) {
+            $query->where('project_phase', $selectedPhase);
+        }
+
+        if ($searchKeyword) {
+            $query->where(function ($q) use ($searchKeyword) {
+                $q->where('title', 'like', "%{$searchKeyword}%")
+                    ->orWhere('description', 'like', "%{$searchKeyword}%")
+                    ->orWhere('address', 'like', "%{$searchKeyword}%");
+            });
+        }
+
+        $items = $query->get()
+            ->map(function ($item) use ($bookmarkedItemIds) {
+                return [
+                    'id' => $item->id,
+                    'title' => $item->title,
+                    'slug' => $item->slug,
+                    'author' => $item->author ?? $item->publisher ?? '',
+                    'latitude' => (float) $item->latitude,
+                    'longitude' => (float) $item->longitude,
+                    'country' => $item->country,
+                    'project_phase' => $item->project_phase,
+                    'category' => [
+                        'id' => $item->category->id,
+                        'name' => $item->category->name,
+                        'color' => $item->category->color,
+                        'icon' => $item->category->icon ?? 'folder',
+                    ],
+                    'category_color' => $item->category->color ?? '#2CBFA0',
+                    'category_icon' => $item->category->icon ?? 'folder',
+                    'category_name' => $item->category->name,
+                    'featured_image_id' => $item->featured_image_id,
+                    'files_count' => $item->files->count(),
+                    'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
+                ];
+            });
+
+        // Get unique countries and phases for dropdowns
+        $countries = Item::where('is_active', true)
+            ->whereNotNull('country')
+            ->where('country', '!=', '')
+            ->distinct()
+            ->orderBy('country')
+            ->pluck('country')
+            ->toArray();
+
+        $phases = [
+            'planning' => 'Planning',
+            'construction' => 'Construction',
+            'completed' => 'Completed',
+            'proposal' => 'Proposal',
+        ];
+
+        return view('case_study', [
+            'items' => $items,
+            'countries' => $countries,
+            'phases' => $phases,
+            'selectedCountry' => $selectedCountry,
+            'selectedPhase' => $selectedPhase,
+            'searchKeyword' => $searchKeyword,
+        ]);
+    }
 }

@@ -29,7 +29,7 @@ Route::get('/about-water-ppps', function () {
     $faqs = \App\Models\Faq::where('is_active', true)
         ->orderBy('sort')
         ->get();
-    
+
     return view('understanding_water_ppp', [
         'faqs' => $faqs,
     ]);
@@ -47,9 +47,7 @@ Route::get('/contact-us', function () {
     return view('contact_us');
 })->name('contactus');
 
-Route::get('/case-study', function () {
-    return view('case_study');
-})->name('casestudy')->middleware('auth');
+Route::get('/case-study', [ResourcesController::class, 'caseStudy'])->name('casestudy')->middleware('auth');
 
 Route::get('/account-details', function () {
     return view('account_details');
@@ -94,7 +92,7 @@ Route::middleware('guest')->group(function () {
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     });
-    
+
     Route::post('/register', function (\Illuminate\Http\Request $request) {
         $request->validate([
             'first_name' => 'required|string|max:255',
@@ -199,7 +197,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/files/{file}/signed-url', [FileDownloadController::class, 'getSignedUrl'])
         ->name('files.signed-url')
         ->middleware('throttle:20,1');
-    
+
     // Media downloads (for featured images)
     Route::get('/media/{media}/download', [MediaDownloadController::class, 'download'])
         ->name('media.download')
