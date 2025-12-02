@@ -7,6 +7,22 @@ return [
         'image/webp',
         'image/svg+xml',
         'application/pdf',
+        // Video types
+        'video/mp4',
+        'video/mpeg',
+        'video/quicktime',
+        'video/x-msvideo',
+        'video/webm',
+        'video/ogg',
+        // Audio types
+        'audio/mpeg',
+        'audio/mp3',
+        'audio/wav',
+        'audio/ogg',
+        'audio/webm',
+        'audio/x-wav',
+        'audio/aac',
+        'audio/flac',
     ],
     'cloud_disks' => [
         's3',
