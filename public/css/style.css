@@ -247,6 +247,28 @@ ul.sub-cat {
 .overlay-btm.active {
   display: block;
 }
+.curator-panel-gallery ul.curator-picker-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.curator-panel-gallery ul.curator-picker-grid li {
+  width: 100%;
+  max-width: 150px;
+  padding: 10px;
+  border: 1px solid #d4d4d8;
+  border-radius: 5px;
+  height: fit-content;
+}
+.curator-panel-gallery ul.curator-picker-grid li svg {
+  height: 100%;
+  width: 100%;
+}
+.curator-panel-gallery ul.curator-picker-grid li p.text-xs {
+  position: relative;
+  color: #000;
+  padding-top: 10px;
+}
 
 @keyframes move-forever {
   0% {
