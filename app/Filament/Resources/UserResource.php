@@ -33,8 +33,14 @@ class UserResource extends Resource
                 Forms\Components\DateTimePicker::make('email_verified_at'),
                 Forms\Components\TextInput::make('password')
                     ->password()
-                    ->required()
-                    ->maxLength(255),
+                    ->required(fn (string $operation): bool => $operation === 'create')
+                    ->maxLength(255)
+                    ->dehydrated(fn ($state) => filled($state)),
+                Forms\Components\Toggle::make('can_access_admin')
+                    ->label('Can Access Admin Panel')
+                    ->helperText('Enable this to allow the user to access the admin panel')
+                    ->default(false)
+                    ->required(),
             ]);
     }
 
@@ -46,6 +52,10 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
+                Tables\Columns\IconColumn::make('can_access_admin')
+                    ->label('Admin Access')
+                    ->boolean()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
                     ->sortable(),
