@@ -32,36 +32,54 @@ class DownloadLogResource extends Resource
                 Forms\Components\Section::make('Download Information')
                     ->schema([
                         Forms\Components\Select::make('file_id')
-                            ->label('File')
+                            ->label('File (Additional Resource)')
                             ->relationship('file', 'name')
                             ->searchable()
                             ->preload()
-                            ->required(),
+                            ->disabled()
+                            ->dehydrated()
+                            ->helperText('For files from Additional Resources section'),
+                        Forms\Components\Select::make('media_id')
+                            ->label('Media (Featured Image)')
+                            ->relationship('media', 'name')
+                            ->searchable()
+                            ->preload()
+                            ->disabled()
+                            ->dehydrated()
+                            ->helperText('For featured images'),
                         Forms\Components\Select::make('user_id')
                             ->label('User')
                             ->relationship('user', 'name')
                             ->searchable()
                             ->preload()
+                            ->disabled()
+                            ->dehydrated()
                             ->required(),
                         Forms\Components\DateTimePicker::make('downloaded_at')
                             ->label('Downloaded At')
                             ->default(now())
+                            ->disabled()
+                            ->dehydrated()
                             ->required()
                             ->displayFormat('Y-m-d H:i:s'),
                     ])
-                    ->columns(3),
-                
+                    ->columns(2),
+
                 Forms\Components\Section::make('Tracking Information')
                     ->schema([
                         Forms\Components\TextInput::make('ip_address')
                             ->label('IP Address')
                             ->maxLength(45)
                             ->ip()
+                            ->disabled()
+                            ->dehydrated()
                             ->helperText('IP address of the user who downloaded the file'),
                         Forms\Components\Textarea::make('user_agent')
                             ->label('User Agent')
                             ->rows(3)
                             ->maxLength(500)
+                            ->disabled()
+                            ->dehydrated()
                             ->helperText('Browser and device information')
                             ->columnSpanFull(),
                     ]),
@@ -73,10 +91,24 @@ class DownloadLogResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('file.name')
-                    ->label('File')
+                    ->label('File (Additional Resource)')
                     ->searchable()
                     ->sortable()
-                    ->limit(30),
+                    ->limit(30)
+                    ->default('—')
+                    ->placeholder('—'),
+                Tables\Columns\TextColumn::make('media.name')
+                    ->label('Media (Featured Image)')
+                    ->searchable()
+                    ->sortable()
+                    ->limit(30)
+                    ->default('—')
+                    ->placeholder('—'),
+                Tables\Columns\TextColumn::make('type')
+                    ->label('Type')
+                    ->badge()
+                    ->color(fn ($record) => $record->file_id ? 'success' : 'info')
+                    ->getStateUsing(fn ($record) => $record->file_id ? 'File' : 'Media'),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('User')
                     ->searchable()
@@ -109,10 +141,35 @@ class DownloadLogResource extends Resource
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('file_id')
-                    ->label('File')
+                    ->label('File (Additional Resource)')
                     ->relationship('file', 'name')
                     ->searchable()
                     ->preload(),
+                Tables\Filters\SelectFilter::make('media_id')
+                    ->label('Media (Featured Image)')
+                    ->relationship('media', 'name')
+                    ->searchable()
+                    ->preload(),
+                Tables\Filters\Filter::make('download_type')
+                    ->label('Download Type')
+                    ->form([
+                        Forms\Components\Select::make('type')
+                            ->options([
+                                'file' => 'File (Additional Resource)',
+                                'media' => 'Media (Featured Image)',
+                            ])
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return $query
+                            ->when(
+                                $data['type'] === 'file',
+                                fn (Builder $query): Builder => $query->whereNotNull('file_id'),
+                            )
+                            ->when(
+                                $data['type'] === 'media',
+                                fn (Builder $query): Builder => $query->whereNotNull('media_id'),
+                            );
+                    }),
                 Tables\Filters\SelectFilter::make('user_id')
                     ->label('User')
                     ->relationship('user', 'name')
@@ -139,7 +196,6 @@ class DownloadLogResource extends Resource
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
@@ -161,8 +217,7 @@ class DownloadLogResource extends Resource
     {
         return [
             'index' => Pages\ListDownloadLogs::route('/'),
-            'create' => Pages\CreateDownloadLog::route('/create'),
-            'edit' => Pages\EditDownloadLog::route('/{record}/edit'),
+            'view' => Pages\ViewDownloadLog::route('/{record}'),
         ];
     }
 }

@@ -486,8 +486,8 @@
             return;
         }
 
-        // Download the featured image
-        const downloadUrl = `/media/${item.featured_image_id}/download`;
+        // Download the featured image - add timestamp to prevent caching
+        const downloadUrl = `/media/${item.featured_image_id}/download?t=${Date.now()}`;
         window.location.href = downloadUrl;
     }
 

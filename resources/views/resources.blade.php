@@ -763,8 +763,8 @@
             return;
         }
 
-        // Download the featured image
-        const downloadUrl = `/media/${item.featured_image_id}/download`;
+        // Download the featured image - add timestamp to prevent caching
+        const downloadUrl = `/media/${item.featured_image_id}/download?t=${Date.now()}`;
         window.location.href = downloadUrl;
     }
 
@@ -791,13 +791,13 @@
 
     // Share functionality
     let isSharing = false;
-    
+
     function shareItem(url, title) {
         // Prevent concurrent share operations
         if (isSharing) {
             return;
         }
-        
+
         // Check if URL is already absolute (starts with http:// or https://)
         let shareUrl = url;
         if (url.startsWith('http://') || url.startsWith('https://')) {
@@ -810,7 +810,7 @@
             // Relative URL without leading /, prepend origin and /
             shareUrl = window.location.origin + '/' + url;
         }
-        
+
         if (navigator.share) {
             // Use Web Share API if available (mobile devices)
             isSharing = true;

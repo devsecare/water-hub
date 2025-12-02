@@ -199,9 +199,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->middleware('throttle:20,1');
 
     // Media downloads (for featured images)
-    Route::get('/media/{media}/download', [MediaDownloadController::class, 'download'])
+    Route::get('/media/{mediaId}/download', [MediaDownloadController::class, 'download'])
         ->name('media.download')
-        ->middleware('throttle:10,1');
+        ->middleware('throttle:10,1')
+        ->where('mediaId', '[0-9]+'); // Ensure it's a numeric ID
 
     // Bookmarks
     Route::post('/bookmark/toggle', [BookmarkController::class, 'toggle'])->name('bookmark.toggle');

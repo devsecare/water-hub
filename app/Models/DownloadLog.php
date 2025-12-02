@@ -9,6 +9,7 @@ class DownloadLog extends Model
 {
     protected $fillable = [
         'file_id',
+        'media_id',
         'user_id',
         'ip_address',
         'user_agent',
@@ -22,6 +23,11 @@ class DownloadLog extends Model
     public function file(): BelongsTo
     {
         return $this->belongsTo(File::class);
+    }
+
+    public function media(): BelongsTo
+    {
+        return $this->belongsTo(Media::class);
     }
 
     public function user(): BelongsTo

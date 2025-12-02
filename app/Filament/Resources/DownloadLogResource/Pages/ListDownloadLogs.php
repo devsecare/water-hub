@@ -13,7 +13,7 @@ class ListDownloadLogs extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            // Download logs are created automatically - no manual creation needed
         ];
     }
 }
