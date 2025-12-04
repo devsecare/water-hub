@@ -33,8 +33,8 @@
 
       <div class="space-y-6">
 
-        <button type="button" class="flex text-[16px] gap-3 items-center space-x-2 text-[#1E1D57] font-semibold cursor-pointer hover:text-[#37C6F4] transition-colors my-saved-content-btn">
-          <span class="material-symbols-outlined text-[#1E1D57]">
+        <button type="button" class="group flex text-[16px] gap-3 items-center space-x-2 text-[#1E1D57] font-semibold cursor-pointer hover:text-[#37C6F4] transition-colors my-saved-content-btn">
+          <span class="material-symbols-outlined text-[#1E1D57] group-hover:text-[#37C6F4]">
             book_4
           </span> My saved content
         </button>
@@ -75,22 +75,22 @@
 
       <div class="flex flex-col gap-4 max-w-xs py-8  rounded-md">
         <!-- Account details link -->
-        <a href="javascript:void(0)" class="flex items-center gap-3  py-2 rounded-md account-details-opn">
+        <a href="javascript:void(0)" class="group flex items-center gap-3  py-2 rounded-md account-details-opn">
           <!-- Gear SVG -->
-          <span class="material-symbols-outlined text-[#1e1d57]">
+          <span class="material-symbols-outlined text-[#1e1d57] group-hover:text-[#37C6F4]">
             settings
           </span>
-          <span class="text-[16px] text-[#000000] font-normal">Account details</span>
+          <span class="text-[16px] text-[#000000] font-normal group-hover:text-[#37C6F4]">Account details</span>
         </a>
 
         <!-- Sign out link -->
-        <a href="{{ route('logout') }}" class="flex items-center gap-3  py-2 rounded-md  "
+        <a href="{{ route('logout') }}" class="group flex items-center gap-3  py-2 rounded-md  "
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
           <!-- Sign out SVG -->
-          <span class="material-symbols-outlined text-[#1e1d57]">
+          <span class="material-symbols-outlined text-[#1e1d57] group-hover:text-[#37C6F4]">
             logout
           </span>
-          <span class="text-[16px] text-[#000000] font-normal">Sign out</span>
+          <span class="text-[16px] text-[#000000] font-normal group-hover:text-[#37C6F4]">Sign out</span>
         </a>
       </div>
     </aside>

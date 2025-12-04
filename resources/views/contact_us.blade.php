@@ -8,10 +8,10 @@
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16 relative">
 
   <div class="max-w-7xl mx-auto  py-20 sm:py-24 lg:py-28">
-    <p class="text-[18px] text-[#37C6F4] font-semibold mb-6">CONTACT US</p>
-    <h1 class=" font-appetite text-3xl sm:text-5xl font-bold leading-none max-w-[710px]">
+    <h1 class="text-[18px] text-[#37C6F4] font-semibold mb-6">CONTACT US</h1>
+    <p class=" font-appetite text-3xl sm:text-5xl font-bold leading-none max-w-[710px]">
       Get in touch with the Water and Wastewater PPP Hub
-    </h1>
+    </p>
   </div>
 </section>
 <section class="px-6 lg:px-16">

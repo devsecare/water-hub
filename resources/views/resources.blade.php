@@ -266,10 +266,10 @@
 <!-- ✅ HERO -->
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16">
     <div class="max-w-7xl mx-auto  py-20 sm:py-24 lg:py-28">
-        <p class="text-lg text-[#37C6F4] font-semibold mb-2">WATER PPP RESOURCES</p>
-        <h1 class="text-3xl font-appetite sm:text-5xl font-bold leading-none max-w-[710px]">
+        <h1 class="text-lg text-[#37C6F4] font-semibold mb-2">WATER PPP RESOURCES</h1>
+        <p class="text-3xl font-appetite sm:text-5xl font-bold leading-none max-w-[710px]">
             Everything You Need To Identify, Prepare, Implement And Manage Your PPP Project
-        </h1>
+        </p>
     </div>
 </section>
 
@@ -382,8 +382,8 @@
             <!-- Right content -->
             <div class="flex-1 bg-white p-8 text-gray-700 text-sm leading-relaxed flex flex-col justify-between">
                 <div>
-                    <p class="font-semibold text-black mb-2">Short description:</p>
-                    <div id="modalDescription" class="prose prose-sm max-w-none">
+                    <p class="font-semibold text-black mb-2 hidden">Short description:</p>
+                    <div id="modalDescription" class="prose prose-sm max-w-none ">
                         Summarise what they will get from the document and also mention the kinds of support files
                         available. Audio, video etc.
                     </div>
@@ -503,18 +503,18 @@
             const descriptionEscaped = (card.short_description || card.description || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
             container.innerHTML += `
-                <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
-                    <div style="${gradientStyle}" class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow drop-shadow-[0 2px 4px rgba(0,0,0, 0.50)]">
+                <div class="bg-white shadow-md p-6 rounded-[25px] flex flex-col justify-between">
+                    <div onclick="openItemPage()" style="${gradientStyle}" class="shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl text-white p-6 rounded-[15px] min-h-[337px] flex flex-col justify-between flex-grow drop-shadow-[0 2px 4px rgba(0,0,0, 0.50)] cursor-pointer features-card">
                         <div>
                             <h3 class="font-semibold text-lg leading-snug">${card.title}</h3>
                             <p class="text-sm mt-2 opacity-90">${card.publisher || ''}</p>
                         </div>
                         <div class="flex items-center space-x-2 mt-12">
                             <span class="material-symbols-outlined text-sm">${card.category_icon || 'folder'}</span>
-                            <span class="text-sm">${card.category_name}</span>
+                            <span class="text-sm font-bold">${card.category_name}</span>
                         </div>
                     </div>
-                    <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
+                    <div class="flex justify-between pt-4  text-black/80">
                         <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openModal(${card.id})">eye_tracking</span>
                         <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="downloadFile(${card.id})">download</span>
                         <span class="material-symbols-outlined  cursor-pointer hover:text-[#37C6F4] duration-250 ${card.is_bookmarked ? 'text-[#37C6F4]' : ''}" data-item-id="${card.id}" onclick="toggleBookmark(${card.id}, this)">bookmark</span>
@@ -598,7 +598,7 @@
         document.getElementById("modalType").innerText = item.category_name || item.type;
         const colorBox = document.getElementById("modalColorBox");
         const gradientStyle = formatGradient(item.category_color);
-        colorBox.className = `p-8 text-white rounded-2xl w-full md:w-1/2 flex flex-col justify-between min-h-[360px]`;
+        colorBox.className = `p-8 text-white rounded-2xl w-full md:w-1/2 flex flex-col justify-between min-h-[360px] shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl`;
         colorBox.setAttribute('style', gradientStyle);
         document.getElementById("modalIcon").innerText = item.category_icon || item.icon || 'folder';
         const modalDescription = document.getElementById("modalDescription");

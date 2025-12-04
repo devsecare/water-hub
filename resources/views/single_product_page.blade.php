@@ -102,7 +102,7 @@
                     <!-- LEFT TEXT SECTION – takes 2/3 -->
                     <div class="md:col-span-2 lg:max-w-[60%]  md:max-w-1/2 text-[#000000]">
                         @if($item->short_description)
-                        <div class="mb-6 leading-relaxed">
+                        <div class="mb-6 leading-relaxed hidden">
                             <span class="text-black font-bold">Short description: </span>
                             <div class="prose prose-sm max-w-none">
                                 {!! $item->short_description !!}

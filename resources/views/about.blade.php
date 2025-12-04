@@ -16,18 +16,21 @@
 
     <!-- Text Content -->
     <div class="relative z-10 flex items-center py-16 px-6 lg:px-16 h-full ">
-        <svg xmlns="http://www.w3.org/2000/svg" width="440" height="20.722" viewBox="0 0 440 20.722" class="absolute top-0 w-[80%] max-w-fit left-0 right-auto h-auto z-10">
-        <path id="Path_412" data-name="Path 412" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
-    </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="440" height="20.722" viewBox="0 0 440 20.722"
+            class="absolute top-0 w-[80%] max-w-fit left-0 right-auto h-auto z-10">
+            <path id="Path_412" data-name="Path 412"
+                d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z"
+                transform="translate(0 -21.645)" fill="#fff"></path>
+        </svg>
         <div class="w-full max-w-7xl mx-auto  text-left">
-            <p class="text-sky-300 font-medium uppercase tracking-wide mb-2 text-sm sm:text-base">
+            <h1 class="text-sky-300 font-medium uppercase tracking-wide mb-2 text-sm sm:text-base">
                 About Us
-            </p>
+            </h1>
 
-            <h1 class="text-3xl sm:text-[48px] font-bold leading-snug font-appetite text-white max-w-[730px]">
+            <p class="text-3xl sm:text-[48px] font-bold leading-snug font-appetite text-white max-w-[730px]">
                 The trusted federation <br class="hidden sm:block" />
                 advancing water PPPs globally
-            </h1>
+            </p>
         </div>
     </div>
 </section>
@@ -36,13 +39,13 @@
     <div class="max-w-7xl mx-auto  w-full">
         <div class="max-w-[790px] text-left">
             <!-- First Bold Paragraph -->
-            <p class="text-[#1E1D57] font-semibold text-sm sm:text-base md:text-[18px] md:leading-[1.35rem] mb-4">
+            <p class="text-[#1E1D57] font-semibold  text-lg leading-snug mb-4">
                 For 20 years, AquaFed has been the global voice of water partnership expertise – connecting 400+
                 operators across 40 countries to deliver sustainable water solutions worldwide.
             </p>
 
             <!-- Second Regular Paragraph -->
-            <p class="text-[#1E1D57] text-sm sm:text-base lg:mt-8 md:text-[18px] md:leading-[1.35rem]">
+            <p class="text-[#1E1D57]  lg:mt-8 text-lg leading-snug">
                 We accelerate the creation and development of markets for public-private partnerships in water and
                 wastewater services. By consolidating best practices, proven models, and expert knowledge from operators
                 worldwide, we help governments, consultants, and investors build water systems that work –
@@ -63,7 +66,8 @@
             </h2>
 
             <p class="mt-6 text-base text-gray-700">
-                <a href="#" class="text-sky-500 font-semibold underline">The Hub</a> exists to break down barriers to
+                <a href="{{ route('resources') }}" class="text-sky-500 font-semibold underline">The Hub</a> exists to
+                break down barriers to
                 successful water partnerships.
                 For too long, essential PPP guidance has been scattered, technical, and difficult to navigate.
                 This platform consolidates the best resources from our global network into one accessible space –
@@ -160,18 +164,25 @@
 </section>
 
 <!-- Comprehensive water PPP section  -->
-<section class="bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-15 md:py-20 px-6 lg:px-16 relative">
+<section
+    class="bg-[linear-gradient(106deg,#37C6F4_0%,#5CD3CE_100%)] bg-no-repeat bg-left-top opacity-100 text-black py-15 md:py-20 px-6 lg:px-16 relative md:pb-[130px]">
 
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722" class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full">
-                <path id="Path_435" data-name="Path 435" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
-            </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="710" height="33.437" viewBox="0 0 710 33.437" class="absolute top-0 xl:left-[15%] hidden md:block ">
-        <path id="Path_419" data-name="Path 419" d="M0,21.645c207.154,0,277.811,33.437,371.982,33.437S537.765,21.645,710,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
-        </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 20.722"
+        class="absolute top-0 left-1/2 -translate-x-1/2 block md:hidden w-full">
+        <path id="Path_435" data-name="Path 435"
+            d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z"
+            transform="translate(0 -21.645)" fill="#fff"></path>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="33.437" viewBox="0 0 710 33.437"
+        class="absolute top-0 xl:left-[15%] hidden md:block ">
+        <path id="Path_419" data-name="Path 419"
+            d="M0,21.645c207.154,0,277.811,33.437,371.982,33.437S537.765,21.645,710,21.645H0Z"
+            transform="translate(0 -21.645)" fill="#fff"></path>
+    </svg>
 
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8 ">
         <div class="max-w-[604px]">
-            <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-semibold leading-tight mb-4">
+            <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-bold  mb-4">
                 Comprehensive water PPP knowledge in a format that works for you
             </h2>
             <p class="text-[#000000]">
@@ -181,7 +192,7 @@
             </p>
         </div>
 
-        <a href="{{ route('resources') }}" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[55px] py-[10px] px-[27px] 
+        <a href="https://water-hub.ecareinfoway.com/resources" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[55px] py-[10px] px-[27px] 
                 hover:bg-[#37C6F4] hover:text-[#1E1D57] transition duration-300">
             The resource library
             <!-- SVG Icon placed after text -->
@@ -192,18 +203,33 @@
             </svg>
         </a>
     </div>
+    <div class=" absolute bottom-0 left-0 right-0">
+        <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
+            preserveAspectRatio="none">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z">
+                </path>
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)"></use>
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57"></use>
+            </g>
+        </svg>
+    </div>
 </section>
 
 <!-- Help us build a better resource section  -->
-<section class="px-6 lg:px-16">
+<!-- <section class="px-6 lg:px-16">
     <section class="max-w-7xl flex mx-auto  py-10 md:py-20">
         <div class="text-left">
-            <!-- Heading -->
+    
             <h2 class="text-3xl md:text-4xl lg:max-w-[605px] font-bold text-[#1e1b4b] mb-6">
                 Help us build a better resource
             </h2>
 
-            <!-- Paragraph -->
+        
             <p class="text-[#000000] text-[16px] lg:max-w-[590px] mb-6">
                 <span class="font-semibold">This Hub grows stronger with your input.</span>
                 If you've developed useful PPP materials, identified gaps in our resources,
@@ -212,7 +238,6 @@
                 we'll create the most valuable water PPP platform in the world.
             </p>
 
-            <!-- Link -->
             <a href="{{ route('contactus') }}" class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold transition-colors">
                 <span class="group-hover:text-[#1E1D57] transition-colors">Get in touch</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-[24px] w-[24px] text-bold ml-1 transition-colors  group-hover:text-[#1E1D57]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -221,9 +246,9 @@
             </a>
         </div>
     </section>
-</section>
+</section> -->
 <!-- waves section  -->
-<div class="bottom-0 left-0 right-0">
+<!-- <div class="bottom-0 left-0 right-0">
     <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
         preserveAspectRatio="none">
         <defs>
@@ -236,5 +261,5 @@
             <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
         </g>
     </svg>
-</div>
+</div> -->
 @endsection

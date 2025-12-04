@@ -70,10 +70,10 @@
 <section class="bg-gradient-to-r from-[#070648] to-[#2CBE9D] text-white px-6 lg:px-16 relative">
 
     <div class="max-w-7xl mx-auto  py-20 sm:py-24 lg:py-28">
-        <p class="text-[18px] text-[#37C6F4] font-semibold mb-6">WATER PPP CASE STUDIES</p>
-        <h1 class=" font-appetite text-3xl sm:text-5xl font-bold leading-none max-w-[500px]">
+        <h1 class="text-[18px] text-[#37C6F4] font-semibold mb-6">WATER PPP CASE STUDIES</h1>
+        <p class=" font-appetite text-3xl sm:text-5xl font-bold leading-none max-w-[500px]">
             Learn from water PPP success stories
-        </h1>
+        </p>
     </div>
 </section>
 <!-- hero section end  -->
@@ -210,7 +210,7 @@
 
     <div class="max-w-7xl mx-auto mb-16 flex flex-col md:flex-row justify-between items-start md:items-end md:gap-8  ">
         <div class="max-w-[604px]">
-            <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-semibold leading-tight mb-4">
+            <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-bold leading-snug mb-4">
                 Comprehensive water PPP knowledge in a format that works for you
             </h2>
             <p class="text-[#000000]">

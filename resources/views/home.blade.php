@@ -32,7 +32,7 @@
 
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 md:gap-4 mt-3 sm:mt-4 md:mt-6">
             @auth
-             <a href="{{ route('casestudy') }}"
+             <a href="{{ route('resources') }}"
                 class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg  py-[6px] px-[31px] rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
                View Map
             </a>
@@ -45,7 +45,7 @@
 
 
             @endauth
-            <a href="{{ route('about') }}"
+            <a href="{{ route('understandingWater') }}"
                 class="group text-[#37C6F4] text-[18px] font-medium flex items-center hover:underline relative transition sm:text-base hover:text-white">
 
                 Learn more
@@ -102,10 +102,10 @@
 <!-- A step-by-step guide to water secton start  -->
 <section class="px-6 lg:px-16 py-12 lg:pt-22 pb-8">
     <div class="max-w-7xl mx-auto ">
-        <h1 class="text-3xl md:text-4xl font-bold text-[#1E1D57] leading-tight">
+        <h2 class="text-3xl md:text-4xl font-bold text-[#1E1D57] leading-tight">
             A step-by-step guide to water<br class="hidden md:block">
             PPP implementation
-        </h1>
+        </h2>
 
         <p class="mt-6 text-[#000000] text-[16px] max-w-[922px] leading-relaxed">
             Every successful water PPP follows a structured path from initial decision
@@ -219,7 +219,7 @@
     </svg>
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:gap-8">
         <div class="max-w-[604px]">
-            <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-semibold leading-tight mb-4">
+            <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-bold leading-tight mb-4">
                 From complex documents to clear guidance – all in one place
             </h2>
             <p class="text-[#000000]">
@@ -314,7 +314,11 @@
             </h2>
             <p class="text-base leading-relaxed">
                 We understand that navigating water PPPs can feel overwhelming. Documents are technical, information is
-                fragmented, and time is limited. That's why <span class="underline text-[#37C6F4]">AquaFed</span>
+                fragmented, and time is limited. That's why <span class="underline text-[#37C6F4]">
+  <a href="https://www.aquafed.org/" target="_blank" rel="noopener noreferrer">
+    AquaFed
+  </a>
+</span>
                 created this Hub – to give you clarity, confidence, and practical tools backed by decades of global
                 water partnership expertise. We're here to help you succeed.
             </p>
@@ -357,54 +361,54 @@
     <ul class="flex animate-slide mt-6 w-[200%]">
         <!-- Original Set -->
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg" class="h-12 object-contain"
-                alt="eBay">
-        </li>
-        <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/CNN.svg" class="h-12 object-contain"
+            <img src="/images/CNN.svg" class="h-12 object-contain"
                 alt="CNN">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
-                class="h-12 object-contain" alt="Google">
+            <img src="/images/Google.svg" class="h-12 object-contain"
+                alt="GOOGLE">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" class="h-12 object-contain"
-                alt="Cisco">
+            <img src="/images/CISCO.svg"
+                class="h-12 object-contain" alt="CISCO">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg"
-                class="h-12 object-contain" alt="Airbnb">
+            <img src="/images/Airbnb.svg" class="h-12 object-contain"
+                alt="AIRBNB">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
-                class="h-12 object-contain" alt="Uber">
+            <img src="/images/Uber.svg"
+                class="h-12 object-contain" alt="UBER">
+        </li>
+        <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
+            <img src="/images/Ebay.svg"
+                class="h-12 object-contain" alt="EBAY">
         </li>
 
         <!-- Duplicate Set for seamless loop -->
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1b/EBay_logo.svg" class="h-12 object-contain"
-                alt="eBay">
-        </li>
-        <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/CNN.svg" class="h-12 object-contain"
+            <img src="/images/CNN.svg" class="h-12 object-contain"
                 alt="CNN">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg"
-                class="h-12 object-contain" alt="Google">
+            <img src="/images/Google.svg" class="h-12 object-contain"
+                alt="GOOGLE">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/64/Cisco_logo.svg" class="h-12 object-contain"
-                alt="Cisco">
+            <img src="/images/CISCO.svg"
+                class="h-12 object-contain" alt="CISCO">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_Bélo.svg"
-                class="h-12 object-contain" alt="Airbnb">
+            <img src="/images/Airbnb.svg" class="h-12 object-contain"
+                alt="AIRBNB">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png"
-                class="h-12 object-contain" alt="Uber">
+            <img src="/images/Uber.svg"
+                class="h-12 object-contain" alt="UBER">
+        </li>
+        <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
+            <img src="/images/Ebay.svg"
+                class="h-12 object-contain" alt="EBAY">
         </li>
     </ul>
 </section>
@@ -426,7 +430,7 @@
             transform="translate(0 -21.645)" fill="#fff"></path>
     </svg>
     <!-- Overlay gradient -->
-    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
+    <div class="absolute inset-0 bg-black/65"></div>
 
     <!-- Content -->
     <div class="relative max-w-7xl mx-auto flex flex-col justify-center mb-12">
@@ -437,10 +441,10 @@
                 PPPs today.
             </h1>
 
-            <p class="text-lg md:text-xl font-medium text-gray-200 mb-8">
+            <h5 class="text-lg  max-w-[498px] font-bold text-gray-200 mb-8">
                 Join government officials, consultants, and investors worldwide who trust the Hub for practical PPP
                 guidance.
-            </p>
+            </h5>
 
             @auth
             <a href="{{ route('map.index') }}"
