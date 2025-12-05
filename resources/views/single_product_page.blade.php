@@ -136,89 +136,41 @@
                         </button>
                     </div>
 
-                    <!-- RIGHT ADDITIONAL RESOURCES (1/3) -->
-                    @if($item->files->count() > 0 || ($item->author || $item->publisher))
+                    <!-- RIGHT SECTION -->
+                    @if(!empty($item->additional_resources) && is_array($item->additional_resources) && count($item->additional_resources) > 0 || $item->featuredImage || ($item->author || $item->publisher))
                     <div class="md:col-span-1">
-                        @if($item->files->count() > 0)
-                        <h3 class=" font-semibold text-[#37C6F4] text-2xl mb-4 max-[1100px]:text-lg max-[1200px]:text-xl">
-                            Additional resources
-                        </h3>
-
-                        @php
-                            // Categorize files by type
-                            $documentFiles = $item->files->filter(function($file) {
-                                $mime = $file->mime_type ?? '';
-                                return str_starts_with($mime, 'application/pdf') ||
-                                       str_starts_with($mime, 'application/msword') ||
-                                       str_starts_with($mime, 'application/vnd.openxmlformats-officedocument') ||
-                                       str_contains($mime, 'document') ||
-                                       (!str_starts_with($mime, 'video/') && !str_starts_with($mime, 'audio/') && $mime !== '');
-                            });
-
-                            $videoFiles = $item->files->filter(function($file) {
-                                return str_starts_with($file->mime_type ?? '', 'video/');
-                            });
-
-                            $audioFiles = $item->files->filter(function($file) {
-                                return str_starts_with($file->mime_type ?? '', 'audio/');
-                            });
-                        @endphp
-
-                        <ul class="space-y-3  text-[#000000] text-[16px]">
-                            @if($documentFiles->count() > 0)
-                                @foreach($documentFiles as $document)
-                                    <li class="flex items-center gap-2 cursor-pointer">
-                                        <svg id="summary-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24">
-                                            <path id="Path_406" data-name="Path 406"
-                                                d="M5,4V4ZM7,14h3.5a5.806,5.806,0,0,1,1.3-2.01H7v2Zm0,4h3.18a5.781,5.781,0,0,1-.16-1,6.677,6.677,0,0,1,.01-1H7v2ZM5,22a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,3,20V4a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,5,2h8l6,6v2.5a5.581,5.581,0,0,0-.98-.31,8.828,8.828,0,0,0-1.03-.16V9h-5V4h-7V20h6.03a8.082,8.082,0,0,0,.9,1.11,5.876,5.876,0,0,0,1.1.89Zm11.5-3a2.517,2.517,0,0,0,1.78-4.29,2.517,2.517,0,0,0-3.56,3.56A2.415,2.415,0,0,0,16.5,19Zm5.1,4-2.7-2.7a4.237,4.237,0,0,1-1.14.53,4.463,4.463,0,0,1-1.26.18,4.371,4.371,0,0,1-3.19-1.31A4.316,4.316,0,0,1,12,16.51a4.371,4.371,0,0,1,1.31-3.19,4.316,4.316,0,0,1,3.19-1.31,4.371,4.371,0,0,1,3.19,1.31A4.316,4.316,0,0,1,21,16.51a4.463,4.463,0,0,1-.18,1.26,3.954,3.954,0,0,1-.53,1.14l2.7,2.7-1.4,1.4Z"
-                                                fill="#1e1d57" />
-                                            <rect id="Rectangle_61" data-name="Rectangle 61" width="24" height="24"
-                                                fill="none" />
-                                        </svg>
-                                        <a href="{{ route('files.download', $document) }}" class="hover:text-[#37C6F4] transition-colors">
-                                            {{ $document->original_name }}
-                                        </a>
-                                    </li>
+                        @if(!empty($item->additional_resources) && is_array($item->additional_resources) && count($item->additional_resources) > 0)
+                        <div class="mt-8 text-lg text-[#37C6F4] space-y-3">
+                            <h3 class="font-semibold text-[#37C6F4] text-2xl mb-4 max-[1100px]:text-lg max-[1200px]:text-xl">
+                                Additional resources
+                            </h3>
+                            <ul class="space-y-3 text-[#000000] text-[16px]">
+                                @foreach($item->additional_resources as $resource)
+                                    @if(!empty($resource['media_id']))
+                                        @php
+                                            $media = \App\Models\Media::find($resource['media_id']);
+                                            $filename = $resource['filename'] ?? ($media ? ($media->file_name ?? $media->name ?? 'Download') : 'Download');
+                                            $iconName = $resource['icon'] ?? '';
+                                        @endphp
+                                        <li class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] transition-colors">
+                                            @if(!empty($iconName))
+                                                <span class="material-symbols-outlined text-[18px] text-[#1e1d57]">{{ $iconName }}</span>
+                                            @else
+                                                {{-- Fallback to default document icon if no icon specified --}}
+                                                <svg id="summary-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                    <path id="Path_406" data-name="Path 406" d="M5,4V4ZM7,14h3.5a5.806,5.806,0,0,1,1.3-2.01H7v2Zm0,4h3.18a5.781,5.781,0,0,1-.16-1,6.677,6.677,0,0,1,.01-1H7v2ZM5,22a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,3,20V4a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,5,2h8l6,6v2.5a5.581,5.581,0,0,0-.98-.31,8.828,8.828,0,0,0-1.03-.16V9h-5V4h-7V20h6.03a8.082,8.082,0,0,0,.9,1.11,5.876,5.876,0,0,0,1.1.89Zm11.5-3a2.517,2.517,0,0,0,1.78-4.29,2.517,2.517,0,0,0-3.56,3.56A2.415,2.415,0,0,0,16.5,19Zm5.1,4-2.7-2.7a4.237,4.237,0,0,1-1.14.53,4.463,4.463,0,0,1-1.26.18,4.371,4.371,0,0,1-3.19-1.31A4.316,4.316,0,0,1,12,16.51a4.371,4.371,0,0,1,1.31-3.19,4.316,4.316,0,0,1,3.19-1.31,4.371,4.371,0,0,1,3.19,1.31A4.316,4.316,0,0,1,21,16.51a4.463,4.463,0,0,1-.18,1.26,3.954,3.954,0,0,1-.53,1.14l2.7,2.7-1.4,1.4Z" fill="#1e1d57" />
+                                                    <rect id="Rectangle_61" data-name="Rectangle 61" width="24" height="24" fill="none" />
+                                                </svg>
+                                            @endif
+                                            <a href="{{ route('media.download', $resource['media_id']) }}?filename={{ urlencode($filename) }}" class="hover:text-[#37C6F4] transition-colors">
+                                                {{ $filename }}
+                                            </a>
+                                        </li>
+                                    @endif
                                 @endforeach
-                            @endif
-
-                            @if($videoFiles->count() > 0)
-                                @foreach($videoFiles as $video)
-                                    <li class="flex items-center gap-2 cursor-pointer">
-                                        <svg id="video-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24">
-                                            <path id="Path_408" data-name="Path 408"
-                                                d="M11.5,14.5l7-4.5-7-4.5ZM8,18a2.015,2.015,0,0,1-2-2V4a1.926,1.926,0,0,1,.59-1.41A1.926,1.926,0,0,1,8,2H20a1.926,1.926,0,0,1,1.41.59A1.926,1.926,0,0,1,22,4V16a2.015,2.015,0,0,1-2,2Zm0-2H20V4H8ZM4,22a1.926,1.926,0,0,1-1.41-.59A1.926,1.926,0,0,1,2,20V6H4V20H18v2ZM8,4V4Z"
-                                                fill="#1e1d57" />
-                                            <rect id="Rectangle_63" data-name="Rectangle 63" width="24" height="24"
-                                                fill="none" />
-                                        </svg>
-                                        <a href="{{ route('files.download', $video) }}" class="hover:text-[#37C6F4] transition-colors">
-                                            {{ $video->original_name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            @endif
-
-                            @if($audioFiles->count() > 0)
-                                @foreach($audioFiles as $audio)
-                                    <li class="flex items-center gap-2 cursor-pointer">
-                                        <svg id="podcast-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24">
-                                            <path id="Path_403" data-name="Path 403"
-                                                d="M11,22V13.72a2.251,2.251,0,0,1-.73-.71A1.805,1.805,0,0,1,9.99,12a1.994,1.994,0,0,1,3.41-1.41A1.926,1.926,0,0,1,13.99,12a1.9,1.9,0,0,1-.28,1.03,2.038,2.038,0,0,1-.73.7v8.28h-2ZM5.1,19.25a10.436,10.436,0,0,1-2.26-3.24A9.639,9.639,0,0,1,2,12a9.508,9.508,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.11,2.78a9.678,9.678,0,0,1,3.9-.79,9.678,9.678,0,0,1,3.9.79A9.989,9.989,0,0,1,21.23,8.1a9.678,9.678,0,0,1,.79,3.9,9.936,9.936,0,0,1-.84,4.03,10.054,10.054,0,0,1-2.26,3.23l-1.4-1.4a8.09,8.09,0,0,0,1.83-2.61,7.874,7.874,0,0,0,.68-3.24A7.742,7.742,0,0,0,17.7,6.33,7.726,7.726,0,0,0,12.02,4,7.726,7.726,0,0,0,6.34,6.33a7.726,7.726,0,0,0-2.33,5.68,7.794,7.794,0,0,0,.68,3.23,8.058,8.058,0,0,0,1.85,2.6L5.11,19.27Zm2.83-2.83a6.311,6.311,0,0,1-1.4-1.96A5.813,5.813,0,0,1,6,12,5.773,5.773,0,0,1,7.75,7.75,5.773,5.773,0,0,1,12,6a5.773,5.773,0,0,1,4.25,1.75A5.773,5.773,0,0,1,18,12a6.032,6.032,0,0,1-1.93,4.43L14.64,15a4.141,4.141,0,0,0,.99-1.35,3.976,3.976,0,0,0-.82-4.48,3.984,3.984,0,0,0-5.66,0,3.992,3.992,0,0,0-.82,4.49A4.322,4.322,0,0,0,9.32,15L7.89,16.43Z"
-                                                fill="#1e1d57" />
-                                            <rect id="Rectangle_58" data-name="Rectangle 58" width="24" height="24"
-                                                fill="none" />
-                                        </svg>
-                                        <a href="{{ route('files.download', $audio) }}" class="hover:text-[#37C6F4] transition-colors">
-                                            {{ $audio->original_name }}
-                                        </a>
-                                    </li>
-                                @endforeach
-                            @endif
-                        </ul>
+                            </ul>
+                        </div>
+                        @endif
 
                         @if($item->featuredImage)
                         <div class="mt-8 text-lg text-[#37C6F4] space-y-2">
@@ -277,7 +229,6 @@
                             @endphp
                             <p><span class="font-semibold text-[#1E1D57]">File type:</span> {{ $fileExtension ?: 'N/A' }}</p>
                         </div>
-                        @endif
                         @endif
 
                         @if($item->author || $item->publisher)
@@ -440,13 +391,13 @@
 
     // Share functionality
     let isSharing = false;
-    
+
     function shareItem(url, title) {
         // Prevent concurrent share operations
         if (isSharing) {
             return;
         }
-        
+
         // Check if URL is already absolute (starts with http:// or https://)
         let shareUrl = url;
         if (url.startsWith('http://') || url.startsWith('https://')) {
@@ -459,7 +410,7 @@
             // Relative URL without leading /, prepend origin and /
             shareUrl = window.location.origin + '/' + url;
         }
-        
+
         if (navigator.share) {
             // Use Web Share API if available (mobile devices)
             isSharing = true;

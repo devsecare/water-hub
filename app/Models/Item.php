@@ -25,6 +25,7 @@ class Item extends Model
         'country',
         'project_phase',
         'featured_image_id',
+        'additional_resources',
         'is_active',
         'is_case_study',
     ];
@@ -34,6 +35,7 @@ class Item extends Model
         'longitude' => 'decimal:8',
         'is_active' => 'boolean',
         'is_case_study' => 'boolean',
+        'additional_resources' => 'array',
     ];
 
     public function getTypeLabelAttribute(): string
@@ -61,11 +63,6 @@ class Item extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function files(): HasMany
-    {
-        return $this->hasMany(File::class);
     }
 
     public function featuredImage(): BelongsTo

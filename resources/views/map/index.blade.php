@@ -117,19 +117,6 @@
                     <span class="inline-block w-4 h-4 rounded-full ml-2"
                         style="background-color: {{ $item->category->color }}"></span>
                 </div>
-                @if($item->files->count() > 0)
-                    <div class="mt-4">
-                        <p class="text-sm font-medium text-gray-700 mb-2">Files ({{ $item->files->count() }})</p>
-                        <div class="space-y-1">
-                            @foreach($item->files as $file)
-                                <a href="{{ route('files.download', $file) }}"
-                                    class="block text-sm text-indigo-600 hover:text-indigo-800">
-                                    📄 {{ $file->original_name }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                @endif
             </div>
         @endforeach
     </div>
@@ -177,7 +164,6 @@
             'start_color' => $startColor,
             'end_color' => $endColor,
             'featured_image_id' => $item->featured_image_id,
-            'files_count' => $item->files->count(),
             'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
         ];
     }));
@@ -249,9 +235,9 @@
             return;
         }
 
-        // Download the featured image - add timestamp to prevent caching
-        const downloadUrl = `/media/${item.featured_image_id}/download?t=${Date.now()}`;
-        window.location.href = downloadUrl;
+        // Simple direct navigation - same as working featured media download link
+        // The server's Content-Disposition header will force the download
+        window.location.href = `/media/${item.featured_image_id}/download`;
     }
 
     // Toggle bookmark from map

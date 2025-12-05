@@ -20,7 +20,7 @@ class MapController extends Controller
 
         // Build query for items
         $query = Item::where('is_active', true)
-            ->with(['category', 'featuredImage', 'files']);
+            ->with(['category', 'featuredImage']);
 
         // Filter by category if selected
         if ($selectedCategory) {
@@ -58,7 +58,7 @@ class MapController extends Controller
 
         // Build query for items
         $query = Item::where('is_active', true)
-            ->with(['category', 'featuredImage', 'files']);
+            ->with(['category', 'featuredImage']);
 
         // Filter by category if selected
         if ($selectedCategory) {
@@ -98,7 +98,6 @@ class MapController extends Controller
                     'icon' => $item->category->icon ?? 'folder',
                 ],
                 'featured_image_id' => $item->featured_image_id,
-                'files_count' => $item->files->count(),
                 'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
             ];
         }));

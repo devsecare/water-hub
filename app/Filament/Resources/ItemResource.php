@@ -100,63 +100,30 @@ class ItemResource extends Resource
 
                 Forms\Components\Section::make('Additional Resources')
                     ->schema([
-                        Forms\Components\Repeater::make('additional_files')
-                            ->label('Files')
+                        Forms\Components\Repeater::make('additional_resources')
+                            ->label('Resources')
                             ->schema([
-                                Forms\Components\Hidden::make('id'),
-                                Forms\Components\Placeholder::make('existing_file')
-                                    ->label('Existing File')
-                                    ->content(function (Forms\Get $get) {
-                                        $id = $get('id');
-                                        if ($id) {
-                                            $file = \App\Models\File::find($id);
-                                            if ($file) {
-                                                $size = $file->size;
-                                                $units = ['B', 'KB', 'MB', 'GB'];
-                                                $bytes = $size;
-                                                for ($i = 0; $bytes > 1024 && $i < count($units) - 1; $i++) {
-                                                    $bytes /= 1024;
-                                                }
-                                                $formattedSize = round($bytes, 2) . ' ' . $units[$i];
-                                                return $file->original_name . ' (' . $formattedSize . ')';
-                                            }
-                                        }
-                                        return null;
-                                    })
-                                    ->visible(fn (Forms\Get $get) => !empty($get('id'))),
                                 CuratorPicker::make('media_id')
-                                    ->label('Select File from Media Library')
-                                    ->required(fn (Forms\Get $get) => empty($get('id')))
+                                    ->label('Media')
                                     ->buttonLabel('Select Media')
                                     ->listDisplay(true)
-                                    ->multiple(false)
-                                    ->helperText('Select a file from the media library (only for new files)')
-                                    ->visible(fn (Forms\Get $get) => empty($get('id')))
-                                    ->dehydrated(true)
-                                    ->afterStateUpdated(function ($state, Forms\Set $set) {
-                                        if ($state) {
-                                            $mediaId = is_array($state) ? (reset($state) ?: null) : $state;
-                                            if ($mediaId) {
-                                                $media = \App\Models\Media::find($mediaId);
-                                                if ($media && $media instanceof \App\Models\Media) {
-                                                    $extension = pathinfo($media->file_name ?? $media->name, PATHINFO_EXTENSION) ?: $media->ext;
-                                                    $set('original_name', $media->file_name ?? $media->name ?? 'file.' . $extension);
-                                                }
-                                            }
-                                        }
-                                    }),
-                                Forms\Components\TextInput::make('original_name')
-                                    ->label('File Name')
                                     ->required()
+                                    ->multiple(false),
+                                Forms\Components\TextInput::make('filename')
+                                    ->label('Filename')
                                     ->maxLength(255)
-                                    ->helperText('The original name of the file'),
+                                    ->required()
+                                    ->helperText('Display name for the file'),
+                                Forms\Components\TextInput::make('icon')
+                                    ->label('Icon')
+                                    ->maxLength(255)
+                                    ->helperText('Icon class or name (e.g., material-symbols-outlined, heroicon-o-document)'),
                             ])
                             ->defaultItems(0)
-                            ->addActionLabel('Add File')
-                            ->reorderable(false)
+                            ->addActionLabel('Add Resource')
+                            ->reorderable()
                             ->collapsible()
-                            ->itemLabel(fn (array $state): ?string => $state['original_name'] ?? null)
-                            ->dehydrated(true)
+                            ->itemLabel(fn (array $state): ?string => $state['filename'] ?? 'New Resource')
                             ->columnSpanFull(),
                     ]),
 

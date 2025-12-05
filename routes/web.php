@@ -190,13 +190,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/map', [MapController::class, 'index'])->name('map.index');
     Route::get('/api/map/items', [MapController::class, 'api'])->name('map.api');
 
-    // File downloads
-    Route::get('/files/{file}/download', [FileDownloadController::class, 'download'])
-        ->name('files.download')
-        ->middleware('throttle:10,1');
-    Route::get('/files/{file}/signed-url', [FileDownloadController::class, 'getSignedUrl'])
-        ->name('files.signed-url')
-        ->middleware('throttle:20,1');
+    // File downloads - REMOVED: Additional files functionality has been removed
 
     // Media downloads (for featured images)
     Route::get('/media/{mediaId}/download', [MediaDownloadController::class, 'download'])

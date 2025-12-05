@@ -34,7 +34,7 @@ class ResourcesController extends Controller
         $bookmarkedItemIds = $user ? $user->bookmarks()->pluck('item_id')->toArray() : [];
 
         $items = Item::where('is_active', true)
-            ->with(['category.parent', 'featuredImage', 'files'])
+            ->with(['category.parent', 'featuredImage'])
             ->orderBy('created_at', 'desc')
             ->get()
             ->map(function ($item) use ($bookmarkedItemIds) {
@@ -55,13 +55,6 @@ class ResourcesController extends Controller
                     'featured_image_url' => $item->featuredImage ? $item->featuredImage->url : null,
                     'featured_image_id' => $item->featuredImage ? $item->featuredImage->id : null,
                     'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
-                    'files' => $item->files->map(function ($file) {
-                        return [
-                            'id' => $file->id,
-                            'original_name' => $file->original_name,
-                            'name' => $file->name,
-                        ];
-                    })->toArray(),
                 ];
             });
 
@@ -76,7 +69,7 @@ class ResourcesController extends Controller
     {
         $item = Item::where('slug', $slug)
             ->where('is_active', true)
-            ->with(['category.parent', 'featuredImage', 'files'])
+            ->with(['category.parent', 'featuredImage'])
             ->firstOrFail();
 
         $user = auth()->user();
@@ -130,7 +123,7 @@ class ResourcesController extends Controller
         $query = Item::where('is_active', true)
             ->whereNotNull('latitude')
             ->whereNotNull('longitude')
-            ->with(['category', 'featuredImage', 'files']);
+            ->with(['category', 'featuredImage']);
 
         // Apply filters
         if ($selectedCountry) {
@@ -170,7 +163,6 @@ class ResourcesController extends Controller
                     'category_icon' => $item->category->icon ?? 'folder',
                     'category_name' => $item->category->name,
                     'featured_image_id' => $item->featured_image_id,
-                    'files_count' => $item->files->count(),
                     'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
                 ];
             });

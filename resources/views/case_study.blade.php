@@ -486,9 +486,9 @@
             return;
         }
 
-        // Download the featured image - add timestamp to prevent caching
-        const downloadUrl = `/media/${item.featured_image_id}/download?t=${Date.now()}`;
-        window.location.href = downloadUrl;
+        // Simple direct navigation - same as working featured media download link
+        // The server's Content-Disposition header will force the download
+        window.location.href = `/media/${item.featured_image_id}/download`;
     }
 
     // Share card item function (same as resources page)
