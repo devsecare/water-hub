@@ -504,7 +504,7 @@
 
             container.innerHTML += `
                 <div class="bg-white shadow-md p-6 rounded-[25px] flex flex-col justify-between">
-                    <div onclick="openItemPage()" style="${gradientStyle}" class="shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl text-white p-6 rounded-[15px] min-h-[337px] flex flex-col justify-between flex-grow drop-shadow-[0 2px 4px rgba(0,0,0, 0.50)] cursor-pointer features-card">
+                    <div onclick="openItemPage('${slugEscaped}')" style="${gradientStyle}" class="shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl text-white p-6 rounded-[15px] min-h-[337px] flex flex-col justify-between flex-grow drop-shadow-[0 2px 4px rgba(0,0,0, 0.50)] cursor-pointer features-card">
                         <div>
                             <h3 class="font-semibold text-lg leading-snug">${card.title}</h3>
                             <p class="text-sm mt-2 opacity-90">${card.publisher || ''}</p>
@@ -774,7 +774,13 @@
         }
     }
 
-    function openItemPage() {
+    function openItemPage(slug) {
+        // If slug is provided, use it directly (called from card click)
+        if (slug) {
+            window.location.href = `/resources/${slug}`;
+            return;
+        }
+        // Otherwise, use currentModalItemId (called from modal button)
         if (currentModalItemId) {
             const item = itemsData.find(i => i.id === currentModalItemId);
             if (item && item.slug) {
