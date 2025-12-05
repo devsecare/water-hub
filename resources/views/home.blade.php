@@ -361,54 +361,54 @@
     <ul class="flex animate-slide mt-6 w-[200%]">
         <!-- Original Set -->
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/CNN.svg" class="h-12 object-contain"
-                alt="CNN">
+            <img src="/images/adb.svg" class="h-12 object-contain"
+                alt="adb">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/Google.svg" class="h-12 object-contain"
-                alt="GOOGLE">
+            <img src="/images/eucommisions.svg" class="h-12 object-contain"
+                alt="eucommisions">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/CISCO.svg"
-                class="h-12 object-contain" alt="CISCO">
+            <img src="/images/idb.svg"
+                class="h-12 object-contain" alt="idb">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/Airbnb.svg" class="h-12 object-contain"
-                alt="AIRBNB">
+            <img src="/images/ppiaf.svg" class="h-12 object-contain"
+                alt="ppiaf">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/Uber.svg"
-                class="h-12 object-contain" alt="UBER">
+            <img src="/images/siwi.svg"
+                class="h-12 object-contain" alt="siwi">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/Ebay.svg"
-                class="h-12 object-contain" alt="EBAY">
+            <img src="/images/worldbankgroup.svg"
+                class="h-12 object-contain" alt="worldbankgroup">
         </li>
 
         <!-- Duplicate Set for seamless loop -->
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/CNN.svg" class="h-12 object-contain"
-                alt="CNN">
+            <img src="/images/adb.svg" class="h-12 object-contain"
+                alt="adb">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/Google.svg" class="h-12 object-contain"
-                alt="GOOGLE">
+            <img src="/images/eucommisions.svg" class="h-12 object-contain"
+                alt="eucommisions">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/CISCO.svg"
-                class="h-12 object-contain" alt="CISCO">
+            <img src="/images/idb.svg"
+                class="h-12 object-contain" alt="idb">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/Airbnb.svg" class="h-12 object-contain"
-                alt="AIRBNB">
+            <img src="/images/ppiaf.svg" class="h-12 object-contain"
+                alt="ppiaf">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/Uber.svg"
-                class="h-12 object-contain" alt="UBER">
+            <img src="/images/siwi.svg"
+                class="h-12 object-contain" alt="siwi">
         </li>
         <li class="flex-1 sm:flex-auto flex justify-center items-center px-2 sm:px-4">
-            <img src="/images/Ebay.svg"
-                class="h-12 object-contain" alt="EBAY">
+            <img src="/images/worldbankgroup.svg"
+                class="h-12 object-contain" alt="worldbankgroup">
         </li>
     </ul>
 </section>
