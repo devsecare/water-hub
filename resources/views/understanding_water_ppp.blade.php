@@ -40,7 +40,7 @@
 <section class="px-6 lg:px-16">
     <div class="max-w-7xl mx-auto ">
         <!-- Main Heading -->
-        <h2 class="text-4xl font-bold text-blue-900 mb-6">
+        <h2 class="text-[40px] font-bold text-[#1E1D57] mb-6">
             Why PPPs matter for water
         </h2>
 
@@ -340,7 +340,7 @@
             <ul class="list-disc pl-4 space-y-2 text-[#000000] mb-6">
                 <li>Protecting water resources through better management </li>
                 <li>Reducing energy consumption and carbon footprint</li>
-                <li>mplementing climate resilience measures </li>
+                <li>Implementing climate resilience measures </li>
                 <li>Ensuring 24/7 service continuity </li>
                 <li>Training local workforces </li>
                 <li>Advancing towards universal access targets </li>
