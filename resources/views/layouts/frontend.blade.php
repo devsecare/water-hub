@@ -6,10 +6,14 @@
 
     @php
         $seoData = \App\Services\SeoHelper::getSeoData();
+        $pageTitle = $seoData['meta_title'] ?? null;
+        if (empty($pageTitle)) {
+            $pageTitle = trim(view()->yieldContent('title')) ?: 'PPP Water Hub';
+        }
     @endphp
 
     <!-- Primary Meta Tags -->
-    <title>{{ $seoData['meta_title'] ?? (@yield('title', 'PPP Water Hub')) }}</title>
+    <title>{{ $pageTitle }}</title>
     @if(!empty($seoData['meta_description']))
     <meta name="description" content="{{ $seoData['meta_description'] }}">
     @endif
