@@ -3,7 +3,52 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@yield('title', 'PPP Water Hub')</title>
+
+    @php
+        $seoData = \App\Services\SeoHelper::getSeoData();
+    @endphp
+
+    <!-- Primary Meta Tags -->
+    <title>{{ $seoData['meta_title'] ?? (@yield('title', 'PPP Water Hub')) }}</title>
+    @if(!empty($seoData['meta_description']))
+    <meta name="description" content="{{ $seoData['meta_description'] }}">
+    @endif
+    @if(!empty($seoData['meta_keywords']))
+    <meta name="keywords" content="{{ $seoData['meta_keywords'] }}">
+    @endif
+    @if(!empty($seoData['robots']))
+    <meta name="robots" content="{{ $seoData['robots'] }}">
+    @endif
+
+    <!-- Canonical URL -->
+    @if(!empty($seoData['canonical_url']))
+    <link rel="canonical" href="{{ $seoData['canonical_url'] }}">
+    @endif
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ $seoData['canonical_url'] ?? url()->current() }}">
+    @if(!empty($seoData['og_title']))
+    <meta property="og:title" content="{{ $seoData['og_title'] }}">
+    @endif
+    @if(!empty($seoData['og_description']))
+    <meta property="og:description" content="{{ $seoData['og_description'] }}">
+    @endif
+    @if(!empty($seoData['og_image']))
+    <meta property="og:image" content="{{ $seoData['og_image'] }}">
+    @endif
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="{{ $seoData['twitter_card'] ?? 'summary_large_image' }}">
+    @if(!empty($seoData['og_title']))
+    <meta name="twitter:title" content="{{ $seoData['og_title'] }}">
+    @endif
+    @if(!empty($seoData['og_description']))
+    <meta name="twitter:description" content="{{ $seoData['og_description'] }}">
+    @endif
+    @if(!empty($seoData['og_image']))
+    <meta name="twitter:image" content="{{ $seoData['og_image'] }}">
+    @endif
     @vite('resources/css/app.css')
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -24,7 +69,7 @@
 
     @stack('styles')
     <link rel="icon" type="image/jpeg" href="{{ asset('images/Favicon.jpg') }}">
-    
+
     <!-- Toast Notification Styles -->
     <style>
         .toast-container {
@@ -36,7 +81,7 @@
             flex-direction: column;
             gap: 10px;
         }
-        
+
         .toast {
             background: white;
             border-radius: 12px;
@@ -50,35 +95,35 @@
             animation: slideInRight 0.3s ease-out;
             border-left: 4px solid #37C6F4;
         }
-        
+
         .toast.success {
             border-left-color: #10b981;
         }
-        
+
         .toast.error {
             border-left-color: #ef4444;
         }
-        
+
         .toast-icon {
             color: #37C6F4;
             font-size: 24px;
         }
-        
+
         .toast.success .toast-icon {
             color: #10b981;
         }
-        
+
         .toast.error .toast-icon {
             color: #ef4444;
         }
-        
+
         .toast-message {
             flex: 1;
             color: #1e1d57;
             font-size: 14px;
             font-weight: 500;
         }
-        
+
         .toast-close {
             background: none;
             border: none;
@@ -93,11 +138,11 @@
             justify-content: center;
             transition: color 0.2s;
         }
-        
+
         .toast-close:hover {
             color: #6b7280;
         }
-        
+
         @keyframes slideInRight {
             from {
                 transform: translateX(100%);
@@ -108,7 +153,7 @@
                 opacity: 1;
             }
         }
-        
+
         @keyframes slideOutRight {
             from {
                 transform: translateX(0);
@@ -119,18 +164,18 @@
                 opacity: 0;
             }
         }
-        
+
         .toast.hiding {
             animation: slideOutRight 0.3s ease-in forwards;
         }
-        
+
         @media (max-width: 640px) {
             .toast-container {
                 top: 10px;
                 right: 10px;
                 left: 10px;
             }
-            
+
             .toast {
                 min-width: auto;
                 max-width: 100%;
@@ -142,27 +187,27 @@
 </head>
 <body class="bg-white text-gray-900">
     @include('partials.header')
-    
+
     @yield('content')
-    
+
     @include('partials.footer')
-    
+
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container"></div>
-    
+
     <script src="{{ asset('js/script.js') }}"></script>
-    
+
     <!-- Toast Notification Script -->
     <script>
         function showToast(message, type = 'success', duration = 3000) {
             const container = document.getElementById('toast-container');
             if (!container) return;
-            
+
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
-            
+
             const icon = type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info';
-            
+
             toast.innerHTML = `
                 <span class="material-symbols-outlined toast-icon">${icon}</span>
                 <span class="toast-message">${message}</span>
@@ -170,9 +215,9 @@
                     <span class="material-symbols-outlined" style="font-size: 20px;">close</span>
                 </button>
             `;
-            
+
             container.appendChild(toast);
-            
+
             // Auto remove after duration
             setTimeout(() => {
                 toast.classList.add('hiding');
@@ -183,11 +228,11 @@
                 }, 300);
             }, duration);
         }
-        
+
         // Make it globally available
         window.showToast = showToast;
     </script>
-    
+
     @stack('scripts')
 </body>
 </html>
