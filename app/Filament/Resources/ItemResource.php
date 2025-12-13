@@ -114,6 +114,10 @@ class ItemResource extends Resource
                                     ->maxLength(255)
                                     ->required()
                                     ->helperText('Display name for the file'),
+                                Forms\Components\TextInput::make('download_text')
+                                    ->label('Download Text')
+                                    ->maxLength(255)
+                                    ->helperText('Text displayed beside the icon (defaults to filename, or "View summary file" if empty)'),
                                 Forms\Components\TextInput::make('icon')
                                     ->label('Icon')
                                     ->maxLength(255)
@@ -123,7 +127,7 @@ class ItemResource extends Resource
                             ->addActionLabel('Add Resource')
                             ->reorderable()
                             ->collapsible()
-                            ->itemLabel(fn (array $state): ?string => $state['filename'] ?? 'New Resource')
+                            ->itemLabel(fn (array $state): ?string => $state['download_text'] ?? $state['filename'] ?? 'New Resource')
                             ->columnSpanFull(),
                     ]),
 

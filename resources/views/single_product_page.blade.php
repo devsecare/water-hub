@@ -150,6 +150,7 @@
                                         @php
                                             $media = \App\Models\Media::find($resource['media_id']);
                                             $filename = $resource['filename'] ?? ($media ? ($media->file_name ?? $media->name ?? 'Download') : 'Download');
+                                            $downloadText = $resource['download_text'] ?? 'View summary file';
                                             $iconName = $resource['icon'] ?? '';
                                         @endphp
                                         <li class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] transition-colors">
@@ -163,7 +164,7 @@
                                                 </svg>
                                             @endif
                                             <a href="{{ route('media.download', $resource['media_id']) }}?filename={{ urlencode($filename) }}" class="hover:text-[#37C6F4] transition-colors">
-                                                {{ $filename }}
+                                                {{ $downloadText }}
                                             </a>
                                         </li>
                                     @endif

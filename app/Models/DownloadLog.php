@@ -20,10 +20,12 @@ class DownloadLog extends Model
         'downloaded_at' => 'datetime',
     ];
 
-    public function file(): BelongsTo
-    {
-        return $this->belongsTo(File::class);
-    }
+    // File relationship removed - files table was dropped
+    // Additional resources are now stored in items.additional_resources JSON field
+    // public function file(): BelongsTo
+    // {
+    //     return $this->belongsTo(File::class);
+    // }
 
     public function media(): BelongsTo
     {

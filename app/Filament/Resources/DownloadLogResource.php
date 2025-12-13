@@ -31,14 +31,11 @@ class DownloadLogResource extends Resource
             ->schema([
                 Forms\Components\Section::make('Download Information')
                     ->schema([
-                        Forms\Components\Select::make('file_id')
-                            ->label('File (Additional Resource)')
-                            ->relationship('file', 'name')
-                            ->searchable()
-                            ->preload()
+                        Forms\Components\TextInput::make('file_id')
+                            ->label('File ID (Legacy)')
                             ->disabled()
                             ->dehydrated()
-                            ->helperText('For files from Additional Resources section'),
+                            ->helperText('File downloads are now tracked via media. This field is for legacy records only.'),
                         Forms\Components\Select::make('media_id')
                             ->label('Media (Featured Image)')
                             ->relationship('media', 'name')
@@ -89,14 +86,20 @@ class DownloadLogResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function (Builder $query) {
+                // Ensure we don't try to load the file relationship since files table was dropped
+                // Only load media and user relationships
+                return $query->with(['media', 'user']);
+            })
             ->columns([
-                Tables\Columns\TextColumn::make('file.name')
-                    ->label('File (Additional Resource)')
+                Tables\Columns\TextColumn::make('file_id')
+                    ->label('File ID (Legacy)')
                     ->searchable()
                     ->sortable()
-                    ->limit(30)
+                    ->toggleable()
                     ->default('—')
-                    ->placeholder('—'),
+                    ->placeholder('—')
+                    ->formatStateUsing(fn ($state) => $state ? "File ID: {$state}" : '—'),
                 Tables\Columns\TextColumn::make('media.name')
                     ->label('Media (Featured Image)')
                     ->searchable()
@@ -107,8 +110,8 @@ class DownloadLogResource extends Resource
                 Tables\Columns\TextColumn::make('type')
                     ->label('Type')
                     ->badge()
-                    ->color(fn ($record) => $record->file_id ? 'success' : 'info')
-                    ->getStateUsing(fn ($record) => $record->file_id ? 'File' : 'Media'),
+                    ->color(fn ($record) => $record->media_id ? 'info' : 'gray')
+                    ->getStateUsing(fn ($record) => $record->media_id ? 'Media' : ($record->file_id ? 'Legacy File' : '—')),
                 Tables\Columns\TextColumn::make('user.name')
                     ->label('User')
                     ->searchable()
@@ -140,11 +143,9 @@ class DownloadLogResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\SelectFilter::make('file_id')
-                    ->label('File (Additional Resource)')
-                    ->relationship('file', 'name')
-                    ->searchable()
-                    ->preload(),
+                Tables\Filters\Filter::make('has_file_id')
+                    ->label('Has Legacy File ID')
+                    ->query(fn (Builder $query): Builder => $query->whereNotNull('file_id')),
                 Tables\Filters\SelectFilter::make('media_id')
                     ->label('Media (Featured Image)')
                     ->relationship('media', 'name')
@@ -155,14 +156,14 @@ class DownloadLogResource extends Resource
                     ->form([
                         Forms\Components\Select::make('type')
                             ->options([
-                                'file' => 'File (Additional Resource)',
+                                'legacy_file' => 'Legacy File (Old System)',
                                 'media' => 'Media (Featured Image)',
                             ])
                     ])
                     ->query(function (Builder $query, array $data): Builder {
                         return $query
                             ->when(
-                                $data['type'] === 'file',
+                                $data['type'] === 'legacy_file',
                                 fn (Builder $query): Builder => $query->whereNotNull('file_id'),
                             )
                             ->when(
