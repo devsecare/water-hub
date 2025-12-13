@@ -283,13 +283,13 @@
                             <rect width="24" height="24" fill="none" />
                         </svg>
                     </a>
-                    <a href="{{ route('resources.show', $relatedItem['slug']) }}" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
+                    <button onclick="downloadFile({{ $relatedItem['id'] }})" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                             <path
                                 d="M12,16,7,11,8.4,9.55l2.6,2.6V4h2v8.15l2.6-2.6L17,11l-5,5ZM6,20a2.015,2.015,0,0,1-2-2V15H6v3H18V15h2v3a2.015,2.015,0,0,1-2,2Z" />
                             <rect width="24" height="24" fill="none" />
                         </svg>
-                    </a>
+                    </button>
                     <button onclick="toggleBookmark({{ $relatedItem['id'] }}, this)" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer {{ $relatedItem['is_bookmarked'] ? 'fill-[#37C6F4]' : '' }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                             <path
@@ -297,13 +297,13 @@
                             <rect width="24" height="24" fill="none" />
                         </svg>
                     </button>
-                    <a href="{{ route('resources.show', $relatedItem['slug']) }}" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
+                    <button onclick="shareCardItem('{{ $relatedItem['slug'] }}', '{{ addslashes($relatedItem['title']) }}')" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                             <path
                                 d="M17,22a3,3,0,0,1-3.01-3.01c0-.1.03-.33.08-.7l-7.03-4.1a2.967,2.967,0,0,1-2.06.8,2.9,2.9,0,0,1-2.13-.88,3.018,3.018,0,0,1,0-4.26,2.906,2.906,0,0,1,2.13-.88,2.967,2.967,0,0,1,2.06.8l7.03-4.1a2.214,2.214,0,0,1-.06-.34C14,5.22,14,5.1,14,4.97a2.9,2.9,0,0,1,.88-2.13,3.018,3.018,0,0,1,4.26,0,2.883,2.883,0,0,1,.88,2.13,2.883,2.883,0,0,1-.88,2.13,2.883,2.883,0,0,1-2.13.88,2.967,2.967,0,0,1-2.06-.8l-7.03,4.1a2.214,2.214,0,0,1,.06.34c.01.11.01.23.01.36s0,.25-.01.36a2.214,2.214,0,0,1-.06.34l7.03,4.1a2.967,2.967,0,0,1,2.06-.8,3.012,3.012,0,0,1,2.13,5.14,2.906,2.906,0,0,1-2.13.88Zm0-2a.99.99,0,1,0-.71-.29A.973.973,0,0,0,17,20ZM5,13a.99.99,0,1,0-.71-.29A.973.973,0,0,0,5,13ZM17,6a1,1,0,0,0,.71-1.71,1,1,0,0,0-1.42,1.42A.973.973,0,0,0,17,6Z" />
                             <rect width="24" height="24" fill="none" />
                         </svg>
-                    </a>
+                    </button>
                 </div>
             </div>
             @endforeach
@@ -361,22 +361,22 @@
             const data = await response.json();
 
             if (response.ok) {
-                // Update icon color
+                // Update icon color - handle both text and fill classes
                 if (data.status === 'added') {
-                    element.classList.add('text-[#37C6F4]');
-                    element.classList.remove('text-[#ababab]');
+                    element.classList.add('fill-[#37C6F4]', 'text-[#37C6F4]');
+                    element.classList.remove('fill-[#ababab]', 'text-[#ababab]');
                     const svg = element.querySelector('svg');
                     if (svg) {
                         svg.classList.add('fill-[#37C6F4]');
-                        svg.classList.remove('fill-[#1e1d57]');
+                        svg.classList.remove('fill-[#1e1d57]', 'fill-[#ababab]');
                     }
                 } else if (data.status === 'removed') {
-                    element.classList.remove('text-[#37C6F4]');
-                    element.classList.add('text-[#ababab]');
+                    element.classList.remove('fill-[#37C6F4]', 'text-[#37C6F4]');
+                    element.classList.add('fill-[#ababab]', 'text-[#ababab]');
                     const svg = element.querySelector('svg');
                     if (svg) {
                         svg.classList.remove('fill-[#37C6F4]');
-                        svg.classList.add('fill-[#1e1d57]');
+                        svg.classList.add('fill-[#ababab]');
                     }
                 }
                 console.log(data.message);
@@ -481,6 +481,37 @@
 
     // Expose shareItem to global scope
     window.shareItem = shareItem;
+
+    // Download file function (same as resources page)
+    function downloadFile(itemId) {
+        // Get related items data from the page
+        const relatedItems = @json($relatedItems);
+        const item = relatedItems.find(i => i.id === itemId);
+
+        if (!item) {
+            alert('Item not found');
+            return;
+        }
+
+        if (!item.featured_image_id) {
+            alert('No file available for download');
+            return;
+        }
+
+        // Simple direct navigation - same as working featured media download link
+        // The server's Content-Disposition header will force the download
+        window.location.href = `/media/${item.featured_image_id}/download`;
+    }
+
+    // Share card item function (same as resources page)
+    function shareCardItem(slug, title) {
+        const url = `${window.location.origin}/resources/${slug}`;
+        shareItem(url, title);
+    }
+
+    // Expose functions to global scope
+    window.downloadFile = downloadFile;
+    window.shareCardItem = shareCardItem;
 </script>
 @endpush
 @endsection

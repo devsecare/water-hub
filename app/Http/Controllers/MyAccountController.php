@@ -40,6 +40,7 @@ class MyAccountController extends Controller
                     'category_icon' => $item->category ? ($item->category->icon ?? 'folder') : 'folder',
                     'parent_category_id' => $item->category && $item->category->parent ? $item->category->parent->id : ($item->category && !$item->category->parent ? $item->category_id : null),
                     'featured_image_url' => $item->featuredImage ? $item->featuredImage->url : null,
+                    'featured_image_id' => $item->featured_image_id,
                     'is_bookmarked' => true,
                 ];
             });

@@ -120,10 +120,10 @@
             </div>
           </div>
           <div class="flex justify-between pt-6 pb-3 border-white/30 text-black/80">
-            <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openItemModal({{ $item['id'] }})">eye_tracking</span>
-            <span class="material-symbols-outlined  cursor-pointer hover:text-[#37C6F4] duration-250 text-[#37C6F4]" data-item-id="${card.id}" onclick="toggleBookmark({{ $item['id'] }}, this)">bookmark</span>
-            <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">download</span>
-            <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="shareItem('{{ route('resources.show', $item['slug']) }}', '{{ $item['title'] }}')">share</span>
+            <a href="{{ route('resources.show', $item['slug']) }}" class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">eye_tracking</a>
+            <span class="material-symbols-outlined cursor-pointer hover:text-[#37C6F4] duration-250 text-[#37C6F4]" onclick="toggleBookmark({{ $item['id'] }}, this)">bookmark</span>
+            <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="downloadFile({{ $item['id'] }})">download</span>
+            <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="shareCardItem('{{ $item['slug'] }}', '{{ addslashes($item['title']) }}')">share</span>
           </div>
         </div>
         @endforeach
@@ -475,12 +475,32 @@
     window.initializeIcons = initializeIcons;
     window.shareItem = shareItem;
 
-    // Placeholder for openItemModal - implement as needed
-    function openItemModal(itemId) {
-      console.log('Opening modal for item:', itemId);
-      // Implement modal logic here, e.g., fetch item details and display
+    // Download file function (same as resources page)
+    function downloadFile(itemId) {
+        // Get bookmarked items data from the page
+        const bookmarkedItems = @json($bookmarkedItems);
+        const item = bookmarkedItems.find(i => i.id === itemId);
+
+        if (!item) {
+            alert('Item not found');
+            return;
+        }
+
+        if (!item.featured_image_id) {
+            alert('No file available for download');
+            return;
+        }
+
+        // Simple direct navigation - same as working featured media download link
+        // The server's Content-Disposition header will force the download
+        window.location.href = `/media/${item.featured_image_id}/download`;
     }
-    window.openItemModal = openItemModal; // Expose to global scope
+
+    // Share card item function (same as resources page)
+    function shareCardItem(slug, title) {
+        const url = `${window.location.origin}/resources/${slug}`;
+        shareItem(url, title);
+    }
 
     function openItemPage(slug) {
         // If slug is provided, use it directly (called from card click)
@@ -496,7 +516,11 @@
             }
         }
     }
-    window.openItemPage = openItemPage; // Expose to global scope
+
+    // Expose functions to global scope
+    window.downloadFile = downloadFile;
+    window.shareCardItem = shareCardItem;
+    window.openItemPage = openItemPage;
 
     // Bookmark toggle function for my account page
     async function toggleBookmark(itemId, iconElement) {

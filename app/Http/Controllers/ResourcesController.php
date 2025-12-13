@@ -100,6 +100,7 @@ class ResourcesController extends Controller
                     'category_color' => $relatedItem->category ? $relatedItem->category->color : '#3B82F6',
                     'category_icon' => $relatedItem->category ? ($relatedItem->category->icon ?? 'folder') : 'folder',
                     'featured_image_url' => $relatedItem->featuredImage ? $relatedItem->featuredImage->url : null,
+                    'featured_image_id' => $relatedItem->featured_image_id,
                     'is_bookmarked' => in_array($relatedItem->id, $bookmarkedItemIds),
                 ];
             });
