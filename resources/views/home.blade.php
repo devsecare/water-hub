@@ -25,7 +25,7 @@
             Your gateway to water and wastewater PPP knowledge
         </h1>
 
-        <p class="max-w-[816px] text-sm sm:text-base md:text-lg text-gray-300">
+        <p class="max-w-[816px] text-sm sm:text-base md:text-lg text-[#FFFFFF]">
            Register an account today to get instant free access to trusted resources, practical guidance, and insights to develop successful PPPs (Public-Private Partnerships) in the water and wastewater sector.
         </p>
 
