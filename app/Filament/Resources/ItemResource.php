@@ -113,7 +113,7 @@ class ItemResource extends Resource
                                     ->label('Filename')
                                     ->maxLength(255)
                                     ->required()
-                                    ->helperText('Display name for the file'),
+                                    ->helperText('Download name for the file (File will be downloaded with this name)'),
                                 Forms\Components\TextInput::make('download_text')
                                     ->label('Download Text')
                                     ->maxLength(255)
