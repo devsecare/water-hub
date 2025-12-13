@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FileDownloadController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageGeneratorController;
@@ -47,6 +48,8 @@ Route::get('/contact-us', function () {
     return view('contact_us');
 })->name('contactus');
 
+Route::post('/contact-us', [ContactController::class, 'store'])->name('contactus.store');
+
 Route::get('/case-study', [ResourcesController::class, 'caseStudy'])->name('casestudy')->middleware('auth');
 
 Route::get('/account-details', function () {
@@ -64,6 +67,7 @@ Route::get('/faq', function () {
 })->name('faq');
 
 Route::get('/my-account', [MyAccountController::class, 'index'])->name('myaccount')->middleware('auth');
+Route::put('/my-account', [MyAccountController::class, 'update'])->name('account.update')->middleware('auth');
 
 // Authentication routes
 Route::middleware('guest')->group(function () {

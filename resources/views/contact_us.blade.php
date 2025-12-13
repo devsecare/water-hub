@@ -51,35 +51,36 @@
       </div>
 
       <!-- RIGHT FORM COLUMN -->
-      <form onsubmit="validateForm(event)" class="space-y-6">
+      <form id="contact-form" action="{{ route('contactus.store') }}" method="POST" class="space-y-6">
+        @csrf
 
         <!-- Name -->
         <div>
           <label class="block text-gray-700 mb-1">Name</label>
-          <input type="text" id="name" class="w-full bg-gray-100 rounded-full px-4 py-3 focus:outline-none" />
-          <span id="name-error" class="text-red-500 text-sm"></span>
+          <input type="text" id="name" name="name" value="{{ old('name') }}" class="w-full bg-gray-100 rounded-full px-4 py-3 focus:outline-none" />
+          <span id="name-error" class="text-red-500 text-sm">@error('name') {{ $message }} @enderror</span>
         </div>
 
         <!-- Organisation -->
         <div>
           <label class="block text-gray-700 mb-1">Organisation</label>
-          <input type="text" id="organisation" class="w-full bg-gray-100 rounded-full px-4 py-3 focus:outline-none" />
-          <span id="organisation-error" class="text-red-500 text-sm"></span>
+          <input type="text" id="organisation" name="organisation" value="{{ old('organisation') }}" class="w-full bg-gray-100 rounded-full px-4 py-3 focus:outline-none" />
+          <span id="organisation-error" class="text-red-500 text-sm">@error('organisation') {{ $message }} @enderror</span>
         </div>
 
         <!-- Email -->
         <div>
           <label class="block text-gray-700 mb-1">Email</label>
-          <input type="email" id="email" class="w-full bg-gray-100 rounded-full px-4 py-3 focus:outline-none" />
-          <span id="email-error" class="text-red-500 text-sm"></span>
+          <input type="email" id="email" name="email" value="{{ old('email') }}" class="w-full bg-gray-100 rounded-full px-4 py-3 focus:outline-none" />
+          <span id="email-error" class="text-red-500 text-sm">@error('email') {{ $message }} @enderror</span>
         </div>
 
         <!-- Message -->
         <div>
           <label class="block text-gray-700 mb-1">Message</label>
-          <textarea id="message" rows="6"
-            class="w-full bg-gray-100 rounded-xl px-4 py-3 focus:outline-none resize-none"></textarea>
-          <span id="message-error" class="text-red-500 text-sm"></span>
+          <textarea id="message" name="message" rows="6"
+            class="w-full bg-gray-100 rounded-xl px-4 py-3 focus:outline-none resize-none">{{ old('message') }}</textarea>
+          <span id="message-error" class="text-red-500 text-sm">@error('message') {{ $message }} @enderror</span>
         </div>
 
         <!-- captcha code  -->
@@ -104,8 +105,15 @@
           <span id="captcha-error" class="text-red-500 text-sm"></span>
         </div>
 
+        <!-- Success Message -->
+        @if(session('success'))
+          <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg" role="alert">
+            {{ session('success') }}
+          </div>
+        @endif
+
         <!-- Button -->
-        <button type="submit"
+        <button type="submit" id="submit-btn"
           class="w-full text-xl bg-[#27C1F9] text-[#121858] font-semibold py-3 rounded-full hover:opacity-90 transition hover:bg-[#1E1D57] hover:text-[#37C6F4]">
           Send
         </button>
@@ -120,7 +128,7 @@
   <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
     preserveAspectRatio="none">
     <defs>
-      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18
         58-18 88-18 58 18 88 18v44h-352z" />
     </defs>
     <g class="parallax">

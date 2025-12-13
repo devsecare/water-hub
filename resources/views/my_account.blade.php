@@ -47,7 +47,7 @@
          checked:bg-white checked:border-[#1E1D57]
          checked:before:content-['✔'] checked:before:text-[#1E1D57]
          checked:before:flex checked:before:items-center checked:before:justify-center
-         checked:before:text-[14px] 
+         checked:before:text-[14px]
          cursor-pointer">
           <span class="text-[#1E1D57] text-[16px] font-semibold">{{ $category['name'] }}</span>
         </label>
@@ -60,7 +60,7 @@
       <div class="w-full mt-6">
         <label class="block text-lg font-semibold text-[#000000] mb-3">Search</label>
         <div class="relative">
-          <input type="text" id="my-account-search" placeholder="Search…" class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700 
+          <input type="text" id="my-account-search" placeholder="Search…" class="w-full bg-white shadow-sm rounded-full py-3 pl-4 pr-10 text-gray-700
                    placeholder-gray-400 focus:ring-0 focus:outline-none">
 
           <!-- Search Icon -->
@@ -103,7 +103,7 @@
         @if($bookmarkedItems->count() > 0)
         @foreach($bookmarkedItems as $item)
         <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between item-card"
-          data-category-id="{{ $item['category_id'] }}" 
+          data-category-id="{{ $item['category_id'] }}"
           data-parent-category-id="{{ $item['parent_category_id'] ?? '' }}"
           data-title="{{ strtolower($item['title']) }}"
           data-publisher="{{ strtolower($item['publisher'] ?? '') }}"
@@ -141,51 +141,102 @@
         <div id="registerForm" class="max-w-md mx-auto">
           <h2 class="text-3xl md:text-4xl font-bold text-[#1E1D57] leading-tight text-center">Account Details</h2>
           <hr class="my-8 text-[#ababab]">
-            <form id="registerFormElement" method="POST" action="https://water-hub.ecareinfoway.com/register" class="space-y-4" novalidate="">
-                <input type="hidden" name="_token" value="Sca0BxOdZY9KccbHe5oVs9putrnNpQ3OPebUt4hs" autocomplete="off">
+
+          @if(session('success'))
+            <div class="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-lg text-sm mb-4">
+              {{ session('success') }}
+            </div>
+          @endif
+
+          @if($errors->any())
+            <div class="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg text-sm mb-4">
+              <ul class="list-disc list-inside">
+                @foreach($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
+            <form id="accountDetailsForm" method="POST" action="{{ route('account.update') }}" class="space-y-4">
+                @csrf
+                @method('PUT')
+
                 <div>
-                    <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                    <input id="first_name" name="first_name" type="text" required="" value="" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] ">
+                    <label for="account_first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                    <input id="account_first_name" name="first_name" type="text" required value="{{ old('first_name', $user->first_name ?? $user->name) }}" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('first_name') border-red-500 @enderror">
+                    @error('first_name')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
-                    <label for="organisation" class="block text-sm font-medium text-gray-700 mb-1">Organisation</label>
-                    <input id="organisation" name="organisation" type="text" value="" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] ">
+                    <label for="account_organisation" class="block text-sm font-medium text-gray-700 mb-1">Organisation</label>
+                    <input id="account_organisation" name="organisation" type="text" value="{{ old('organisation', $user->organisation) }}" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('organisation') border-red-500 @enderror">
+                    @error('organisation')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input id="email" name="email" type="email" required="" value="" readonly class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] ">
+                    <label for="account_email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input id="account_email" name="email" type="email" required value="{{ old('email', $user->email) }}" readonly class="w-full border border-gray-300 rounded-[20px] px-3 py-2 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('email') border-red-500 @enderror">
+                    @error('email')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <hr class="my-8 text-[#ababab]">
 
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Old Password</label>
+                    <label for="old_password" class="block text-sm font-medium text-gray-700 mb-1">Old Password</label>
                     <div class="relative">
-                        <input id="password" name="password" type="password" required="" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 pr-10 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] ">
-                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+                        <input id="old_password" name="old_password" type="password" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 pr-10 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('old_password') border-red-500 @enderror" placeholder="Enter current password">
+                        <button type="button" id="toggleOldPassword" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                 <circle cx="12" cy="12" r="3"></circle>
                             </svg>
                         </button>
                     </div>
+                    @error('old_password')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                    <label for="new_password" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
                     <div class="relative">
-                        <input id="password" name="password" type="password" required="" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 pr-10 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] ">
-                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+                        <input id="new_password" name="new_password" type="password" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 pr-10 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('new_password') border-red-500 @enderror" placeholder="Enter new password">
+                        <button type="button" id="toggleNewPassword" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                                 <circle cx="12" cy="12" r="3"></circle>
                             </svg>
                         </button>
                     </div>
+                    @error('new_password')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
-                <button type="submit" class="cursor-pointer w-full bg-[#37C6F4] text-white rounded-[20px] py-2.5 mt-2 text-[16px] font-medium transition hover:bg-[#2CB0D9]">
+
+                <div>
+                    <label for="new_password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                    <div class="relative">
+                        <input id="new_password_confirmation" name="new_password_confirmation" type="password" class="w-full border border-gray-300 rounded-[20px] px-3 py-2 pr-10 text-gray-900 text-[15px] bg-gray-100 focus:outline-none focus:ring-2 focus:ring-[#37C6F4] @error('new_password_confirmation') border-red-500 @enderror" placeholder="Confirm new password">
+                        <button type="button" id="toggleNewPasswordConfirmation" class="absolute inset-y-0 right-3 flex items-center text-gray-400 hover:text-gray-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    @error('new_password_confirmation')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <button type="submit" class="cursor-pointer w-full bg-[#37C6F4] hover:bg-[#1E1D57] text-[#1E1D57] hover:text-[#37C6F4] rounded-[20px] py-2.5 mt-2 text-[16px] font-medium transition">
                     Update
                 </button>
             </form>
@@ -203,7 +254,7 @@
   <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
     preserveAspectRatio="none">
     <defs>
-      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+      <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18
         58-18 88-18 58 18 88 18v44h-352z" />
     </defs>
     <g class="parallax">
@@ -221,7 +272,7 @@
   (function () {
     // Categories data with child IDs for filtering
     const categoriesData = @json($categories);
-    
+
     // Initialize Lucide icons function
     function initializeIcons() {
       if (typeof lucide !== 'undefined') {
@@ -270,7 +321,7 @@
         // 3. Item's parent category matches selected category, OR
         // 4. Item's category is a child of selected parent category
         let matchesCategory = selectedCategories.length === 0;
-        
+
         if (!matchesCategory && selectedCategories.length > 0) {
           for (const selectedCategoryId of selectedCategories) {
             // Direct match
@@ -278,13 +329,13 @@
               matchesCategory = true;
               break;
             }
-            
+
             // Parent category match
             if (parentCategoryId === selectedCategoryId) {
               matchesCategory = true;
               break;
             }
-            
+
             // Check if item's category is a child of selected parent
             const selectedCategory = categoriesData.find(cat => cat.id === selectedCategoryId);
             if (selectedCategory && selectedCategory.child_ids && selectedCategory.child_ids.includes(categoryId)) {
@@ -311,7 +362,7 @@
       // Show/hide no data message
       const container = document.getElementById('bookmarked-items-container');
       const filteredMessage = document.getElementById('filtered-no-data');
-      
+
       if (visibleCount === 0 && itemCards.length > 0) {
         // Items exist but are filtered out - show "No bookmarked items yet" message
         if (!filteredMessage) {
@@ -358,7 +409,7 @@
         // Relative URL without leading /, prepend origin and /
         shareUrl = window.location.origin + '/' + url;
       }
-      
+
       if (navigator.share) {
         // Use Web Share API if available (mobile devices)
         navigator.share({
@@ -505,16 +556,36 @@
     const accountDetailsPanel = document.querySelector('.account-details-main');
     const otherAccountDetails = document.querySelector('.other-accnt-dtails');
     const mySavedContentBtn = document.querySelector('.my-saved-content-btn');
-    
-    if (accountDetailsTrigger && accountDetailsPanel) {
-      accountDetailsTrigger.addEventListener('click', () => {
+
+    // Function to show account details panel
+    function showAccountDetailsPanel() {
+      if (accountDetailsPanel) {
         accountDetailsPanel.classList.remove('hidden');
         if (otherAccountDetails) {
           otherAccountDetails.classList.add('hidden');
         }
+        // Scroll to account details form
+        accountDetailsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    // Check if we should show account details panel on page load
+    // Show if: URL parameter is set, or there are validation errors, or there's a success message
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasErrors = document.querySelector('.bg-red-50') !== null;
+    const hasSuccess = document.querySelector('.bg-green-50') !== null;
+
+    if (urlParams.get('show_account_details') === '1' || hasErrors || hasSuccess) {
+      // Show account details panel after a short delay to ensure DOM is ready
+      setTimeout(showAccountDetailsPanel, 100);
+    }
+
+    if (accountDetailsTrigger && accountDetailsPanel) {
+      accountDetailsTrigger.addEventListener('click', () => {
+        showAccountDetailsPanel();
       });
     }
-    
+
     // My saved content button - switch back to main content
     if (mySavedContentBtn && accountDetailsPanel && otherAccountDetails) {
       mySavedContentBtn.addEventListener('click', () => {
@@ -522,6 +593,26 @@
         otherAccountDetails.classList.remove('hidden');
       });
     }
+
+    // Password toggle functionality for account details form
+    function setupPasswordToggle(toggleId, inputId) {
+      const toggle = document.getElementById(toggleId);
+      const input = document.getElementById(inputId);
+      if (toggle && input) {
+        toggle.addEventListener('click', () => {
+          const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+          input.setAttribute('type', type);
+          toggle.innerHTML = type === 'password'
+            ? '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>'
+            : '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>';
+        });
+      }
+    }
+
+    // Setup password toggles for account details form
+    setupPasswordToggle('toggleOldPassword', 'old_password');
+    setupPasswordToggle('toggleNewPassword', 'new_password');
+    setupPasswordToggle('toggleNewPasswordConfirmation', 'new_password_confirmation');
   })();
 </script>
 @endpush

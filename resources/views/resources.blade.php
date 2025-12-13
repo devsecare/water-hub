@@ -629,8 +629,11 @@
 
     function filterItems() {
         filteredData = itemsData.filter(item => {
-            if (activeFilter === 'case_study' && item.type_value !== 'case_study') {
-                return false;
+            // Filter for "All case studies" - must be case study AND have lat/long
+            if (activeFilter === 'case_study') {
+                const isCaseStudy = item.is_case_study === true || item.type_value === 'case_study';
+                const hasLocation = item.latitude !== null && item.longitude !== null;
+                return isCaseStudy && hasLocation;
             }
             if (activeFilter === 'all' && activeCategoryId === null) {
                 return true;
@@ -720,8 +723,10 @@
                     filteredData = itemsData.filter(item => {
                         // First check if item matches current filter
                         let matchesFilter = true;
-                        if (activeFilter === 'case_study' && item.type_value !== 'case_study') {
-                            matchesFilter = false;
+                        if (activeFilter === 'case_study') {
+                            const isCaseStudy = item.is_case_study === true || item.type_value === 'case_study';
+                            const hasLocation = item.latitude !== null && item.longitude !== null;
+                            matchesFilter = isCaseStudy && hasLocation;
                         } else if (activeFilter === 'all' && activeCategoryId === null) {
                             matchesFilter = true;
                         } else if (activeCategoryId !== null && item.category_id !== activeCategoryId) {

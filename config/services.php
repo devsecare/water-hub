@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+    'elasticemail' => [
+        'api_key' => env('ELASTICEMAIL_API_KEY'),
+        'from_email' => env('ELASTICEMAIL_FROM_EMAIL', 'noreply@elasticemail.com'),
+    ],
+
 ];

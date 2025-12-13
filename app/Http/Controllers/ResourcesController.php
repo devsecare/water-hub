@@ -55,6 +55,9 @@ class ResourcesController extends Controller
                     'featured_image_url' => $item->featuredImage ? $item->featuredImage->url : null,
                     'featured_image_id' => $item->featuredImage ? $item->featuredImage->id : null,
                     'is_bookmarked' => in_array($item->id, $bookmarkedItemIds),
+                    'is_case_study' => $item->is_case_study ?? false,
+                    'latitude' => $item->latitude ? (float) $item->latitude : null,
+                    'longitude' => $item->longitude ? (float) $item->longitude : null,
                 ];
             });
 

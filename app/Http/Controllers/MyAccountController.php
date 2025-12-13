@@ -12,7 +12,7 @@ class MyAccountController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        
+
         if (!$user) {
             return redirect()->route('resources');
         }
@@ -66,5 +66,51 @@ class MyAccountController extends Controller
             'bookmarkedItems' => $bookmarkedItems,
             'categories' => $categories,
         ]);
+    }
+
+    public function update(Request $request)
+    {
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login');
+        }
+
+        $request->validate([
+            'first_name' => 'required|string|max:255',
+            'organisation' => 'nullable|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+            'old_password' => 'nullable|required_with:new_password',
+            'new_password' => 'nullable|min:8|confirmed',
+        ], [], [
+            'old_password' => 'current password',
+            'new_password' => 'new password',
+            'new_password_confirmation' => 'password confirmation',
+        ]);
+
+        // Update user information
+        $user->first_name = $request->first_name;
+        $user->name = $request->first_name; // Keep name for compatibility
+        $user->organisation = $request->organisation;
+
+        // Only update email if it changed
+        if ($user->email !== $request->email) {
+            $user->email = $request->email;
+        }
+
+        // Update password if provided
+        if ($request->filled('old_password') && $request->filled('new_password')) {
+            // Verify old password
+            if (!\Illuminate\Support\Facades\Hash::check($request->old_password, $user->password)) {
+                return redirect()->route('myaccount', ['show_account_details' => '1'])->withErrors(['old_password' => 'The current password is incorrect.'])->withInput();
+            }
+
+            // Update to new password
+            $user->password = \Illuminate\Support\Facades\Hash::make($request->new_password);
+        }
+
+        $user->save();
+
+        return redirect()->route('myaccount', ['show_account_details' => '1'])->with('success', 'Account details updated successfully!');
     }
 }

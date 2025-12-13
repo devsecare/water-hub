@@ -144,62 +144,114 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // contact us page form start
 
-function validateForm(event) {
-  event.preventDefault(); // Prevent the form from submitting if validation fails
+const contactForm = document.getElementById("contact-form");
+if (contactForm) {
+  contactForm.addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting if validation fails
 
-  // Get form elements
-  const name = document.getElementById("name");
-  const organisation = document.getElementById("organisation");
-  const email = document.getElementById("email");
-  const message = document.getElementById("message");
+    // Get form elements
+    const name = document.getElementById("name");
+    const organisation = document.getElementById("organisation");
+    const email = document.getElementById("email");
+    const message = document.getElementById("message");
 
-  // Get error elements
-  const nameError = document.getElementById("name-error");
-  const organisationError = document.getElementById("organisation-error");
-  const emailError = document.getElementById("email-error");
-  const messageError = document.getElementById("message-error");
+    // Get error elements
+    const nameError = document.getElementById("name-error");
+    const organisationError = document.getElementById("organisation-error");
+    const emailError = document.getElementById("email-error");
+    const messageError = document.getElementById("message-error");
+    const submitBtn = document.getElementById("submit-btn");
 
-  let isValid = true;
+    let isValid = true;
 
-  // Clear previous error messages
-  nameError.textContent = "";
-  organisationError.textContent = "";
-  emailError.textContent = "";
-  messageError.textContent = "";
+    // Clear previous error messages
+    nameError.textContent = "";
+    organisationError.textContent = "";
+    emailError.textContent = "";
+    messageError.textContent = "";
 
-  // Name validation
-  if (name.value.trim() === "") {
-    nameError.textContent = "Please enter your name";
-    isValid = false;
-  }
+    // Name validation
+    if (name.value.trim() === "") {
+      nameError.textContent = "Please enter your name";
+      isValid = false;
+    }
 
-  // Organisation validation
-  if (organisation.value.trim() === "") {
-    organisationError.textContent = "Please enter your organisation";
-    isValid = false;
-  }
+    // Email validation
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (email.value.trim() === "") {
+      emailError.textContent = "Please enter your email";
+      isValid = false;
+    } else if (!emailPattern.test(email.value.trim())) {
+      emailError.textContent = "Please enter a valid email address";
+      isValid = false;
+    }
 
-  // Email validation
-  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-  if (email.value.trim() === "") {
-    emailError.textContent = "Please enter your email";
-    isValid = false;
-  } else if (!emailPattern.test(email.value.trim())) {
-    emailError.textContent = "Please enter a valid email address";
-    isValid = false;
-  }
+    // Message validation
+    if (message.value.trim() === "") {
+      messageError.textContent = "Please enter your message";
+      isValid = false;
+    }
 
-  // Message validation
-  if (message.value.trim() === "") {
-    messageError.textContent = "Please enter your message";
-    isValid = false;
-  }
+    // If all fields are valid, submit the form
+    if (isValid) {
+      // Disable submit button to prevent double submission
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
 
-  // If all fields are valid, submit the form
-  if (isValid) {
-    alert("Form submitted successfully!");
-    // Here you can add code to submit the form data if needed
-  }
+      // Submit the form via AJAX
+      const formData = new FormData(contactForm);
+
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Show success message
+          const successDiv = document.createElement('div');
+          successDiv.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4';
+          successDiv.textContent = data.message || 'Thank you for contacting us! We will get back to you soon.';
+          contactForm.insertBefore(successDiv, submitBtn);
+
+          // Reset form
+          contactForm.reset();
+
+          // Scroll to success message
+          successDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          // Handle validation errors
+          if (data.errors) {
+            if (data.errors.name) {
+              nameError.textContent = data.errors.name[0];
+            }
+            if (data.errors.email) {
+              emailError.textContent = data.errors.email[0];
+            }
+            if (data.errors.message) {
+              messageError.textContent = data.errors.message[0];
+            }
+            if (data.errors.organisation) {
+              organisationError.textContent = data.errors.organisation[0];
+            }
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      })
+      .finally(() => {
+        // Re-enable submit button
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send";
+      });
+    }
+  });
 }
 
 // contact us page form end
@@ -256,7 +308,7 @@ buttons.forEach((btn) => {
       text.classList.add("text-[#37C6F4]");
       path.classList.add("fill-[#37C6F4]");
       path.classList.remove("fill-[#ababab]");
-     
+
     }
   });
 });
