@@ -2,10 +2,10 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="440" height="20.722" viewBox="0 0 440 20.722" class="absolute top-[100%] w-[80%] max-w-fit left-0 right-auto h-auto z-10">
         <path id="Path_412" data-name="Path 412" d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z" transform="translate(0 -21.645)" fill="#fff"></path>
     </svg>
-    <div class="mx-auto gap-2 flex items-center justify-between py-10 px-4 md:px-6 overflow-x-auto whitespace-nowrap relative z-10 bg-white">
+    <div class="mx-auto gap-4 flex items-center justify-between py-10 px-4 md:px-6 overflow-x-auto whitespace-nowrap relative z-10 bg-white">
         <!-- Logo -->
         <a href="{{ route('home') }}" class="max-w-[400px] w-full">
-            <img src="{{ asset('images/header-logo.svg') }}" alt="Logo" class="h-8 md:h-10 w-[236px] sm:w-auto transition-all duration-300" />
+            <img src="{{ asset('images/header-logo.svg') }}" alt="Logo" class="h-8 md:h-10 min-w-[236px]  sm:w-auto transition-all duration-300" />
         </a>
 
         <!-- Desktop Menu -->
@@ -13,7 +13,8 @@
             <a href="{{ route('understandingWater') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">About water PPPs</a>
             <a href="{{ route('about') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Who we are</a>
             <a href="{{ route('resources') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Water PPP Resources</a>
-            <a href="{{ route('casestudy') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Case studies</a>           
+            <a href="{{ route('casestudy') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Case studies</a> 
+            <a href="{{ route('faq') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Faqs</a>          
             <a href="{{ route('contactus') }}" class="text-[#0b0b3b] hover:text-[#00b4ff] transition">Contact us</a>
             @auth
                 <a href="{{ route('myaccount') }}" class="flex gap-2 items-center text-[#37C6F4]"><span><svg id="account-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -66,7 +67,8 @@
             <a href="{{ route('understandingWater') }}" class="hover:text-blue-600">About water PPPs</a>
              <a href="{{ route('about') }}" class="hover:text-blue-600">Who we are</a>
             <a href="{{ route('resources') }}" class="hover:text-blue-600">Water PPP Resources</a>
-            <a href="#" class="hover:text-blue-600">Case studies</a>     
+            <a href="{{ route('casestudy') }}" class="hover:text-blue-600">Case studies</a> 
+            <a href="{{ route('faq') }}" class="hover:text-blue-600">Faqs</a>    
             <a href="{{ route('contactus') }}" class="hover:text-blue-600">Contact us</a>
             
                 <!-- <a href="{{ route('map.index') }}" class="hover:text-blue-600">Map</a>

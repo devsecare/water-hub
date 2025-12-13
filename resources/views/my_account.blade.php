@@ -24,7 +24,7 @@
 </section>
 
 <!-- MAIN SECTION -->
-<section class=" bg-[#F7F7F7] lg:px-16 lg:py-16 py-8">
+<section class=" bg-[#F7F7F7] lg:px-16 lg:py-16 py-8 pb-10 md:pb-16">
   <div class="max-w-7xl  mx-auto min-h-screen flex flex-col md:flex-row">
 
     <!-- SIDEBAR -->
@@ -108,8 +108,8 @@
           data-title="{{ strtolower($item['title']) }}"
           data-publisher="{{ strtolower($item['publisher'] ?? '') }}"
           data-description="{{ strtolower($item['short_description'] ?? $item['description'] ?? '') }}">
-          <div style="background: linear-gradient(to bottom, #070648, {{ $item['category_color'] ?? '#2CBFA0' }});"
-            class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]">
+          <div onclick="openItemPage('{{ $item['slug'] }}')" style="background: linear-gradient(to bottom, #070648, {{ $item['category_color'] ?? '#2CBFA0' }});"
+            class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] features-card">
             <div>
               <h3 class="font-semibold text-lg leading-snug">{{ $item['title'] }}</h3>
               <p class="text-sm mt-2 mb-8 opacity-90">{{ $item['publisher'] ?? '' }}</p>
@@ -119,7 +119,7 @@
               <span class="text-sm">{{ $item['category_name'] ?? $item['type'] ?? 'Guide' }}</span>
             </div>
           </div>
-          <div class="flex justify-between pt-6 pb-3 border-t border-white/30 text-black/80">
+          <div class="flex justify-between pt-6 pb-3 border-white/30 text-black/80">
             <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250" onclick="openItemModal({{ $item['id'] }})">eye_tracking</span>
             <span class="material-symbols-outlined  cursor-pointer hover:text-[#37C6F4] duration-250 text-[#37C6F4]" data-item-id="${card.id}" onclick="toggleBookmark({{ $item['id'] }}, this)">bookmark</span>
             <span class="material-symbols-outlined text-[#ababab] cursor-pointer hover:text-[#37C6F4] duration-250">download</span>
@@ -199,7 +199,7 @@
 
 <!-- waves  -->
 
-<div class=" bottom-0 left-0 right-0 bg-[#F7F7F7]">
+<!-- <div class=" bottom-0 left-0 right-0 bg-[#F7F7F7]">
   <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
     preserveAspectRatio="none">
     <defs>
@@ -213,7 +213,7 @@
       <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
     </g>
   </svg>
-</div>
+</div> -->
 
 
 @push('scripts')
@@ -430,6 +430,22 @@
       // Implement modal logic here, e.g., fetch item details and display
     }
     window.openItemModal = openItemModal; // Expose to global scope
+
+    function openItemPage(slug) {
+        // If slug is provided, use it directly (called from card click)
+        if (slug) {
+            window.location.href = `/resources/${slug}`;
+            return;
+        }
+        // Otherwise, use currentModalItemId (called from modal button)
+        if (currentModalItemId) {
+            const item = itemsData.find(i => i.id === currentModalItemId);
+            if (item && item.slug) {
+                window.location.href = `/resources/${item.slug}`;
+            }
+        }
+    }
+    window.openItemPage = openItemPage; // Expose to global scope
 
     // Bookmark toggle function for my account page
     async function toggleBookmark(itemId, iconElement) {

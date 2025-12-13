@@ -26,8 +26,7 @@
         </h1>
 
         <p class="max-w-[816px] text-sm sm:text-base md:text-lg text-gray-300">
-            Register and account today to get instant free access to curated resources, practical guidance,
-            and insights to develop successful public-private partnerships in the water sector.
+           Register an account today to get instant free access to trusted resources, practical guidance, and insights to develop successful PPPs (Public-Private Partnerships) in the water and wastewater sector.
         </p>
 
         <div class="flex flex-wrap justify-center items-center gap-2 sm:gap-3 md:gap-4 mt-3 sm:mt-4 md:mt-6">
@@ -143,7 +142,7 @@
                 <div class="swiper-slide max-w-[286px]">
                     <div class="card max-w-[286px] w-full bg-white rounded-2xl shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl overflow-hidden border border-[#1E1D57]">
                         <div class="p-5 space-y-3 card-before h-[300px] flex flex-col justify-between">
-                            <div class="space-y-1 ">
+                            <div class="space-y-1 [&>p]:leading-tight ">
                                 @php
                                     // Split title by newlines to handle multiline titles
                                     $titleLines = explode("\n", $card->title);
@@ -217,15 +216,15 @@
             d="M0,21.645c128.377,0,172.165,20.722,230.524,20.722S333.263,21.645,440,21.645H0Z"
             transform="translate(0 -21.645)" fill="#fff"></path>
     </svg>
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:gap-8">
-        <div class="max-w-[604px]">
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-start md:gap-8">
+        <div class="max-w-[750px]">
             <h2 class="text-3xl text-[#1E1D57] md:text-[40px] font-bold leading-tight mb-4">
-                From complex documents to clear guidance – all in one place
+                From complex documents to clear guidance for PPP implementation – all in one place
+
             </h2>
             <p class="text-[#000000]">
-                Access comprehensive PPP documentation alongside bite-sized summaries, expert tips, audio overviews, and
-                video discussions. Every resource is designed to save you time and build your understanding, step by
-                step.
+               Water PPPs follow a structured process from preparation and decision, through to contract signing and monitoring. For each essential phase of the process, access comprehensive guides, short summaries, expert tips, audio overviews, and video discussions. Every resource is designed to save you time and build your understanding.
+
             </p>
         </div>
 
@@ -256,37 +255,37 @@
             <!-- CARD 1 -->
             <div class="text-left shrink-0 w-[286px] snap-start sm:w-auto">
                 <img src="{{ asset('images/Document-library.svg') }}" alt="">
-                <h3 class="text-white mt-[12px]">Document library</h3>
+                <h3 class="text-white font-bold mt-[12px]">Document library</h3>
                 <p class="text-black mt-5 text-[16px] leading-normal">
-                    Access full PPP guidance documents, contracts, and case studies from water projects worldwide
+                   Access full PPP guidance documents, case studies and technical information from water and wastewater projects worldwide.
                 </p>
             </div>
 
             <!-- CARD 2 -->
             <div class="text-left shrink-0 w-[286px] snap-start sm:w-auto">
                 <img src="{{ asset('images/summary-guides.svg') }}" alt="">
-                <h3 class="text-white mt-[12px]">Summary guides</h3>
+                <h3 class="text-white font-bold mt-[12px]">Summary guides</h3>
                 <p class="text-black mt-5 text-[16px] leading-normal">
                     Get concise overviews highlighting key points and actionable insights from lengthy technical
-                    documents
+                    documents.
                 </p>
             </div>
 
             <!-- CARD 3 -->
             <div class="text-left shrink-0 w-[286px] snap-start sm:w-auto">
                 <img src="https://water-hub.ecareinfoway.com/images/Audio-briefings.svg" alt="">
-                <h3 class="text-white mt-3">Audio briefings</h3>
+                <h3 class="text-white font-bold mt-3">Audio briefings</h3>
                 <p class="text-black mt-5 text-[16px] leading-normal">
-                    Listen to expert summaries and discussions whilst commuting or between meetings
+                    Listen to expert summaries and discussions whilst commuting or between meetings.
                 </p>
             </div>
 
             <!-- CARD 4 -->
             <div class="text-left shrink-0 w-[286px] snap-start sm:w-auto">
                 <img src="https://water-hub.ecareinfoway.com/images/video-explainers.svg" alt="">
-                <h3 class="text-white mt-3">Video explainers</h3>
+                <h3 class="text-white font-bold mt-3">Video explainers</h3>
                 <p class="text-black mt-5 text-[16px] leading-normal">
-                    Watch visual breakdowns of complex PPP concepts and real-world project examples
+                    Watch visual breakdowns of complex PPP concepts and real-world project examples.
                 </p>
             </div>
 
@@ -314,13 +313,9 @@
             </h2>
             <p class="text-base leading-relaxed">
                 We understand that navigating water PPPs can feel overwhelming. Documents are technical, information is
-                fragmented, and time is limited. That's why <span class="underline text-[#37C6F4]">
-  <a href="https://www.aquafed.org/" target="_blank" rel="noopener noreferrer">
-    AquaFed
-  </a>
-</span>
-                created this Hub – to give you clarity, confidence, and practical tools backed by decades of global
-                water partnership expertise. We're here to help you succeed.
+                fragmented, and time is limited. That's why 
+                <span class="underline text-[#37C6F4]"> <a href="https://www.aquafed.org/" target="_blank" rel="noopener noreferrer"> AquaFed</a></span>
+                created this Hub – to give you clarity, confidence, and practical tools. 
             </p>
         </div>
 
@@ -447,9 +442,9 @@
             </h5>
 
             @auth
-            <a href="{{ route('map.index') }}"
-                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-lg  py-[6px] px-[31px] rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
-                View Map
+            <a href="{{ route('casestudy') }}"
+                class="inline-block bg-[#3DB8FF] text-[#1E1D57] font-semibold text-[16px]  py-[6px] px-[16px] rounded-full hover:bg-[#1E1D57] hover:text-[#37C6F4] transition-all duration-300 flex items-center justify-center">
+                View Case Studies
             </a>
             @else
 

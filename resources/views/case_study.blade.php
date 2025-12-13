@@ -233,7 +233,7 @@
         </a>
     </div>
     <!-- Waves (inside hero section for overlap effect) -->
-    <div class=" bottom-0 absolute left-0 right-0">
+    <!-- <div class=" bottom-0 absolute left-0 right-0">
         <svg class="w-full h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
             preserveAspectRatio="none">
             <defs>
@@ -247,7 +247,7 @@
                 <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
             </g>
         </svg>
-    </div>
+    </div> -->
 </section>
 
 </section>

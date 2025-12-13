@@ -9,7 +9,7 @@
     <div class="max-w-7xl mx-auto  py-12  sm:py-24 lg:py-28">
         <h1 class="text-xl text-[#37C6F4] font-semibold mb-2">WHAT ARE WATER AND WASTEWATER PPPs</h1>
         <p class="text-4xl font-appetite sm:text-5xl font-bold leading-none max-w-xl">
-            Understanding Water PPPs – The Facts
+            Understanding Water Public-Private Partnerships
         </p>
     </div>
 </section>
@@ -20,47 +20,54 @@
         <div class="max-w-[790px] text-left">
             <!-- First Bold Paragraph -->
             <p class="text-[#1E1D57] font-semibold text-sm sm:text-base md:text-[18px] leading-snug mb-4">
-                A Public-Private Partnership (PPP) in water and wastewater is a contractual agreement between a
-                public authority and a private operator to deliver water services. The public authority remains the
-                “master” – setting objectives, goals, and conditions – whilst the private operator becomes the
-                “servant”, carrying out operations and transferring technology and expertise to improve services.
+                A Public-Private Partnership (PPP) in water and wastewater is a specific contractual framework between a
+                public authority and a private operator to deliver water services. In a PPP each P is essential for a
+                balanced and impactful process.
 
             </p>
 
             <!-- Second Regular Paragraph -->
-            <p class="text-[#1E1D57] text-sm sm:text-base lg:mt-8 md:text-[18px] leading-snug ">
+            <!-- <p class="text-[#1E1D57] text-sm sm:text-base lg:mt-8 md:text-[18px] leading-snug">
                 Through these agreements, the skills and assets of both sectors combine to deliver essential
                 services. Each party shares in the risks and rewards, working towards a common goal: reliable, safe
                 water and sanitation for communities.
-            </p>
+            </p> -->
         </div>
     </div>
 </section>
-<!-- flex three section  -->
+<!-- flex two section  -->
 <section class="px-6 lg:px-16">
     <div class="max-w-7xl mx-auto ">
         <!-- Main Heading -->
-        <h2 class="text-[40px] font-bold text-[#1E1D57] mb-6">
+        <!-- <h2 class="text-[40px] font-bold text-[#1E1D57] mb-6 ">
             Why PPPs matter for water
-        </h2>
+        </h2> -->
 
         <!-- 3 Column Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 text-[#000000] ">
+        <div class="flex  gap-10 flex-col lg:flex-row text-[#000000] ">
             <!-- Left Column -->
-            <div class="text-[16px] lg:max-w-[392px] leading-relaxed space-y-3">
+            <div class="text-[16px] lg:w-[66%] leading-relaxed space-y-3 ">
                 <p>
-                    Almost 1 billion people still use unsafe drinking water sources, whilst 2.5 billion lack proper
-                    sanitation
-                    facilities. The water sector globally is chronically underfunded and inefficient. Meeting
-                    <a href="https://globalgoals.org/goals/6-clean-water-and-sanitation/" class="text-[#37C6F4] font-semibold hover:underline">Sustainable Development Goal 6</a>
-                    – universal access to safe water and sanitation by 2030 – requires massive investment that
-                    traditional funding
-                    alone cannot deliver.
+                    <strong>P for Public.</strong> The public partner can be ministries, PPP units, local authorities, municipalities, or
+                    state-owned enterprise. In a PPP, the public authority is the ultimate owner of the water services
+                    assets, defines the project scope and objectives, and monitors the contract.
+                </p>
+                <p>
+                   <strong>P for Private.</strong>  The private partner could be a private water operator or a consortium of operators
+                    and engineers to deliver a project. Private operators now include increasingly local and regional
+                    providers, bringing down costs through competition whilst understanding local contexts. The private
+                    water operator brings its expertise, innovation capacity and experience in management and operation
+                    to develop and provide sustainable, efficient and resilient water and wastewater services.
+                </p>
+                <p>
+                     <strong>P for Partnership.</strong> Within a PPP, public and private parties agree a contract which assigns the role
+                    and responsibilities of each party, allocation of risks, and the common objectives and performance
+                    indicators to be achieved to deliver reliable, safe water and sanitation for communities.
                 </p>
             </div>
 
             <!-- Middle Column -->
-            <div class="text-[16px] lg:max-w-[392px] leading-relaxed">
+            <!-- <div class="text-[16px] lg:max-w-[392px] leading-relaxed">
                 <p class="font-semibold mb-3">PPPs offer a mechanism to:</p>
                 <ul class="list-disc pl-6 space-y-1 lg:max-w-[378px]">
                     <li>Fund critical infrastructure investment</li>
@@ -69,14 +76,22 @@
                     <li>Transfer specialist expertise to utilities</li>
                     <li>Achieve financial sustainability through better management</li>
                 </ul>
-            </div>
+            </div> -->
 
             <!-- Right Column -->
             <div class="text-[16px] lg:max-w-[392px] leading-relaxed space-y-6">
                 <p>
-                    Private operators now include increasingly local and regional providers, bringing down costs through
-                    competition whilst understanding local contexts.
+                    Water PPPs offer a mechanism to:
                 </p>
+                <ul class="list-disc ml-5">
+                    <li>Catalyse broader water and sanitation sector reform</li>
+                    <li>Improve operational efficiency and reduce water loss</li>
+                    <li> Introduce new technology, innovation and industrial excellence (desalination, water reuse,
+                        smart systems)</li>
+                    <li>Transfer specialist expertise from private operators to public utilities</li>
+                    <li>Fund critical infrastructure investment</li>
+                    <li>Achieve financial sustainability through better management</li>
+                </ul>
                 <div class="flex items-center space-x-3">
                     <img src="images/clean-water.jpg" alt="SDG 6" class=" object-contain">
                 </div>
@@ -93,12 +108,8 @@
         <h2 class="text-[40px] font-bold text-[#1E1D57] mb-6">
             Types of PPPs
         </h2>
-
-        <!-- Intro Paragraph -->
-
-
         <!-- Two Column Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 text-[17px] leading-relaxed text-[#000000] ">
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-10 gap-4 text-[17px] leading-relaxed text-[#000000] ">
 
             <!-- Left Column -->
             <div class="lg:space-y-6 space-y-2">
@@ -199,8 +210,45 @@
     </svg>
 </section>
 
+<!-- PPPs and sustainability  -->
+<section class="lg:my-20 my-10 px-6 lg:px-16">
+   <div class="max-w-7xl flex gap-10 mx-auto pb-6">
+     <h2 class="text-xl sm:text-[40px] w-1/2 hidden lg:block font-bold text-[#1E1D57] ">
+            
+        </h2>
+        <h2 class="text-xl lg:w-1/2 w-full sm:text-[40px] font-bold text-[#1E1D57] ">
+            PPPs and sustainability
+        </h2>
+    </div>
+ <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row gap-6 md:gap-10  ">
+
+        <div class="lg:w-1/2">
+                <img src="images/sustainability.jpg" alt="Water Infrastructure" class="w-full md:h-full max-h-[380px] object-cover rounded-2xl">
+        </div>
+        <div class="lg:w-1/2">
+
+            <p class="text-[#000000] mb-6">
+                Water operators link the natural and human water cycles – taking water from nature, treating it
+                safely for use, collecting wastewater, treating it to remove pollution, and returning it to nature.
+                This cycle must be sustainable.
+            </p>
+            <h3 class="text-[22px] mb-4 font-bold text-[#1E1D57]">
+                Private operators support community sustainability by:
+            </h3>
+            <ul class="list-disc pl-4 space-y-2 text-[#000000] mb-6">
+                <li>Protecting water resources through better management </li>
+                <li>Reducing energy consumption and carbon footprint</li>
+                <li>Implementing climate resilience measures </li>
+                <li>Ensuring 24/7 service continuity </li>
+                <li>Training local workforces </li>
+                <li>Advancing towards universal access targets </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
 <!-- The Economics of Water PPPs section  -->
-<section class="px-6 lg:px-16 py-20">
+<section class="px-6 lg:px-16 lg:my-20 my-10">
     <div class="max-w-7xl mx-auto">
         <div class="flex flex-col lg:flex-row gap-6 md:gap-10">
             <!-- Right Content -->
@@ -208,7 +256,8 @@
                 <h2 class="text-3xl sm:text-4xl font-bold text-[#1E1D57] mb-6">
                     The Economics of Water PPPs
                 </h2>
-                <p class="text-[#000000] mb-4 leading-relaxed">Sustainable water services require cost recovery. Most costs – labour,
+                <p class="text-[#000000] mb-4 leading-relaxed">Sustainable water services require cost recovery. Most
+                    costs – labour,
                     energy, chemicals, financing for infrastructure – are external factors, not controlled by operators.
                     When authorities engage private operators, they often make important economic decisions
                     simultaneously:</p>
@@ -219,7 +268,8 @@
                     <li>Establishing tariff structures that ensure long-term sustainability</li>
                 </ul>
 
-                <p class="text-[#000000] leading-relaxed">This means PPPs sometimes “appear” more expensive, but they’re often simply
+                <p class="text-[#000000] leading-relaxed">This means PPPs sometimes “appear” more expensive, but they’re
+                    often simply
                     reflecting decisions about investment and cost recovery that the authority has already made and
                     would occur regardless of who operates the service.
                 </p>
@@ -227,52 +277,16 @@
             <!-- Left Image -->
             <div class="lg:w-1/2">
                 <img src="images/The-Economics-of-Water-PPPs-min.png" alt="Water Infrastructure"
-                    class="md:w-full md:h-full object-contain rounded-2xl">
+                    class="w-full md:h-full max-h-[380px] object-cover rounded-2xl">
             </div>
         </div>
     </div>
 </section>
 
-<!-- financial water infrastructure  -->
 
-<section class="bg-[#f2f2f2] px-6 lg:px-16">
-    <div class="max-w-7xl mx-auto  py-12">
-        <div class="flex flex-col-reverse lg:flex-row gap-6 md:gap-10">
-
-            <!-- Left Image -->
-            <div class="lg:w-1/2">
-                <img src="images/Financing-Water-Infrastructure.png" alt="Water Infrastructure"
-                    class="md:w-full md:h-full object-contain rounded-2xl">
-            </div>
-
-            <!-- Right Content -->
-            <div class="lg:w-1/2 flex flex-col justify-center">
-                 <h2 class="text-lg sm:text-4xl sm:text-4xl font-bold text-[#1E1D57] mb-6">
-                    Financing Water Infrastructure
-                </h2>
-                <p class="text-[#000000] mb-4">
-                    Private operators access various financing sources to fund needed investments:
-                </p>
-
-                <ul class="list-disc list-outside pl-4 text-[#000000] space-y-1 mb-4">
-                    <li>Bank loans or financial institution borrowing</li>
-                    <li>Capital investment from financial investors or the operator itself</li>
-                    <li>Repayable subsidies from government or revolving funds</li>
-                    <li>Blended finance combining multiple sources</li>
-                    <li>Non-repayable grants from donors (for specific social programmes)</li>
-                </ul>
-
-                <p class="text-[#000000] leading-relaxed">
-                    All financing mechanisms except grants require repayment over the contract term through the
-                    agreed revenue model.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- real world success  -->
-<section class="relative overflow-hidden relative">
+<!-- <section class="relative overflow-hidden relative">
     <svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994"
         class="absolute top-0 z-111 right-[10%] hidden md:block  ">
         <path id="Path_432" data-name="Path 432"
@@ -286,8 +300,7 @@
             d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z"
             transform="translate(0 -21.645)" fill="#f2f2f2"></path>
     </svg>
- 
-    <!-- Background Gradient -->
+
     <div
         class="bg-[linear-gradient(103deg,#37C6F4_0%,#5CD3CE_100%)] opacity-100 text-center py-16 px-6 md:px-16 text-white relative z-10">
         <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-[#1E1D57] mb-6">Real-World Success</h2>
@@ -313,55 +326,48 @@
                 </svg>
             </a>
         </div>
-
-
     </div>
-</section>
-<!-- PPPs and sustainability  -->
-<section class="lg:py-20 py-10 lg:pb-[90px] px-6 lg:px-16">
-    <div class="max-w-7xl mx-auto pb-6">
-        <h2 class="text-xl sm:text-[40px] font-bold text-[#1E1D57] ">
-            PPPs and sustainability
-        </h2>
-    </div>
-    <div class="max-w-7xl  py-4 mx-auto grid lg:grid-cols-2 gap-10 ">
+</section> -->
 
-        <!-- bottom Section -->
-        <div>
+<!-- financial water infrastructure  -->
+<section class="bg-[#f2f2f2] px-6 lg:px-16">
+    <div class="max-w-7xl mx-auto  py-12">
+        <div class="flex flex-col-reverse lg:flex-row gap-6 md:gap-10">
 
-            <p class="text-[#000000] mb-6">
-                Water operators link the natural and human water cycles – taking water from nature, treating it
-                safely for use, collecting wastewater, treating it to remove pollution, and returning it to nature.
-                This cycle must be sustainable.
-            </p>
-            <h3 class="text-[22px] mb-4 font-bold text-[#1E1D57]">
-                Private operators support community sustainability by:
-            </h3>
-            <ul class="list-disc pl-4 space-y-2 text-[#000000] mb-6">
-                <li>Protecting water resources through better management </li>
-                <li>Reducing energy consumption and carbon footprint</li>
-                <li>Implementing climate resilience measures </li>
-                <li>Ensuring 24/7 service continuity </li>
-                <li>Training local workforces </li>
-                <li>Advancing towards universal access targets </li>
-            </ul>
+            <!-- Left Image -->
+            <div class="lg:w-1/2">
+                <img src="images/Financing-Water-Infrastructure.png" alt="Water Infrastructure"
+                    class="w-full md:h-full max-h-[380px] object-cover rounded-2xl">
+            </div>
 
+            <!-- Right Content -->
+            <div class="lg:w-1/2 flex flex-col justify-center">
+                <h2 class="text-lg sm:text-4xl sm:text-4xl font-bold text-[#1E1D57] mb-6">
+                    Financing Water Infrastructure
+                </h2>
+                <p class="text-[#000000] mb-4">
+                    Private operators access various financing sources to fund needed investments:
+                </p>
 
-        </div>
+                <ul class="list-disc list-outside pl-4 text-[#000000] space-y-1 mb-4">
+                    <li>Bank loans or financial institution borrowing</li>
+                    <li>Capital investment from financial investors or the operator itself</li>
+                    <li>Repayable subsidies from government or revolving funds</li>
+                    <li>Blended finance combining multiple sources</li>
+                    <li>Non-repayable grants from donors (for specific social programmes)</li>
+                </ul>
 
-        <!-- Right Section (Suggested Graphic Placeholder) -->
-        <div class="bg-blue-50 rounded-2xl p-6 flex flex-col justify-center">
-            <h2 class="font-semibold text-gray-800 mb-2">SUGGESTED GRAPHIC:</h2>
-            <p class="text-gray-700">
-                Simple breakdown showing what makes up the cost of water services – positioned here.
-                Can this be done?
-            </p>
+                <p class="text-[#000000] leading-relaxed">
+                    All financing mechanisms except grants require repayment over the contract term through the
+                    agreed revenue model.
+                </p>
+            </div>
         </div>
     </div>
 </section>
 <!-- faq section  -->
 
-<section class="w-full bg-regal-blue lg:py-20 py-10 lg:pb-50 text-white relative mb-10">
+<section class="w-full bg-regal-blue lg:py-20 py-10 lg:pb-50 text-white relative mb-[20px] md:mb-[40px]">
     <div class="max-w-4xl mx-auto px-6 lg:px-16">
 
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 max-[440px]:text-xl">
@@ -399,7 +405,7 @@
         </div>
     </div>
     <!-- waves section  -->
-    <div class=" -bottom-[40px] absolute left-0 right-0">
+    <!-- <div class=" -bottom-[40px] absolute left-0 right-0">
         <svg class="w-full h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
             <defs>
                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
@@ -412,6 +418,6 @@
                 <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57"></use>
             </g>
         </svg>
-    </div>
+    </div> -->
 </section>
 @endsection

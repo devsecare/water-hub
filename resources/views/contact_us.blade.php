@@ -14,7 +14,7 @@
     </p>
   </div>
 </section>
-<section class="px-6 lg:px-16">
+<section class="px-6 lg:px-16 pb-[70px] md:pb-[150px]">
   <div class="max-w-7xl mx-auto  py-16">
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -82,6 +82,28 @@
           <span id="message-error" class="text-red-500 text-sm"></span>
         </div>
 
+        <!-- captcha code  -->
+        <div>
+          <label class="block text-gray-700 mb-1">Captcha</label>
+
+          <div class="flex items-center justify-between  gap-3">
+
+            <input type="text" id="submit" placeholder="Enter Captcha"
+              class="w-full mt-2 bg-gray-100 rounded-full px-4 py-3 focus:outline-none">
+
+            <!-- Captcha Output -->
+            <div id="image" class="px-4 py-6 bg-gray-200 rounded-lg font-bold w-1/3"></div>
+
+            <!-- Refresh Button -->
+            <button type="button" onclick="generate()" class="text-blue-600 text-sm">
+              Refresh
+            </button>
+          </div>
+          <!-- User Input -->
+
+          <span id="captcha-error" class="text-red-500 text-sm"></span>
+        </div>
+
         <!-- Button -->
         <button type="submit"
           class="w-full text-xl bg-[#27C1F9] text-[#121858] font-semibold py-3 rounded-full hover:opacity-90 transition hover:bg-[#1E1D57] hover:text-[#37C6F4]">
@@ -94,7 +116,7 @@
   </div>
 </section>
 
-<div class=" bottom-0 left-0 right-0">
+<!-- <div class=" bottom-0 left-0 right-0">
   <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
     preserveAspectRatio="none">
     <defs>
@@ -108,7 +130,7 @@
       <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
     </g>
   </svg>
-</div>
+</div> -->
 
 
 

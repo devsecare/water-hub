@@ -52,6 +52,16 @@ Route::get('/case-study', [ResourcesController::class, 'caseStudy'])->name('case
 Route::get('/account-details', function () {
     return view('account_details');
 })->name('accountdetails');
+Route::get('/privacy-policy', function () {
+    return view('privacy_policy');
+})->name('privacypolicy');
+Route::get('/terms-of-service', function () {
+    return view('terms_of_service');
+})->name('termsofservice');
+
+Route::get('/faq', function () {
+    return view('faq');
+})->name('faq');
 
 Route::get('/my-account', [MyAccountController::class, 'index'])->name('myaccount')->middleware('auth');
 

@@ -360,15 +360,15 @@
 <div id="productModal"
     class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 transition-all duration-300">
     <div
-        class="bg-white rounded-2xl shadow-xl max-w-[51rem] w-[90%] md:w-[70%] p-8 relative animate-fadeIn overflow-hidden">
-        <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-600 hover:text-black z-10 cursor-pointer">
+        class="bg-white rounded-2xl shadow-xl max-w-[51rem] w-[90%] md:w-[70%] p-8 relative animate-fadeIn overflow-auto h-full max-h-fit">
+        <button onclick="closeModal()" class="absolute md:top-5 md:right-5 top-8 right-2 text-gray-600 hover:text-black z-10 cursor-pointer">
             <i data-lucide="x" class="w-6 h-6"></i>
         </button>
 
         <div class="flex flex-col md:flex-row">
             <!-- Left gradient -->
             <div id="modalColorBox"
-                class="p-8 text-white rounded-2xl w-full  md:w-1/2 flex flex-col justify-between min-h-[360px]">
+                class="p-8 text-white rounded-2xl w-full max-h-fit md:w-1/2 flex flex-col justify-between min-h-[360px]">
                 <div>
                     <h3 id="modalTitle" class="text-2xl font-semibold leading-snug mb-3">title goes here</h3>
                     <p id="modalPublisher" class="text-sm opacity-90 mb-4">Publisher name here</p>
@@ -383,7 +383,7 @@
             <div class="flex-1 bg-white p-8 text-gray-700 text-sm leading-relaxed flex flex-col justify-between">
                 <div>
                     <p class="font-semibold text-black mb-2 hidden">Short description:</p>
-                    <div id="modalDescription" class="prose prose-sm max-w-none ">
+                    <div id="modalDescription" class="prose prose-sm max-w-none space-y-6  [&>ul]:list-disc [&>ul]:pl-6">
                         Summarise what they will get from the document and also mention the kinds of support files
                         available. Audio, video etc.
                     </div>
@@ -392,7 +392,7 @@
             </div>
         </div>
         <!-- Buttons fixed at the bottom section -->
-        <div class="border-t mt-8 pt-4 flex justify-between flex-wrap gap-4 text-gray-700 text-sm">
+        <div class=" mt-8 pt-4 flex justify-between flex-wrap gap-4 text-gray-700 text-sm">
             <div class="flex flex-wrap gap-6">
                 <button class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] duration-250" id="modalBookmarkBtn" onclick="toggleBookmarkFromModal(this)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -423,7 +423,7 @@
 </div>
 
 <!-- waves  -->
-<div class=" bottom-0 left-0 right-0 bg-[#f2f2f2]">
+<!-- <div class=" bottom-0 left-0 right-0 bg-[#f2f2f2]">
     <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
         preserveAspectRatio="none">
         <defs>
@@ -437,7 +437,7 @@
             <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
         </g>
     </svg>
-</div>
+</div> -->
 
 
 <div class="overlay-btm"></div>
@@ -598,7 +598,7 @@
         document.getElementById("modalType").innerText = item.category_name || item.type;
         const colorBox = document.getElementById("modalColorBox");
         const gradientStyle = formatGradient(item.category_color);
-        colorBox.className = `p-8 text-white rounded-2xl w-full md:w-1/2 flex flex-col justify-between min-h-[360px] shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl`;
+        colorBox.className = `p-8 text-white rounded-2xl w-full max-h-fit md:w-1/2 flex flex-col justify-between min-h-[360px] shadow-[0_8px_12px_rgba(0,0,0,0.4)] shadow-2xl`;
         colorBox.setAttribute('style', gradientStyle);
         document.getElementById("modalIcon").innerText = item.category_icon || item.icon || 'folder';
         const modalDescription = document.getElementById("modalDescription");

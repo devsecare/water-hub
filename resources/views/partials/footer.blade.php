@@ -1,4 +1,19 @@
-<footer class=" text-white">
+<footer class=" text-white relative">
+    <!-- waves  -->
+    <div class=" -top-[30px] md:-top-[80px] absolute left-0 right-0">
+    <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
+        <defs>
+            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18
+        58-18 88-18 58 18 88 18v44h-352z"></path>
+        </defs>
+        <g class="parallax">
+            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)"></use>
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)"></use>
+            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)"></use>
+            <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57"></use>
+        </g>
+    </svg>
+</div>
     <div class="bg-[#1E1D57] py-12 px-6 lg:px-16">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row gap-10 lg:gap-[8rem]">
             <div class="lg:max-w-[391px] md:max-w-[350px]">
@@ -12,7 +27,7 @@
                 <form class="flex justify-between items-center rounded-3xl overflow-hidden max-w-sm px-2 sm:px-4"
                     style="background-color:#37c6f445;">
                     <input type="email" placeholder="Enter your email address"
-                        class="w-full lg:px-4 px-2 py-3 text-sm text-white bg-transparent focus:outline-none max-w-[200px]">
+                        class="w-full lg:px-4 px-2 py-3 text-sm text-white bg-transparent focus:outline-none flex-1">
                     <button class="bg-transparent hover:bg-[#2f6990] text-[#37C6F4] px-2 lg:px-4 py-3">Stay Updated</button>
                 </form>
             </div>
@@ -85,13 +100,15 @@
         <div
             class="max-w-7xl mx-auto max-[540px]:flex-col flex items-center max-[540px]:items-start max-[540px]:gap-4 gap-10 ">
             <p class="text-sm">© <span id="year">2025</span>. All right reserved.</p>
-            <a href=""
+            <a href="{{ route('privacypolicy') }}"
                 class="text-[#37C6F4] text-sm hover:text-white hover:underline underline underline-offset-4">Privacy
                 Policy</a>
-            <a href=""
+            <a href="{{ route('termsofservice') }}"
                 class="text-[#37C6F4] text-sm hover:text-white hover:underline underline underline-offset-4">Terms of
                 Service</a>
 
         </div>
     </section>
 </footer>
+
+

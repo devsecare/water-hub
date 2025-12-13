@@ -72,3 +72,6 @@
     background-color: #000000ba;
     padding: 5px 10px;
 }
+.dark .curator-panel-gallery ul.curator-picker-grid li p.text-xs {
+    color: #fff;
+}

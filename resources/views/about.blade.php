@@ -34,26 +34,7 @@
         </div>
     </div>
 </section>
-<!-- About Section -->
-<section class="w-full bg-white my-10 lg:my-20 md:h-[165px] px-6 lg:px-16 flex items-center">
-    <div class="max-w-7xl mx-auto  w-full">
-        <div class="max-w-[790px] text-left">
-            <!-- First Bold Paragraph -->
-            <p class="text-[#1E1D57] font-semibold  text-lg leading-snug mb-4">
-                For 20 years, AquaFed has been the global voice of water partnership expertise – connecting 400+
-                operators across 40 countries to deliver sustainable water solutions worldwide.
-            </p>
 
-            <!-- Second Regular Paragraph -->
-            <p class="text-[#1E1D57]  lg:mt-8 text-lg leading-snug">
-                We accelerate the creation and development of markets for public-private partnerships in water and
-                wastewater services. By consolidating best practices, proven models, and expert knowledge from operators
-                worldwide, we help governments, consultants, and investors build water systems that work –
-                transparently, sustainably, and at scale.
-            </p>
-        </div>
-    </div>
-</section>
 
 <!-- about section part two  -->
 <section class="px-6 lg:px-16">
@@ -65,21 +46,21 @@
                 and Wastewater PPP Hub
             </h2>
 
-            <p class="mt-6 text-base text-gray-700">
-                <a href="{{ route('resources') }}" class="text-sky-500 font-semibold underline">The Hub</a> exists to
-                break down barriers to
-                successful water partnerships.
-                For too long, essential PPP guidance has been scattered, technical, and difficult to navigate.
-                This platform consolidates the best resources from our global network into one accessible space –
-                offering clear guidance, practical tools, and unbiased knowledge to anyone working to improve water and
-                wastewater services.
+            <p class="mt-6 text-base text-[#000000]">
+                <a href="{{ route('resources') }}" class="text-sky-500 font-semibold underline"> The Hub </a> exists to
+                break down barriers to successful water PPPs. We believe all the essential PPP guidance has already been
+                produced, but it is scattered across the web and is often very technical and difficult to navigate. This
+                platform consolidates the best resources and tools from the most trusted sources – including
+                international organisations such as the World Bank Group, or the Asian Development Bank - into one
+                accessible space. It then offers clear guidance, practical methodologies, and unbiased knowledge to
+                anyone working to improve water and wastewater services.
             </p>
 
-            <p class="mt-6 font-semibold text-gray-900">
+            <p class="mt-6 font-semibold text-[#000000]">
                 Our goal is simple:
                 <span class="font-normal">
-                    to grow the pipeline of PPP projects and strengthen the long-term resilience of water systems
-                    worldwide.
+                    To increase your knowledge, capacity and confidence to create water PPP projects and strengthen the
+                    long-term resilience of your country’s water systems
                 </span>
             </p>
         </div>
@@ -87,16 +68,16 @@
         <!-- Right Section -->
         <div class="lg:w-1/2">
             <h2 class="text-3xl md:text-4xl font-bold text-[#0C134F] leading-tight">
-                Built for the people<br />
-                shaping water's future
+                Who is the Hub trying <br> to help?
             </h2>
 
-            <p class="mt-6 text-base text-gray-700">
-                This Hub serves government officials, PPP units, development partners, consultants, and investors —
-                anyone committed to delivering safe, reliable water and sanitation services. Whether you're exploring
-                PPPs for the first time or managing complex contracts, you'll find resources tailored to your needs.
-                We meet you where you are in the PPP journey, offering foundational knowledge and technical depth in
-                equal measure.
+            <p class="mt-6 text-base text-[#000000]">
+                If you are a government official, in a PPP unit, a development partners, consultant or investor – anyone
+                considering PPP as an option to deliver safe, reliable water and sanitation services - the Hub is for
+                you. Whether you're exploring PPPs for the first time or managing complex contracts, you'll find
+                resources tailored to your needs. We meet you where you are in the PPP journey, offering foundational
+                knowledge and technical depth in equal measure.
+
             </p>
         </div>
     </section>
@@ -203,63 +184,58 @@
             </svg>
         </a>
     </div>
-    <div class=" absolute bottom-0 left-0 right-0">
-        <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
-            preserveAspectRatio="none">
-            <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z">
-                </path>
-            </defs>
-            <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)"></use>
-                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)"></use>
-                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)"></use>
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57"></use>
-            </g>
-        </svg>
+
+</section>
+
+<!-- About Section -->
+<section class="w-full bg-white my-10 lg:my-20  px-6 lg:px-16 flex items-center">
+    <div class="max-w-7xl mx-auto  w-full">
+        <div class="max-w-[790px] text-left">
+            <h2 class="text-3xl md:text-4xl mb-4 font-bold text-[#0C134F] leading-tight">What is AquaFed?</h2>
+            <!-- First Bold Paragraph -->
+            <p class="text-[#1E1D57] font-semibold  text-lg leading-snug mb-4">
+                For 20 years, AquaFed has been the global voice of private water operators – connecting 400+ operators
+                across more than 40 countries to deliver sustainable water solutions worldwide.
+            </p>
+
+            <!-- Second Regular Paragraph -->
+            <p class="text-[#1E1D57]  lg:mt-8 text-lg leading-snug">
+                We aim to accelerate the creation and development of markets for PPPs in water and wastewater services.
+                By consolidating best practices, proven models, and expert knowledge from our members worldwide, we help
+                governments, consultants, and investors to partner with our members to build resilient water and
+                wastewater systems.
+            </p>
+        </div>
     </div>
 </section>
 
-<!-- Help us build a better resource section  -->
-<!-- <section class="px-6 lg:px-16">
-    <section class="max-w-7xl flex mx-auto  py-10 md:py-20">
+<!-- Help us build a better resource -->
+<section class="px-6 lg:px-16 my-10 md:my-20 pb-[70px] md:pb-[100px]">
+    <section class="max-w-7xl flex mx-auto  ">
         <div class="text-left">
-    
             <h2 class="text-3xl md:text-4xl lg:max-w-[605px] font-bold text-[#1e1b4b] mb-6">
                 Help us build a better resource
             </h2>
-
-        
             <p class="text-[#000000] text-[16px] lg:max-w-[590px] mb-6">
                 <span class="font-semibold">This Hub grows stronger with your input.</span>
-                If you've developed useful PPP materials, identified gaps in our resources,
-                or have feedback on how we can improve, we want to hear from you.
-                Share your insights, suggest content, or let us know what's working – together,
-                we'll create the most valuable water PPP platform in the world.
+                This Hub grows stronger with your input. If you've developed useful PPP materials, identified gaps in
+                our resources, or have feedback on how we can improve, we want to hear from you. Share your insights,
+                suggest content, or let us know what's working – together, we'll create the most valuable water PPP
+                platform in the world.
             </p>
-
-            <a href="{{ route('contactus') }}" class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold transition-colors">
+            <a href="https://phplaravel-1168881-6023281.cloudwaysapps.com/contact-us"
+                class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold transition-colors">
                 <span class="group-hover:text-[#1E1D57] transition-colors">Get in touch</span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-[24px] w-[24px] text-bold ml-1 transition-colors  group-hover:text-[#1E1D57]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="h-[24px] w-[24px] text-bold ml-1 transition-colors  group-hover:text-[#1E1D57]" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"></path>
                 </svg>
             </a>
         </div>
     </section>
-</section> -->
-<!-- waves section  -->
-<!-- <div class="bottom-0 left-0 right-0">
-    <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
-        preserveAspectRatio="none">
-        <defs>
-            <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 58-18 88-18 58 18 88 18v44h-352z" />
-        </defs>
-        <g class="parallax">
-            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)" />
-            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)" />
-            <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)" />
-            <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
-        </g>
-    </svg>
-</div> -->
+</section>
+
+
+
 @endsection

@@ -104,14 +104,14 @@
                         @if($item->short_description)
                         <div class="mb-6 leading-relaxed hidden">
                             <span class="text-black font-bold">Short description: </span>
-                            <div class="prose prose-sm max-w-none">
+                            <div class="prose prose-sm max-w-none ">
                                 {!! $item->short_description !!}
                             </div>
                         </div>
                         @endif
 
                         @if($item->description)
-                        <div class="space-y-6 leading-relaxed prose prose-sm max-w-none">
+                        <div class="space-y-6 leading-relaxed prose prose-sm max-w-none [&>ul]:list-disc [&>ul]:pl-6">
                             {!! $item->description !!}
                         </div>
                         @endif
@@ -154,7 +154,7 @@
                                         @endphp
                                         <li class="flex items-center gap-2 cursor-pointer hover:text-[#37C6F4] transition-colors">
                                             @if(!empty($iconName))
-                                                <span class="material-symbols-outlined text-[18px] text-[#1e1d57]">{{ $iconName }}</span>
+                                                <span class="material-symbols-outlined text-[18px]">{{ $iconName }}</span>
                                             @else
                                                 {{-- Fallback to default document icon if no icon specified --}}
                                                 <svg id="summary-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -251,17 +251,17 @@
 </section>
 <!-- Related Content -->
 @if($relatedItems->count() > 0)
-<section class="py-12 bg-[#F7F7F7] px-6 lg:px-16">
+<section class="py-12 bg-[#F7F7F7] px-6 lg:px-16 pb-[150px]">
     <div class="max-w-7xl mx-auto ">
         <h2 class="text-4xl md:text-5xl text-[#1E1D57] font-bold mb-8">Related content</h2>
 
-        <div  class="grid grid-cols-1  sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 lg:gap-[100px]">
+        <div  class="grid grid-cols-1  min-[640px]:grid-cols-2 min-[1200px]:grid-cols-3 gap-6 md:gap-10 lg:gap-[100px]">
             @foreach($relatedItems as $relatedItem)
             @php
                 $startColor = '#070648';
                 $endColor = $relatedItem['category_color'] ?? '#2CBFA0';
             @endphp
-            <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between">
+            <div class="bg-white shadow-md p-4 rounded-[25px] flex flex-col justify-between aspect-square">
                 <div
                     class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)]"
                     style="background: linear-gradient(to bottom right, {{ $startColor }}, {{ $endColor }});">
@@ -274,7 +274,7 @@
                         <span class="text-lg">{{ $relatedItem['category_name'] ?? $relatedItem['type'] }}</span>
                     </div>
                 </div>
-                <div class="flex justify-between pt-6 pb-3  border-t border-white/30 text-black/80">
+                <div class="flex justify-between pt-6 pb-3  border-white/30 text-black/80">
                     <a href="{{ route('resources.show', $relatedItem['slug']) }}" class="fill-[#ababab] hover:fill-[#37C6F4] transition-colors duration-200 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
                             <path
@@ -311,7 +311,7 @@
 </section>
 @endif
 <!-- wave section  -->
-<div class=" bottom-0 left-0 right-0">
+<!-- <div class=" bottom-0 left-0 right-0">
     <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
         preserveAspectRatio="none">
         <defs>
@@ -325,7 +325,7 @@
             <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57" />
         </g>
     </svg>
-</div>
+</div> -->
 
 
 
