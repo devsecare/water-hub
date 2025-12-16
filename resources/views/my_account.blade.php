@@ -109,7 +109,7 @@
           data-publisher="{{ strtolower($item['publisher'] ?? '') }}"
           data-description="{{ strtolower($item['short_description'] ?? $item['description'] ?? '') }}">
           <div onclick="openItemPage('{{ $item['slug'] }}')" style="background: linear-gradient(to bottom, #070648, {{ $item['category_color'] ?? '#2CBFA0' }});"
-            class="text-white p-6 rounded-[15px] flex flex-col justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] features-card">
+            class="text-white p-6 rounded-[15px] flex flex-col cursor-pointer justify-between flex-grow shadow-[0_8px_15px_-4px_rgba(0,0,0,0.50)] features-card">
             <div>
               <h3 class="font-semibold text-lg leading-snug">{{ $item['title'] }}</h3>
               <p class="text-sm mt-2 mb-8 opacity-90">{{ $item['publisher'] ?? '' }}</p>
