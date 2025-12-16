@@ -43,17 +43,19 @@ class TestMail extends Command
                 'api_key_set' => !empty(config('mail.mailers.elastic_email.key')),
             ]);
 
-            Mail::raw(
-                "This is a test email from the Water Hub application.\n\n" .
+            // Send with both HTML and plain text to avoid spam
+            $plainText = "This is a test email from the Water Hub application.\n\n" .
                 "Settings are now managed from the admin panel.\n" .
                 "Admin Email: {$adminEmail}\n" .
                 "Sent at: " . now()->format('Y-m-d H:i:s') . "\n" .
-                "Mailer: " . config('mail.default'),
-                function ($message) use ($toEmail) {
-                    $message->to($toEmail)
-                            ->subject('Test Email - Water Hub Settings System - ' . now()->format('H:i:s'));
-                }
-            );
+                "Mailer: " . config('mail.default');
+
+            Mail::send([], [], function ($message) use ($toEmail, $plainText) {
+                $message->to($toEmail)
+                        ->subject('Test Email - Water Hub Settings System - ' . now()->format('H:i:s'))
+                        ->from(config('mail.from.address'), config('mail.from.name'))
+                        ->text($plainText); // Plain text only to match curl behavior
+            });
 
             \Log::info('TestMail: Email sent via Mail facade', [
                 'to' => $toEmail,

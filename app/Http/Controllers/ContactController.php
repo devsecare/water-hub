@@ -69,12 +69,15 @@ class ContactController extends Controller
         // Send email notification using Laravel Mail (ElasticEmail API via flexflux package)
         try {
             $emailBody = view('emails.contact-form-notification', ['contact' => $contact])->render();
+            $plainTextBody = strip_tags($emailBody); // Create plain text version
 
-            Mail::html($emailBody, function ($message) use ($contact) {
+            Mail::send([], [], function ($message) use ($contact, $emailBody, $plainTextBody) {
                 $message->to(SettingsService::getAdminEmail())
                         ->subject('New Contact Form Submission - ' . config('app.name'))
                         ->from(config('mail.from.address'), config('mail.from.name', config('app.name')))
-                        ->replyTo($contact->email);
+                        ->replyTo($contact->email)
+                        ->html($emailBody)
+                        ->text($plainTextBody); // Add plain text alternative to avoid spam
             });
 
             Log::info('Contact form email sent successfully', [
