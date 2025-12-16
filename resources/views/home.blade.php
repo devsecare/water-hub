@@ -273,7 +273,7 @@
 
             <!-- CARD 3 -->
             <div class="text-left shrink-0 w-[286px] snap-start sm:w-auto">
-                <img src="https://water-hub.ecareinfoway.com/images/Audio-briefings.svg" alt="">
+                <img src="{{ asset('images/Audio-briefings.svg') }}" alt="">
                 <h3 class="text-white font-bold mt-3">Audio briefings</h3>
                 <p class="text-black mt-5 text-[16px] leading-normal">
                     Listen to expert summaries and discussions whilst commuting or between meetings.
@@ -282,7 +282,7 @@
 
             <!-- CARD 4 -->
             <div class="text-left shrink-0 w-[286px] snap-start sm:w-auto">
-                <img src="https://water-hub.ecareinfoway.com/images/video-explainers.svg" alt="">
+                <img src="{{ asset('images/video-explainers.svg') }}" alt="">
                 <h3 class="text-white font-bold mt-3">Video explainers</h3>
                 <p class="text-black mt-5 text-[16px] leading-normal">
                     Watch visual breakdowns of complex PPP concepts and real-world project examples.
@@ -307,7 +307,7 @@
 
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <div class="flex-1 text-white md:max-w-[604px]">
-            <img src="/images/aquafedlogo.png" alt="aquafed logo" class="mb-2">
+            <img src="{{ asset('images/aquafedlogo.png') }}" alt="aquafed logo" class="mb-2">
             <h2 class="text-3xl md:text-[40px] font-bold mb-6 leading-snug">
                 Your partner in water and wastewater PPP development
             </h2>

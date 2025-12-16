@@ -94,7 +94,7 @@
 
 
 
-            <form id="registerFormElement" method="POST" action="https://water-hub.ecareinfoway.com/register" class="space-y-4" novalidate="">
+            <form id="registerFormElement" method="POST" action="{{ route('login') }}" class="space-y-4" novalidate="">
                 <input type="hidden" name="_token" value="Sca0BxOdZY9KccbHe5oVs9putrnNpQ3OPebUt4hs" autocomplete="off">
                 <div>
                     <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
@@ -153,7 +153,7 @@
                 Don't have an account? <a href="javascript:void(0)" id="showRegister" class="text-blue-600 font-medium hover:underline">Register</a>.
             </p>
 
-            <form id="loginFormElement" method="POST" action="https://water-hub.ecareinfoway.com/login" class="space-y-4" novalidate="">
+            <form id="loginFormElement" method="POST" action="{{ route('register') }}" class="space-y-4" novalidate="">
                 <input type="hidden" name="_token" value="Sca0BxOdZY9KccbHe5oVs9putrnNpQ3OPebUt4hs" autocomplete="off">
                 <div>
                     <label for="login_email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
