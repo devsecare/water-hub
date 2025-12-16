@@ -1,0 +1,17 @@
+# ElasticEmail SMTP Configuration
+# Copy these lines to your .env file
+
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.elasticemail.com
+MAIL_PORT=587
+MAIL_USERNAME=0D17EB4F1011867E2F93A0D99A0292C6C0F40DB42645441DB2F71296070C842E5523486E3F25523096965DE29DE7D611
+MAIL_PASSWORD=0D17EB4F1011867E2F93A0D99A0292C6C0F40DB42645441DB2F71296070C842E5523486E3F25523096965DE29DE7D611
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=noreply@yourdomain.com
+MAIL_FROM_NAME="${APP_NAME}"
+
+# Important Notes:
+# - MAIL_USERNAME and MAIL_PASSWORD should both be your ElasticEmail API key
+# - MAIL_FROM_ADDRESS must be a verified email address in your ElasticEmail account
+# - Replace "yourdomain.com" with your actual verified domain
+# - After updating .env, run: php artisan config:clear
