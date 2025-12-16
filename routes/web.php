@@ -63,7 +63,20 @@ Route::get('/terms-of-service', function () {
 })->name('termsofservice');
 
 Route::get('/faq', function () {
-    return view('faq');
+    $aboutTheHubFaqs = \App\Models\Faq::where('category', 'about_the_hub')
+        ->where('is_active', true)
+        ->orderBy('sort')
+        ->get();
+
+    $aboutWaterPppsFaqs = \App\Models\Faq::where('category', 'about_water_ppps')
+        ->where('is_active', true)
+        ->orderBy('sort')
+        ->get();
+
+    return view('faq', [
+        'aboutTheHubFaqs' => $aboutTheHubFaqs,
+        'aboutWaterPppsFaqs' => $aboutWaterPppsFaqs,
+    ]);
 })->name('faq');
 
 Route::get('/my-account', [MyAccountController::class, 'index'])->name('myaccount')->middleware('auth');

@@ -18,7 +18,7 @@ class FaqResource extends Resource
     protected static ?string $model = Faq::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-question-mark-circle';
-    
+
     protected static ?string $navigationGroup = 'Content';
 
     public static function form(Form $form): Form
@@ -34,6 +34,15 @@ class FaqResource extends Resource
                         Forms\Components\RichEditor::make('answer')
                             ->required()
                             ->columnSpanFull(),
+                        Forms\Components\Select::make('category')
+                            ->label('Category')
+                            ->required()
+                            ->options([
+                                'about_the_hub' => 'About the Hub',
+                                'about_water_ppps' => 'About water and wastewater PPPs',
+                            ])
+                            ->default('about_the_hub')
+                            ->helperText('Select the category for this FAQ'),
                         Forms\Components\Toggle::make('is_active')
                             ->default(true)
                             ->required(),
@@ -48,6 +57,18 @@ class FaqResource extends Resource
                 Tables\Columns\TextColumn::make('question')
                     ->searchable()
                     ->limit(50),
+                Tables\Columns\TextColumn::make('category')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => match($state) {
+                        'about_the_hub' => 'About the Hub',
+                        'about_water_ppps' => 'About water and wastewater PPPs',
+                        default => $state,
+                    })
+                    ->color(fn (string $state): string => match($state) {
+                        'about_the_hub' => 'info',
+                        'about_water_ppps' => 'success',
+                        default => 'gray',
+                    }),
                 Tables\Columns\IconColumn::make('is_active')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -60,6 +81,12 @@ class FaqResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
+                Tables\Filters\SelectFilter::make('category')
+                    ->label('Category')
+                    ->options([
+                        'about_the_hub' => 'About the Hub',
+                        'about_water_ppps' => 'About water and wastewater PPPs',
+                    ]),
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label('Active')
                     ->placeholder('All FAQs')
