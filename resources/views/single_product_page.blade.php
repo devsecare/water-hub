@@ -4,7 +4,7 @@
 
 @section('content')
 
-<section class="bg-[#F2F2F2] px-6 lg:px-16">
+<section class="bg-[#F2F2F2] px-6 lg:px-16 {{ $relatedItems->count() > 0 ? '' : 'pb-[150px]' }}">
     <div class="max-w-7xl mx-auto  py-16">
 
         <!-- Back link -->

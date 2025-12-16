@@ -35,7 +35,7 @@
                 <ul class="space-y-3">
                     <li><a href="{{ route('understandingWater') }}" class="hover:text-[#00b4ff]">About water
                             PPPs</a></li>
-                    <li><a href="https://water-hub.ecareinfoway.com/resources" class="hover:text-[#00b4ff]">Water PPP
+                    <li><a href="{{ route('resources') }}" class="hover:text-[#00b4ff]">Water PPP
                             Resources</a></li>
                     <li><a href="{{ route('casestudy') }}" class="hover:text-[#00b4ff]">Case study</a></li>
                     <li><a href="{{ route('about') }}" class="hover:text-[#00b4ff]">Who we are</a></li>

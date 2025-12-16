@@ -221,7 +221,7 @@
         </div>
 
 
-        <a href="https://water-hub.ecareinfoway.com/resources" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[25px] py-[10px] px-[27px]
+        <a href="{{ route('resources') }}" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[25px] py-[10px] px-[27px]
                         hover:bg-[#37C6F4] hover:text-[#1E1D57] transition duration-300">
             The resource library
             <!-- SVG Icon placed after text -->

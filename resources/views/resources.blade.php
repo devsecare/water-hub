@@ -77,9 +77,9 @@
 
             <p class="text-xs text-center text-gray-500 mt-6 leading-snug">
                 By registering you agree with the
-                <a href="#" class="text-blue-600 hover:underline">Terms and Conditions</a>
+                <a href="{{ route('termsofservice') }}" class="text-blue-600 hover:underline">Terms and Conditions</a>
                 and
-                <a href="#" class="text-blue-600 hover:underline">Privacy Policy</a>.
+                <a href="{{ route('privacypolicy') }}" class="text-blue-600 hover:underline">Privacy Policy</a>.
             </p>
         </div>
 

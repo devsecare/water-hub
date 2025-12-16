@@ -22,9 +22,9 @@ Route::get('/who-we-are', function () {
 Route::get('/resources', [ResourcesController::class, 'index'])->name('resources');
 Route::get('/resources/{slug}', [ResourcesController::class, 'show'])->name('resources.show')->middleware('auth');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+// Route::get('/contact', function () {
+//     return view('contact');
+// })->name('contact');
 
 Route::get('/about-water-ppps', function () {
     $faqs = \App\Models\Faq::where('is_active', true)

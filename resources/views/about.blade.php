@@ -173,7 +173,7 @@
             </p>
         </div>
 
-        <a href="https://water-hub.ecareinfoway.com/resources" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[55px] py-[10px] px-[27px] 
+        <a href="{{ route('resources') }}" class="group inline-flex items-center text-[#37C6F4] mt-6 md:mt-0 font-medium  whitespace-nowrap bg-[#1E1D57] rounded-[55px] py-[10px] px-[27px] 
                 hover:bg-[#37C6F4] hover:text-[#1E1D57] transition duration-300">
             The resource library
             <!-- SVG Icon placed after text -->
@@ -223,7 +223,7 @@
                 suggest content, or let us know what's working – together, we'll create the most valuable water PPP
                 platform in the world.
             </p>
-            <a href="https://phplaravel-1168881-6023281.cloudwaysapps.com/contact-us"
+            <a href="{{ route('contactus') }}"
                 class="group inline-flex items-center text-[#37C6F4] text-xl font-semibold transition-colors">
                 <span class="group-hover:text-[#1E1D57] transition-colors">Get in touch</span>
                 <svg xmlns="http://www.w3.org/2000/svg"
