@@ -40,4 +40,9 @@ return [
         'from_email' => env('ELASTICEMAIL_FROM_EMAIL', 'noreply@elasticemail.com'),
     ],
 
+    'recaptcha' => [
+        'site_key' => env('RECAPTCHA_SITE_KEY', '6Lc0ZiwsAAAAAMJV6XvpPKkt90YFQRM1UzF7ZFD7'),
+        'secret_key' => env('RECAPTCHA_SECRET_KEY', '6Lc0ZiwsAAAAAEBsEQpnw4wI-lT_22g13qy8rznO'),
+    ],
+
 ];

@@ -143,9 +143,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // water ppp resources page script end
 
 // contact us page form start
+// Note: Form submission is now handled by reCAPTCHA v3 script in contact_us.blade.php
+// This handler is kept as fallback for basic validation if reCAPTCHA is not loaded
 
 const contactForm = document.getElementById("contact-form");
-if (contactForm) {
+if (contactForm && typeof grecaptcha === 'undefined') {
+  // Only use this handler if reCAPTCHA is not available (fallback)
   contactForm.addEventListener("submit", function(event) {
     event.preventDefault(); // Prevent the form from submitting if validation fails
 

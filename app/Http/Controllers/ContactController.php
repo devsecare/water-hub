@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Services\ElasticEmailService;
+use App\Services\RecaptchaService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -18,6 +19,49 @@ class ContactController extends Controller
 
     public function store(Request $request)
     {
+        // Verify reCAPTCHA first
+        $recaptchaToken = $request->input('recaptcha_token');
+
+        if (empty($recaptchaToken)) {
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'reCAPTCHA verification is required',
+                    'errors' => [
+                        'recaptcha_token' => ['reCAPTCHA verification is required. Please refresh the page and try again.']
+                    ]
+                ], 422);
+            }
+
+            return back()->withErrors([
+                'recaptcha_token' => 'reCAPTCHA verification is required. Please refresh the page and try again.'
+            ])->withInput();
+        }
+
+        $recaptchaResult = RecaptchaService::verify($recaptchaToken, 'contact_form', 0.5);
+
+        if (!$recaptchaResult['success']) {
+            Log::warning('reCAPTCHA verification failed for contact form', [
+                'ip' => $request->ip(),
+                'errors' => $recaptchaResult['errors'] ?? [],
+                'score' => $recaptchaResult['score'] ?? null,
+            ]);
+
+            if ($request->ajax() || $request->wantsJson()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $recaptchaResult['message'] ?? 'reCAPTCHA verification failed',
+                    'errors' => [
+                        'recaptcha_token' => [$recaptchaResult['message'] ?? 'reCAPTCHA verification failed. Please try again.']
+                    ]
+                ], 422);
+            }
+
+            return back()->withErrors([
+                'recaptcha_token' => $recaptchaResult['message'] ?? 'reCAPTCHA verification failed. Please try again.'
+            ])->withInput();
+        }
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'organisation' => 'nullable|string|max:255',

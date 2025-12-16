@@ -83,27 +83,8 @@
           <span id="message-error" class="text-red-500 text-sm">@error('message') {{ $message }} @enderror</span>
         </div>
 
-        <!-- captcha code  -->
-        <div>
-          <label class="block text-gray-700 mb-1">Captcha</label>
-
-          <div class="flex items-center justify-between  gap-3">
-
-            <input type="text" id="submit" placeholder="Enter Captcha"
-              class="w-full mt-2 bg-gray-100 rounded-full px-4 py-3 focus:outline-none">
-
-            <!-- Captcha Output -->
-            <div id="image" class="px-4 py-6 bg-gray-200 rounded-lg font-bold w-1/3"></div>
-
-            <!-- Refresh Button -->
-            <button type="button" onclick="generate()" class="text-blue-600 text-sm">
-              Refresh
-            </button>
-          </div>
-          <!-- User Input -->
-
-          <span id="captcha-error" class="text-red-500 text-sm"></span>
-        </div>
+        <!-- reCAPTCHA v3 token (hidden) -->
+        <input type="hidden" id="recaptcha_token" name="recaptcha_token" />
 
         <!-- Success Message -->
         @if(session('success'))
@@ -123,6 +104,160 @@
     </div>
   </div>
 </section>
+
+@push('scripts')
+<!-- Google reCAPTCHA v3 -->
+<script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+<script>
+  // Initialize reCAPTCHA
+  grecaptcha.ready(function() {
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+      // Execute reCAPTCHA on form submit
+      contactForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        // Get form elements
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const message = document.getElementById("message");
+
+        // Get error elements
+        const nameError = document.getElementById("name-error");
+        const emailError = document.getElementById("email-error");
+        const messageError = document.getElementById("message-error");
+        const submitBtn = document.getElementById("submit-btn");
+
+        let isValid = true;
+
+        // Clear previous error messages
+        nameError.textContent = "";
+        emailError.textContent = "";
+        messageError.textContent = "";
+
+        // Name validation
+        if (name.value.trim() === "") {
+          nameError.textContent = "Please enter your name";
+          isValid = false;
+        }
+
+        // Email validation
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (email.value.trim() === "") {
+          emailError.textContent = "Please enter your email";
+          isValid = false;
+        } else if (!emailPattern.test(email.value.trim())) {
+          emailError.textContent = "Please enter a valid email address";
+          isValid = false;
+        }
+
+        // Message validation
+        if (message.value.trim() === "") {
+          messageError.textContent = "Please enter your message";
+          isValid = false;
+        }
+
+        // If validation fails, don't proceed with reCAPTCHA
+        if (!isValid) {
+          return;
+        }
+
+        grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', {action: 'contact_form'})
+          .then(function(token) {
+            // Set the token in the hidden input
+            document.getElementById('recaptcha_token').value = token;
+
+            // Now submit the form
+            const formData = new FormData(contactForm);
+            const submitBtn = document.getElementById("submit-btn");
+            const originalText = submitBtn.textContent;
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Sending...";
+
+            fetch(contactForm.action, {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+              }
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.success) {
+                // Show success message
+                if (window.showToast) {
+                  window.showToast(data.message || 'Thank you for contacting us! We will get back to you soon.', 'success');
+                } else {
+                  const successDiv = document.createElement('div');
+                  successDiv.className = 'bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg mb-4';
+                  successDiv.textContent = data.message || 'Thank you for contacting us! We will get back to you soon.';
+                  contactForm.insertBefore(successDiv, submitBtn);
+                }
+
+                // Reset form
+                contactForm.reset();
+                document.getElementById('recaptcha_token').value = '';
+              } else {
+                // Handle validation errors
+                if (data.errors) {
+                  if (data.errors.name) {
+                    document.getElementById('name-error').textContent = data.errors.name[0];
+                  }
+                  if (data.errors.email) {
+                    document.getElementById('email-error').textContent = data.errors.email[0];
+                  }
+                  if (data.errors.message) {
+                    document.getElementById('message-error').textContent = data.errors.message[0];
+                  }
+                  if (data.errors.organisation) {
+                    document.getElementById('organisation-error').textContent = data.errors.organisation[0];
+                  }
+                  if (data.errors.recaptcha_token) {
+                    if (window.showToast) {
+                      window.showToast(data.errors.recaptcha_token[0], 'error');
+                    } else {
+                      alert(data.errors.recaptcha_token[0]);
+                    }
+                  }
+                } else if (data.message) {
+                  if (window.showToast) {
+                    window.showToast(data.message, 'error');
+                  } else {
+                    alert(data.message);
+                  }
+                }
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              if (window.showToast) {
+                window.showToast('An error occurred. Please try again.', 'error');
+              } else {
+                alert('An error occurred. Please try again.');
+              }
+            })
+            .finally(() => {
+              // Re-enable submit button
+              submitBtn.disabled = false;
+              submitBtn.textContent = originalText;
+            });
+          })
+          .catch(function(error) {
+            console.error('reCAPTCHA error:', error);
+            if (window.showToast) {
+              window.showToast('reCAPTCHA verification failed. Please refresh the page and try again.', 'error');
+            } else {
+              alert('reCAPTCHA verification failed. Please refresh the page and try again.');
+            }
+          });
+      });
+    }
+  });
+</script>
+@endpush
 
 <!-- <div class=" bottom-0 left-0 right-0">
   <svg class="w-full h-[30px] md:h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28"
