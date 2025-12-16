@@ -3,20 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contact;
-use App\Services\ElasticEmailService;
 use App\Services\RecaptchaService;
 use App\Services\SettingsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    protected ElasticEmailService $emailService;
-
-    public function __construct(ElasticEmailService $emailService)
-    {
-        $this->emailService = $emailService;
-    }
 
     public function store(Request $request)
     {
@@ -72,33 +66,27 @@ class ContactController extends Controller
 
         $contact = Contact::create($validated);
 
-        // Send email notification
+        // Send email notification using Laravel Mail (ElasticEmail API via flexflux package)
         try {
             $emailBody = view('emails.contact-form-notification', ['contact' => $contact])->render();
 
-            // Use a verified email address from ElasticEmail account
-            // This must be an email address from a verified domain in your ElasticEmail account
-            $fromEmail = config('services.elasticemail.from_email', 'noreply@yourdomain.com');
+            Mail::html($emailBody, function ($message) use ($contact) {
+                $message->to(SettingsService::getAdminEmail())
+                        ->subject('New Contact Form Submission - ' . config('app.name'))
+                        ->from(config('mail.from.address'), config('mail.from.name', config('app.name')))
+                        ->replyTo($contact->email);
+            });
 
-            $result = $this->emailService->sendEmail(
-                to: SettingsService::getAdminEmail(),
-                subject: 'New Contact Form Submission - ' . config('app.name'),
-                body: $emailBody,
-                fromEmail: $fromEmail,
-                fromName: config('mail.from.name', config('app.name')),
-                replyTo: $contact->email
-            );
-
-            if (!$result['success']) {
-                Log::warning('Failed to send contact form email', [
-                    'contact_id' => $contact->id,
-                    'error' => $result['message'] ?? 'Unknown error',
-                ]);
-            }
+            Log::info('Contact form email sent successfully', [
+                'contact_id' => $contact->id,
+                'to' => SettingsService::getAdminEmail(),
+                'from' => config('mail.from.address'),
+            ]);
         } catch (\Exception $e) {
             Log::error('Exception sending contact form email', [
                 'contact_id' => $contact->id,
                 'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
             ]);
         }
 
