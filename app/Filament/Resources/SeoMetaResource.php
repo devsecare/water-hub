@@ -40,11 +40,12 @@ class SeoMetaResource extends Resource
                             ->unique(ignoreRecord: true)
                             ->options(SeoHelper::getAvailableRoutes())
                             ->searchable()
-                            ->helperText('Select the route name for this page. For dynamic pages like /resources/{slug}, use the route name (e.g., resources.show)'),
+                            ->preload()
+                            ->helperText('Select the route name for this page. Type to search. For dynamic pages like /resources/{slug}, use the route name (e.g., resources.show). If your route is not listed, it may need to be added to the system.'),
                         Forms\Components\TextInput::make('page_url')
                             ->label('Page URL Pattern')
                             ->maxLength(255)
-                            ->helperText('Optional: Full URL pattern for dynamic pages. Leave empty for static routes.'),
+                            ->helperText('Optional: Full URL pattern for dynamic pages. Leave empty for static routes. Example: /resources/some-slug'),
                     ])
                     ->columns(2),
 

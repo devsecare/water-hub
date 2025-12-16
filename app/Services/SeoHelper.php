@@ -99,24 +99,34 @@ class SeoHelper
     public static function getAvailableRoutes(): array
     {
         return [
+            // Main Pages
             'home' => 'Home',
             'about' => 'About Us',
             'resources' => 'Resources',
             'resources.show' => 'Resource Detail (Dynamic)',
-            'contact' => 'Contact',
             'contactus' => 'Contact Us',
             'understandingWater' => 'Understanding Water PPPs',
             'waterpppresources' => 'Water PPP Resources',
             'singleproductpage' => 'Single Product Page',
             'casestudy' => 'Case Study',
-            'accountdetails' => 'Account Details',
+            'faq' => 'FAQ',
+
+            // Legal Pages
+            'privacypolicy' => 'Privacy Policy',
+            'termsofservice' => 'Terms of Service',
+
+            // User Account Pages
             'myaccount' => 'My Account',
+            'accountdetails' => 'Account Details',
             'map.index' => 'Map View',
+
+            // Authentication Pages
             'login' => 'Login',
             'register' => 'Register',
             'password.request' => 'Forgot Password',
             'password.reset' => 'Reset Password',
-            'verification.notice' => 'Email Verification',
+            'verification.notice' => 'Email Verification Notice',
+            'verification.verify' => 'Email Verification',
         ];
     }
 }
