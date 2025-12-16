@@ -107,15 +107,23 @@
 
 @push('scripts')
 <!-- Google reCAPTCHA v3 -->
-<script src="https://www.google.com/recaptcha/api.js?render={{ config('services.recaptcha.site_key') }}"></script>
+@php
+  $recaptchaSiteKey = config('services.recaptcha.site_key');
+@endphp
+@if($recaptchaSiteKey)
+<script src="https://www.google.com/recaptcha/api.js?render={{ $recaptchaSiteKey }}"></script>
 <script>
-  // Initialize reCAPTCHA
+  // Wait for reCAPTCHA to load, then initialize
   grecaptcha.ready(function() {
     const contactForm = document.getElementById("contact-form");
-    if (contactForm) {
-      // Execute reCAPTCHA on form submit
-      contactForm.addEventListener("submit", function(event) {
-        event.preventDefault();
+    if (!contactForm) {
+      console.error('Contact form not found');
+      return;
+    }
+
+    // Execute reCAPTCHA on form submit
+    contactForm.addEventListener("submit", function(event) {
+      event.preventDefault();
 
         // Get form elements
         const name = document.getElementById("name");
@@ -162,13 +170,33 @@
           return;
         }
 
-        grecaptcha.execute('{{ config('services.recaptcha.site_key') }}', {action: 'contact_form'})
+        grecaptcha.execute('{{ $recaptchaSiteKey }}', {action: 'contact_form'})
           .then(function(token) {
+            if (!token) {
+              console.error('reCAPTCHA token is empty');
+              if (window.showToast) {
+                window.showToast('reCAPTCHA verification failed. Please refresh the page and try again.', 'error');
+              } else {
+                alert('reCAPTCHA verification failed. Please refresh the page and try again.');
+              }
+              return;
+            }
+
             // Set the token in the hidden input
-            document.getElementById('recaptcha_token').value = token;
+            const tokenInput = document.getElementById('recaptcha_token');
+            if (tokenInput) {
+              tokenInput.value = token;
+            }
 
             // Now submit the form
             const formData = new FormData(contactForm);
+
+            // Explicitly ensure the token is in FormData
+            formData.set('recaptcha_token', token);
+
+            // Debug: Log token (remove in production)
+            console.log('reCAPTCHA token set:', token ? 'Token received' : 'Token missing');
+
             const submitBtn = document.getElementById("submit-btn");
             const originalText = submitBtn.textContent;
 
@@ -257,6 +285,11 @@
     }
   });
 </script>
+@else
+<script>
+  console.error('reCAPTCHA site key is not configured');
+</script>
+@endif
 @endpush
 
 <!-- <div class=" bottom-0 left-0 right-0">
