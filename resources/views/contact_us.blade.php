@@ -108,22 +108,31 @@
 @push('scripts')
 <!-- Google reCAPTCHA v3 -->
 @php
-  $recaptchaSiteKey = config('services.recaptcha.site_key');
+  $recaptchaSiteKey = config('services.recaptcha.site_key', '');
 @endphp
-@if($recaptchaSiteKey)
+@if(!empty($recaptchaSiteKey))
 <script src="https://www.google.com/recaptcha/api.js?render={{ $recaptchaSiteKey }}"></script>
 <script>
-  // Wait for reCAPTCHA to load, then initialize
-  grecaptcha.ready(function() {
-    const contactForm = document.getElementById("contact-form");
-    if (!contactForm) {
-      console.error('Contact form not found');
+  (function() {
+    // Store site key in JavaScript variable (using JSON to ensure proper escaping)
+    const RECAPTCHA_SITE_KEY = {!! json_encode($recaptchaSiteKey) !!};
+
+    // Wait for reCAPTCHA to load, then initialize
+    if (typeof grecaptcha === 'undefined') {
+      console.error('reCAPTCHA script not loaded');
       return;
     }
 
-    // Execute reCAPTCHA on form submit
-    contactForm.addEventListener("submit", function(event) {
-      event.preventDefault();
+    grecaptcha.ready(function() {
+      const contactForm = document.getElementById("contact-form");
+      if (!contactForm) {
+        console.error('Contact form not found');
+        return;
+      }
+
+      // Execute reCAPTCHA on form submit
+      contactForm.addEventListener("submit", function(event) {
+        event.preventDefault();
 
         // Get form elements
         const name = document.getElementById("name");
@@ -170,7 +179,7 @@
           return;
         }
 
-        grecaptcha.execute('{{ $recaptchaSiteKey }}', {action: 'contact_form'})
+        grecaptcha.execute(RECAPTCHA_SITE_KEY, {action: 'contact_form'})
           .then(function(token) {
             if (!token) {
               console.error('reCAPTCHA token is empty');
@@ -282,8 +291,8 @@
             }
           });
       });
-    }
-  });
+    });
+  })();
 </script>
 @else
 <script>
