@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'elastic_email'),
 
     /*
     |--------------------------------------------------------------------------
@@ -48,6 +48,11 @@ return [
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url((string) env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
+
+        'elastic_email' => [
+            'transport' => 'elastic_email',
+            'key' => env('ELASTIC_KEY', env('ELASTICEMAIL_API_KEY')),
         ],
 
         'ses' => [

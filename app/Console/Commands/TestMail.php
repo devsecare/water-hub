@@ -35,26 +35,47 @@ class TestMail extends Command
         $this->info("From Address: " . config('mail.from.address'));
 
         try {
+            // Log before sending
+            \Log::info('TestMail: Starting email send', [
+                'to' => $toEmail,
+                'from' => config('mail.from.address'),
+                'mailer' => config('mail.default'),
+                'api_key_set' => !empty(config('mail.mailers.elastic_email.key')),
+            ]);
+
             Mail::raw(
                 "This is a test email from the Water Hub application.\n\n" .
                 "Settings are now managed from the admin panel.\n" .
                 "Admin Email: {$adminEmail}\n" .
                 "Sent at: " . now()->format('Y-m-d H:i:s') . "\n" .
-                "SMTP Host: " . config('mail.mailers.smtp.host'),
+                "Mailer: " . config('mail.default'),
                 function ($message) use ($toEmail) {
                     $message->to($toEmail)
                             ->subject('Test Email - Water Hub Settings System - ' . now()->format('H:i:s'));
                 }
             );
 
+            \Log::info('TestMail: Email sent via Mail facade', [
+                'to' => $toEmail,
+                'timestamp' => now()->toIso8601String(),
+            ]);
+
             $this->info('✅ Test email sent successfully!');
             $this->info("Check inbox for: {$toEmail}");
+            $this->info("Mailer: " . config('mail.default'));
             $this->warn('Note: If email not received, check ElasticEmail dashboard for delivery status.');
+            $this->warn('The ElasticEmail API may not return errors - check your ElasticEmail dashboard.');
 
             return Command::SUCCESS;
         } catch (\Exception $e) {
+            \Log::error('TestMail: Email sending failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'to' => $toEmail,
+            ]);
+
             $this->error('❌ Failed to send email: ' . $e->getMessage());
-            $this->error('Stack trace: ' . $e->getTraceAsString());
+            $this->error('Check logs for more details: storage/logs/laravel.log');
 
             return Command::FAILURE;
         }
