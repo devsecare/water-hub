@@ -17,7 +17,7 @@ class RecaptchaService
      */
     public static function verify(string $token, ?string $action = null, float $minScore = 0.5): array
     {
-        $secretKey = config('services.recaptcha.secret_key');
+        $secretKey = SettingsService::get('recaptcha_secret_key', config('services.recaptcha.secret_key', ''));
 
         if (empty($secretKey)) {
             Log::error('reCAPTCHA secret key is not configured');

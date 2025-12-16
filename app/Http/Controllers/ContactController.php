@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Services\ElasticEmailService;
 use App\Services\RecaptchaService;
+use App\Services\SettingsService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -80,7 +81,7 @@ class ContactController extends Controller
             $fromEmail = config('services.elasticemail.from_email', 'noreply@yourdomain.com');
 
             $result = $this->emailService->sendEmail(
-                to: 'developers@ecareinfoway.com',
+                to: SettingsService::getAdminEmail(),
                 subject: 'New Contact Form Submission - ' . config('app.name'),
                 body: $emailBody,
                 fromEmail: $fromEmail,

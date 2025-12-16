@@ -8,8 +8,11 @@
         $seoData = \App\Services\SeoHelper::getSeoData();
         $pageTitle = $seoData['meta_title'] ?? null;
         if (empty($pageTitle)) {
-            $pageTitle = trim(view()->yieldContent('title')) ?: 'PPP Water Hub';
+            $pageTitle = trim(view()->yieldContent('title')) ?: \App\Services\SettingsService::get('site_name', config('app.name', 'PPP Water Hub'));
         }
+        $siteName = \App\Services\SettingsService::get('site_name', config('app.name', 'PPP Water Hub'));
+        $siteUrl = \App\Services\SettingsService::get('site_url', config('app.url', ''));
+        $siteDescription = \App\Services\SettingsService::get('site_description', '');
     @endphp
 
     <!-- Primary Meta Tags -->
@@ -31,7 +34,8 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ $seoData['canonical_url'] ?? url()->current() }}">
+    <meta property="og:site_name" content="{{ $siteName }}">
+    <meta property="og:url" content="{{ $seoData['canonical_url'] ?? ($siteUrl ?: url()->current()) }}">
     @if(!empty($seoData['og_title']))
     <meta property="og:title" content="{{ $seoData['og_title'] }}">
     @endif

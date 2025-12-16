@@ -108,7 +108,7 @@
 @push('scripts')
 <!-- Google reCAPTCHA v3 -->
 @php
-  $recaptchaSiteKey = config('services.recaptcha.site_key', '');
+  $recaptchaSiteKey = \App\Services\SettingsService::get('recaptcha_site_key', config('services.recaptcha.site_key', ''));
 @endphp
 @if(!empty($recaptchaSiteKey))
 <script src="https://www.google.com/recaptcha/api.js?render={{ $recaptchaSiteKey }}"></script>
