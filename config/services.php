@@ -45,4 +45,9 @@ return [
         'secret_key' => env('RECAPTCHA_SECRET_KEY', '6Lc0ZiwsAAAAAEBsEQpnw4wI-lT_22g13qy8rznO'),
     ],
 
+    'mailchimp' => [
+        'api_key' => env('MAILCHIMP_API_KEY'),
+        'audience_id' => env('MAILCHIMP_AUDIENCE_ID'),
+    ],
+
 ];

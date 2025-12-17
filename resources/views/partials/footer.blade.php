@@ -24,12 +24,14 @@
                     Join our newsletter to stay up to date when content is updated or new content is released
                 </p>
 
-                <form class="flex justify-between items-center rounded-3xl overflow-hidden max-w-sm px-2 sm:px-4"
+                <form id="newsletter-form" class="flex justify-between items-center rounded-3xl overflow-hidden max-w-sm px-2 sm:px-4"
                     style="background-color:#37c6f445;">
-                    <input type="email" placeholder="Enter your email address"
-                        class="w-full lg:px-4 px-2 py-3 text-sm text-white bg-transparent focus:outline-none flex-1">
-                    <button class="bg-transparent hover:bg-[#2f6990] text-[#37C6F4] px-2 lg:px-4 py-3">Stay Updated</button>
+                    @csrf
+                    <input type="email" name="email" id="newsletter-email" placeholder="Enter your email address" required
+                        class="w-full lg:px-4 px-2 py-3 text-sm text-white bg-transparent focus:outline-none flex-1 placeholder-white/70">
+                    <button type="submit" class="bg-transparent hover:bg-[#2f6990] text-[#37C6F4] px-2 lg:px-4 py-3">Stay Updated</button>
                 </form>
+                <div id="newsletter-message" class="mt-2 text-sm hidden"></div>
             </div>
             <div class="flex flex-col sm:flex-row gap-10 md:mt-16">
                 <ul class="space-y-3">
@@ -111,4 +113,60 @@
     </section>
 </footer>
 
+@push('scripts')
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const newsletterForm = document.getElementById('newsletter-form');
+    const newsletterMessage = document.getElementById('newsletter-message');
+    const newsletterEmail = document.getElementById('newsletter-email');
+    const submitButton = newsletterForm.querySelector('button[type="submit"]');
 
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const email = newsletterEmail.value.trim();
+            const originalButtonText = submitButton.textContent;
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Subscribing...';
+            newsletterMessage.classList.add('hidden');
+
+            try {
+                const formData = new FormData(newsletterForm);
+                const response = await fetch('{{ route("newsletter.subscribe") }}', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json',
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    newsletterMessage.textContent = data.message;
+                    newsletterMessage.className = 'mt-2 text-sm text-green-400';
+                    newsletterMessage.classList.remove('hidden');
+                    newsletterEmail.value = '';
+                } else {
+                    newsletterMessage.textContent = data.message || 'An error occurred. Please try again.';
+                    newsletterMessage.className = 'mt-2 text-sm text-red-400';
+                    newsletterMessage.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Newsletter subscription error:', error);
+                newsletterMessage.textContent = 'An error occurred. Please try again later.';
+                newsletterMessage.className = 'mt-2 text-sm text-red-400';
+                newsletterMessage.classList.remove('hidden');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+            }
+        });
+    }
+});
+</script>
+@endpush

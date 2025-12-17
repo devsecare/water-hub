@@ -9,6 +9,7 @@ use App\Http\Controllers\ImageGeneratorController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\MediaDownloadController;
 use App\Http\Controllers\MyAccountController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ResourcesController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,8 @@ Route::get('/contact-us', function () {
 })->name('contactus');
 
 Route::post('/contact-us', [ContactController::class, 'store'])->name('contactus.store');
+
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
 Route::get('/case-study', [ResourcesController::class, 'caseStudy'])->name('casestudy')->middleware('auth');
 
