@@ -49,6 +49,7 @@ class ResourcesController extends Controller
                     'short_description' => $item->short_description ?? '',
                     'description' => $item->description ?? '',
                     'category_id' => $item->category_id,
+                    'parent_category_id' => $item->category && $item->category->parent ? $item->category->parent->id : null,
                     'category_name' => $item->category ? $item->category->name : '',
                     'category_color' => $item->category ? $item->category->color : '#3B82F6',
                     'category_icon' => $item->category ? ($item->category->icon ?? 'folder') : 'folder',
@@ -61,9 +62,19 @@ class ResourcesController extends Controller
                 ];
             });
 
+        // Prepare categories data for frontend (with children IDs)
+        $categoriesData = $categories->map(function ($category) {
+            return [
+                'id' => $category->id,
+                'name' => $category->name,
+                'children_ids' => $category->children->pluck('id')->toArray(),
+            ];
+        });
+
         return view('resources', [
             'requiresAuth' => false,
             'categories' => $categories,
+            'categoriesData' => $categoriesData,
             'items' => $items,
         ]);
     }

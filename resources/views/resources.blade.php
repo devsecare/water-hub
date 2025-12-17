@@ -449,6 +449,7 @@
 <script>
     (function() {
     const itemsData = @json($items);
+    const categoriesData = @json($categoriesData ?? []);
     const cardsPerPage = 12;
     let currentPage = 1;
     let filteredData = [...itemsData];
@@ -627,6 +628,30 @@
         modal.classList.remove("flex");
     }
 
+    // Helper function to check if an item matches the current category filter
+    function itemMatchesCategoryFilter(item) {
+        if (activeCategoryId === null) {
+            return true;
+        }
+        // Check if item's category matches the selected category
+        if (item.category_id === activeCategoryId) {
+            return true;
+        }
+        // Check if the selected category is a top category and item belongs to one of its subcategories
+        const selectedCategory = categoriesData.find(cat => cat.id === activeCategoryId);
+        if (selectedCategory && selectedCategory.children_ids && selectedCategory.children_ids.length > 0) {
+            // Check if item's category is one of the subcategories
+            if (selectedCategory.children_ids.includes(item.category_id)) {
+                return true;
+            }
+        }
+        // Check if item's parent category matches the selected category (for subcategory items)
+        if (item.parent_category_id === activeCategoryId) {
+            return true;
+        }
+        return false;
+    }
+
     function filterItems() {
         filteredData = itemsData.filter(item => {
             // Filter for "All case studies" - must be case study AND have lat/long
@@ -638,10 +663,7 @@
             if (activeFilter === 'all' && activeCategoryId === null) {
                 return true;
             }
-            if (activeCategoryId !== null && item.category_id !== activeCategoryId) {
-                return false;
-            }
-            return true;
+            return itemMatchesCategoryFilter(item);
         });
         currentPage = 1;
         updateActiveFilter();
@@ -729,8 +751,8 @@
                             matchesFilter = isCaseStudy && hasLocation;
                         } else if (activeFilter === 'all' && activeCategoryId === null) {
                             matchesFilter = true;
-                        } else if (activeCategoryId !== null && item.category_id !== activeCategoryId) {
-                            matchesFilter = false;
+                        } else if (activeCategoryId !== null) {
+                            matchesFilter = itemMatchesCategoryFilter(item);
                         }
 
                         if (!matchesFilter) {
