@@ -287,8 +287,8 @@
 
 <!-- financial water infrastructure  -->
 <section class="bg-[#f2f2f2] px-6 lg:px-16">
-    <div class="max-w-7xl mx-auto  py-12 lg:pb-20 pb-15">
-        <div class="flex flex-col-reverse lg:flex-row gap-6 md:gap-10">
+    <div class="max-w-7xl mx-auto  py-12 ">
+        <div class="flex flex-col-reverse lg:flex-row gap-6 md:gap-10 lg:pb-20 pb-15">
 
             <!-- Left Image -->
             <div class="lg:w-1/2">
