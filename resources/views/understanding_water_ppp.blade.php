@@ -46,7 +46,7 @@
         <!-- 3 Column Layout -->
         <div class="flex  gap-10 flex-col lg:flex-row text-[#000000] ">
             <!-- Left Column -->
-            <div class="text-[16px] lg:w-[66%] leading-relaxed space-y-3 ">
+            <div class="text-[16px] lg:w-1/2 leading-relaxed space-y-3 ">
                 <p>
                     <strong>P for Public.</strong> The public partner can be ministries, PPP units, local authorities, municipalities, or
                     state-owned enterprise. In a PPP, the public authority is the ultimate owner of the water services
@@ -79,7 +79,7 @@
             </div> -->
 
             <!-- Right Column -->
-            <div class="text-[16px] lg:max-w-[392px] leading-relaxed space-y-6">
+            <div class="text-[16px] lg:w-1/2 leading-relaxed space-y-6">
                 <p>
                     Water PPPs offer a mechanism to:
                 </p>
@@ -212,21 +212,23 @@
 
 <!-- PPPs and sustainability  -->
 <section class="lg:my-20 my-10 px-6 lg:px-16">
-   <div class="max-w-7xl flex gap-10 mx-auto pb-6">
+   {{-- <div class="max-w-7xl flex gap-10 mx-auto pb-6">
      <h2 class="text-xl sm:text-[40px] w-1/2 hidden lg:block font-bold text-[#1E1D57] ">
-            
+
         </h2>
         <h2 class="text-xl lg:w-1/2 w-full sm:text-[40px] font-bold text-[#1E1D57] ">
             PPPs and sustainability
         </h2>
-    </div>
+    </div> --}}
  <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row gap-6 md:gap-10  ">
 
         <div class="lg:w-1/2">
                 <img src="images/sustainability.jpg" alt="Water Infrastructure" class="w-full md:h-full max-h-[380px] object-cover rounded-2xl">
         </div>
         <div class="lg:w-1/2">
-
+            <h2 class="text-3xl sm:text-4xl font-bold text-[#1E1D57] mb-6">
+                PPPs and sustainability
+            </h2>
             <p class="text-[#000000] mb-6">
                 Water operators link the natural and human water cycles – taking water from nature, treating it
                 safely for use, collecting wastewater, treating it to remove pollution, and returning it to nature.
@@ -313,8 +315,8 @@
 
 
         <div class="mt-6">
-            <a href="{{ route('casestudy') }}" class="group inline-flex items-center bg-[#1E1D57] text-[#37C6F4] 
-               text-sm md:text-base font-medium py-3 px-6 rounded-full 
+            <a href="{{ route('casestudy') }}" class="group inline-flex items-center bg-[#1E1D57] text-[#37C6F4]
+               text-sm md:text-base font-medium py-3 px-6 rounded-full
                shadow-md transition-all duration-300 hover:text-white">
 
                 View more case studies
@@ -368,7 +370,7 @@
 <!-- faq section  -->
 
 <section class="w-full bg-regal-blue lg:py-20 py-10 lg:pb-50 text-white relative mb-[20px] md:mb-[40px]">
-    <div class="max-w-4xl mx-auto px-6 lg:px-16">
+    <div class="max-w-4xl mx-auto px-6 lg:px-16 lg:pb-20 pb-15">
 
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 max-[440px]:text-xl">
             Frequently asked questions
@@ -408,7 +410,7 @@
     <!-- <div class=" -bottom-[40px] absolute left-0 right-0">
         <svg class="w-full h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
             <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18 
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18
         58-18 88-18 58 18 88 18v44h-352z"></path>
             </defs>
             <g class="parallax">
