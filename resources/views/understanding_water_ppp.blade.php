@@ -285,55 +285,9 @@
     </div>
 </section>
 
-
-
-<!-- real world success  -->
-<!-- <section class="relative overflow-hidden relative">
-    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994"
-        class="absolute top-0 z-111 right-[10%] hidden md:block  ">
-        <path id="Path_432" data-name="Path 432"
-            d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z"
-            transform="translate(0 -21.645)" fill="#f2f2f2"></path>
-    </svg>
-
-    <svg xmlns="http://www.w3.org/2000/svg" width="710" height="37.994" viewBox="0 0 710 37.994"
-        class="-translate-x-1/2 left-1/2 absolute top-[-10px] z-111 md:hidden max-w-[400px] items-center justify-center">
-        <path id="Path_432" data-name="Path 432"
-            d="M0,21.645c207.154,0,277.811,37.995,371.982,37.995S537.765,21.645,710,21.645H0Z"
-            transform="translate(0 -21.645)" fill="#f2f2f2"></path>
-    </svg>
-
-    <div
-        class="bg-[linear-gradient(103deg,#37C6F4_0%,#5CD3CE_100%)] opacity-100 text-center py-16 px-6 md:px-16 text-white relative z-10">
-        <h2 class="text-2xl sm:text-4xl md:text-5xl font-bold text-[#1E1D57] mb-6">Real-World Success</h2>
-        <p class="text-[#1E1D57] max-w-5xl mx-auto leading-relaxed text-lg md:text-[22px]">
-            There’s evidence from around the world demonstrates PPPs’ impact.
-            In Manila, Philippines, access jumped from 26% to 99% since 1997,
-            with diarrhoea incidences falling 75%. Poor families who paid $3
-            per cubic metre for bottled water now pay 18 cents through subsidised tariffs.
-        </p>
-
-
-        <div class="mt-6">
-            <a href="{{ route('casestudy') }}" class="group inline-flex items-center bg-[#1E1D57] text-[#37C6F4]
-               text-sm md:text-base font-medium py-3 px-6 rounded-full
-               shadow-md transition-all duration-300 hover:text-white">
-
-                View more case studies
-
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    class="ml-2 transition-all duration-200 fill-[#37C6F4] group-hover:fill-white">
-                    <rect width="24" height="24" fill="none"></rect>
-                    <path d="M12.6,12,8,7.4,9.4,6l6,6-6,6L8,16.6,12.6,12Z"></path>
-                </svg>
-            </a>
-        </div>
-    </div>
-</section> -->
-
 <!-- financial water infrastructure  -->
 <section class="bg-[#f2f2f2] px-6 lg:px-16">
-    <div class="max-w-7xl mx-auto  py-12">
+    <div class="max-w-7xl mx-auto  py-12 lg:pb-20 pb-15">
         <div class="flex flex-col-reverse lg:flex-row gap-6 md:gap-10">
 
             <!-- Left Image -->
@@ -369,57 +323,5 @@
 </section>
 <!-- faq section  -->
 
-<section class="w-full bg-regal-blue lg:py-20 py-10 lg:pb-50 text-white relative mb-[20px] md:mb-[40px]">
-    <div class="max-w-4xl mx-auto px-6 lg:px-16 lg:pb-20 pb-15">
 
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10 max-[440px]:text-xl">
-            Frequently asked questions
-        </h2>
-
-        <div class="space-y-4">
-            @forelse($faqs ?? [] as $faq)
-            <div class="bg-[#131B5A] rounded-[25px] p-4 max-[400px]:p-2">
-                <button class="w-full flex justify-between items-center faq-btn group">
-                    <span class="font-medium text-lg max-[400px]:text-sm transition-colors group-hover:text-[#37C6F4]">
-                        {{ $faq->question }}
-                    </span>
-
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                        class="transition-transform rotate-0 duration-300">
-                        <rect width="24" height="24" fill="none"></rect>
-                        <path class="fill-[#ababab] transition-colors duration-300 group-hover:fill-[#37C6F4]"
-                            d="M12.68,12,9.6,15.08,11,16.51l4.5-4.5L11,7.51,9.6,8.94l3.08,3.08ZM12,22a9.678,9.678,0,0,1-3.9-.79,9.989,9.989,0,0,1-5.32-5.32,9.678,9.678,0,0,1-.79-3.9,9.678,9.678,0,0,1,.79-3.9A9.989,9.989,0,0,1,8.1,2.77,9.678,9.678,0,0,1,12,1.98a9.678,9.678,0,0,1,3.9.79,9.989,9.989,0,0,1,5.32,5.32,9.678,9.678,0,0,1,.79,3.9,9.678,9.678,0,0,1-.79,3.9,9.989,9.989,0,0,1-5.32,5.32A9.678,9.678,0,0,1,12,22Zm0-2a7.742,7.742,0,0,0,5.68-2.33,7.726,7.726,0,0,0,2.33-5.68,7.726,7.726,0,0,0-2.33-5.68A7.726,7.726,0,0,0,12,3.98,7.726,7.726,0,0,0,6.32,6.31a7.726,7.726,0,0,0-2.33,5.68,7.726,7.726,0,0,0,2.33,5.68A7.726,7.726,0,0,0,12,20Z">
-                        </path>
-                    </svg>
-                </button>
-
-                <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300">
-                    <div class="pt-3 text-[#FFFFFF] max-w-[719px]">
-                        {!! $faq->answer !!}
-                    </div>
-                </div>
-            </div>
-            @empty
-            <div class="bg-[#131B5A] rounded-[25px] p-4 text-center">
-                <p class="text-[#FFFFFF]">No FAQs available at the moment.</p>
-            </div>
-            @endforelse
-        </div>
-    </div>
-    <!-- waves section  -->
-    <!-- <div class=" -bottom-[40px] absolute left-0 right-0">
-        <svg class="w-full h-[80px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 24 150 28" preserveAspectRatio="none">
-            <defs>
-                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s58 18 88 18
-        58-18 88-18 58 18 88 18v44h-352z"></path>
-            </defs>
-            <g class="parallax">
-                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(30, 29, 87, 0.25)"></use>
-                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(30, 29, 87, 0.49)"></use>
-                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(55, 198, 244, 0.49)"></use>
-                <use xlink:href="#gentle-wave" x="48" y="7" fill="#1E1D57"></use>
-            </g>
-        </svg>
-    </div> -->
-</section>
 @endsection
